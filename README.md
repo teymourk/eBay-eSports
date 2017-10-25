@@ -1,1 +1,1 @@
-# eBay-eSports (CS461)
+# eBay eSports (CS461)
