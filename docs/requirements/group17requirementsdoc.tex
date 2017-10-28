@@ -8,28 +8,28 @@
 \geometry{textheight=9.5in, textwidth=7in}
 
 % 1. Fill in these details
-\def \CapstoneTeamName{		Skill Capped IRL}
-\def \CapstoneTeamNumber{		17}
-\def \GroupMemberOne{			Katherine Bajno}
-\def \GroupMemberTwo{			Meagan Olsen}
-\def \GroupMemberThree{			William Sims}
-\def \GroupMemberFour{			Kiarash Teymoury}
-\def \CapstoneProjectName{		eBay iOS eSports Application}
-\def \CapstoneSponsorCompany{	eBay}
-\def \CapstoneSponsorPerson{		Luther Boorn}
+\def \CapstoneTeamName{     Skill Capped IRL}
+\def \CapstoneTeamNumber{       17}
+\def \GroupMemberOne{           Katherine Bajno}
+\def \GroupMemberTwo{           Meagan Olsen}
+\def \GroupMemberThree{         William Sims}
+\def \GroupMemberFour{          Kiarash Teymoury}
+\def \CapstoneProjectName{      eBay iOS eSports Application}
+\def \CapstoneSponsorCompany{   eBay}
+\def \CapstoneSponsorPerson{        Luther Boorn}
 
 % 2. Uncomment the appropriate line below so that the document type works
-\def \DocType{	%Problem Statement
-				Requirements Document
-				%Technology Review
-				%Design Document
-				%Progress Report
-				}
-			
+\def \DocType{  %Problem Statement
+                Requirements Document
+                %Technology Review
+                %Design Document
+                %Progress Report
+                }
+            
 \newcommand{\NameSigPair}[1]{\par
-\makebox[2.75in][r]{#1} \hfil 	\makebox[3.25in]{\makebox[2.25in]{\hrulefill} \hfill		\makebox[.75in]{\hrulefill}}
+\makebox[2.75in][r]{#1} \hfil   \makebox[3.25in]{\makebox[2.25in]{\hrulefill} \hfill        \makebox[.75in]{\hrulefill}}
 \par\vspace{-12pt} \textit{\tiny\noindent
-\makebox[2.75in]{} \hfil		\makebox[3.25in]{\makebox[2.25in][r]{Signature} \hfill	\makebox[.75in][r]{Date}}}}
+\makebox[2.75in]{} \hfil        \makebox[3.25in]{\makebox[2.25in][r]{Signature} \hfill  \makebox[.75in][r]{Date}}}}
 % 3. If the document is not to be signed, uncomment the RENEWcommand below
 %\renewcommand{\NameSigPair}[1]{#1}
 
@@ -38,8 +38,8 @@
 \begin{titlepage}
     \pagenumbering{gobble}
     \begin{singlespace}
-    	% Need to uncomment this line below to include the COE photo
-    	%\includegraphics[height=4cm]{coe_v_spot1}
+        % Need to uncomment this line below to include the COE photo
+        %\includegraphics[height=4cm]{coe_v_spot1}
         \hfill 
         % 4. If you have a logo, use this includegraphics command to put it on the coversheet.
         %\includegraphics[height=4cm]{CompanyLogo}   
@@ -72,11 +72,11 @@
         }
         \begin{abstract}
         % 6. Fill in your abstract
-        	Katherine
+        This document contains specific requirements that we will fulfill in order to sucessfully complete our project. An iOS application will be created that utilizes eBays public APIs to help understand the eSports market and shopping opportunities. Our challenge is to target millennial gamers and connect to a variety of different APIs. The eBay public buying APIs will allow users to search for and purchase eSports merchandise within the application. There will be a social component that allows users to learn more about upcoming events by utilizing Twitter APIs to display information from relevant eSports social media accounts. The primary goal of the app is to make it easier for consumers to purchase eSports merchandise and find information about upcoming eSports related events.
             
-        	%This document is written using one sentence per line.
-        	%This allows you to have sensible diffs when you use \LaTeX with version control, as well as giving a quick visual test to see if sentences are too short/long.
-        	%If you have questions, ``The Not So Short Guide to LaTeX'' is a great resource (\url{https://tobi.oetiker.ch/lshort/lshort.pdf})
+            %This document is written using one sentence per line.
+            %This allows you to have sensible diffs when you use \LaTeX with version control, as well as giving a quick visual test to see if sentences are too short/long.
+            %If you have questions, ``The Not So Short Guide to LaTeX'' is a great resource (\url{https://tobi.oetiker.ch/lshort/lshort.pdf})
         \end{abstract}     
     \end{singlespace}
 \end{titlepage}
@@ -131,28 +131,39 @@ This application will be created on iOS 11, and use eBay's public buying APIs. U
 Our product is independent. It is a standalone application not related to eBay that utilizes their public APIs.
 
 \subsubsection{System interfaces}
-The product will be an independent iOS 11 application that makes use of eBay public buying APIs. 
-It will drive traffic to eBay without users ever leaving the application, but it is still not part of eBay’s larger system. 
-Users will be able to search for and purchase eSports merchandise from eBay within the application. 
+\begin{itemize}
+\item The product will be an independent iOS 11 application that makes use of eBay public buying APIs. 
+\item It will drive traffic to eBay without users ever leaving the application, but it is still not part of eBay’s larger system. 
+\item Users will be able to search for and purchase eSports merchandise from eBay within the application. 
 Google Firebase will be used for backend databases and authentication so that users can login to the app with their eBay accounts. 
-The application will use an eSports API that has yet to be determined to display scores and information about current eSports events.  
+\item The application will use an eSports API that has yet to be determined to display scores and information about current eSports events.
+\end{itemize}
 
 A stretch goal will be utilizing Facebook and Twitter APIs to display posts from targeted eSports accounts such as Riot Games and Blizzard so users can stay up to date with ongoing events. 
 \subsubsection{User interfaces}
-The user interface will have a screen for displaying eSports scores for different games and related merchandise. 
-There will be a login form for signing into an eBay account and search functionality for discovering relevant eSports merchandise that is actively being sold on eBay. 
-Merchandise will be displayed as cards that contain the item name, a picture, and price. 
-There will be a shopping cart screen that contains order information such as quantity, price, and item names. 
-The interface will also contain fields for entering payment information and components for completing the checkout process. 
+\begin{itemize}
+\item Users will be able to interact with a sign in pop op module where they can Log in/ Register on the home page. Users are able to see their eSports event along with all the related merchandise. They will be navigated to eBay app to complete their purchase if interested.
+\item Home page will also contain favorited eSports events.
+\item The brows page will contain category of different events and games where users can select to choose what they are interested.
+\item They will be given the option to filter the search for their own personal preference.
+\item Users will recieve and error messgage pop op if not conntected to the internet.
+\item No search or events found will also be shown if no objects are found in the API. 
+\end{itemize}
+
 
 \subsubsection{Hardware interfaces}
-The application will support iPhones running iOS 11. 
+\begin{itemize}
+\item The app will support all of iPhone devices currently running iOS 11 since the whole application will be written with latest version of Xcode and Swift.
+\item Application will use some of iPhone intergrated hardware to interact with the user. Local notifications and many other thing provided by apple will be intergrated.
+\end{itemize}
 
 \subsubsection{Software interfaces}
-The application will utilize the eBay buy APIs which consists of the marketing, browse, and order APIs. 
-The buy APIs are currently publicly available and will require an eBay developers program account. 
-We have not yet discussed with our client the eSports API we will be using to display score information. 
-The Twitter APIs are publicly available.
+\begin{itemize}
+\item Our Application will run all the fetching in the background to retrieve data given by the user to display all on the home page and the broswe page.
+\item The Firebase backend will be used to let users register and log in by using an authentication system on the sig in modal.
+\item Purchasing an item will make a transition call to open the eBay app to complete users purchase. social APIs will be displayed on event page to share the event.
+\end{itemize}
+
 
 \subsubsection{Communications interfaces}
 The application will require an internet connection to connect to the eBay and eSports APIs that will be used.
@@ -168,7 +179,7 @@ Viewing items that are actively being sold will not require the user to be logge
 The user will require a recent iPhone device such as the iPhone 5,6, or 7 to run the application. The application will need to accommodate different screen sizes for both iPhone plus and normal sized models. 
 
 \subsection{Product functions}
-
+The application will allow users to browse esports merchandise. It will also have filters to control which merchandise is displayed.  It will allow users to perform searches for esports merchandise related to one of a select group of commonly played esports games at a time to be chosen by the user. It will advertise merchandise related to current esports events, and it will save these searches in a favorites feature. It will allow the user to sign on and maintain a personal account. It also will allow users to see twitter feeds related to esports events.  It will allow the user easy navigation through different tabs. 
 
 \subsection{User characteristics}
 The intended user of this application are those looking to purchase eSports related merchandise. The main audience will be those who are interested in eSports merchandise, such as gamers looking to support their favorite teams or other individuals looking to purchase this merchandise as a gift. This encompasses a wide age, from middle-aged students all the way to grandparents. There is also a large educational range for our intended users, as those who are into eSports and would be using the application do not need to have a high school or college degree to do so. The intended user has enough technical skills to be able to navigate a mobile application and complete a transaction. They should be able to familiarize themselves with the interface in a short period of time without needing specific instructions for how to navigate.
@@ -180,7 +191,7 @@ The application will be dependent on eBay buy APIs in order to display relevant 
 The end application will load within a reasonable amount of time. The Twitter API will be used inside the application for the social component mentioned above. The application will meet basic functional/performance requirements as we have defined them. The main source of the application will be implemented in the Swift programming language and will adhere to the Apple Developer Standards. The application will incorporate the eBay public APIs. All development will take place outside the eBay domain. The application will use Google Firebase for back end authentication. 
 
 \subsection{Apportioning of requirements}
-MEAGAN
+In a later version, the application will allow for checkout and purchase of a single product or even multiple products. It will also display individual information about a single product. It will display apple ads on the bottom of each tab. It could possible display used products for sale instead of just new products. It may include a shopping cart. It could allow searches by specific esports teams or participants. It might later have the functionality to sort the returned products. It may be able to categorize returned products.
 
 \section{Specific requirements}
 This section goes into details of the applications functions, the external interface, the software systems attributes, and the constraints.
@@ -189,16 +200,30 @@ This section goes into details of the applications functions, the external inter
 We will be using the eBay public APIs as a starting point for our application. We will also be integrating for Twitter APIs and or Facebook APIs for the social component. We will be also integrating with Google Firebase as a back end for authentication. 
 
 \subsubsection{User interfaces}
-Kia (BULLET IT!!!) (Look at the IEEE document for what to write in here)
-Look @ communications interfaces for example
+
+\begin{itemize}
+\item Users will be able to interact with a sign in pop op module where they can Log in/ Register
+on the home page. Users are able to see their eSports event along with all the related merchandise. They will be navigated to eBay app to complete their purchase if interested.
+\item Home page will also contain favorited eSports events.
+\item The brows page will contain category of different events and games where users can select to choose what they are interested. 
+\item They will be given the option to filter the search for their own personal preference
+\item Users will recieve and error messgage pop op if not conntected to the internet
+\item No search or events found will also be shown if no objects are found in the API.
+\end{itemize}
 
 \subsubsection{Hardware interfaces}
-Kia (BULLET IT!!!) (Look at the IEEE document for what to write in here)
-Look @ communications interfaces for example
+\begin{itemize}
+\item The app will support all of iPhone devices currently running iOS 11 since the whole application will be written with latest version of Xcode and Swift.
+\item Application will use some of iPhone intergrated hardware to interact with the user. Local notifications and many other thing provided by apple will be intergrated. 
+\end{itemize}
 
 \subsubsection{Software interfaces}
-Kia (BULLET IT!!!) (Look at the IEEE document for what to write in here)
-Look @ communications interfaces for example
+\begin{itemize}
+\item Our Application will run all the fetching in the background to retrieve data given by the user to display all on the home page and the broswe page.
+\item The Firebase backend will be used to let users register and log in by using an authentication system on the sig in modal. 
+\item Purchasing an item will make a transition call to open the eBay app to complete users purchase.
+\item social APIs will be displayed on event page to share the event.
+\end{itemize}
 
 \subsubsection{Communications interfaces}
 \begin{itemize}
@@ -263,7 +288,6 @@ to gather eSports event data such as dates, details, and locations. Currently, o
 \subsubsection{Standards compliance}
   We will be obtaining proper licensing from Apple to develop this native application since our application will developed specifically for the protected iOS system.
 
-
 \subsection{Software system attributes}
 This section includes how reliable, available, secure, maintainable, and portable our application will be.
 
@@ -314,14 +338,14 @@ This application will not be very portable. Since it will only be usable on iPho
 \end{itemize}
 
 \section{Appendixes}
-
+\subsection{Gantt Chart}
 \begin{ganttchart}[hgrid, vgrid]{1}{30}
-	\gantttitle{Fall 2017}{10}
-	\gantttitle{Winter 2018}{10}
+    \gantttitle{Fall 2017}{10}
+    \gantttitle{Winter 2018}{10}
     \gantttitle{Spring 2018}{10} \\
-	\ganttbar{Problem statement}{3}{4} \\
-	\ganttbar{Requirements}{5}{6} \\
-	\ganttbar{Sketch UI}{6}{8} \\
+    \ganttbar{Problem statement}{3}{4} \\
+    \ganttbar{Requirements}{5}{6} \\
+    \ganttbar{Sketch UI}{6}{8} \\
     \ganttbar{Research APIs}{6}{10} \\
     \ganttbar{Finalize UI}{11}{11.5} \\
     \ganttbar{Setup Firebase Database}{11}{13} \\
