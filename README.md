@@ -2,8 +2,8 @@
 
 ## Problem Statement 
 
-### docs/problem_statements/problem_statement_final
+docs/problem_statements/problem_statement_final
 
 ## Project Requirements
 
-### docs/requirements
+docs/requirements
