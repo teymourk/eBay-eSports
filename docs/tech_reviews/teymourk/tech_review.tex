@@ -1,0 +1,130 @@
+\documentclass[onecolumn, draftclsnofoot,10pt, compsoc]{IEEEtran}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{setspace}
+\usepackage{pgfgantt}
+
+\newcommand{\subparagraph}{}
+\usepackage{titlesec}
+\setcounter{secnumdepth}{4}
+
+\usepackage{geometry}
+\geometry{textheight=9.5in, textwidth=7in}
+
+% 1. Fill in these details
+\def \CapstoneTeamName{		Skill Capped IRL}
+\def \CapstoneTeamNumber{		17}
+\def \GroupMemberOne{			Katherine Bajno}
+\def \GroupMemberTwo{			Meagan Olsen}
+\def \GroupMemberThree{			William Sims}
+\def \GroupMemberFour{			Kiarash Teymoury}
+\def \CapstoneProjectName{		eBay iOS eSports Application}
+\def \CapstoneSponsorCompany{	eBay}
+\def \CapstoneSponsorPerson{		Luther Boorn}
+
+% 2. Uncomment the appropriate line below so that the document type works
+\def \DocType{	%Problem Statement
+				Requirements Document
+				%Technology Review
+				%Design Document
+				%Progress Report
+				}
+			
+\newcommand{\NameSigPair}[1]{\par
+\makebox[2.75in][r]{#1} \hfil 	\makebox[3.25in]{\makebox[2.25in]{\hrulefill} \hfill		\makebox[.75in]{\hrulefill}}
+\par\vspace{-12pt} \textit{\tiny\noindent
+\makebox[2.75in]{} \hfil		\makebox[3.25in]{\makebox[2.25in][r]{Signature} \hfill	\makebox[.75in][r]{Date}}}}
+% 3. If the document is not to be signed, uncomment the RENEWcommand below
+%\renewcommand{\NameSigPair}[1]{#1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{titlepage}
+    \pagenumbering{gobble}
+    \begin{singlespace}
+    	% Need to uncomment this line below to include the COE photo
+    	%\includegraphics[height=4cm]{coe_v_spot1}
+        \hfill 
+        % 4. If you have a logo, use this includegraphics command to put it on the coversheet.
+        %\includegraphics[height=4cm]{CompanyLogo}   
+        \par\vspace{.2in}
+        \centering
+        \scshape{
+            \huge CS Capstone \DocType \par
+            {\large\today}\par   
+            \vspace{.5in}
+            \textbf{\Huge\CapstoneProjectName}\par
+            {\large CS461 Senior Software Engineering Project I}\par
+            {\large Fall 2017}\par
+            \vfill
+            {\large Prepared for}\par
+            \Huge \CapstoneSponsorCompany\par
+            \vspace{5pt}
+            {\Large\NameSigPair{\CapstoneSponsorPerson}\par}
+            {\large Prepared by }\par
+            Group\CapstoneTeamNumber\par
+            % 5. comment out the line below this one if you do not wish to name your team
+            \CapstoneTeamName\par 
+            \vspace{5pt}
+            {\Large
+                \NameSigPair{\GroupMemberOne}\par
+                \NameSigPair{\GroupMemberTwo}\par
+                \NameSigPair{\GroupMemberThree}\par
+                 \NameSigPair{\GroupMemberFour}\par
+            }
+            \vspace{20pt}
+        }
+        \begin{abstract}
+        % 6. Fill in your abstract
+		THis document contains pieces that our application will be using. Database, Data persistence and eBay Browse API are few of important components of this application that will allow the user to communicate through the app. 
+            
+        	%This document is written using one sentence per line.
+        	%This allows you to have sensible diffs when you use \LaTeX with version control, as well as giving a quick visual test to see if sentences are too short/long.
+        	%If you have questions, ``The Not So Short Guide to LaTeX'' is a great resource (\url{https://tobi.oetiker.ch/lshort/lshort.pdf})
+        \end{abstract}     
+    \end{singlespace}
+\end{titlepage}
+\newpage
+\pagenumbering{arabic}
+\tableofcontents
+% 7. uncomment this (if applicable). Consider adding a page break.
+%\listoffigures
+%\listoftables
+\clearpage
+
+% 8. now you write!
+\section{Introduction}
+\section{Piece 1: Database}
+\subsection{Overview}
+\subsection{Potential Choices}
+\subsubsection{Firebase}
+Firebase is a real-time database that stores given data as JSON and synchronizes it across all clients. We are planning to develop our application using Firebase backend due to an amount of services they provide. Firebase will all us to use read and write to users data after authentication process which takes place when logging in. Firebase also gives us the ability to send messages and notification. In addition to all these great services, we also have access to analytics and crash reporting which will only enhance our ability to focus on our users.
+
+\subsubsection{mySQL}
+\subsubsection{MariaDB}
+\subsection{Discussion}
+\subsection{Conclusion}
+
+\section{Piece 2: Data Persistence(Offline Capabilities)}
+\subsection{Overview}
+\subsection{Potential Choices}
+\subsubsection{Coere Data}
+\par Core Data is a graph and object persistence frame work that was introduced by Apple. manage the model layer objects in your application. It provides generalized and automated solutions to common tasks associated with object lifecycle and object graph management, including persistence.
+\subsubsection{Firebase Offline Data}
+\par Firebase applications work even if your app temporarily loses its network connection. In addition, Firebase provides tools for persisting data locally, managing presence, and handling latency. Firebase apps automatically handle temporary network interruptions. Cached data is available while offline and Firebase resends any writes when network connectivity is restored.When you enable disk persistence, your app writes the data locally to the device so your app can maintain state while offline, even if the user or operating system restarts the app.
+\begin{itemize}
+\item \textbf{Database.database().isPersistenceEnabled = true}
+\end{itemize}
+By enabling persistence, any data that the Firebase Realtime Database client would sync while online persists to disk and is available offline, even when the user or operating system restarts the app.
+\subsection{Discussionc}
+\subsection{Conclusion}
+
+\section{Piece 3: eBay Browse Items}
+\subsection{Overview}
+\subsection{Potential Choices}
+\subsubsection{eBay Browse REST API}
+\subsection{Discussion}
+\subsection{Conclusion}
+
+
+\end{document}
