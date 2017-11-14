@@ -79,7 +79,7 @@
         This document contains a review of three different pieces of technology that will be neccesary to complete the objectives outlined in our requirements document. 
         I will be responsible for reviewing different methods of generating Twitter data, generating Event data, and converting JSON strings into Swift data types. 
         Our project involves the creation of an iOS application by utilizing eBay public buying APIs to help eBay understand the eSports market and provide shopping opportunities. 
-        My role is focus on the social component where we will display tweets from targeted eSports accounts in order to make the application more engaging.
+        My role is to implement the data generation and display of tweets from targeted eSports accounts in order to make the application more engaging.
             
         	%This document is written using one sentence per line.
         	%This allows you to have sensible diffs when you use \LaTeX with version control, as well as giving a quick visual test to see if sentences are too short/long.
@@ -97,32 +97,98 @@
 
 % 8. now you write!
 \section{Introduction}
+In order to explore the eSports market, eBay would like to test their public buying APIs with a mobile application. 
+The core functionality of our app involves displaying eSports merchandise being sold on eBay that is relevant to various eSports games and events. 
+However, users will be also able to view a featured eSport event and relevant tweets from targeted accounts on the home screen. 
+Part of my role is to implement Twitter functionality in our application so that the most recent tweet from a targeted account is displayed.
+In this technical review, I explore different methods of generating Twitter data, converting JSON, and generating event content. 
+
 \section{Piece 1: Generating Twitter Data}
 \subsection{Overview}
+In order to properly display tweets in our application, we will need to choose a technology for gathering Twitter data.
+It is important that the twitter content is related to the featured event being displayed on the home screen.
+The goal of this functionality is to provide engaging content and to keep users up to date on current eSports events. 
 \subsection{Potential Choices}
 \subsubsection{Twitter Kit for iOS\cite{twitter}}
+Twitter Kit for iOS is the offical API for integrating Twitter with an iOS application.
+The API is free for anyone that has a Twitter account and requires that all requests be authenticated with tokens that can be traced back to an individual Twitter App.
+A Twitter App is created in the dashboard and it provides you with an access token that you use to authenticate.
+Installing the Twitter Kit can either be done using CocoaPods or manually. 
+Once installed, the Twitter Kit allows you to easily display single tweets and timelines from desired accounts in Swift.
+Tweet View Style provides UI components for displaying tweets effortlessly. 
 \subsubsection{Scraping HTML Data with SwiftSoup\cite{ssoup}}
+SwiftSoup is an HTML Parser available under the MIT license which means it is completely free to use. 
+It is a pure Swift library that a very convenient API for extracting and manipulating data, using the best of DOM, CSS, and jquery-like methods.
+SwiftSoup could be used for generating Twitter data by parsing through HTML that has been scraped from a twitter webpage. 
+Implementation would involve providing the URL of a targeted eSports account and then parsing through the HTML for specific tweet data. 
+The tweet data would then be stored in a Swift data type that can then be utilized for displaying information in the UI. 
 \subsubsection{Manually adding tweets to Firebase\cite{fb}}
+Tweets could also be manually stored in Firebase which wouldn't inolve the use of any extra libraries or APIs.
+This method wouldn't require integration from any other APIs or libaries since we are already using Firebase as our primary database. 
+However, entering tweet information manually will be tedious and the content would get old quickly since it wouldn't be updated dynamically.
 \subsection{Discussion}
+The Twitter Kit for iOS is the most well documented option compared to SwiftSoup and using Firebase to manually add tweets.
+UI components are already built into the kit which would save a lot of time spent on front-end development. 
+Writing a function to correctly parse the HTML would be more complicated than converting JSON or entering items into the Firebase. 
+Manually adding tweets is definitely the least complicated option, but it would require the developer to spend a lot of time updating tweets when new events are featured. 
 \subsection{Conclusion}
+Overall, using the Twitter iOS kit would be the best option for our project because it is well supported by Twitter, has UI components built in, and JSON is easier to convert to Swift code than HTML.
 
 \section{Piece 2: Generating Event Data}
 \subsection{Overview}
+In order to display events on our home, browse, and events screens, we will need to choose a technology for generating this data. 
+We plan to curate content and display merchandise for approximately five upcoming eSports events.
+Our goal is provide helpful information to the user such as the time and location of these events. 
 \subsection{Potential Choices}
-\subsubsection{Manually adding events to Firebase\cite{fb}}
 \subsubsection{Toornament API\cite{toornament}}
+Toornament is a free API that gives you access to data of the Toornament platform.
+The API sends responses that contain information about different eSports touraments and games in JSON.
+It provides the functionality to list public tournaments, indivdual matches, participants, and schedules. 
 \subsubsection{Abios API\cite{abios}}
+Abios is a paid eSports API solution that covers extremely detailed and broad data. 
+The service includes access to play by plays of many popular games and a betting platform for eSports.
+Statistics on team and inter-team performance is also supported. 
+\subsubsection{Manually adding events to Firebase\cite{fb}}
+Event data could be manually added into Firebase which would create JSON strings for each event.
+This method wouldn't require integration from any other APIs or libraries since we are already using Firebase as our primary database.
+We only expect to support approximately five of the largest upcoming global gaming events so we would not expect the content to change frequently. 
 \subsection{Discussion}
+During research, I was unable to find an API that targeted a wide range of video game events instead of different game tournaments. 
+Abios provides a huge amount of information compared to Toornament, but much of it would not be used for our application. 
+However, Toornament is a free option and we would need to get a quote from Abios before we would be able to use their services. 
+Both APIs don't meet our needs because they don't provide the location of different events and there isn't support for large gaming conventions such as E3 and PAX. 
+Using Firebase would make it very easy to generate the content that we would like to be displayed in our application.
+It is not neccesary that our content is generating dynamically because there are only a small number of eSports events we would like to support. 
 \subsection{Conclusion}
+The main focus of our application is to sell eSports merchandise related to different games and events. 
+Displaying tournament information would be useful, but not as important as specific event information that isn't supported by any known APIs.
+Due to the ease of manually adding information into Firebase and the small number of eSports events we plan to support, curated content in Firebase looks like the best option for our project.  
 
 \section{Piece 3: Converting JSON}
 \subsection{Overview}
+We plan to use the eBay Browse API and Twitter API for our application which both return data formatted as JSON strings. 
+In order to effectively use the returned data, we will need to convert the JSON into Swift data types and objects that are specific our app’s domain.
+Working with JSON can be tedious and there are a number of available technologies that are designed to make it easier.
 \subsection{Potential Choices}
 \subsubsection{Apple Foundation Framework\cite{json}}
+Apple has implemented a class called JSONSerialization built directly into the Foundation framework that is used to convert JSON into Swift data types.
+Swift’s built-in language features make it easy to safely extract and work with JSON data.
 \subsubsection{SwiftyJSON Library\cite{sjson}}
+The typical JSON handling in Swift is not perfect because it is very strict about explicit types. 
+SwiftyJSON is a free JSON parsing library that gives you much clearer syntax when converting JSON in Swift.
+It takes out a lot of the headache of parsing through complex JSON data by making use of implicit typing.
 \subsubsection{Gloss Library\cite{gloss}}
+Gloss is another free JSON parsing library for Swift that has support for mapping JSON to objects, mapping objects to JSON, nested objects, custom transformations.
+It involves the creation of compact Gloss models that have roughly 1-line-to-property ratio for deserialization and serialization respectively.
 \subsection{Discussion}
+Compared to Gloss and the Foundation Framework, SwiftJSON has the simplest syntax when working with JSON. 
+Gloss utilizes it's own custom operating syntax to make your model less cluttered, but it makes it difficult to clearly commicate what is happening.
+You can disable the custom operators, but then your syntax looks equally as complicated as using the built in Swift Foundation Framework.
 \subsection{Conclusion}
+Overall, SwiftyJSON looks like the best option for our project due to the simplicity of JSON conversion.
+However, the Swift 4 built was just released in early November and there have been some issues posted to the GitHub recently so we will need to test it out with our application before committing. 
+Therefore, we should use the default Apple Foundation Framework before we confirm that SwiftyJSON is working effectively in Swift 4.
+The Foundation Framework has lots of documentation online and examples show it would be an easy transition to SwiftyJSON if we are confident in the stability of the library.
 
 \bibliography{tech_review}
 \bibliographystyle{IEEEtran}
