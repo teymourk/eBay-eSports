@@ -12,28 +12,28 @@
 \geometry{textheight=9.5in, textwidth=7in}
 
 % 1. Fill in these details
-\def \CapstoneTeamName{		Skill Capped IRL}
-\def \CapstoneTeamNumber{		17}
-\def \GroupMemberOne{			Katherine Bajno}
-\def \GroupMemberTwo{			Meagan Olsen}
-\def \GroupMemberThree{			William Sims}
-\def \GroupMemberFour{			Kiarash Teymoury}
-\def \CapstoneProjectName{		eBay iOS eSports Application}
-\def \CapstoneSponsorCompany{	eBay}
-\def \CapstoneSponsorPerson{		Luther Boorn}
+\def \CapstoneTeamName{     Skill Capped IRL}
+\def \CapstoneTeamNumber{       17}
+\def \GroupMemberOne{           Katherine Bajno}
+\def \GroupMemberTwo{           Meagan Olsen}
+\def \GroupMemberThree{         William Sims}
+\def \GroupMemberFour{          Kiarash Teymoury}
+\def \CapstoneProjectName{      eBay iOS eSports Application}
+\def \CapstoneSponsorCompany{   eBay}
+\def \CapstoneSponsorPerson{        Luther Boorn}
 
 % 2. Uncomment the appropriate line below so that the document type works
-\def \DocType{	%Problem Statement
-				Requirements Document
-				%Technology Review
-				%Design Document
-				%Progress Report
-				}
-			
+\def \DocType{  %Problem Statement
+                Requirements Document
+                %Technology Review
+                %Design Document
+                %Progress Report
+                }
+            
 \newcommand{\NameSigPair}[1]{\par
-\makebox[2.75in][r]{#1} \hfil 	\makebox[3.25in]{\makebox[2.25in]{\hrulefill} \hfill		\makebox[.75in]{\hrulefill}}
+\makebox[2.75in][r]{#1} \hfil   \makebox[3.25in]{\makebox[2.25in]{\hrulefill} \hfill        \makebox[.75in]{\hrulefill}}
 \par\vspace{-12pt} \textit{\tiny\noindent
-\makebox[2.75in]{} \hfil		\makebox[3.25in]{\makebox[2.25in][r]{Signature} \hfill	\makebox[.75in][r]{Date}}}}
+\makebox[2.75in]{} \hfil        \makebox[3.25in]{\makebox[2.25in][r]{Signature} \hfill  \makebox[.75in][r]{Date}}}}
 % 3. If the document is not to be signed, uncomment the RENEWcommand below
 %\renewcommand{\NameSigPair}[1]{#1}
 
@@ -42,8 +42,8 @@
 \begin{titlepage}
     \pagenumbering{gobble}
     \begin{singlespace}
-    	% Need to uncomment this line below to include the COE photo
-    	%\includegraphics[height=4cm]{coe_v_spot1}
+        % Need to uncomment this line below to include the COE photo
+        %\includegraphics[height=4cm]{coe_v_spot1}
         \hfill 
         % 4. If you have a logo, use this includegraphics command to put it on the coversheet.
         %\includegraphics[height=4cm]{CompanyLogo}   
@@ -76,11 +76,11 @@
         }
         \begin{abstract}
         % 6. Fill in your abstract
-		THis document contains pieces that our application will be using. Database, Data persistence and eBay Browse API are few of important components of this application that will allow the user to communicate through the app. 
+        THis document contains pieces that our application will be using. Database, Data persistence and eBay Browse API are few of important components of this application that will allow the user to communicate through the app. 
             
-        	%This document is written using one sentence per line.
-        	%This allows you to have sensible diffs when you use \LaTeX with version control, as well as giving a quick visual test to see if sentences are too short/long.
-        	%If you have questions, ``The Not So Short Guide to LaTeX'' is a great resource (\url{https://tobi.oetiker.ch/lshort/lshort.pdf})
+            %This document is written using one sentence per line.
+            %This allows you to have sensible diffs when you use \LaTeX with version control, as well as giving a quick visual test to see if sentences are too short/long.
+            %If you have questions, ``The Not So Short Guide to LaTeX'' is a great resource (\url{https://tobi.oetiker.ch/lshort/lshort.pdf})
         \end{abstract}     
     \end{singlespace}
 \end{titlepage}
@@ -96,35 +96,51 @@
 \section{Introduction}
 \section{Piece 1: Database}
 \subsection{Overview}
+\par our application will be using a database back end to keep track of our users information and favorited games. Our users will be able to go to a login and sign up in order to get authenticated. Below are some of the most popular database that is used for a variety of different applications. 
 \subsection{Potential Choices}
-\subsubsection{Firebase}
-Firebase is a real-time database that stores given data as JSON and synchronizes it across all clients. We are planning to develop our application using Firebase backend due to an amount of services they provide. Firebase will all us to use read and write to users data after authentication process which takes place when logging in. Firebase also gives us the ability to send messages and notification. In addition to all these great services, we also have access to analytics and crash reporting which will only enhance our ability to focus on our users.
 
-\subsubsection{mySQL}
-\subsubsection{MariaDB}
+\subsubsection{Firebase}
+Firebase is a real-time database that stores given data as JSON and synchronizes it across all clients.Firebase offers a lot of great services that could be used to develop and manage your application. Firebase will all us to use read and write to users data after authentication process which takes place when logging in. Firebase also gives us the ability to send messages and notification. In addition to all these great services, we also have access to analytics and crash reporting which will only enhance our ability to focus on our users. Lastly, Firebase database also offers a full set of tools for managing the security of the application.
+
+\subsubsection{MySQL}
+MySQL is one of the most popular open source database management systems that was developed and distributed by Oracle. It's mostly used for web-based applications by allowing you to create tables and relations to handle a large amount of data. MySql gives you the option to write your own queries and gives you access to a lot of aggregate functions that could be extremely helpful to deal with data. The database works very well with many different languages such as C++, C, Java, and PHP to make calls to the server. However, out of all these languages, PHP is the most popular one that's used.
+
 \subsection{Discussion}
+MySQL is used mostly in web applications and doesn't offer as much when it comes to iOS development. Unlike Firebase, MySQL isn't a real-time database that gets updated everytime data is changed. It also doesn't come with a lot of different services that Firebase offers such as offline compatibility and cloud messaging.
 \subsection{Conclusion}
+In conclusion, I believe out of these databases, Firebase will be the best one to use. With all the features and services it offers, it can really help us be focused on our users by giving them the best experience possible. 
 
 \section{Piece 2: Data Persistence(Offline Capabilities)}
 \subsection{Overview}
+Our application will be using the persistent store to save users data and event information just in case there is a net loss. Below are two of the greatest libraries that could be used to save these data so they don't have to continuously be downloaded everytime the user starts the application.
+
 \subsection{Potential Choices}
-\subsubsection{Coere Data}
-\par Core Data is a graph and object persistence frame work that was introduced by Apple. manage the model layer objects in your application. It provides generalized and automated solutions to common tasks associated with object lifecycle and object graph management, including persistence.
+\subsubsection{Core Data}
+\par Core Data is a graph and object persistence frame work that was introduced by Apple. It manages the model layer objects in your application. It provides generalized and automated solutions to common tasks associated with object lifecycle and object graph management, including persistence. Core data offers a lot of great features such as Data Migration, sync and async background fetch request and many other things that enhance that help to enhance the performance of the application.
+
 \subsubsection{Firebase Offline Data}
 \par Firebase applications work even if your app temporarily loses its network connection. In addition, Firebase provides tools for persisting data locally, managing presence, and handling latency. Firebase apps automatically handle temporary network interruptions. Cached data is available while offline and Firebase resends any writes when network connectivity is restored.When you enable disk persistence, your app writes the data locally to the device so your app can maintain state while offline, even if the user or operating system restarts the app.
 \begin{itemize}
 \item \textbf{Database.database().isPersistenceEnabled = true}
 \end{itemize}
 By enabling persistence, any data that the Firebase Realtime Database client would sync while online persists to disk and is available offline, even when the user or operating system restarts the app.
-\subsection{Discussionc}
+
+\subsection{Discussion}
+Both of these are great. Core Data is widely used in many different iOS applications and offers many different great methods to make the user experience much better. Not only core data makes sorting and filtering extremely easier, you are able to make async and syn background or foreground fetches to retrieve data. On the other hand, Firebase offline compatibility is just much simpler to use but doesn't offer nearly as much as core data. With just one line of code we are just able to save data in the persistent store just in case there is a loss in the network.
+
 \subsection{Conclusion}
+Even though, they are both great to use. I believe we could always use the Firebase offline compatibility, to begin with, and later integrate core data. Implementing this framework will have a great impact on the performance and stability of the application
 
 \section{Piece 3: eBay Browse Items}
 \subsection{Overview}
+Everytime the user clicks on a game, they get related merchandise. This is possible using the eBay Browse API. We need to be able to retrieve and display details about each merchandise displayed. 
+
 \subsection{Potential Choices}
 \subsubsection{eBay Browse REST API}
+\par using the eBay browse API users can create different selections of items to browse. Some of the items that could be fetched using this API are "\textbf{basic information for an item or a group of items, such as title, pricing, images, shipping, and seller. It also includes refinements, such as item condition, buys options, category, and item aspects}" along with different sort of details about the sellers and different type of shipping options. It also includes product reviews, item location and return policy terms. The results of browse could be sorted and filtered by fixed price or auction. We are able to fetch a whole item description by just making a GET reuest to "\textbf{getItem}" REST
 \subsection{Discussion}
+eBay Browse API is great to retrive details about every merchendise displayed.
 \subsection{Conclusion}
-
+As of now this is the only option we have as far as browsing eBay items. 
 
 \end{document}
