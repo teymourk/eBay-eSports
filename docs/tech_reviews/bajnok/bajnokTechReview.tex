@@ -1,0 +1,178 @@
+\documentclass[onecolumn, draftclsnofoot,10pt, compsoc]{IEEEtran}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{setspace}
+
+\usepackage{geometry}
+\geometry{textheight=9.5in, textwidth=7in}
+
+% 1. Fill in these details
+\def \CapstoneTeamName{		Skill Capped IRL}
+\def \CapstoneTeamNumber{		17}
+\def \GroupMemberOne{			Katherine Bajno}
+%\def \GroupMemberTwo{			Meagan Olsen}
+%\def \GroupMemberThree{			William Sims}
+%\def \GroupMemberFour{			Kiarash Teymoury}
+\def \CapstoneProjectName{		eBay iOS eSports Application}
+\def \CapstoneSponsorCompany{	eBay}
+\def \CapstoneSponsorPerson{		Luther Boorn}
+
+% 2. Uncomment the appropriate line below so that the document type works
+\def \DocType{		%Problem Statement
+				%Requirements Document
+				Technology Review
+				%Design Document
+				%Progress Report
+				}
+			
+\newcommand{\NameSigPair}[1]{\par
+\makebox[2.75in][r]{#1} \hfil 	\makebox[3.25in]{\makebox[2.25in]{\hrulefill} \hfill		\makebox[.75in]{\hrulefill}}
+\par\vspace{-12pt} \textit{\tiny\noindent
+\makebox[2.75in]{} \hfil		\makebox[3.25in]{\makebox[2.25in][r]{Signature} \hfill	\makebox[.75in][r]{Date}}}}
+% 3. If the document is not to be signed, uncomment the RENEWcommand below
+%\renewcommand{\NameSigPair}[1]{#1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{titlepage}
+    \pagenumbering{gobble}
+    \begin{singlespace}
+    	% Need to uncomment this line below to include the COE photo
+    	%\includegraphics[height=4cm]{coe_v_spot1}
+        \hfill 
+        % 4. If you have a logo, use this includegraphics command to put it on the coversheet.
+        %\includegraphics[height=4cm]{CompanyLogo}   
+        \par\vspace{.2in}
+        \centering
+        \scshape{
+            \huge CS Capstone \DocType \par
+            {\large\today}\par   
+            \vspace{.5in}
+            \textbf{\Huge\CapstoneProjectName}\par
+            {\large CS461 Senior Software Engineering Project I}\par
+            {\large Fall 2017}\par
+            \vfill
+            {\large Prepared for}\par
+            \Huge \CapstoneSponsorCompany\par
+            \vspace{5pt}
+            {\Large\NameSigPair{\CapstoneSponsorPerson}\par}
+            {\large Prepared by }\par
+            Group\CapstoneTeamNumber\par
+            % 5. comment out the line below this one if you do not wish to name your team
+            \CapstoneTeamName\par 
+            \vspace{5pt}
+            {\Large
+                \NameSigPair{\GroupMemberOne}\par
+                %\NameSigPair{\GroupMemberTwo}\par
+                %\NameSigPair{\GroupMemberThree}\par
+                 %\NameSigPair{\GroupMemberFour}\par
+            }
+            \vspace{20pt}
+        }
+        \begin{abstract}
+        % 6. Fill in your abstract
+        	This document compares and contrasts various options for technology pieces in relation to the eBay iOS eSports application. 
+        User authentication is another technology piece that is analyzed. The potential choices for user authentication include Firebase, Facebook, and Google, and the three are compared and contrasted.
+        The eCommerce options for the application are discussed including redirecting to the eBay application for purchasing, using the eBay Order API, and utilizing the Apple Pay framework.
+        The final technology piece discussed is displaying multiple merchandise results. The options for this include a scrolling item list view, a scrolling item grid view, and a swiping single item view. The pros and cons of these are discussed.
+            
+        	%This document is written using one sentence per line.
+        	%This allows you to have sensible diffs when you use \LaTeX with version control, as well as giving a quick visual test to see if sentences are too short/long.
+        	%If you have questions, ``The Not So Short Guide to LaTeX'' is a great resource (\url{https://tobi.oetiker.ch/lshort/lshort.pdf})
+        \end{abstract}     
+    \end{singlespace}
+\end{titlepage}
+\newpage
+\pagenumbering{arabic}
+\tableofcontents
+% 7. uncomment this (if applicable). Consider adding a page break.
+%\listoffigures
+%\listoftables
+\clearpage
+
+% 8. now you write!
+
+\section{Introduction}
+In order to create a successful mobile application to target users in the eSports market, it is essential that the correct technology choices are made. The user needs to be able to log-in with a low-cost and accessible account, browse merchandise relevant to them with ease, and successfully purchase the merchandise with a system that is reliable and secure. Discussed in this document are some technology options for each of these three categories, and the pros and cons of them.
+
+\section{User Authentication}
+
+\subsection{Overview}
+When the application first launches, the user will be prompted to sign-in. In order to have a secure system for our user, an authentication system must be used. There are various services that could be used for this task including Firebase, Facebook, and Google that would work for our application. 
+
+\subsection{Criteria}
+The best option for an authentication system would be a service that is accessible to the masses. It would be a low-cost option for the user. It would allow the user to sign-in through both email and password and a second mainstream account. 
+
+\subsection{Potential Choices}
+
+\subsubsection{Firebase}
+The Firebase Authentication system is that the service handles the UI flow for users signing in. With Firebase, we can choose to allow users to sign in through Facebook, Google, phone numbers, and by email address and password \cite{firebase}. We do not have to handle the connection between our application and each service we decided to choose, and it would be easy to add on support for more sign-in options in the future. Firebase takes care of the sign-in process, and we would just have to use their API in the code. Firebase would also be free for our purposes, and would not require any review by Google to use.
+
+\subsubsection{Facebook}
+The Facebook API log-in authentication system only allows users to log-in who have a pre-existing Facebook account. If information is requested beyond people's public profiles, emails, or friends list, the application needs to be submitted for log-in review \cite{facebook}. Facebook accounts are free and easy to make, and millions of users already have one. A user being logged into Facebook on an application allows them to create an account in the application without setting up a password, personalize information such as birthday and likes, and connect with friends through the social aspect. The log-in system easily integrates with Facebooks social API. Other features include being able to share their real identity in their public profile, and gradual authorization which allows us to only ask for them to log-in at the start but later on ask for more information from them in the future.
+
+\subsubsection{Google}
+The Google API has a secure log-in authentication system. If a user has a Google account, which is highly accessible and has zero cost associated with it for the user, they can log into the application. It allows the user to log-in with an account they use for many services already such as Gmail, Play, Google+, and many other Google services. With a Google sign-in account, the user can easily pay in the application with Android Pay, add an event to their Google Calendar, and integrate with other Google Drive services that the user is most likely already utilizing \cite{google}. The Google log-in also uses the Google Smart Lock service, allowing for one-tap sign-in and saved passwords on Android.
+
+\subsection{Discussion}
+Compared to Facebook and Google, the Firebase log-in authentication system allows for multiple ways for users to log-in, rather than just through one service such as Google and Facebook. The benefit of all three options are that they are all low-cost, as making an account is free for users and they are highly accessible. A benefit of Firebase in contrast to Facebook and Google is the privacy for our users. Since it does not require having an account in an outside application, they can keep their other information safe. Compared to Facebook and Firebase, Google allows for purchasing integration through the user signing in with their system. 
+
+\subsection{Conclusion}
+We chose choice one, Firebase, because it allows for a vast amount of options through the user signing in, while maintaining their security. The service is free for both us and the user, making it a great choice. It also allows for sign in through multiple services, unlike the other two options. While we are only allowing the user to log-in with email and password at first, this will be great for future-proofing the application. 
+
+\section{eCommerce Options}
+
+\subsection{Overview}
+In-order to purchase the eSports related merchandise the user is searching for, an eCommerce platform needs to be implemented in the application. The user needs to be able to purchase their selected item. Redirecting to eBay.com, the eBay Order API, and Apple Pay are the options to consider.
+
+\subsection{Criteria}
+The eCommerce purchasing option needs to have a secure checkout. It needs to be easy for the user. The option should also be feasible for the developer to do, and not have to get outside reviews or certifications for it. The option needs to ensure that the entire checkout process will occur from selecting to purchase the item, putting in their card information if not already saved, inputting their shipping and billing information if not already saved, and finalizing the purchase with conformation.
+
+\subsection{Potential Choices}
+
+\subsubsection{Redirect to eBay.com}
+A way to handle eCommerce is out of the application. When a user clicks on an item to purchase it, they will be redirected to the eBay website where they can continue the checkout process. The query results that display the item in the application would be used to generate the web address for purchasing on the eBay website. This would ensure the checkout process is secure. The user would only be able to purchase one item at a time, and would have to go through a separate process once on the eBay website.
+
+\subsubsection{Checkout in application with eBay Order API}
+Using the eBay Order API in our application would allow for the user to complete the full checkout process in our application. It supports users checking out as guests or as a eBay member. The user would be required to log-in to eBay if they wanted to complete a member checkout. A member would use PayPal to make their purchase, and a guest would use a credit card \cite{ebayOrderAPI}. The entire checkout process would have to be implemented and handled in the application including payment authorization, and notifiyng the user of tracking information.
+
+\subsubsection{Checkout in application with Apple Pay}
+Apple Pay is another option for in-application purchasing. It is for iOS applications only. Users can authorize payments using Touch ID or using their card credentials that are already stored on their Apple Wallet /cite{applePay}. Since a user needs to have an Apple account to download this application, they will not need to go through a second log-in step to purchase the item. A merchant ID needs to be registered with Apple to use this feature in applications, and the application needs to be registered and validated. The items would have to be sold in an authorized merchandise website by the developer. 
+
+\subsection{Discussion}
+In contrast to the eBay Order API and Apple Pay, redirecting the purchase to eBay.com is guaranteed to work and be secure. A pro is we would not have to worry about contacting the user after the purchase with shipping information, as eBay will do that. Compared to the eBay Order API and redirecting to eBay.com, with Apple Pay the user is guaranteed to have an Apple account with Apple Pay being easy to set up. A con of Apple Pay is the user needs to be logged into Apple, and also the application needs to be registered with Apple in-order to utilize this feature. In contrast to Apple Pay, the eBay Order API would make in-application purchases easier. Since the user is purchasing merchandise from eBay, it is likely they have an eBay account. If not, they have the option as continuing as a guest.
+
+\subsection{Conclusion}
+We chose choice one, redirecting to eBay.com. eBay already has a great system in place for purchasing and we will utilize that. The checkout will be secure, and the user will be able to complete the entire checkout transaction from start to finish. eBay will then take care of notifying the user in the future about shipping and tracking information, and makes for the best user experience.
+
+
+\section{Displaying Multiple Merchandise Results}
+
+\subsection{Overview}
+In-order for the user to browse the merchandise they want to purchase, the items need to be displayed. How the items are displayed can change the likelihood the user will purchase an item. Our options are a scrolling item list view, a scrolling item grid view, and a swiping single item view.
+
+\subsection{Criteria}
+The page should display as many merchandise results as possible while still being viewable to maximize the amount shown to the user. The view should make it easy to display new items on the page. 
+
+\subsection{Potential Choices}
+
+\subsubsection{Scrolling Item List View}
+The items would be displayed in a list view. As the user scrolls down, more items would appear. If they scrolled back up, previous items would load.This allows for one column of items to be displayed. The list view allows for more information to be included in the item, such as a brief description along with the image, title, and price.
+
+\subsubsection{Scrolling Item Grid View}
+The items would be displayed in a grid view. Two columns of merchandise would be displayed. Since there is more merchandise on the page, only the image, title, and price would be displayed. If the user scrolled down, new merchandise would appear. If they user scrolled back up, previous merchandise would appear.
+
+\subsubsection{Swiping Single Item View}
+A single item view displays just one merchandise result per page. If the user wanted to see a new item, they would have to swipe to have a new item appear. If they swiped left, the previous item would appear. This cannot keep track of previously seen items easily, since only one item is displayed per page.
+
+\subsection{Discussion}
+In contrast to the scrolling item views, the swiping single item only displays one item at a time. This makes it difficult for the user to see multiple merchandise results. In contrast to the swiping single item view, the scrolling views make it easy to display new items. The user does not have to tap a button each time they want to display a new result. The scrolling allows the user to have new search results displayed without changing their motion. Compared to the scrolling item list view, the scrolling item grid view will display more search results. It displays multiple columns of merchandise rather than just the one.
+
+\subsection{Conclusion}
+We chose choice two, scrolling item grid view, because of the benefits of the view. It allows for the user to see many items per page. They do not have to click to view new pages, and can continue scrolling and have new merchandise appear. This meets our criteria the best.
+
+\bibliography{source} 
+\bibliographystyle{ieeetr}
+
+
+\end{document}
