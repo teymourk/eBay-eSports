@@ -94,9 +94,11 @@
 
 % 8. now you write!
 \section{Introduction}
+To find out more about the eSports market, we have to come up with ways to know more about our users and their behaviors. Therefore, things listed below are some of the most important things thay we need to take in consideration in order to accomplish that goal. From different types of database, offine compatibilies and HTTP calles we are hoping that using our comparisons and contrasts, we were able to pick the best options to apply. 
+
 \section{Piece 1: Database}
 \subsection{Overview}
-\par our application will be using a database backend to keep track of our user's information and favorited games. Our users will be able to go to a login and sign up in order to get authenticated. Below are some of the most popular database that is used for a variety of different applications. 
+\par In order for our application to keep track of users favorited games and information, we will be using a database to store the user's data. Our users will be able to go to a login and sign up in order to get authenticated. Below are some of the most popular database that is used for a variety of different applications. 
 \subsection{Potential Choices}
 
 \subsubsection{Firebase\cite{Firebase}}
@@ -136,24 +138,24 @@ Essentially, Realm offline Data works just like Firebase offline, it gives you t
 Both of these are great. Core Data is widely used in many different iOS applications and offers many different great methods to make the user experience much better. Not only core data makes sorting and filtering extremely easier, you are able to make async and syn background or foreground fetches to retrieve data. On the other hand, Firebase offline compatibility is just much simpler to use but doesn't offer nearly as much as core data. With just one line of code we are just able to save data in the persistent store just in case there is a loss in the network.
 
 \subsection{Conclusion}
-Even though, they are both great to use. I believe we could always use the Firebase offline compatibility, to begin with, and later integrate core data. Implementing this framework will have a great impact on the performance and stability of the application. However, since its a pretty small application then use of core data is unnecessary will be unnecessary since it will be very time-consuming.
+Even though, they are both great to use. I believe we could always use the Firebase offline compatibility, to begin with, and later integrate core data. Implementing this framework will have a great impact on the performance and stability of the application. However, since its a pretty small application then use of core data will be unnecessary since it will be very time-consuming to implement.
 
 \section{Piece 3: eBay Browse Items HHTP Call}
 \subsection{Overview}
-using the eBay browse API users can create different selections of items to browse. Some of the items that could be fetched using this API are "\textbf{basic information for an item or a group of items, such as title, pricing, images, shipping, and seller. It also includes refinements, such as item condition, buys options, category, and item aspects}" along with different sort of details about the sellers and different type of shipping options. It also includes product reviews, item location and returns policy terms. The results of browse could be sorted and filtered by fixed price or auction. We are able to fetch a whole item description by just making a GET reuest to "\textbf{getItem}" REST
+Using the eBay browse API users can create different selections of items to browse. Some of the items that could be fetched using this API are "\textbf{basic information for an item or a group of items, such as title, pricing, images, shipping, and seller. It also includes refinements, such as item condition, buys options, category, and item aspects}" along with different sort of details about the sellers and different type of shipping options. It also includes product reviews, item location and returns policy terms. The results of browse could be sorted and filtered by fixed price or auction. We are able to fetch a whole item description by just making a GET reuest to "\textbf{getItem}" REST
 
 \subsection{Potential Choices}
 \subsubsection{iOS URLSession \cite{URLSession}}
-\par URL session is a built-in class that allows you to perform background or foreground downloads. It supports the data, file, FTP, and htpp/https checked. With URL session API, the app creates one or more sessions each with a group of related transfer tasks. URL session also conforms to many other delegate methods that help to enhance the application
+\par URL session is a built-in class that allows you to perform background or foreground downloads. It supports the data, file, FTP, http, and https checked. With URL session API, the app creates one or more sessions each with a group of related transfer tasks. URL session also conforms to many other delegate methods that help to enhance the application
 
 \subsubsection{Alamofire\cite{Alamofire}}
-\par Alamofire is and HTTP base networking library used for iOS. It gives the user the elegant interface on top of Apples Foundation networking stack by simplifying the bunch of networking tasks. Users are able to make different types of HTPP calls such as asynchronous and synchronous. It provides request/response methods, JSON parameter and response serialization, and authentication.
+\par Alamofire is and HTTP base networking library used for iOS. It gives the user the elegant interface on top of Apples Foundation networking stack by simplifying the bunch of networking tasks. Users are able to make asynchronous and synchronous http calls. It provides request/response methods, JSON parameter and response serialization, and authentication.
 
 \subsubsection{JustHTTP\cite{JustHTTP}}
-\par Just HTTP is another commonly used 3rd party library that allows the user to make requests. This library offers URL queries, custom headers, cookies, timeouts, synchronous/asynchronous request, upload and many other things. This HTTP call seems to be the most complete out of all with all the functionalities that offer. 
+\par Just HTTP is another commonly used 3rd party library that allows the user to make requests. This library offers URL queries, custom headers, cookies, timeouts, synchronous/asynchronous request, upload and many other things. This HTTP call seems to be the most complete out of all with all the functionalities it offers. 
 
 \subsection{Discussion}
-All these libraries are great to use for what we are doing. They offer everything we need. They all essentially serve the same purpose for this application. The difference is tho that with these 3rd party libraries, most of them aren't updated regularly. If there is a change to Apple language, then we could run into a lot of migration issues. Using URLSession will require more code to make optimized Whereas with the other we only have to make the calls and give it the URL.
+All these libraries are great to use for what we are doing. They offer everything we need. They all essentially serve the same purpose for this application. The difference is that with these 3rd party libraries, most of them aren't updated regularly. If there is a change to Apple language, then we could run into a lot of migration issues. Using URLSession will require more code to make optimized Whereas with the other we only have to make the calls and give it the URL.
 
 \subsection{Conclusion}
 In conclusion, we believe that using Apple URLSession class will be the best due to a number of features it offers. Even though these other libraries make our lives easier, we would like to stay with the default library to not have to deal with switching over if there are updates made. 
