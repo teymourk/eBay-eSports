@@ -94,69 +94,71 @@
 
 % 8. now you write!
 \section{Introduction}
+To find out more about the eSports market, we have to come up with ways to know more about our users and their behaviors. Therefore, things listed below are some of the most important things that we need to take in consideration in order to accomplish that goal. From different types of database, offline compatibility and HTTP calls we are hoping that using our comparisons and contrasts, we were able to pick the best options to apply. 
+
 \section{Piece 1: Database}
 \subsection{Overview}
-\par our application will be using a database backend to keep track of our user's information and favorited games. Our users will be able to go to a login and sign up in order to get authenticated. Below are some of the most popular database that is used for a variety of different applications. 
+In order for our application to keep track of users favorited games and information, we will be using a database to store the user's data. Our users will go through a sign-up interface in order to get authenticated. Below are some of the most popular databases that are used for a variety of different applications. 
 \subsection{Potential Choices}
 
 \subsubsection{Firebase\cite{Firebase}}
-Firebase is a real-time database that stores given data as JSON and synchronizes it across all clients.Firebase offers a lot of great services that could be used to develop and manage your application. Firebase will all us to use read and write to users data after authentication process which takes place when logging in. Firebase also gives us the ability to send messages and notification. In addition to all these great services, we also have access to analytics and crash reporting which will only enhance our ability to focus on our users. Lastly, Firebase database also offers a full set of tools for managing the security of the application.
+Firebase is a real-time database that stores given data as JSON and synchronizes it across all clients.Firebase offers a lot of great services that could be used to develop and manage your application. Firebase will allow us to read and write to users data after the authentication process. Firebase also gives us the ability to send messages along with remote notifications. In addition to all these great services, we also have access to analytics and crash reporting which will only enhance our ability to focus on our users. Lastly, Firebase database also offers a full set of tools for managing the security of the application.
 
 \subsubsection{MySQL\cite{MySql}}
-MySQL is one of the most popular open source database management systems that was developed and distributed by Oracle. It's mostly used for web-based applications by allowing you to create tables and relations to handle a large amount of data. MySql gives you the option to write your own queries and gives you access to a lot of aggregate functions that could be extremely helpful to deal with data. The database works very well with many different languages such as C++, C, Java, and PHP to make calls to the server. However, out of all these languages, PHP is the most popular one that's used.
+MySQL is one of the most popular open source database management systems that was developed and distributed by Oracle. It's mostly used for web-based applications by allowing you to create tables and relations to handle a large amount of data. MySql gives you the option to write your own queries and gives you access to a lot of aggregate functions that could be extremely helpful to handle data. The database works very well with many different languages such as C++, C, Java, and PHP to make calls to the server. However, out of all these languages, PHP is the most popular one that's used.
 
 \subsubsection{Realm\cite{Realm}}
-Just like Firebase, Realm is a real-time database that replaces SQLite and Core Data. They claim that Realm is much faster than ORM and often faster than SQLite in minutes. Realm offers cross-platform apps and safe threading, fast queries, and offline functionality. 
+Just like Firebase, Realm is a real-time database that replaces SQLite and CoreData. They claim that Realm is much faster than ORM and often faster than SQLite in minutes. Realm offers cross-platform apps and safe threading, fast queries, and offline functionalities.
 
 \subsection{Discussion}
-MySQL is used mostly in web applications and doesn't offer as much when it comes to iOS development. Unlike Firebase, MySQL isn't a real-time database that gets updated everytime data is changed. It also doesn't come with a lot of different services that Firebase offers such as offline compatibility and cloud messaging. Same thing goes for Realm. even though it offers a lot of things that Firebase offers, it still isn't as complete as Firebase. 
+MySQL is used mostly in web applications and doesn't offer as much when it comes to iOS development. Unlike Firebase, MySQL isn't a real-time database that gets updated everytime data is changed. It also doesn't come with a lot of different services that Firebase offers such as offline compatibility and cloud messaging. Same thing goes for Realm. even though it offers a lot of things that Firebase does, it still isn't as complete. 
 
 \subsection{Conclusion}
-In conclusion, I believe out of these databases, Firebase will be the best one to use. With all the features and services it offers, it can really help us be focused on our users by giving them the best experience possible. 
+In conclusion, I believe out of all these databases, Firebase will be the best one to use. With all the great features and services it offers, it can really help us focus on our users by giving them the best possible user experience. 
 
 \section{Piece 2: Data Persistence(Offline Capabilities)}
 \subsection{Overview}
-Our application will be using the persistent store to save users data and event information just in case there is a net loss. Below are two of the greatest libraries that could be used to save these data so they don't have to continuously be downloaded everytime the user starts the application.
+Our application will be using the persistent store to save users data and event information just in case there is a net loss. Below are 3 libraries that could be used to save these datas in local storage to avoid extensive use of data.
 
 \subsection{Potential Choices}
 \subsubsection{Core Data\cite{CoreData}}
-\par Core Data is a graph and object persistence framework that was introduced by Apple. It manages the model layer objects in your application. It provides generalized and automated solutions to common tasks associated with object lifecycle and object graph management, including persistence. Core data offers a lot of great features such as Data Migration, sync and async background fetch request and many other things that enhance that help to enhance the performance of the application.
+CoreData is a graph and object persistence framework that was introduced by Apple. It manages the model layer objects in your application. It provides generalized and automated solutions to common tasks associated with object lifecycle and object graph management, including persistence. CoreData offers a lot of great features such as Data Migration, sync and async background fetch request and many other things that help to enhance the performance of the application.
 
 \subsubsection{Firebase Offline Data\cite{Firebase}}
-\par Firebase applications work even if your app temporarily loses its network connection. In addition, Firebase provides tools for persisting data locally, managing presence, and handling latency. Firebase apps automatically handle temporary network interruptions. Cached data is available while offline and Firebase resends any writes when network connectivity is restored.When you enable disk persistence, your app writes the data locally to the device so your app can maintain state while offline, even if the user or operating system restarts the app.
+Firebase applications work even if your app temporarily loses its network connection. In addition, Firebase provides tools for persisting data locally, managing presence, and handling latency. Firebase apps automatically handle temporary network interruptions. Cached data is available while offline and Firebase resends any writes when network connectivity is restored.When you enable disk persistence, your app writes the data locally to the device so your app can maintain state while offline, even if the user or operating system restarts the app.
 \begin{itemize}
 \item \textbf{Database.database().isPersistenceEnabled = true}
 \end{itemize}
 By enabling persistence, any data that the Firebase Realtime Database client would sync while online persists to disk and is available offline, even when the user or operating system restarts the app.
 
 \subsubsection{Realm Offline Data\cite{Realm}}
-Essentially, Realm offline Data works just like Firebase offline, it gives you the Background and foreground sync and saves the data in the persistent store it creates. It also deals with a lot of Automated conflict resolution
+Essentially, Realm offline Data works just like Firebase offline, it gives you the Background and foreground sync and saves the data in the persistent store it creates. 
 
 \subsection{Discussion}
-Both of these are great. Core Data is widely used in many different iOS applications and offers many different great methods to make the user experience much better. Not only core data makes sorting and filtering extremely easier, you are able to make async and syn background or foreground fetches to retrieve data. On the other hand, Firebase offline compatibility is just much simpler to use but doesn't offer nearly as much as core data. With just one line of code we are just able to save data in the persistent store just in case there is a loss in the network.
+Both of these are great. CoreData is widely used in many different iOS applications and offers many different great methods to make the user experience much better. Not only it makes sorting and filtering extremely easier, you are also able to make async and syn background or foreground fetches to retrieve data. On the other hand, Firebase offline compatibility is just much simpler to use but doesn't offer nearly as much as CoreData. With just one line of code we are just able to save data in the persistent store just in case there is a loss in the network.
 
 \subsection{Conclusion}
-Even though, they are both great to use. I believe we could always use the Firebase offline compatibility, to begin with, and later integrate core data. Implementing this framework will have a great impact on the performance and stability of the application. However, since its a pretty small application then use of core data is unnecessary will be unnecessary since it will be very time-consuming.
+Even though, they are both great to use. I believe we could always use the Firebase offline compatibilities, to begin with, and later integrate CoreData. Implementing this framework will have a great impact on the performance and stability of the application. However, since its a pretty small application, the use of it will be unnecessary since it will be very time-consuming to implement.
 
 \section{Piece 3: eBay Browse Items HHTP Call}
 \subsection{Overview}
-using the eBay browse API users can create different selections of items to browse. Some of the items that could be fetched using this API are "\textbf{basic information for an item or a group of items, such as title, pricing, images, shipping, and seller. It also includes refinements, such as item condition, buys options, category, and item aspects}" along with different sort of details about the sellers and different type of shipping options. It also includes product reviews, item location and returns policy terms. The results of browse could be sorted and filtered by fixed price or auction. We are able to fetch a whole item description by just making a GET reuest to "\textbf{getItem}" REST
+Using the eBay browse API users can create different selections of items to browse. Some of the items that could be fetched using this API are "\textbf{basic information for an item or a group of items, such as title, pricing, images, shipping, and seller. It also includes refinements, such as item condition, buys options, category, and item aspects}" along with different sort of details about the sellers and different type of shipping options. It also includes product reviews, item location and returns policy terms. The results of browse could be sorted and filtered by fixed price or auction. We are able to fetch a whole item description by just making a GET request to "\textbf{getItem}" REST
 
 \subsection{Potential Choices}
 \subsubsection{iOS URLSession \cite{URLSession}}
-\par URL session is a built-in class that allows you to perform background or foreground downloads. It supports the data, file, FTP, and htpp/https checked. With URL session API, the app creates one or more sessions each with a group of related transfer tasks. URL session also conforms to many other delegate methods that help to enhance the application
+URLSession is a built-in class that allows you to perform background or foreground downloads. It supports the data, file, FTP, HTTP, and HTTPS checked. With URLSession library, the app creates one or more sessions each with a group of related transfer tasks. It also conforms to many other delegate methods that help to enhance the peformance of the application.
 
 \subsubsection{Alamofire\cite{Alamofire}}
-\par Alamofire is and HTTP base networking library used for iOS. It gives the user the elegant interface on top of Apples Foundation networking stack by simplifying the bunch of networking tasks. Users are able to make different types of HTPP calls such as asynchronous and synchronous. It provides request/response methods, JSON parameter and response serialization, and authentication.
+\par Alamofire is and HTTP base networking library used for iOS. It gives the user the elegant interface on top of Apples Foundation networking stack by simplifying the bunch of networking tasks. Users are able to make asynchronous and synchronous http calls. It provides request/response methods, JSON parameter and response serialization, and authentication.
 
 \subsubsection{JustHTTP\cite{JustHTTP}}
-\par Just HTTP is another commonly used 3rd party library that allows the user to make requests. This library offers URL queries, custom headers, cookies, timeouts, synchronous/asynchronous request, upload and many other things. This HTTP call seems to be the most complete out of all with all the functionalities that offer. 
+JustHTTP is another commonly used 3rd party library that allows the user to make requests. This library offers URL queries, custom headers, cookies, timeouts, synchronous/asynchronous request along with upload and many other things. This HTTP call seems to be the most complete out of all with different functionalities it offers. 
 
 \subsection{Discussion}
-All these libraries are great to use for what we are doing. They offer everything we need. They all essentially serve the same purpose for this application. The difference is tho that with these 3rd party libraries, most of them aren't updated regularly. If there is a change to Apple language, then we could run into a lot of migration issues. Using URLSession will require more code to make optimized Whereas with the other we only have to make the calls and give it the URL.
+All these libraries are great to use for what we are trying to accomplish since they offer everything we need and essentially serve the same purpose for this application. The difference is that with these 3rd party libraries, most of them aren't updated regularly. If there is a change to Apple language, then we could run into a lot of migration issues. Using URLSession will require more code to make it optimized whereas with the others we only have to make the calls and give it the URL string.
 
 \subsection{Conclusion}
-In conclusion, we believe that using Apple URLSession class will be the best due to a number of features it offers. Even though these other libraries make our lives easier, we would like to stay with the default library to not have to deal with switching over if there are updates made. 
+In conclusion, we believe that using Apple URLSession class will be the best option due to a number of features it offers. Even though these other libraries make our lives easier, we would like to stay with the default library to not have to deal with switching over if there are updates made. 
 
 \bibliography{tech_review}
 \bibliographystyle{IEEEtran}
