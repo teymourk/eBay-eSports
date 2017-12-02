@@ -88,9 +88,9 @@
         }
         \begin{abstract}
         % 6. Fill in your abstract
-        This purpose of this document is to create a roadmap of the steps we will take to develop the eBay iOS eSports application. 
-        The designs for various components of the application are described in detail and analyzed from different viewpoints.
-        Also outlined is the software architecture and user interface design that will be implemented. 
+This purpose of this document is to create a roadmap of the steps we will take to develop the eBay iOS eSports application. 
+The designs for various components of the application are described in detail and analyzed from different viewpoints.
+Also outlined is the software architecture and user interface design that will be implemented. 
             
         	%This document is written using one sentence per line.
         	%This allows you to have sensible diffs when you use \LaTeX with version control, as well as giving a quick visual test to see if sentences are too short/long.
@@ -229,7 +229,7 @@ The user interface will be developed using custom code rather than storyboards o
 Firebase is used to allow our users to sign up and log in to create a bridge between the application and the backend storage. Data will be written to Firebase database to allow an interaction between the users and data being passed around. Since Firebase is a real-time database, any changes made by the user will instantly update the user interface.
 
 \subsubsection{Logical Viewpoint}
-Every user receives a user-ID from Firebase after they fully get authenticated. This way we are able to easily write and parse JSON data retrieved from the database using queries.
+Every user receives a user id from Firebase after they fully get authenticated. This way we are able to easily write and parse JSON data retrieved from the database using queries.
 
 \subsubsection{Dependency Viewpoint}
 Since Firebase is offered by Google, they make updates pretty regularly to make it more stable and reliable. Currently, Firebase SDK is fully updated to support Swift 4 and it includes everything needed to create an interaction between the backend and the application.
@@ -238,7 +238,7 @@ There are essentially there important methods that the Firebase SDK includes to 
 \begin{lstlisting}
 db.collection("Users")
 \end{lstlisting}
-Every call will include this method to do either of the three things mentioned. "db" is just our variable that is an instant of Firestore.firestore()  which includes the Collection Abstract data type. "Collection" is another term for the entity that we are trying to access.//
+Every call will include this method to do either of the three things mentioned. "db" is just our variable that is an instant of Firestore.firestore()  which includes the collection method. "Collection" is another term for the entity that we are trying to access from the data storage. \\
 \noindent\textbf{Updating and writing to the database}
 \begin{lstlisting}
 .addDocument(data: user.infoDic) { error in
@@ -249,21 +249,25 @@ For writing to the database, we have to use a dictionary to have set of keys and
 \begin{lstlisting}
 .getDocuments() { querySnapshot, error in 
 \end{lstlisting}
-getDocument will return everything that is included in the user attribute.// 
+getDocument will return everything that is included in the user attribute. 
 
-\noindent\textbf{Checking for changes in database}
+\noindent\textbf{Checking for changes in the database}
 \begin{lstlisting}
 .whereField("Name", isEqualTo: "Kia").addSnapshotListener { querySnapshot, error in 
 \end{lstlisting}
 
-\noindent whereField is another method provided by "collection" that is used to query specific attributes. All these methods eventually give us a completionHandler that contains the querySnapshot and the possible error object that we could use for error handling to possible crashes.
+\noindent "whereField" is another method provided by "collection" that is used to query specific attributes. All these methods eventually give us a completionHandler that contains the querySnapshot and the possible error object that we could use for error handling to avoid possible crashes.
 \subsubsection{Interface Viewpoint}
-In the context of this application, we are only Firebase to update our users favorited games. Therefore, the only things being changed on the UI is the list of all the games that user has favorited. 
+In the context of this application, we are only using Firebase to update our user's favorited games. Therefore, the only things being changed on the main UI is the list of all the games that user has favorited. 
 \subsubsection{Interaction Viewpoint}
-The only interaction the user will have with the database is to perhaps be able to update their information and most importantly be able to favorite and unfavorite games.
+The only interaction the user will have with the database is to be able to update their information and most importantly be able to favorite and unfavorite games.
 \subsection{Firebase User Authentication}
 \subsubsection{Context Viewpoint}
-The user authentication will take place using Firebase authentication. Firebase authentication has the advantage of providing some built in resources that are easy to pick up including SDKs and pre-built libraries.Firebase authentication supports a wide variety of application mediums including websites and mobile devices. 
+The user authentication will take place using Firebase authentication. Firebase authentication has the advantage of providing some built in resources that are easy to implement including SDKs and pre-built libraries. Firebase authentication supports a wide variety of application mediums including websites and mobile devices. It also catches many edge cases that could turn in security vulnerabilities which might introduce malicious material into the application if not caught. This authentication  supports many different forms of authentication including UI authentication and SDK authentication. This authentication choice integrates well with the back end data storage.
+\subsubsection{Composition Viewpoint}
+From a composition viewpoint, Firebase UI has the option of incorporating authentication from a variety of different sources including phone, email, Facebook, Twitter, and Google.The Firebase UI is composed of the Firebase Authentication SDK. Each of the views has a listener which keeps track of sign in state. This listener has methods which support signing up a user, retrieving information and profile about a user, signing in a user, and other functions relating to managing a user. This application chooses to use the custom password and username accounts, so it also has support for setting up those accounts and signing in with the created accounts.
+\subsubsection{Dependency Viewpoint}
+From a dependency viewpoint,the Firebase SDK must be installed and initialized. In addition, the support for each of the functions above requires that Firebase be first imported into the actual iOS application. It also necessary to attach the listeners to the relevant views in the application. 
 
 \subsection{Twitter API}
 The Twitter Kit for iOS will be used to retrieve Twitter data for our application by making REST API calls\cite{twitter}. 
@@ -298,7 +302,7 @@ The eBay browse API is essential for this application. This application will be 
 The application will make GET calls to the browser API to give us data object back. Then using apple JSONSerialization class which is included in the Apple SDK, we could parse each object and update our main UI. 
 
 \subsubsection{Dependency Viewpoint}
-this is the beta release of eBays browse API. Since they aren't providing any SDKs then we don't have to worry about it is fully compatible with our application. The application is using apples URLSession class to make calls and retrieve data. Therefore, it will always be updated if there are any updates to the iOS SDK. 
+This is the beta release of eBays browse API. Since they are not providing any SDKs then we don't have to worry about it is fully compatible with our application. The application is using apples URLSession class to make calls and retrieve data. Therefore, it will always be updated if there are any updates to the iOS SDK. 
 
 \subsubsection{Information Viewpoint}
 Search for Items by Keyword will be used by making a GET request to retrieve data
@@ -324,31 +328,16 @@ if let baseURL = URL(string: "https://api.ebay.com/buy/browse/v1/item_summary/se
 }
 \end{verbatim}
 
-\noindent Using this query we could fetch 3 different merchandise that is associated with "League of Legends". This will return us a JSON with an array of different items. Each Item will have its own ID and attributes that would use to display item information on our user interface.
+\noindent Using this query we could fetch 3 different merchandise that is associated with "League of Legends". This will return us a JSON with an array of different items. Each Item will have its own ID and attributes that would use to display item information on the main UI.
 \subsubsection{Interface Viewpoint}
-
+Our UI is one of the most important components, we are updating each UI element that is associated with the merchandise. The application will show the price, name and other details regarding the item.
 \subsubsection{Interaction Viewpoint}
-
+The fetched data will be displayed on our browse page where players get to see all the different merchandise populated with the items. As soon as the user clicks on one of the items, we will then display all the items details using the parsed JSON. 
 \subsection{User Interface Design}
+
 \subsubsection{Context Viewpoint}
-    The user interface design entails the design of a user interface for the eBay iOS eSports mobile application. The interface will conform to the Apple iOS Human Interface guidelines. This application will be designed in such a way that each page has its own view, and this section details these views and how they are connected.The user interface will serve as the first look of the application, so it must clearly direct the end user to do all of the following things within the application:
-    \begin{itemize}
-    \item query for an item
-    \item filter which type of merchandise appears on the screen after a search 
-    \item view information about a particular item 
-    \item view relevant items to upcoming eSports events
-    \item display eSports merchandise
-    \item favorite games
-    \item view favorites
-    \item view information about a particular game 
-    \item sign in
-    \item register 
-    \item view twitter feeds for games
-    \item browse items by events, games, or teams
-     \end{itemize}
-    Each of these actions above will require some sort of networking to display state changes on the user interface.
-      
-      \textbf{Design Elements and Entities}
+    The user interface design entails the design of a user interface for the eBay iOS eSports mobile application. The interface will conform to the Apple iOS Human Interface guidelines. This application will be designed in such a way that each page has its own view, and this section details these views and how they are connected.\\
+     \indent\textbf{Design Elements and Entities}
      \begin{itemize}
      \item Actors
        \begin{itemize}
@@ -386,10 +375,6 @@ if let baseURL = URL(string: "https://api.ebay.com/buy/browse/v1/item_summary/se
         \item The user will view twitter feeds for games by clicking on the twitter feed from the home page. 
         \item The user will browse items by selecting which category they want to search by. 
         \end{itemize}
-        \textbf{Design Constraints}
-        \begin{itemize} 
-        \item The user interface must scale for a mobile or a larger tablet such as iPhone
-      	 \end{itemize} 
          
         \subsubsection{Dependency Viewpoint}
         The user interface is dependent on the networking from the back end Firebase Database to the views. The UI displays the data while the networking grabs the data from the database.
@@ -416,7 +401,7 @@ if let baseURL = URL(string: "https://api.ebay.com/buy/browse/v1/item_summary/se
           \item The event page takes as an input a particular event and outputs information about that event as well as merchandise and relevant tweets.
           \item The twitter feeds page takes in as an input the game or event describing the feeds and outputs the list of feeds. 
           \item The register page inputs a username and password for the account being set up.
-          \item The sign in page takes the username and password of the account attempting to be accessed and outputs that user's home page or a popup error message if valid credentials cannot be found.
+          \item The sign in page takes the username and password of the account being accessed and outputs the corresponding home screen or an error message if valid credentials cannot be found.
           \end {itemize} 
           
 \begin{figure}[H]
@@ -449,7 +434,6 @@ if let baseURL = URL(string: "https://api.ebay.com/buy/browse/v1/item_summary/se
 \captionsetup{justification=centering}
 \end{figure}
 
-\newpage
 \bibliographystyle{IEEEtran}
 \bibliography{design_doc}
 
