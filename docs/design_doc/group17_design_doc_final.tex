@@ -265,9 +265,26 @@ The only interaction the user will have with the database is to be able to updat
 \subsubsection{Context Viewpoint}
 The user authentication will take place using Firebase authentication. Firebase authentication has the advantage of providing some built in resources that are easy to implement including SDKs and pre-built libraries. Firebase authentication supports a wide variety of application mediums including websites and mobile devices. It also catches many edge cases that could turn in security vulnerabilities which might introduce malicious material into the application if not caught. This authentication  supports many different forms of authentication including UI authentication and SDK authentication. This authentication choice integrates well with the back end data storage.
 \subsubsection{Composition Viewpoint}
-From a composition viewpoint, Firebase UI has the option of incorporating authentication from a variety of different sources including phone, email, Facebook, Twitter, and Google.The Firebase UI is composed of the Firebase Authentication SDK. Each of the views has a listener which keeps track of sign in state. This listener has methods which support signing up a user, retrieving information and profile about a user, signing in a user, and other functions relating to managing a user. This application chooses to use the custom password and username accounts, so it also has support for setting up those accounts and signing in with the created accounts.
+From a composition viewpoint, Firebase UI has the option of incorporating authentication from a variety of different sources including phone, email, Facebook, Twitter, and Google.The Firebase UI is composed of the Firebase Authentication SDK. Each of the views has a listener which keeps track of sign in state.   This application chooses to use the custom password and username accounts, so it also has support for setting up those accounts and signing in with the created accounts.
 \subsubsection{Dependency Viewpoint}
 From a dependency viewpoint,the Firebase SDK must be installed and initialized. In addition, the support for each of the functions above requires that Firebase be first imported into the actual iOS application. It also necessary to attach the listeners to the relevant views in the application. 
+\subsubsection{Information Viewpoint}
+In order to get users fully authenticated and registered with the database, they will need to go through a sign up flow which will require them to input a valid email along with password 
+
+\begin{verbatim}
+Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+\end{verbatim}
+FirebaseAuth contains "createUser" method with email and password parameters that are given by the user to fully get them registered and authenticated. The user object in the closure will contain details about the user. 
+
+\begin{verbatim}
+Auth.auth().signIn(withEmail: email, password: password) { (user, error) in }
+\end{verbatim}
+
+\noindent "SignIn" just like "CreateUser" will take in those two parameters to successfully allow the user that has already been authenticated to log in if there are no errors. The user object return in this method will contain all the existing information about the user.
+
+\subsubsection{Interface Viewpoint}
+From an interface standpoint, Firebase leverages existing and familiar sign in forms for its authentication. The Firebase UI has support for signing up a user, retrieving information and profile about a user, signing in a user, and other functions relating to managing a user.It also includes necessary functionality for user authentication services such as deleting and re-authenticating a user.
+
 
 \subsection{Twitter API}
 The Twitter Kit for iOS will be used to retrieve Twitter data for our application by making REST API calls\cite{twitter}. 
@@ -313,8 +330,8 @@ https://api.ebay.com/buy/browse/v1/item_summary/search?q="Leage+of+Legends&limit
 \end{verbatim}
 making a call to the API using URLSession() object
 \begin{verbatim}
-let keyWord: String
-let FetchLimit: Int
+let keyWord: String = "SomeKeyWord"
+let FetchLimit: Int = 10
 if let baseURL = URL(string: "https://api.ebay.com/buy/browse/v1/item_summary/search?q=\(keyWord)&\(FetchLimit)") {
     URLSession().dataTask(with: baseURL!) {
         (data, response, error ) in
