@@ -16,4 +16,4 @@ docs/tech_reviews
 
 ## Design Document
 
-/docs/design_doc
+docs/design_doc
