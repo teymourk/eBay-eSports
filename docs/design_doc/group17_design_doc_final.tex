@@ -5,7 +5,6 @@
 \usepackage{setspace}
 \usepackage{float}
 \usepackage{caption}
-\setcounter{tocdepth}{3}
 \usepackage{geometry}
 \geometry{textheight=9.5in, textwidth=7in}
 \usepackage{listings}
@@ -213,7 +212,7 @@ After the designs were discussed, the Max OSX program Sketch was used to visuali
 \subsection{Introduction}
 This section outlines various design components using various viewpoints. The design components discussed include developing the user interface, data storage, user authentication, the user interface design, networking, the Twitter API, and the eBay Browse API. The viewpoints in which they are discussed include the pattern viewpoint, resources viewpoint, dependency viewpoint, context viewpoint, logical viewpoint, information viewpoint, interface viewpoint, and interaction viewpoint.
 
-\subsection{Developing the User Interface}
+\subsection{Developing the User Interface \cite{UI}}
 The user interface will be developed using custom code rather than storyboards or xibs. Doing it this helps avoids the problems of the complexity, possibility of too large of storyboards, and the merge conflicts that can arise from them with four different developers working on the same thing.While this may create more of a challenge visually, it also provides more freedom for more custom, dynamic layouts than storyboards or xibs. Using custom code will help provide us as developers a better understanding of the user interface that can be overlooked when using xibs and storyboards.  
  \subsubsection{Pattern Viewpoint}
   From a pattern viewpoint, using custom code will present an advantage for replicating views as storyboards and templates do not allow for things like inheritance. While it is possible to create duplicate storyboards or xibs, these duplicate views are then separate from the original.
@@ -226,13 +225,13 @@ The user interface will be developed using custom code rather than storyboards o
    
 \subsection{Firebase Data Storage}
 \subsubsection{Context Viewpoint}
-Firebase is used to allow our users to sign up and log in to create a bridge between the application and the backend storage. Data will be written to Firebase database to allow an interaction between the users and data being passed around. Since Firebase is a real-time database, any changes made by the user will instantly update the user interface.
+Firebase is used to allow our users to sign up and log in to create a bridge between the application and the back end storage. Data will be written to Firebase database to allow an interaction between the users and data being passed around. Since Firebase is a real-time database, any changes made by the user will instantly update the user interface.
 
 \subsubsection{Logical Viewpoint}
 Every user receives a user id from Firebase after they fully get authenticated. This way we are able to easily write and parse JSON data retrieved from the database using queries.
 
 \subsubsection{Dependency Viewpoint}
-Since Firebase is offered by Google, they make updates pretty regularly to make it more stable and reliable. Currently, Firebase SDK is fully updated to support Swift 4 and it includes everything needed to create an interaction between the backend and the application.
+Since Firebase is offered by Google, they make updates pretty regularly to make it more stable and reliable. Currently, Firebase SDK is fully updated to support Swift 4 and it includes everything needed to create an interaction between the back end and the application.
 \subsubsection{Information Viewpoint}
 There are essentially there important methods that the Firebase SDK includes to allow us to write, retrieve, check for update.
 \begin{lstlisting}
@@ -261,31 +260,37 @@ getDocument will return everything that is included in the user attribute.
 In the context of this application, we are only using Firebase to update our user's favorited games. Therefore, the only things being changed on the main UI is the list of all the games that user has favorited. 
 \subsubsection{Interaction Viewpoint}
 The only interaction the user will have with the database is to be able to update their information and most importantly be able to favorite and unfavorite games.
-\subsection{Firebase User Authentication}
+\subsection{Firebase User Authentication \cite{Firebase}}
 \subsubsection{Context Viewpoint}
-The user authentication will take place using Firebase authentication. Firebase authentication has the advantage of providing some built in resources that are easy to implement including SDKs and pre-built libraries. Firebase authentication supports a wide variety of application mediums including websites and mobile devices. It also catches many edge cases that could turn in security vulnerabilities which might introduce malicious material into the application if not caught. This authentication  supports many different forms of authentication including UI authentication and SDK authentication. This authentication choice integrates well with the back end data storage.
+The user authentication will take place using Firebase authentication. Firebase authentication has the advantage of providing some built in resources that are easy to implement including SDKs and pre-built libraries. Firebase authentication supports a wide variety of application mediums including websites and mobile devices. It also catches many edge cases that could turn in security vulnerabilities which might introduce malicious material into the application if not caught. This authentication  supports many different forms of authentication including UI authentication and SDK authentication. This application uses Firebase UI library because it is set up to integrate with iOS applications smoothly.
 \subsubsection{Composition Viewpoint}
-From a composition viewpoint, Firebase UI has the option of incorporating authentication from a variety of different sources including phone, email, Facebook, Twitter, and Google.The Firebase UI is composed of the Firebase Authentication SDK. Each of the views has a listener which keeps track of sign in state.   This application chooses to use the custom password and username accounts, so it also has support for setting up those accounts and signing in with the created accounts.
+From a composition viewpoint, Firebase UI has the option of incorporating authentication from a variety of different sources including phone, email, Facebook, Twitter, and Google.The Firebase UI is composed of the Firebase Authentication SDK. Each of the views has a listener which keeps track of sign in state.This application chooses to use the custom password and username accounts, so it also has support for setting up those accounts and signing in with the created accounts.
 \subsubsection{Dependency Viewpoint}
 From a dependency viewpoint,the Firebase SDK must be installed and initialized. In addition, the support for each of the functions above requires that Firebase be first imported into the actual iOS application. It also necessary to attach the listeners to the relevant views in the application. 
 \subsubsection{Information Viewpoint}
-In order to get users fully authenticated and registered with the database, they will need to go through a sign up flow which will require them to input a valid email along with password 
+In order to get users fully authenticated and registered with the database, they will need to go through a sign up flow which will require them to input a valid email along with a password 
 
 \begin{verbatim}
-Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+Auth.auth().createUser(withEmail: email, password: password) { (user, error) in }
 \end{verbatim}
-FirebaseAuth contains "createUser" method with email and password parameters that are given by the user to fully get them registered and authenticated. The user object in the closure will contain details about the user. 
+Auth() contains "createUser" method with email and password parameters that are given by the user to fully get them registered and authenticated. The user object in the closure will contain details about the user. 
 
 \begin{verbatim}
-Auth.auth().signIn(withEmail: email, password: password) { (user, error) in }
-\end{verbatim}
+Auth.auth().signIn(withEmail: email, password: password) { (user, error) in }\end{verbatim}
 
-\noindent "SignIn" just like "CreateUser" will take in those two parameters to successfully allow the user that has already been authenticated to log in if there are no errors. The user object return in this method will contain all the existing information about the user.
-
-\subsubsection{Interface Viewpoint}
+\noindent "SignIn" just like "CreateUser" will take in those two parameters to successfully allow the user that has already been authenticated to log in if there are no errors. The user object returned in this method will contain all the existing information about the user.
+\subsubsection{Logical Viewpoint}
+From a logical viewpoint, Firebase UI has the capacity to store user email, password, phone, and other profile information. Though Firebase does provide a security mechanism to control when and how that data is handled both on the development side and on the user interface side.
+\subsubsection{Interface/Patterns Viewpoints}
 From an interface standpoint, Firebase leverages existing and familiar sign in forms for its authentication. The Firebase UI has support for signing up a user, retrieving information and profile about a user, signing in a user, and other functions relating to managing a user.It also includes necessary functionality for user authentication services such as deleting and re-authenticating a user.
-
-
+\subsubsection{Structure Viewpoint}
+From a structure viewpoint, the listener is organized as an object with multiple methods which perform the different functionality described in the previous section. 
+\subsubsection{Algorithm Viewpoint}
+From an algorithmic viewpoint, the Firebase UI functions by initializing a listener. The listener is an object, and it has a variety of functions which can be called to perform the functional tasks described in the section above. 
+\subsubsection{Interaction Viewpoint}
+From an interactive viewpoint, Firebase UI stores account information for new users when they are created. This user information is then accessible throughout the entirety of the application and is able to be used for interacting with the application.However, it also provides standard security rules to prevent leakage of confidential data.  
+\subsubsection{Resources Viewpoint}
+From a resources viewpoint, Firebase provides a limit on how many user accounts can be created by a single application from a particular IP in a particular time frame. This is to protect performance on the application but also serves as a security mechanism to thwart possible malicious attempts.
 \subsection{Twitter API}
 The Twitter Kit for iOS will be used to retrieve Twitter data for our application by making REST API calls\cite{twitter}. 
 Tweets from accounts relevant to the event featured on the home screen will be displayed. 
