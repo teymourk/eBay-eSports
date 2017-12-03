@@ -12,3 +12,8 @@ docs/requirements
 ## Technology Review and Implementation Plan
 
 docs/tech_reviews
+
+
+## Design Document
+
+/docs/design_doc
