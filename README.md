@@ -19,3 +19,6 @@ docs/design_doc
 
 ## Progress Reports
 Fall: docs/progress_reports/fall
+
+## [UI Design](https://sketch.cloud/s/25qZe)
+
