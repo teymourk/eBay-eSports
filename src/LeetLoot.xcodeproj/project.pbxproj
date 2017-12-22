@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		141690F0C6C00E83139AC50A /* Pods_LeetLootTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7756037293945067944C34A /* Pods_LeetLootTests.framework */; };
 		AB7847C61FDDFB24008EBD70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */; };
 		AB7847C81FDDFB24008EBD70 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847C71FDDFB24008EBD70 /* Home.swift */; };
 		AB7847CD1FDDFB24008EBD70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB7847CC1FDDFB24008EBD70 /* Assets.xcassets */; };
 		AB7847D01FDDFB24008EBD70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB7847CE1FDDFB24008EBD70 /* LaunchScreen.storyboard */; };
 		AB7847DB1FDDFB24008EBD70 /* LeetLootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847DA1FDDFB24008EBD70 /* LeetLootTests.swift */; };
+		BA25D71E3395478B222BCCA7 /* Pods_LeetLoot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2332B1B8B9901E9E01AC1AE7 /* Pods_LeetLoot.framework */; };
+		E86A6F231FEC81C6003188BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E86A6F221FEC81C5003188BB /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +28,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2273B31204F924AED3B719B2 /* Pods-LeetLoot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLoot.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLoot/Pods-LeetLoot.release.xcconfig"; sourceTree = "<group>"; };
+		2332B1B8B9901E9E01AC1AE7 /* Pods_LeetLoot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeetLoot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		26B939428E35986B807F8E56 /* Pods-LeetLootTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7A1F30C730B697589D58797A /* Pods-LeetLootTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.release.xcconfig"; sourceTree = "<group>"; };
 		AB7847C21FDDFB24008EBD70 /* LeetLoot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeetLoot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB7847C71FDDFB24008EBD70 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -34,6 +41,9 @@
 		AB7847D61FDDFB24008EBD70 /* LeetLootTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeetLootTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB7847DA1FDDFB24008EBD70 /* LeetLootTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetLootTests.swift; sourceTree = "<group>"; };
 		AB7847DC1FDDFB24008EBD70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B32F9ADFD97BBE109C6F27A6 /* Pods-LeetLoot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLoot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLoot/Pods-LeetLoot.debug.xcconfig"; sourceTree = "<group>"; };
+		B7756037293945067944C34A /* Pods_LeetLootTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeetLootTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E86A6F221FEC81C5003188BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA25D71E3395478B222BCCA7 /* Pods_LeetLoot.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,18 +59,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				141690F0C6C00E83139AC50A /* Pods_LeetLootTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		98991E43370EBD388C24AA36 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2332B1B8B9901E9E01AC1AE7 /* Pods_LeetLoot.framework */,
+				B7756037293945067944C34A /* Pods_LeetLootTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AB7847B91FDDFB24008EBD70 = {
 			isa = PBXGroup;
 			children = (
 				AB7847C41FDDFB24008EBD70 /* LeetLoot */,
 				AB7847D91FDDFB24008EBD70 /* LeetLootTests */,
 				AB7847C31FDDFB24008EBD70 /* Products */,
+				DFEEA0AE006D30D64C78C322 /* Pods */,
+				98991E43370EBD388C24AA36 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +122,7 @@
 				AB7847CC1FDDFB24008EBD70 /* Assets.xcassets */,
 				AB7847CE1FDDFB24008EBD70 /* LaunchScreen.storyboard */,
 				AB7847D11FDDFB24008EBD70 /* Info.plist */,
+				E86A6F221FEC81C5003188BB /* GoogleService-Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -125,6 +149,17 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		DFEEA0AE006D30D64C78C322 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B32F9ADFD97BBE109C6F27A6 /* Pods-LeetLoot.debug.xcconfig */,
+				2273B31204F924AED3B719B2 /* Pods-LeetLoot.release.xcconfig */,
+				26B939428E35986B807F8E56 /* Pods-LeetLootTests.debug.xcconfig */,
+				7A1F30C730B697589D58797A /* Pods-LeetLootTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +167,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB7847DF1FDDFB24008EBD70 /* Build configuration list for PBXNativeTarget "LeetLoot" */;
 			buildPhases = (
+				399A39D13038E8C9FF0FA62E /* [CP] Check Pods Manifest.lock */,
 				AB7847BE1FDDFB24008EBD70 /* Sources */,
 				AB7847BF1FDDFB24008EBD70 /* Frameworks */,
 				AB7847C01FDDFB24008EBD70 /* Resources */,
+				D8E048AA4E76D2CE2C3EDF51 /* [CP] Embed Pods Frameworks */,
+				3CD4D0C27AA3720FE2C1C2A3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,9 +187,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB7847E21FDDFB24008EBD70 /* Build configuration list for PBXNativeTarget "LeetLootTests" */;
 			buildPhases = (
+				71D3CD604C95FFBFC94FC895 /* [CP] Check Pods Manifest.lock */,
 				AB7847D21FDDFB24008EBD70 /* Sources */,
 				AB7847D31FDDFB24008EBD70 /* Frameworks */,
 				AB7847D41FDDFB24008EBD70 /* Resources */,
+				B1888780EC3315B77DF02BAC /* [CP] Embed Pods Frameworks */,
+				355E18C9DA46B5F3E767BDDF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -210,6 +251,7 @@
 			files = (
 				AB7847D01FDDFB24008EBD70 /* LaunchScreen.storyboard in Resources */,
 				AB7847CD1FDDFB24008EBD70 /* Assets.xcassets in Resources */,
+				E86A6F231FEC81C6003188BB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +263,110 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		355E18C9DA46B5F3E767BDDF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		399A39D13038E8C9FF0FA62E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LeetLoot-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3CD4D0C27AA3720FE2C1C2A3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeetLoot/Pods-LeetLoot-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		71D3CD604C95FFBFC94FC895 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LeetLootTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B1888780EC3315B77DF02BAC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8E048AA4E76D2CE2C3EDF51 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LeetLoot/Pods-LeetLoot-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeetLoot/Pods-LeetLoot-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AB7847BE1FDDFB24008EBD70 /* Sources */ = {
@@ -371,6 +517,7 @@
 		};
 		AB7847E01FDDFB24008EBD70 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B32F9ADFD97BBE109C6F27A6 /* Pods-LeetLoot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -386,6 +533,7 @@
 		};
 		AB7847E11FDDFB24008EBD70 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2273B31204F924AED3B719B2 /* Pods-LeetLoot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -401,6 +549,7 @@
 		};
 		AB7847E31FDDFB24008EBD70 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 26B939428E35986B807F8E56 /* Pods-LeetLootTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -418,6 +567,7 @@
 		};
 		AB7847E41FDDFB24008EBD70 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A1F30C730B697589D58797A /* Pods-LeetLootTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
