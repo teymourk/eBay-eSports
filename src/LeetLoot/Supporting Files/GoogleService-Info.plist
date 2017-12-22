@@ -17,21 +17,21 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.OSU.Capstone.eBay.LeetLoot</string>
+	<string>OSU.Capstone.eBay.LeetLoot</string>
 	<key>PROJECT_ID</key>
 	<string>ebay-esports-app</string>
 	<key>STORAGE_BUCKET</key>
 	<string>ebay-esports-app.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:137399935292:ios:d7b6fe831a78672a</string>
 	<key>DATABASE_URL</key>
