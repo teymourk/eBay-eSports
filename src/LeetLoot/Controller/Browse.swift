@@ -1,21 +1,21 @@
 //
-//  ViewController.swift
+//  Browse.swift
 //  LeetLoot
 //
-//  Created by Kiarash Teymoury on 12/10/17.
+//  Created by Will on 12/28/17.
 //  Copyright © 2017 Kiarash Teymoury. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class Home: UIViewController {
+class Browse: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        view.backgroundColor = .green
+        view.backgroundColor = .red
     }
     
     override func didReceiveMemoryWarning() {
@@ -23,4 +23,3 @@ class Home: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
-
