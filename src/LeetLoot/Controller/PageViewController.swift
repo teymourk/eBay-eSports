@@ -25,6 +25,10 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         let page1 = Home()
         let page2 = Browse()
         
+        // set navigation bar
+        navigationItem.title = "LeetLoot"
+        navigationController?.navigationBar.isTranslucent = false;
+        
         // add the individual viewControllers to the pages array
         self.pages.append(page1)
         self.pages.append(page2)
@@ -34,7 +38,6 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if let viewControllerIndex = self.pages.index(of: viewController) {
             if viewControllerIndex == 0 {
-                // wrap to last page in array
                 return nil
             } else {
                 // go to previous page in array
