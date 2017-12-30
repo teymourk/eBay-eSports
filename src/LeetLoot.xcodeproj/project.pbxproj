@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		141690F0C6C00E83139AC50A /* Pods_LeetLootTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7756037293945067944C34A /* Pods_LeetLootTests.framework */; };
+		AB406EF01FF76E9600A1FD1D /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB406EEF1FF76E9600A1FD1D /* MenuBar.swift */; };
 		AB7847C61FDDFB24008EBD70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */; };
 		AB7847C81FDDFB24008EBD70 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847C71FDDFB24008EBD70 /* Home.swift */; };
 		AB7847CD1FDDFB24008EBD70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB7847CC1FDDFB24008EBD70 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 		2332B1B8B9901E9E01AC1AE7 /* Pods_LeetLoot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeetLoot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26B939428E35986B807F8E56 /* Pods-LeetLootTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7A1F30C730B697589D58797A /* Pods-LeetLootTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.release.xcconfig"; sourceTree = "<group>"; };
+		AB406EEF1FF76E9600A1FD1D /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		AB7847C21FDDFB24008EBD70 /* LeetLoot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeetLoot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB7847C71FDDFB24008EBD70 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 		AB7847E81FDDFC2A008EBD70 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AB406EEF1FF76E9600A1FD1D /* MenuBar.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				BE24D7381FF585C600E745E6 /* Browse.swift in Sources */,
 				AB7847C61FDDFB24008EBD70 /* AppDelegate.swift in Sources */,
 				BE24D73A1FF585EC00E745E6 /* PageViewController.swift in Sources */,
+				AB406EF01FF76E9600A1FD1D /* MenuBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

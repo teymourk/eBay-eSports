@@ -13,6 +13,12 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
     
     var pages = [UIViewController]()
     
+    var menuBar = { () -> MenuBar in
+        let view = MenuBar()
+            view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override init(transitionStyle style: UIPageViewControllerTransitionStyle, navigationOrientation: UIPageViewControllerNavigationOrientation, options: [String : Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: navigationOrientation, options: nil)
     }
@@ -33,6 +39,8 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         self.pages.append(page1)
         self.pages.append(page2)
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
+        
+        setupMenuBar()
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -61,4 +69,13 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func setupMenuBar() {
+        view.addSubview(menuBar)
+        
+        NSLayoutConstraint.activate([
+            menuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            menuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            menuBar.heightAnchor.constraint(equalToConstant: 45)
+        ])
+    }
 }
