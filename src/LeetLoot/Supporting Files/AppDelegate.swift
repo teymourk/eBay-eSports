@@ -22,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.rootViewController = UINavigationController(rootViewController: PageView())
         FirebaseApp.configure()
+        
+        //NavigationBar Appearance
+        UINavigationBar.appearance().barTintColor = .gold
+        
         return true
     }
 

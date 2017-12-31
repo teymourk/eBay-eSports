@@ -29,7 +29,7 @@ class MenuBar: UIView {
         let button = UIButton()
             button.setTitle(MenuOptions.Home.title, for: .normal)
             button.setTitleColor(.black, for: .normal)
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            button.titleLabel?.font = .systemFont(ofSize: 15)
         return button
     }()
     
@@ -37,7 +37,7 @@ class MenuBar: UIView {
         let button = UIButton()
             button.setTitle(MenuOptions.Browse.title, for: .normal)
             button.setTitleColor(.black, for: .normal)
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            button.titleLabel?.font = .systemFont(ofSize: 15)
         return button
     }()
     
@@ -81,6 +81,6 @@ class MenuBar: UIView {
     }
     
     func setupView() {
-        backgroundColor = .yellow
+        backgroundColor = .gold
     }
 }
