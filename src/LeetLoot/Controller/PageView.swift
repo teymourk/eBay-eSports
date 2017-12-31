@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class PageView: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate {
     
     var pages = [UIViewController]()
     
@@ -41,6 +41,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
         
         setupMenuBar()
+        setupScrollViewDelegation()
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -67,6 +68,21 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        //Moving Horizontal bar goes here.
+        print(scrollView.contentOffset.x)
+    }
+    
+    //Set scrollView Delegate
+    private func setupScrollViewDelegation() {
+        for view in view.subviews {
+            if let scrollView = view as? UIScrollView {
+                scrollView.delegate = self
+            }
+        }
     }
     
     private func setupMenuBar() {

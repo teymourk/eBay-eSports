@@ -16,7 +16,7 @@
 		AB7847DB1FDDFB24008EBD70 /* LeetLootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847DA1FDDFB24008EBD70 /* LeetLootTests.swift */; };
 		BA25D71E3395478B222BCCA7 /* Pods_LeetLoot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2332B1B8B9901E9E01AC1AE7 /* Pods_LeetLoot.framework */; };
 		BE24D7381FF585C600E745E6 /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24D7371FF585C600E745E6 /* Browse.swift */; };
-		BE24D73A1FF585EC00E745E6 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24D7391FF585EC00E745E6 /* PageViewController.swift */; };
+		BE24D73A1FF585EC00E745E6 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24D7391FF585EC00E745E6 /* PageView.swift */; };
 		E86A6F231FEC81C6003188BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E86A6F221FEC81C5003188BB /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +48,7 @@
 		B32F9ADFD97BBE109C6F27A6 /* Pods-LeetLoot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLoot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLoot/Pods-LeetLoot.debug.xcconfig"; sourceTree = "<group>"; };
 		B7756037293945067944C34A /* Pods_LeetLootTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeetLootTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE24D7371FF585C600E745E6 /* Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
-		BE24D7391FF585EC00E745E6 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		BE24D7391FF585EC00E745E6 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		E86A6F221FEC81C5003188BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,7 +138,7 @@
 			children = (
 				AB7847C71FDDFB24008EBD70 /* Home.swift */,
 				BE24D7371FF585C600E745E6 /* Browse.swift */,
-				BE24D7391FF585EC00E745E6 /* PageViewController.swift */,
+				BE24D7391FF585EC00E745E6 /* PageView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -385,7 +385,7 @@
 				AB7847C81FDDFB24008EBD70 /* Home.swift in Sources */,
 				BE24D7381FF585C600E745E6 /* Browse.swift in Sources */,
 				AB7847C61FDDFB24008EBD70 /* AppDelegate.swift in Sources */,
-				BE24D73A1FF585EC00E745E6 /* PageViewController.swift in Sources */,
+				BE24D73A1FF585EC00E745E6 /* PageView.swift in Sources */,
 				AB406EF01FF76E9600A1FD1D /* MenuBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
