@@ -41,6 +41,7 @@ class PageView: UIPageViewController, UIPageViewControllerDataSource, UIPageView
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
         
         setupMenuBar()
+        setupNavBar()
         setupScrollViewDelegation()
     }
     
@@ -74,6 +75,19 @@ class PageView: UIPageViewController, UIPageViewControllerDataSource, UIPageView
         
         //Moving Horizontal bar goes here.
         print(scrollView.contentOffset.x)
+    }
+    
+    private func setupNavBar() {
+        let signIn = UIBarButtonItem(title: "Browse game", style: .plain, target: self, action: #selector(onSignIn(sender: )))
+        navigationItem.leftBarButtonItem = signIn
+    }
+    
+    @objc
+    private func onSignIn(sender: UIBarButtonItem) {
+        //signIn.openMenu()
+        let layout = UICollectionViewFlowLayout()
+        let myPge = Browse_Game(collectionViewLayout: layout)
+        navigationController?.pushViewController(myPge, animated: true)
     }
     
     //Set scrollView Delegate
