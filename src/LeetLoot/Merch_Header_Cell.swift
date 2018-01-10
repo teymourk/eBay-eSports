@@ -56,7 +56,7 @@ final class Merch_Header_Cell: UICollectionViewCell {
     
     lazy var openButton = { () -> UIButton in
         let button = UIButton()
-            button.setTitleColor(.black, for: .normal)
+            button.setImage(#imageLiteral(resourceName: "DownArrow"), for: .normal)
             button.addTarget(self, action: #selector(onButton(_:)), for: .touchUpInside)
         return button
     }()
@@ -102,6 +102,13 @@ final class Merch_Header_Cell: UICollectionViewCell {
 
     private func handleMenuFunctionality(_ sender: UIButton) {
         menu.state = menu.state == .close ? .open : .close
+        let buttonImage = menu.state == .close ? #imageLiteral(resourceName: "DownArrow") : #imageLiteral(resourceName: "UpArrow")
+        guard browse_game != nil else { return  }
+        sender.setImage(buttonImage, for: .normal)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.browse_game?.collectionViewLayout.invalidateLayout()
+            self.browse_game?.view.layoutIfNeeded()
+        })
     }
     
     private func setupLayoutContraints() {
