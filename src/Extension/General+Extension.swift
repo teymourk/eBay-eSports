@@ -8,6 +8,7 @@
 
 import UIKit
 
+//Mark: - UIColor
 extension UIColor {
     
     //Override super init to create out own convenience init.
@@ -18,4 +19,13 @@ extension UIColor {
     //App Color -> Gold
     static var gold: UIColor { return UIColor(red: 247, green: 196, blue: 70) }
 }
+
+//Mark: - Int
+extension Int {
+    func doTask(_ task: (Int) -> Void) {
+        for index in 0..<self {
+            task(index)
+        }
+    }
+ }
 

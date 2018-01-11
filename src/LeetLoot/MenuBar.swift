@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuBar: UIView {
+final class MenuBar: UIView {
     
     enum MenuOptions: String {
         case Home, Browse

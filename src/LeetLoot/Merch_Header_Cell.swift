@@ -16,7 +16,7 @@ final class Merch_Header_Cell: UICollectionViewCell {
         static var state = menu() //Singleton
         
         mutating func adjustMenuHeigh() -> CGFloat  {
-            return menu.state == .close ? 240 : 350
+            return menu.state == .close ? 240 : 350 // Need Cosnstants
         }
         
         private init() {
@@ -29,6 +29,7 @@ final class Merch_Header_Cell: UICollectionViewCell {
     lazy var gameCarousel = { () -> UIScrollView in
         let scrollView = UIScrollView()
             scrollView.isPagingEnabled = true
+            scrollView.delegate = self
             scrollView.contentSize.width = bounds.size.width * CGFloat(3)
             scrollView.showsHorizontalScrollIndicator = false
         return scrollView
@@ -152,5 +153,13 @@ final class Merch_Header_Cell: UICollectionViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+//Mark: - ScrollViewDelegate
+extension Merch_Header_Cell: UIScrollViewDelegate {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let pageNumber = targetContentOffset.pointee.x / frame.width
+        pageControl.currentPage = Int(pageNumber)
     }
 }
