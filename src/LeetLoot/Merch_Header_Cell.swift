@@ -100,6 +100,16 @@ final class Merch_Header_Cell: UICollectionViewCell {
     private func onButton(_ sender: UIButton) {
         handleMenuFunctionality(sender)
     }
+    
+    private func handleScrollableImages() {
+        colors.count.doTask {
+            let image = UIImageView()
+            image.backgroundColor = colors[$0]
+            image.frame.size = bounds.size
+            image.frame.origin.x = CGFloat($0) * bounds.size.width
+            gameCarousel.addSubview(image)
+        }
+    }
 
     private func handleMenuFunctionality(_ sender: UIButton) {
         menu.state = menu.state == .close ? .open : .close
@@ -143,12 +153,12 @@ final class Merch_Header_Cell: UICollectionViewCell {
     
     private func setupView() {
         setupLayoutContraints()
+        handleScrollableImages()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        setupLayoutContraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
