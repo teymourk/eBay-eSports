@@ -20,6 +20,7 @@
 		AB7847D01FDDFB24008EBD70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB7847CE1FDDFB24008EBD70 /* LaunchScreen.storyboard */; };
 		AB7847DB1FDDFB24008EBD70 /* LeetLootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847DA1FDDFB24008EBD70 /* LeetLootTests.swift */; };
 		AB7CE6411FF8901C0050125C /* General+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7CE6401FF8901C0050125C /* General+Extension.swift */; };
+		ABBC3F89201011330004C2C5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBC3F88201011320004C2C5 /* Constants.swift */; };
 		BA25D71E3395478B222BCCA7 /* Pods_LeetLoot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2332B1B8B9901E9E01AC1AE7 /* Pods_LeetLoot.framework */; };
 		BE24D7381FF585C600E745E6 /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24D7371FF585C600E745E6 /* Browse.swift */; };
 		BE24D73A1FF585EC00E745E6 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24D7391FF585EC00E745E6 /* PageView.swift */; };
@@ -57,6 +58,7 @@
 		AB7847DA1FDDFB24008EBD70 /* LeetLootTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetLootTests.swift; sourceTree = "<group>"; };
 		AB7847DC1FDDFB24008EBD70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB7CE6401FF8901C0050125C /* General+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "General+Extension.swift"; sourceTree = "<group>"; };
+		ABBC3F88201011320004C2C5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B32F9ADFD97BBE109C6F27A6 /* Pods-LeetLoot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLoot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLoot/Pods-LeetLoot.debug.xcconfig"; sourceTree = "<group>"; };
 		B7756037293945067944C34A /* Pods_LeetLootTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeetLootTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE24D7371FF585C600E745E6 /* Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		AB7847E51FDDFC02008EBD70 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ABBC3F88201011320004C2C5 /* Constants.swift */,
 				AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */,
 				AB7847CC1FDDFB24008EBD70 /* Assets.xcassets */,
 				AB7847CE1FDDFB24008EBD70 /* LaunchScreen.storyboard */,
@@ -419,6 +422,7 @@
 				AB3CE83320068CAA00EF3A5D /* Browse_Game+Extension.swift in Sources */,
 				AB406EF01FF76E9600A1FD1D /* MenuBar.swift in Sources */,
 				AB3CE83520068CC500EF3A5D /* Browse_Game.swift in Sources */,
+				ABBC3F89201011330004C2C5 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

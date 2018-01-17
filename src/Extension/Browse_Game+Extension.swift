@@ -23,7 +23,7 @@ extension Browse_Game {
 // Mark: - UICollectionViewDelegateFlowLayout
 extension Browse_Game: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = view.frame.width * (1/2) - 40
+        let width = Constants.kWidth * (1/2) - 40
         
         return CGSize(width: width,
                       height: 270) //Need To add constant Value
@@ -50,7 +50,7 @@ extension Browse_Game {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         var state = Merch_Header_Cell.menu.state
-        return CGSize(width: view.frame.width,
+        return CGSize(width: Constants.kWidth,
                       height: state.adjustMenuHeigh())
     }
 }

@@ -168,7 +168,7 @@ final class Merch_Header_Cell: UICollectionViewCell {
 //Mark: - ScrollViewDelegate
 extension Merch_Header_Cell: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let pageNumber = targetContentOffset.pointee.x / frame.width
+        let pageNumber = targetContentOffset.pointee.x / Constants.kWidth
         pageControl.currentPage = Int(pageNumber)
     }
 }

@@ -11,8 +11,8 @@ import UIKit
 
 class PageView: UIViewController {
     
-    lazy var menuBar = { () -> MenuBar in
-        let view = MenuBar()
+    lazy var menuBar = { () -> Menu in
+        let view = Menu()
             view.delegate = self
             view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -24,7 +24,7 @@ class PageView: UIViewController {
         return [home, browse]
     }()
     
-    var menuOp: MenuBar.MenuOptions!
+    private var menuOp = Menu.Options.menu
     
     lazy var pageCarousel = { () -> ScrollView in
         let scrollView = ScrollView()
@@ -60,8 +60,6 @@ class PageView: UIViewController {
     }
     
     private func setupMenuBar() {
-        menuOp = MenuBar.MenuOptions { menuBar.leftAncharConstraint?.constant = $0 }
-        
         view.addSubview(menuBar)
         view.addSubview(pageCarousel)
         
@@ -82,9 +80,8 @@ class PageView: UIViewController {
 //Mark: ScrollViewDelegate
 extension PageView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let width = view.frame.width
         let offsetX = scrollView.contentOffset.x
-        menuBar.leftAncharConstraint?.constant = (offsetX / 4) + (width/4)
+        menuBar.menuOptionsBar.frame.origin.x = (offsetX / menuBar.optionsCount) + (Constants.kWidth / menuBar.optionsCount)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -96,12 +93,11 @@ extension PageView: UIScrollViewDelegate {
 extension PageView: MenuBarDelegate {
     func onMenuButtons(_ sender: UIButton) {
         menuOp = sender.tag == 0 ? .Home : .Browse
-        let width = view.frame.width
         UIView.animate(withDuration: 0.3,
                        delay: 0,
                        options: .curveEaseInOut ,
                        animations: {
-            self.pageCarousel.contentOffset.x = self.menuOp == .Home ? (width - width) : width
+            self.pageCarousel.contentOffset.x = self.menuOp == .Home ? (Constants.kWidth - Constants.kWidth) : Constants.kWidth
             self.view.layoutIfNeeded()
         })
     }

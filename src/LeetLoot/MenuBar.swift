@@ -12,18 +12,22 @@ protocol MenuBarDelegate {
     func onMenuButtons(_ sender: UIButton)
 }
 
-final class MenuBar: UIView {
+final class Menu: UIView {
     
-    enum MenuOptions: String {
+    enum Options: String {
         case Home, Browse
         
-        var width: CGFloat { return UIApplication.shared.keyWindow!.frame.width }
+        static var menu = Menu.Options()
+    
         var title: String { return self.rawValue }
         
-        init(barXValue: (CGFloat) -> ()) {
+        private init() {
             self = .Home
-            barXValue(width/4)
         }
+    }
+    
+    var optionsCount: CGFloat {
+        return CGFloat(stackView.subviews.count)
     }
     
     lazy var menuOptionsBar: UIView = {
@@ -35,7 +39,7 @@ final class MenuBar: UIView {
     
     lazy var home = { () -> UIButton in
         let button = UIButton()
-            button.setTitle(MenuOptions.Home.title, for: .normal)
+            button.setTitle(Options.Home.title, for: .normal)
             button.setTitleColor(.black, for: .normal)
             button.titleLabel?.font = .systemFont(ofSize: 15)
             button.addTarget(self, action: #selector(onMenuOptions(_:)), for: .touchUpInside)
@@ -45,7 +49,7 @@ final class MenuBar: UIView {
     
     lazy var browse = { () -> UIButton in
         let button = UIButton()
-            button.setTitle(MenuOptions.Browse.title, for: .normal)
+            button.setTitle(Options.Browse.title, for: .normal)
             button.setTitleColor(.black, for: .normal)
             button.titleLabel?.font = .systemFont(ofSize: 15)
             button.addTarget(self, action: #selector(onMenuOptions(_:)), for: .touchUpInside)
@@ -72,21 +76,19 @@ final class MenuBar: UIView {
         delegate?.onMenuButtons(sender)
     }
     
-    var leftAncharConstraint: NSLayoutConstraint?
-    
     private func setupLayoutContraints() {
+       
         addSubview(menuOptionsBar)
         addSubview(stackView)
-        
-        leftAncharConstraint = menuOptionsBar.leftAnchor.constraint(equalTo: leftAnchor)
-        leftAncharConstraint?.isActive = true
-        
+    
         NSLayoutConstraint.activate([
+        
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-            menuOptionsBar.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/4),
+            menuOptionsBar.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/optionsCount),
+            menuOptionsBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.kWidth/optionsCount),
             menuOptionsBar.heightAnchor.constraint(equalToConstant: 3),
             menuOptionsBar.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
