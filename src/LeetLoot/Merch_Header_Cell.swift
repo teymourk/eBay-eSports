@@ -26,12 +26,11 @@ final class Merch_Header_Cell: UICollectionViewCell {
     
     let colors: [UIColor] = [.red, .blue, .yellow]
     
-    lazy var gameCarousel = { () -> UIScrollView in
-        let scrollView = UIScrollView()
-            scrollView.isPagingEnabled = true
+    lazy var gameCarousel = { () -> ScrollView in
+        let scrollView = ScrollView()
+            scrollView.createScrollable(colors.count, view: self)
+            scrollView.contentSize.width = bounds.size.width * CGFloat(colors.count)
             scrollView.delegate = self
-            scrollView.contentSize.width = bounds.size.width * CGFloat(3)
-            scrollView.showsHorizontalScrollIndicator = false
         return scrollView
     }()
     

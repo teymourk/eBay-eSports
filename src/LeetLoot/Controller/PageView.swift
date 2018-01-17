@@ -17,6 +17,22 @@ class PageView: UIViewController,  UIScrollViewDelegate {
         return view
     }()
     
+    var pages: [UIViewController] = {
+        let home = Home()
+        let browse = Browse()
+        return [home, browse]
+    }()
+    
+    var menuOp: MenuBar.MenuOptions!
+    
+    lazy var pageCarousel = { () -> ScrollView in
+        let scrollView = ScrollView()
+            scrollView.createScrollableViews(forPages: pages, controller: self)
+            scrollView.contentSize.width = view.bounds.size.width * CGFloat(pages.count)
+            scrollView.bounces = false
+        return scrollView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,11 +63,18 @@ class PageView: UIViewController,  UIScrollViewDelegate {
     
     private func setupMenuBar() {
         view.addSubview(menuBar)
+        view.addSubview(pageCarousel)
         
         NSLayoutConstraint.activate([
             menuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             menuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            menuBar.heightAnchor.constraint(equalToConstant: 45)
+            menuBar.heightAnchor.constraint(equalToConstant: 45),
+            menuBar.topAnchor.constraint(equalTo: view.topAnchor),
+            
+            pageCarousel.topAnchor.constraint(equalTo: menuBar.bottomAnchor),
+            pageCarousel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            pageCarousel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pageCarousel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
 }
