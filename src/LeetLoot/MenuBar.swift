@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol MenuBarDelegate {
+    func onMenuButtons(_ sender: UIButton)
+}
+
 final class MenuBar: UIView {
     
     enum MenuOptions: String {
@@ -29,19 +33,23 @@ final class MenuBar: UIView {
         return view
     }()
     
-    var home = { () -> UIButton in
+    lazy var home = { () -> UIButton in
         let button = UIButton()
             button.setTitle(MenuOptions.Home.title, for: .normal)
             button.setTitleColor(.black, for: .normal)
             button.titleLabel?.font = .systemFont(ofSize: 15)
+            button.addTarget(self, action: #selector(onMenuOptions(_:)), for: .touchUpInside)
+            button.tag = 0
         return button
     }()
     
-    var browse = { () -> UIButton in
+    lazy var browse = { () -> UIButton in
         let button = UIButton()
             button.setTitle(MenuOptions.Browse.title, for: .normal)
             button.setTitleColor(.black, for: .normal)
             button.titleLabel?.font = .systemFont(ofSize: 15)
+            button.addTarget(self, action: #selector(onMenuOptions(_:)), for: .touchUpInside)
+            button.tag = 1
         return button
     }()
     
@@ -53,6 +61,16 @@ final class MenuBar: UIView {
             stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    
+    var delegate: MenuBarDelegate?
+    
+    @objc
+    private func onMenuOptions(_ sender: UIButton) {
+        guard delegate != nil else {
+            return
+        }
+        delegate?.onMenuButtons(sender)
+    }
     
     var leftAncharConstraint: NSLayoutConstraint?
     

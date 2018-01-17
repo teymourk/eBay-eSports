@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
-class PageView: UIViewController,  UIScrollViewDelegate {
+class PageView: UIViewController {
     
-    var menuBar = { () -> MenuBar in
+    lazy var menuBar = { () -> MenuBar in
         let view = MenuBar()
+            view.delegate = self
             view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -45,17 +46,6 @@ class PageView: UIViewController,  UIScrollViewDelegate {
         setupNavBar()
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let width = view.frame.width
-        let offsetX = scrollView.contentOffset.x
-        menuBar.leftAncharConstraint?.constant = (offsetX / 4) + (width/4)
-    }
-    
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        menuOp = menuOp == .Home ? .Browse : .Home
-    }
-    
     private func setupNavBar() {
         let signIn = UIBarButtonItem(title: "Browse game", style: .plain, target: self, action: #selector(onSignIn(sender: )))
         navigationItem.leftBarButtonItem = signIn
@@ -76,15 +66,43 @@ class PageView: UIViewController,  UIScrollViewDelegate {
         view.addSubview(pageCarousel)
         
         NSLayoutConstraint.activate([
-            menuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            menuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            menuBar.heightAnchor.constraint(equalToConstant: 45),
             menuBar.topAnchor.constraint(equalTo: view.topAnchor),
+            menuBar.heightAnchor.constraint(equalToConstant: 45),
+            menuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            menuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             pageCarousel.topAnchor.constraint(equalTo: menuBar.bottomAnchor),
             pageCarousel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             pageCarousel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pageCarousel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+    }
+}
+
+//Mark: ScrollViewDelegate
+extension PageView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let width = view.frame.width
+        let offsetX = scrollView.contentOffset.x
+        menuBar.leftAncharConstraint?.constant = (offsetX / 4) + (width/4)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        menuOp = menuOp == .Home ? .Browse : .Home
+    }
+}
+
+//Mark: MenuBarDelegate
+extension PageView: MenuBarDelegate {
+    func onMenuButtons(_ sender: UIButton) {
+        menuOp = sender.tag == 0 ? .Home : .Browse
+        let width = view.frame.width
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .curveEaseInOut ,
+                       animations: {
+            self.pageCarousel.contentOffset.x = self.menuOp == .Home ? (width - width) : width
+            self.view.layoutIfNeeded()
+        })
     }
 }
