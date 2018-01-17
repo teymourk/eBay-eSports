@@ -13,8 +13,12 @@ final class MenuBar: UIView {
     enum MenuOptions: String {
         case Home, Browse
         
-        var title: String {
-            return self.rawValue
+        var width: CGFloat { return UIApplication.shared.keyWindow!.frame.width }
+        var title: String { return self.rawValue }
+        
+        init(barXValue: (CGFloat) -> ()) {
+            self = .Home
+            barXValue(width/4)
         }
     }
     

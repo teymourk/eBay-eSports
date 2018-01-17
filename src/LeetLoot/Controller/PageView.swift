@@ -30,6 +30,7 @@ class PageView: UIViewController,  UIScrollViewDelegate {
             scrollView.createScrollableViews(forPages: pages, controller: self)
             scrollView.contentSize.width = view.bounds.size.width * CGFloat(pages.count)
             scrollView.bounces = false
+            scrollView.delegate = self
         return scrollView
     }()
     
@@ -45,7 +46,14 @@ class PageView: UIViewController,  UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.x)
+        let width = view.frame.width
+        let offsetX = scrollView.contentOffset.x
+        menuBar.leftAncharConstraint?.constant = (offsetX / 4) + (width/4)
+    }
+    
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        menuOp = menuOp == .Home ? .Browse : .Home
     }
     
     private func setupNavBar() {
@@ -62,6 +70,8 @@ class PageView: UIViewController,  UIScrollViewDelegate {
     }
     
     private func setupMenuBar() {
+        menuOp = MenuBar.MenuOptions { menuBar.leftAncharConstraint?.constant = $0 }
+        
         view.addSubview(menuBar)
         view.addSubview(pageCarousel)
         
