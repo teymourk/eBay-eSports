@@ -9,5 +9,7 @@
 import UIKit
 
 struct Constants {
-    static var kWidth: CGFloat { return UIApplication.shared.keyWindow!.frame.width }
+    static var kWindow: UIWindow { return UIApplication.shared.keyWindow! }
+    static var kWidth: CGFloat { return kWindow.frame.width }
+    static var kHeight: CGFloat { return kWindow.frame.height }
 }

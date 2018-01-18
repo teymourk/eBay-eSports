@@ -10,6 +10,11 @@ import UIKit
 
 class Browse_Game: UICollectionViewController {
     
+    let buyItem = { () -> BuyItem in
+        let view = BuyItem()
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -18,6 +18,10 @@ extension Browse_Game {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? Merch_Cell
         return cell ?? UICollectionViewCell()
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        buyItem.openPage()
+    }
 }
 
 // Mark: - UICollectionViewDelegateFlowLayout
