@@ -21,10 +21,10 @@ class Home_Header_Cell: UICollectionViewCell {
     
     let title = { ()-> UILabel in
         let label = UILabel()
-        label.textColor = .black
-        label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
+            label.textColor = .black
+            label.textAlignment = .left
+            label.font = UIFont.systemFont(ofSize: 15)
+            label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
