@@ -7,6 +7,9 @@ target 'LeetLoot' do
 
   # Pods for LeetLoot
   pod 'Firebase/Core'
+  
+  # Pods for Twitter
+  pod 'TwitterKit'
 
   target 'LeetLootTests' do
     inherit! :search_paths
