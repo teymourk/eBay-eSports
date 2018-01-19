@@ -9,89 +9,96 @@
 import Foundation
 import UIKit
 
-class PageView: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate {
+class PageView: UIViewController {
     
-    var pages = [UIViewController]()
-    
-    var menuBar = { () -> MenuBar in
-        let view = MenuBar()
+    lazy var menuBar = { () -> Menu in
+        let view = Menu()
+            view.delegate = self
             view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    override init(transitionStyle style: UIPageViewControllerTransitionStyle, navigationOrientation: UIPageViewControllerNavigationOrientation, options: [String : Any]? = nil) {
-        super.init(transitionStyle: .scroll, navigationOrientation: navigationOrientation, options: nil)
-    }
+    var pages: [UIViewController] = {
+        let home = Home()
+        let browse = Browse()
+        return [home, browse]
+    }()
+    
+    private var menuOp = Menu.Options.menu
+    
+    lazy var pageCarousel = { () -> ScrollView in
+        let scrollView = ScrollView()
+            scrollView.createScrollableViews(forPages: pages, controller: self)
+            scrollView.contentSize.width = view.bounds.size.width * CGFloat(pages.count)
+            scrollView.bounces = false
+            scrollView.delegate = self
+        return scrollView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataSource = self
-        self.delegate = self
-        let initialPage = 0
-        let page1 = Home()
-        let page2 = Browse()
         
         // set navigation bar
         navigationItem.title = "LeetLoot"
         navigationController?.navigationBar.isTranslucent = false;
         
-        // add the individual viewControllers to the pages array
-        self.pages.append(page1)
-        self.pages.append(page2)
-        setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
-        
         setupMenuBar()
-        setupScrollViewDelegation()
+        setupNavBar()
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let viewControllerIndex = self.pages.index(of: viewController) {
-            if viewControllerIndex == 0 {
-                return nil
-            } else {
-                // go to previous page in array
-                return self.pages[viewControllerIndex - 1]
-            }
-        }
-        return nil
+    private func setupNavBar() {
+        let signIn = UIBarButtonItem(title: "Browse game", style: .plain, target: self, action: #selector(onSignIn(sender: )))
+        navigationItem.leftBarButtonItem = signIn
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let viewControllerIndex = self.pages.index(of: viewController) {
-            if viewControllerIndex < self.pages.count - 1 {
-                // go to next page in array
-                return self.pages[viewControllerIndex + 1]
-            }
-        }
-        return nil
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        //Moving Horizontal bar goes here.
-        print(scrollView.contentOffset.x)
-    }
-    
-    //Set scrollView Delegate
-    private func setupScrollViewDelegation() {
-        for view in view.subviews {
-            if let scrollView = view as? UIScrollView {
-                scrollView.delegate = self
-            }
-        }
+    @objc
+    private func onSignIn(sender: UIBarButtonItem) {
+        //signIn.openMenu()
+        let layout = UICollectionViewFlowLayout()
+        let myPge = Browse_Game(collectionViewLayout: layout)
+        navigationController?.pushViewController(myPge, animated: true)
     }
     
     private func setupMenuBar() {
         view.addSubview(menuBar)
+        view.addSubview(pageCarousel)
         
         NSLayoutConstraint.activate([
-            menuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            menuBar.topAnchor.constraint(equalTo: view.topAnchor),
+            menuBar.heightAnchor.constraint(equalToConstant: 45),
             menuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            menuBar.heightAnchor.constraint(equalToConstant: 45)
+            menuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            pageCarousel.topAnchor.constraint(equalTo: menuBar.bottomAnchor),
+            pageCarousel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            pageCarousel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pageCarousel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+    }
+}
+
+//Mark: ScrollViewDelegate
+extension PageView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetX = scrollView.contentOffset.x
+        menuBar.menuOptionsBar.frame.origin.x = (offsetX / menuBar.optionsCount) + (Constants.kWidth / menuBar.optionsCount)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        menuOp = menuOp == .Home ? .Browse : .Home
+    }
+}
+
+//Mark: MenuBarDelegate
+extension PageView: MenuBarDelegate {
+    func onMenuButtons(_ sender: UIButton) {
+        menuOp = sender.tag == 0 ? .Home : .Browse
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .curveEaseInOut ,
+                       animations: {
+            self.pageCarousel.contentOffset.x = self.menuOp == .Home ? (Constants.kWidth - Constants.kWidth) : Constants.kWidth
+            self.view.layoutIfNeeded()
+        })
     }
 }
