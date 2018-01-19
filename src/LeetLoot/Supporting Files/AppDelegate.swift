@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import TwitterKit
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //NavigationBar Appearance
         UINavigationBar.appearance().barTintColor = .gold
+        
+        //Connect to the Twitter API
+        TWTRTwitter.sharedInstance().start(withConsumerKey:"9BnvFFtOYulbdyXkUCGhgBbgY", consumerSecret:"b8AjQP6QWCP1gnRb5jfL7LP8wWFurpSLxfSgbEM67XrwztyfrS")
         
         return true
     }
@@ -50,5 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+
 }
 
