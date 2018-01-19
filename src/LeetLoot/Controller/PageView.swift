@@ -45,9 +45,21 @@ class PageView: UIViewController {
         setupNavBar()
     }
     
+    //Setup navigation bar 
     private func setupNavBar() {
         let signIn = UIBarButtonItem(title: "Browse game", style: .plain, target: self, action: #selector(onSignIn(sender: )))
         navigationItem.leftBarButtonItem = signIn
+        
+        addNavdBarImage()
+    }
+    
+    //Replaces the navigation title with the Rupee icon
+    private func addNavdBarImage() {
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 45))
+            image.image = UIImage(named: "rupee")
+            image.clipsToBounds = true
+            image.contentMode = .scaleAspectFit
+            navigationItem.titleView = image
     }
     
     @objc

@@ -32,7 +32,7 @@ final class Menu: UIView {
     
     lazy var menuOptionsBar: UIView = {
         let view = UIView()
-            view.backgroundColor = .lightGray
+            view.backgroundColor = .blue
             view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -77,7 +77,7 @@ final class Menu: UIView {
     }
     
     private func setupLayoutContraints() {
-       
+
         addSubview(menuOptionsBar)
         addSubview(stackView)
     
@@ -105,6 +105,6 @@ final class Menu: UIView {
     }
     
     func setupView() {
-        backgroundColor = .gold
+        backgroundColor = .white
     }
 }
