@@ -30,7 +30,6 @@ class PageView: UIViewController {
         let scrollView = ScrollView()
             scrollView.createScrollableViews(forPages: pages, controller: self)
             scrollView.contentSize.width = view.bounds.size.width * CGFloat(pages.count)
-            scrollView.bounces = false
             scrollView.delegate = self
         return scrollView
     }()
@@ -81,9 +80,13 @@ class PageView: UIViewController {
 extension PageView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
-        menuBar.menuOptionsBar.frame.origin.x = (offsetX / menuBar.optionsCount) + (Constants.kWidth / menuBar.optionsCount)
+        
+        //Prevents scroll bar from extending beyond Home and Browse positions
+        if 0...Constants.kWidth  ~= offsetX {
+            menuBar.menuOptionsBar.frame.origin.x = (offsetX / menuBar.optionsCount) + (Constants.kWidth / menuBar.optionsCount)
+        }
     }
-    
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         menuOp = menuOp == .Home ? .Browse : .Home
     }
