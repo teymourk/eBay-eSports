@@ -20,7 +20,6 @@ class ScrollView: UIScrollView {
     private func setupView() {
         backgroundColor = .white
         isPagingEnabled = true
-        bounces = false
         showsHorizontalScrollIndicator = false
         translatesAutoresizingMaskIntoConstraints = false
     }
