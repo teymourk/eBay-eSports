@@ -17,7 +17,7 @@ class Browse_Game: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //Register HeaderCell + ColleCtionCell
         collectionView?.register(Merch_Header_Cell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CellH")
         collectionView?.register(Merch_Cell.self, forCellWithReuseIdentifier: "Cell")

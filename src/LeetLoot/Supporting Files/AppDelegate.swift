@@ -24,7 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         //NavigationBar Appearance
-        UINavigationBar.appearance().barTintColor = .gold
+        UINavigationBar.appearance().barTintColor = .white
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        
+        //UINavigationShadow
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         
         return true
     }
