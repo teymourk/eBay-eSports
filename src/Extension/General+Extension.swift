@@ -16,8 +16,8 @@ extension UIColor {
         self.init(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
     
-    //App Color -> Gold
-    static var gold: UIColor { return UIColor(red: 247, green: 196, blue: 70) }
+    //Secondary Color -> Blue
+    static var blue: UIColor { return UIColor(red: 18, green: 149, blue: 232) }
 }
 
 //Mark: - Int
