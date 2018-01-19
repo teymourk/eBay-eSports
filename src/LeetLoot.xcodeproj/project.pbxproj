@@ -71,7 +71,6 @@
 		BE24D7371FF585C600E745E6 /* Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
 		BE24D7391FF585EC00E745E6 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		BE4625282011C367005789E6 /* Twitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
-		BE46252A2011C58A005789E6 /* LeetLoot-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LeetLoot-Bridging-Header.h"; sourceTree = "<group>"; };
 		BE46252D2011D305005789E6 /* Featured_Events_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Featured_Events_Cell.swift; sourceTree = "<group>"; };
 		BE46252F2011D544005789E6 /* Home+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home+Extension.swift"; sourceTree = "<group>"; };
 		BE4625312011DA1A005789E6 /* Home_Header_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home_Header_Cell.swift; sourceTree = "<group>"; };
@@ -158,7 +157,6 @@
 				AB7847CE1FDDFB24008EBD70 /* LaunchScreen.storyboard */,
 				AB7847D11FDDFB24008EBD70 /* Info.plist */,
 				E86A6F221FEC81C5003188BB /* GoogleService-Info.plist */,
-				BE46252A2011C58A005789E6 /* LeetLoot-Bridging-Header.h */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";

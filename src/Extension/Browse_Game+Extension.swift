@@ -48,13 +48,12 @@ extension Browse_Game: UICollectionViewDelegateFlowLayout {
 extension Browse_Game {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CellH", for: indexPath) as? Merch_Header_Cell
-        header?.browse_game = self
         return header ?? UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        var state = Merch_Header_Cell.menu.state
         return CGSize(width: Constants.kWidth,
-                      height: state.adjustMenuHeigh())
+                      height: Constants.kHeight * 1/4)
+        
     }
 }
