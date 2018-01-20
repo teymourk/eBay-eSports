@@ -29,7 +29,7 @@ Clone or Download the project
 
 ```git clone https://github.com/teymourk/eBay-eSports.git ```
 
-open terminal and $ cd into your project directory.
+open terminal and ```$ cd``` into your project directory.
 
 run  ```pod install```  to download all the dependencies
 
