@@ -25,6 +25,10 @@ Fall: docs/progress_reports/fall
 
 ## Installing
 
+### Make sure to have cocoapods fully installed on your machine before pursuing. 
+
+To install cocoapods oepn terminal and run ```sudo gem install cocoapods```
+
 Clone or Download the project
 
 ```git clone https://github.com/teymourk/eBay-eSports.git ```
@@ -32,10 +36,3 @@ Clone or Download the project
 open terminal and ```$ cd``` into your project directory.
 
 run  ```pod install```  to download all the dependencies
-
-### Make sure to have cocoapods fully installed on your machine. 
-
-To install cocoapods oepn terminal and run ```sudo gem install cocoapods```
-
-
-
