@@ -33,6 +33,12 @@ class PageView: UIViewController {
             scrollView.delegate = self
         return scrollView
     }()
+
+    //Custom Title view for the nav bar
+    let titleView = { () -> CustomNavbar in
+        let view = CustomNavbar(frame: CGRect(x: 0, y: 0, width: Constants.kWidth * (1/2), height: 50))
+            return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,19 +53,9 @@ class PageView: UIViewController {
     
     //Setup navigation bar 
     private func setupNavBar() {
-        let signIn = UIBarButtonItem(title: "Browse game", style: .plain, target: self, action: #selector(onSignIn(sender: )))
+        navigationItem.titleView = titleView
+        let signIn = UIBarButtonItem(title: "Browse", style: .plain, target: self, action: #selector(onSignIn(sender: )))
         navigationItem.leftBarButtonItem = signIn
-        
-        addNavdBarImage()
-    }
-    
-    //Replaces the navigation title with the Rupee icon
-    private func addNavdBarImage() {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 45))
-            image.image = UIImage(named: "rupee")
-            image.clipsToBounds = true
-            image.contentMode = .scaleAspectFit
-            navigationItem.titleView = image
     }
     
     @objc
