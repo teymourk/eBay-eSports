@@ -42,20 +42,16 @@ class PageView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // set navigation bar
-        navigationItem.title = "LeetLoot"
-        navigationController?.navigationBar.isTranslucent = false;
-        
         setupMenuBar()
         setupNavBar()
     }
     
-    //Setup navigation bar 
+    //Setup navigation bar
     private func setupNavBar() {
-        navigationItem.titleView = titleView
+        navigationController?.navigationBar.isTranslucent = false;
         let signIn = UIBarButtonItem(title: "Browse", style: .plain, target: self, action: #selector(onSignIn(sender: )))
         navigationItem.leftBarButtonItem = signIn
+        navigationItem.titleView = titleView
     }
     
     @objc

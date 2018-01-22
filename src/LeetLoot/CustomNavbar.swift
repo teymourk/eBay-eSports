@@ -45,9 +45,9 @@ class CustomNavbar: UIView {
             titleImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleImage.trailingAnchor.constraintLessThanOrEqualToSystemSpacingAfter(trailingAnchor, multiplier: 1/2),
             
+            title.centerYAnchor.constraint(equalTo: titleImage.centerYAnchor),
             title.leadingAnchor.constraint(equalTo: titleImage.trailingAnchor),
             title.trailingAnchor.constraint(equalTo: trailingAnchor),
-            titleImage.centerXAnchor.constraint(equalTo: titleImage.centerXAnchor)
         ])
     }
 }
