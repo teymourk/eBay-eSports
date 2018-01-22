@@ -19,7 +19,6 @@ class Browse_Game: UICollectionViewController {
         super.viewDidLoad()
 
         //Register HeaderCell + ColleCtionCell
-        collectionView?.register(Merch_Header_Cell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CellH")
         collectionView?.register(Merch_Cell.self, forCellWithReuseIdentifier: "Cell")
         collectionView?.backgroundColor = .white
         title = "Game Title"

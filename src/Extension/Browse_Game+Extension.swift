@@ -37,23 +37,10 @@ extension Browse_Game: UICollectionViewDelegateFlowLayout {
         return 20
     }
     
+    
     //Space Between Header and Collection itself
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20,
+        return UIEdgeInsets(top: 0,
                             left: 20, bottom: 0, right: 20)
-    }
-}
-
-// Mark: - UICollectionViewHeader
-extension Browse_Game {
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CellH", for: indexPath) as? Merch_Header_Cell
-        return header ?? UICollectionViewCell()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: Constants.kWidth,
-                      height: Constants.kHeight * 1/4)
-        
     }
 }
