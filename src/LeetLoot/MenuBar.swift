@@ -32,7 +32,7 @@ final class Menu: UIView {
     
     lazy var menuOptionsBar: UIView = {
         let view = UIView()
-            view.backgroundColor = .blue
+            view.backgroundColor = .lightBlue
             view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

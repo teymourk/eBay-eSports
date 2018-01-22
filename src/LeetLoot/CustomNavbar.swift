@@ -30,7 +30,7 @@ class CustomNavbar: UIView {
     let title = { () -> UILabel in
         let label = UILabel()
             label.text = "Elite Loot"
-            label.textColor = .blue
+            label.textColor = .lightBlue
             label.font = UIFont.boldSystemFont(ofSize: 25)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
