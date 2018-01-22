@@ -30,14 +30,22 @@ final class Menu: UIView {
         return CGFloat(stackView.subviews.count)
     }
     
-    lazy var menuOptionsBar: UIView = {
+    var barConstant: CGFloat {
+        get {
+            return horizontalBar.frame.origin.x
+        } set(newValue) {
+            horizontalBar.frame.origin.x = newValue
+        }
+    }
+    
+    private let horizontalBar: UIView = {
         let view = UIView()
             view.backgroundColor = .lightBlue
             view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    lazy var home = { () -> UIButton in
+    private lazy var home = { () -> UIButton in
         let button = UIButton()
             button.setTitle(Options.Home.title, for: .normal)
             button.setTitleColor(.black, for: .normal)
@@ -47,7 +55,7 @@ final class Menu: UIView {
         return button
     }()
     
-    lazy var browse = { () -> UIButton in
+    private lazy var browse = { () -> UIButton in
         let button = UIButton()
             button.setTitle(Options.Browse.title, for: .normal)
             button.setTitleColor(.black, for: .normal)
@@ -57,7 +65,7 @@ final class Menu: UIView {
         return button
     }()
     
-    lazy var stackView = { () -> UIStackView in
+    private lazy var stackView = { () -> UIStackView in
         let blankViwe1 = UIView() //Using these blanck views to
         let blankView4 = UIView() //evenly distribute the stackview
         let stack = UIStackView(arrangedSubviews: [blankViwe1,home,browse,blankView4])
@@ -77,8 +85,7 @@ final class Menu: UIView {
     }
     
     private func setupLayoutContraints() {
-
-        addSubview(menuOptionsBar)
+        addSubview(horizontalBar)
         addSubview(stackView)
     
         NSLayoutConstraint.activate([
@@ -87,10 +94,10 @@ final class Menu: UIView {
             stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             
-            menuOptionsBar.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/optionsCount),
-            menuOptionsBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.kWidth/optionsCount),
-            menuOptionsBar.heightAnchor.constraint(equalToConstant: 3),
-            menuOptionsBar.bottomAnchor.constraint(equalTo: bottomAnchor)
+            horizontalBar.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/optionsCount),
+            horizontalBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.kWidth/optionsCount),
+            horizontalBar.heightAnchor.constraint(equalToConstant: 3),
+            horizontalBar.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     

@@ -87,7 +87,7 @@ extension PageView: UIScrollViewDelegate {
         
         //Prevents scroll bar from extending beyond Home and Browse positions
         if 0...Constants.kWidth  ~= offsetX {
-            menuBar.menuOptionsBar.frame.origin.x = (offsetX / menuBar.optionsCount) + (Constants.kWidth / menuBar.optionsCount)
+            menuBar.barConstant = (offsetX / menuBar.optionsCount) + (Constants.kWidth / menuBar.optionsCount)
         }
     }
 
