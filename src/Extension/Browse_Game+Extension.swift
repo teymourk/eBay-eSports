@@ -11,7 +11,7 @@ import UIKit
 // Mark: - UICollectionViewDelegate
 extension Browse_Game {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 6
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -30,14 +30,13 @@ extension Browse_Game: UICollectionViewDelegateFlowLayout {
         let width = Constants.kWidth * (1/2) - 40
         
         return CGSize(width: width,
-                      height: 270) //Need To add constant Value
+                      height: 210) //Need To add constant Value
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
+        return 15
     }
-    
-    
+        
     //Space Between Header and Collection itself
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0,
