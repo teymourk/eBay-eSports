@@ -24,9 +24,7 @@ eBay would like to make use of recently released public buying APIs in order to 
 ## [UI Design](https://sketch.cloud/s/ZO1DG)
 
 
-## Installing
-
-### Make sure to have cocoapods fully installed on your machine before pursuing. 
+## Installing 
 
 oepn terminal and run ```sudo gem install cocoapods``` to install cocoapods 
 
