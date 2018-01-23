@@ -12,9 +12,8 @@ import UIKit
 class PageView: UIViewController {
     
     lazy var menuBar = { () -> Menu in
-        let view = Menu()
+        let view = Menu(isMenu: true)
             view.delegate = self
-            view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -33,33 +32,25 @@ class PageView: UIViewController {
             scrollView.delegate = self
         return scrollView
     }()
+
+    //Custom Title view for the nav bar
+    let titleView = { () -> CustomNavbar in
+        let view = CustomNavbar(frame: CGRect(x: 0, y: 0, width: Constants.kWidth * (1/2), height: 50))
+            return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // set navigation bar
-        navigationItem.title = "LeetLoot"
-        navigationController?.navigationBar.isTranslucent = false;
-        
         setupMenuBar()
         setupNavBar()
     }
     
-    //Setup navigation bar 
+    //Setup navigation bar
     private func setupNavBar() {
-        let signIn = UIBarButtonItem(title: "Browse game", style: .plain, target: self, action: #selector(onSignIn(sender: )))
+        navigationController?.navigationBar.isTranslucent = false;
+        let signIn = UIBarButtonItem(title: "Browse", style: .plain, target: self, action: #selector(onSignIn(sender: )))
         navigationItem.leftBarButtonItem = signIn
-        
-        addNavdBarImage()
-    }
-    
-    //Replaces the navigation title with the Rupee icon
-    private func addNavdBarImage() {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 45))
-            image.image = UIImage(named: "rupee")
-            image.clipsToBounds = true
-            image.contentMode = .scaleAspectFit
-            navigationItem.titleView = image
+        navigationItem.titleView = titleView
     }
     
     @objc
@@ -95,7 +86,7 @@ extension PageView: UIScrollViewDelegate {
         
         //Prevents scroll bar from extending beyond Home and Browse positions
         if 0...Constants.kWidth  ~= offsetX {
-            menuBar.menuOptionsBar.frame.origin.x = (offsetX / menuBar.optionsCount) + (Constants.kWidth / menuBar.optionsCount)
+            menuBar.barConstant = (offsetX / menuBar.optionsCount) + (Constants.kWidth / menuBar.optionsCount)
         }
     }
 
