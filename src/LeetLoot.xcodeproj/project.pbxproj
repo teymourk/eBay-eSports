@@ -80,7 +80,7 @@
 		BE46252F2011D544005789E6 /* Home+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home+Extension.swift"; sourceTree = "<group>"; };
 		BE4625312011DA1A005789E6 /* Home_Header_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home_Header_Cell.swift; sourceTree = "<group>"; };
 		BE4625332011DA4F005789E6 /* Favorites_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites_Cell.swift; sourceTree = "<group>"; };
-		BE7D2B1120170F950063BF7E /* Futura Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Futura Bold.otf"; path = "../../../../../Downloads/Futura Bold/Futura Bold.otf"; sourceTree = "<group>"; };
+		BE7D2B1120170F950063BF7E /* Futura Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Futura Bold.otf"; path = "LeetLoot/Supporting Files/Futura Bold.otf"; sourceTree = SOURCE_ROOT; };
 		E86A6F221FEC81C5003188BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
