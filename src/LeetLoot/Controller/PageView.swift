@@ -12,9 +12,8 @@ import UIKit
 class PageView: UIViewController {
     
     lazy var menuBar = { () -> Menu in
-        let view = Menu()
+        let view = Menu(isMenu: true)
             view.delegate = self
-            view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
