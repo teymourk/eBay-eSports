@@ -90,6 +90,7 @@ final class Menu: UIView {
     private lazy var stackView = { () -> UIStackView in
         let stack = UIStackView(arrangedSubviews: options)
             stack.distribution = .fillEqually
+            stack.alignment = .center
             stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -108,8 +109,8 @@ final class Menu: UIView {
         
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             horizontalBar.bottomAnchor.constraint(equalTo: bottomAnchor),
             horizontalBar.heightAnchor.constraint(equalToConstant: 3)

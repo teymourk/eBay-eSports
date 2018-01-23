@@ -15,7 +15,7 @@ class CustomButton: UIButton {
         setTitle(title, for: .normal)
         titleLabel?.font = .systemFont(ofSize: 15)
         setImage(image, for: .normal)
-        setTitleColor(.black, for: .normal)
+        setTitleColor(.darkText , for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

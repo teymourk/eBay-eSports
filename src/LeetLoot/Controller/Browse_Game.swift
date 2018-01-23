@@ -10,6 +10,11 @@ import UIKit
 
 class Browse_Game: UICollectionViewController {
     
+    lazy var menuBar = { () -> Menu in
+        let view = Menu(isMenu: false)
+        return view
+    }()
+    
     let buyItem = { () -> BuyItem in
         let view = BuyItem()
         return view
@@ -17,11 +22,33 @@ class Browse_Game: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //Register HeaderCell + ColleCtionCell
+        setupCollectionView()
+        setupMenuBar()
+        setupNavBar()
+    }
+    
+    private func setupCollectionView() {
         collectionView?.register(Merch_Cell.self, forCellWithReuseIdentifier: "Cell")
         collectionView?.backgroundColor = .white
         title = "Game Title"
+    }
+    
+    private func setupMenuBar() {
+        view.addSubview(menuBar)
+        
+        NSLayoutConstraint.activate([
+            menuBar.topAnchor.constraint(equalTo: view.topAnchor),
+            menuBar.heightAnchor.constraint(equalToConstant: 45),
+            menuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            menuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+    }
+    
+    //Setup navigation bar
+    private func setupNavBar() {
+        navigationController?.navigationBar.isTranslucent = false;
+        let likes = UIBarButtonItem(image: UIImage(named: "Path"), style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = likes
     }
 }
 

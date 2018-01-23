@@ -28,7 +28,6 @@ extension Browse_Game {
 extension Browse_Game: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = Constants.kWidth * (1/2) - 40
-        
         return CGSize(width: width,
                       height: 210) //Need To add constant Value
     }
@@ -39,7 +38,9 @@ extension Browse_Game: UICollectionViewDelegateFlowLayout {
         
     //Space Between Header and Collection itself
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0,
+        let height = menuBar.frame.height + 20
+        collectionView.scrollIndicatorInsets.top = height
+        return UIEdgeInsets(top: height,
                             left: 20, bottom: 0, right: 20)
     }
 }
