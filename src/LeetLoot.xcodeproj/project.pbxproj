@@ -164,12 +164,6 @@
 		AB7847E51FDDFC02008EBD70 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				BE7D2B1120170F950063BF7E /* Futura Bold.otf */,
-				ABBC3F88201011320004C2C5 /* Constants.swift */,
-				AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */,
-=======
->>>>>>> buy_filter
 				AB7847CC1FDDFB24008EBD70 /* Assets.xcassets */,
 				AB7847D11FDDFB24008EBD70 /* Info.plist */,
 				E86A6F221FEC81C5003188BB /* GoogleService-Info.plist */,
