@@ -8,14 +8,19 @@
 
 import UIKit
 
-class CustomButton: UIButton {
-    convenience init(title: String, imageName: String? = nil) {
+
+protocol CustomButton {}
+
+extension CustomButton where Self: UIButton {
+     init(title: Menu.Options, imageName: String? = nil) {
         self.init(frame: .zero)
         let image = imageName == nil ? nil : UIImage(named: imageName!)
-        setTitle(title, for: .normal)
+        setTitle(title.title, for: .normal)
         titleLabel?.font = .systemFont(ofSize: 15)
         setImage(image, for: .normal)
         setTitleColor(.darkText , for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
     }
 }
+
+extension UIButton: CustomButton {}

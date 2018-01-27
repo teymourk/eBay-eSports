@@ -9,10 +9,9 @@
 /* Begin PBXBuildFile section */
 		141690F0C6C00E83139AC50A /* Pods_LeetLootTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7756037293945067944C34A /* Pods_LeetLootTests.framework */; };
 		AB0220E12016F37400BEFFCD /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0220E02016F37400BEFFCD /* CustomButton.swift */; };
-		AB3CE83320068CAA00EF3A5D /* Browse_Game+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CE83220068CAA00EF3A5D /* Browse_Game+Extension.swift */; };
+		AB3CE83320068CAA00EF3A5D /* Browse_Game+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CE83220068CAA00EF3A5D /* Browse_Game+Ext.swift */; };
 		AB3CE83520068CC500EF3A5D /* Browse_Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CE83420068CC500EF3A5D /* Browse_Game.swift */; };
 		AB3CE83720068D0A00EF3A5D /* Merch_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CE83620068D0A00EF3A5D /* Merch_Cell.swift */; };
-		AB3CE83920068D2A00EF3A5D /* Merch_Header_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CE83820068D2A00EF3A5D /* Merch_Header_Cell.swift */; };
 		AB406EF01FF76E9600A1FD1D /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB406EEF1FF76E9600A1FD1D /* MenuBar.swift */; };
 		AB6DA787200FF75500135CF5 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6DA786200FF75500135CF5 /* ScrollView.swift */; };
 		AB7847C61FDDFB24008EBD70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */; };
@@ -20,7 +19,7 @@
 		AB7847CD1FDDFB24008EBD70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB7847CC1FDDFB24008EBD70 /* Assets.xcassets */; };
 		AB7847D01FDDFB24008EBD70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB7847CE1FDDFB24008EBD70 /* LaunchScreen.storyboard */; };
 		AB7847DB1FDDFB24008EBD70 /* LeetLootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847DA1FDDFB24008EBD70 /* LeetLootTests.swift */; };
-		AB7CE6411FF8901C0050125C /* General+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7CE6401FF8901C0050125C /* General+Extension.swift */; };
+		AB7CE6411FF8901C0050125C /* General+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7CE6401FF8901C0050125C /* General+Ext.swift */; };
 		ABA5A91520106DC9005D66D5 /* BuyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA5A91420106DC9005D66D5 /* BuyItem.swift */; };
 		ABBC3F89201011330004C2C5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBC3F88201011320004C2C5 /* Constants.swift */; };
 		ABD41D972015C45500A61C95 /* CustomNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD41D962015C45500A61C95 /* CustomNavbar.swift */; };
@@ -29,7 +28,7 @@
 		BE24D73A1FF585EC00E745E6 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24D7391FF585EC00E745E6 /* PageView.swift */; };
 		BE4625292011C367005789E6 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625282011C367005789E6 /* Twitter.swift */; };
 		BE46252E2011D305005789E6 /* Featured_Events_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE46252D2011D305005789E6 /* Featured_Events_Cell.swift */; };
-		BE4625302011D544005789E6 /* Home+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE46252F2011D544005789E6 /* Home+Extension.swift */; };
+		BE4625302011D544005789E6 /* Home+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE46252F2011D544005789E6 /* Home+Ext.swift */; };
 		BE4625322011DA1A005789E6 /* Home_Header_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625312011DA1A005789E6 /* Home_Header_Cell.swift */; };
 		BE4625342011DA4F005789E6 /* Favorites_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625332011DA4F005789E6 /* Favorites_Cell.swift */; };
 		BE7D2B1220170F950063BF7E /* Futura Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BE7D2B1120170F950063BF7E /* Futura Bold.otf */; };
@@ -52,10 +51,9 @@
 		26B939428E35986B807F8E56 /* Pods-LeetLootTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7A1F30C730B697589D58797A /* Pods-LeetLootTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.release.xcconfig"; sourceTree = "<group>"; };
 		AB0220E02016F37400BEFFCD /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		AB3CE83220068CAA00EF3A5D /* Browse_Game+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browse_Game+Extension.swift"; sourceTree = "<group>"; };
+		AB3CE83220068CAA00EF3A5D /* Browse_Game+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browse_Game+Ext.swift"; sourceTree = "<group>"; };
 		AB3CE83420068CC500EF3A5D /* Browse_Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse_Game.swift; sourceTree = "<group>"; };
 		AB3CE83620068D0A00EF3A5D /* Merch_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merch_Cell.swift; sourceTree = "<group>"; };
-		AB3CE83820068D2A00EF3A5D /* Merch_Header_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merch_Header_Cell.swift; sourceTree = "<group>"; };
 		AB406EEF1FF76E9600A1FD1D /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		AB6DA786200FF75500135CF5 /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
 		AB7847C21FDDFB24008EBD70 /* LeetLoot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeetLoot.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,7 +65,7 @@
 		AB7847D61FDDFB24008EBD70 /* LeetLootTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeetLootTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB7847DA1FDDFB24008EBD70 /* LeetLootTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetLootTests.swift; sourceTree = "<group>"; };
 		AB7847DC1FDDFB24008EBD70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB7CE6401FF8901C0050125C /* General+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "General+Extension.swift"; sourceTree = "<group>"; };
+		AB7CE6401FF8901C0050125C /* General+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "General+Ext.swift"; sourceTree = "<group>"; };
 		ABA5A91420106DC9005D66D5 /* BuyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyItem.swift; sourceTree = "<group>"; };
 		ABBC3F88201011320004C2C5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ABD41D962015C45500A61C95 /* CustomNavbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavbar.swift; sourceTree = "<group>"; };
@@ -77,7 +75,7 @@
 		BE24D7391FF585EC00E745E6 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		BE4625282011C367005789E6 /* Twitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
 		BE46252D2011D305005789E6 /* Featured_Events_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Featured_Events_Cell.swift; sourceTree = "<group>"; };
-		BE46252F2011D544005789E6 /* Home+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home+Extension.swift"; sourceTree = "<group>"; };
+		BE46252F2011D544005789E6 /* Home+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home+Ext.swift"; sourceTree = "<group>"; };
 		BE4625312011DA1A005789E6 /* Home_Header_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home_Header_Cell.swift; sourceTree = "<group>"; };
 		BE4625332011DA4F005789E6 /* Favorites_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites_Cell.swift; sourceTree = "<group>"; };
 		BE7D2B1120170F950063BF7E /* Futura Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Futura Bold.otf"; path = "LeetLoot/Supporting Files/Futura Bold.otf"; sourceTree = SOURCE_ROOT; };
@@ -113,11 +111,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AB00877A201965490003F94C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				AB0220E02016F37400BEFFCD /* CustomButton.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		AB7847B91FDDFB24008EBD70 = {
 			isa = PBXGroup;
 			children = (
 				AB7847C41FDDFB24008EBD70 /* LeetLoot */,
-				AB7CE63F1FF88FFD0050125C /* Extension */,
 				AB7847D91FDDFB24008EBD70 /* LeetLootTests */,
 				AB7847C31FDDFB24008EBD70 /* Products */,
 				DFEEA0AE006D30D64C78C322 /* Pods */,
@@ -137,10 +142,12 @@
 		AB7847C41FDDFB24008EBD70 /* LeetLoot */ = {
 			isa = PBXGroup;
 			children = (
-				AB7847E51FDDFC02008EBD70 /* Supporting Files */,
+				AB7CE63F1FF88FFD0050125C /* Extension */,
+				AB00877A201965490003F94C /* Protocols */,
 				AB7847E71FDDFC1F008EBD70 /* Model */,
 				AB7847E81FDDFC2A008EBD70 /* View */,
 				AB7847E61FDDFC15008EBD70 /* Controller */,
+				AB7847E51FDDFC02008EBD70 /* Resources */,
 			);
 			path = LeetLoot;
 			sourceTree = "<group>";
@@ -154,23 +161,26 @@
 			path = LeetLootTests;
 			sourceTree = "<group>";
 		};
-		AB7847E51FDDFC02008EBD70 /* Supporting Files */ = {
+		AB7847E51FDDFC02008EBD70 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				BE7D2B1120170F950063BF7E /* Futura Bold.otf */,
 				ABBC3F88201011320004C2C5 /* Constants.swift */,
 				AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */,
+=======
+>>>>>>> buy_filter
 				AB7847CC1FDDFB24008EBD70 /* Assets.xcassets */,
-				AB7847CE1FDDFB24008EBD70 /* LaunchScreen.storyboard */,
 				AB7847D11FDDFB24008EBD70 /* Info.plist */,
 				E86A6F221FEC81C5003188BB /* GoogleService-Info.plist */,
 			);
-			path = "Supporting Files";
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		AB7847E61FDDFC15008EBD70 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */,
 				AB7847C71FDDFB24008EBD70 /* Home.swift */,
 				BE24D7371FF585C600E745E6 /* Browse.swift */,
 				BE24D7391FF585EC00E745E6 /* PageView.swift */,
@@ -182,6 +192,7 @@
 		AB7847E71FDDFC1F008EBD70 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ABBC3F88201011320004C2C5 /* Constants.swift */,
 				BE4625282011C367005789E6 /* Twitter.swift */,
 			);
 			name = Model;
@@ -190,8 +201,8 @@
 		AB7847E81FDDFC2A008EBD70 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AB7847CE1FDDFB24008EBD70 /* LaunchScreen.storyboard */,
 				AB406EEF1FF76E9600A1FD1D /* MenuBar.swift */,
-				AB3CE83820068D2A00EF3A5D /* Merch_Header_Cell.swift */,
 				ABA5A91420106DC9005D66D5 /* BuyItem.swift */,
 				AB3CE83620068D0A00EF3A5D /* Merch_Cell.swift */,
 				BE46252D2011D305005789E6 /* Featured_Events_Cell.swift */,
@@ -199,7 +210,6 @@
 				BE4625312011DA1A005789E6 /* Home_Header_Cell.swift */,
 				ABD41D962015C45500A61C95 /* CustomNavbar.swift */,
 				AB6DA786200FF75500135CF5 /* ScrollView.swift */,
-				AB0220E02016F37400BEFFCD /* CustomButton.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -207,9 +217,9 @@
 		AB7CE63F1FF88FFD0050125C /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				AB7CE6401FF8901C0050125C /* General+Extension.swift */,
-				AB3CE83220068CAA00EF3A5D /* Browse_Game+Extension.swift */,
-				BE46252F2011D544005789E6 /* Home+Extension.swift */,
+				AB7CE6401FF8901C0050125C /* General+Ext.swift */,
+				AB3CE83220068CAA00EF3A5D /* Browse_Game+Ext.swift */,
+				BE46252F2011D544005789E6 /* Home+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -448,9 +458,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE4625302011D544005789E6 /* Home+Extension.swift in Sources */,
+				BE4625302011D544005789E6 /* Home+Ext.swift in Sources */,
 				BE4625342011DA4F005789E6 /* Favorites_Cell.swift in Sources */,
-				AB3CE83920068D2A00EF3A5D /* Merch_Header_Cell.swift in Sources */,
 				BE4625292011C367005789E6 /* Twitter.swift in Sources */,
 				AB0220E12016F37400BEFFCD /* CustomButton.swift in Sources */,
 				ABD41D972015C45500A61C95 /* CustomNavbar.swift in Sources */,
@@ -460,9 +469,9 @@
 				BE24D7381FF585C600E745E6 /* Browse.swift in Sources */,
 				AB7847C61FDDFB24008EBD70 /* AppDelegate.swift in Sources */,
 				AB3CE83720068D0A00EF3A5D /* Merch_Cell.swift in Sources */,
-				AB7CE6411FF8901C0050125C /* General+Extension.swift in Sources */,
+				AB7CE6411FF8901C0050125C /* General+Ext.swift in Sources */,
 				BE24D73A1FF585EC00E745E6 /* PageView.swift in Sources */,
-				AB3CE83320068CAA00EF3A5D /* Browse_Game+Extension.swift in Sources */,
+				AB3CE83320068CAA00EF3A5D /* Browse_Game+Ext.swift in Sources */,
 				AB406EF01FF76E9600A1FD1D /* MenuBar.swift in Sources */,
 				AB3CE83520068CC500EF3A5D /* Browse_Game.swift in Sources */,
 				BE4625322011DA1A005789E6 /* Home_Header_Cell.swift in Sources */,
@@ -616,11 +625,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QHXQSMBDV2;
-				INFOPLIST_FILE = "$(SRCROOT)/LeetLoot/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LeetLoot/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = OSU.Capstone.eBay.LeetLoot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LeetLoot/Supporting Files/LeetLoot-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -635,11 +643,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QHXQSMBDV2;
-				INFOPLIST_FILE = "$(SRCROOT)/LeetLoot/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LeetLoot/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = OSU.Capstone.eBay.LeetLoot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LeetLoot/Supporting Files/LeetLoot-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -16,7 +16,7 @@ final class Menu: UIView {
 
     //Menu Enum
     enum Options: String {
-        case Home, Browse
+        case Home, Browse, Filters
         
         static var menu = Menu.Options() //Singleton
     
@@ -46,7 +46,8 @@ final class Menu: UIView {
     
     //Stack view arrangedsubviews based on isMenu value
     private var options: [UIView] {
-        return isMenu == true ? [UIView(), home, browse, UIView()] : [result, UIView(), UIView(), filtering]
+        return isMenu == true ? [UIView(), home, browse, UIView()] :
+                                [result, UIView(), UIView(), filtering]
     }
     
     private lazy var horizontalBar = { () -> UIView in
@@ -64,23 +65,23 @@ final class Menu: UIView {
         return label
     }()
     
-    private let home = { () -> CustomButton in
-        let button = CustomButton(title: Menu.Options.Home.title)
+    private let home = { () -> UIButton in
+        let button = UIButton(title: .Home)
             button.addTarget(self, action: #selector(onMenuOptions(_:)), for: .touchUpInside)
             button.tag = 0
         return button
     }()
     
-    private var browse = { () -> CustomButton in
-        let button = CustomButton(title: Menu.Options.Browse.title)
+    private var browse = { () -> UIButton in
+        let button = UIButton(title: .Browse)
             button.addTarget(self, action: #selector(onMenuOptions(_:)), for: .touchUpInside)
             button.tag = 1
         return button
     }()
     
-    private lazy var filtering = { () -> CustomButton in
-        let button = CustomButton(title: "Filters",
-                                  imageName: "Filters") //Needs To be a constant
+    private lazy var filtering = { () -> UIButton in
+        let button = UIButton(title: .Filters,
+                              imageName: "Filters")
             button.titleEdgeInsets.left = 10
             button.addTarget(self, action: #selector(onMenuOptions(_:)), for: .touchUpInside)
             button.tag = 2
