@@ -9,9 +9,9 @@
 import UIKit
 
 
-protocol m {}
+protocol CustomButton {}
 
-extension m where Self: UIButton {
+extension CustomButton where Self: UIButton {
      init(title: Menu.Options, imageName: String? = nil) {
         self.init(frame: .zero)
         let image = imageName == nil ? nil : UIImage(named: imageName!)
@@ -23,4 +23,4 @@ extension m where Self: UIButton {
     }
 }
 
-extension UIButton: m {}
+extension UIButton: CustomButton {}
