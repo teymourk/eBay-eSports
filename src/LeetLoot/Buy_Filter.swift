@@ -19,13 +19,11 @@ final class Buy_Filter: NSObject {
     
     private lazy var buyView = { () -> Buy in
         let view = Buy(frame: frame)
-            view.layer.cornerRadius = 5
         return view
     }()
     
     private lazy var filterView = { () -> Filter in
         let view = Filter(frame: frame)
-            view.layer.cornerRadius = 5
         return view
     }()
     
@@ -36,12 +34,24 @@ final class Buy_Filter: NSObject {
         return view
     }()
     
-    private let (width, height, window, cutomHeight) = (Constants.kWidth,
-                                                        Constants.kHeight,
-                                                        Constants.kWindow,
-                                                        Constants.kHeight * (3.5/5))
-
-    private let edgeOffset: CGFloat = 10
+    private let (width, height, window) = (Constants.kWidth,
+                                           Constants.kHeight,
+                                           Constants.kWindow)
+    
+    private let (device, cutomHeight) = (Constants.deviceType.None,
+                                         Constants.kHeight * (3.5/5))
+                
+                                
+    private let edgeOffset: CGFloat = 10.0
+    
+    private var bottomOffset: CGFloat {
+        get {
+            if device.isDevice() == .X {
+                return 40
+            }
+            return 10
+        }
+    }
     
     func openPageFor(_ Option: Option) {
         Option == .Details ? setupViewFor(buyView) : setupViewFor(filterView)
@@ -50,11 +60,12 @@ final class Buy_Filter: NSObject {
     private func setupViewFor(_ view: UIView) {
         window.addSubview(fadeBackgroud)
         window.addSubview(view)
-        
+    
+        view.layer.cornerRadius = 5
         UIView.animate(withDuration: 0.5,
                        delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         
-            let y = (self.height) - (self.cutomHeight) - 10 //Needs to be Safelayout constant
+                        let y = (self.height) - (self.cutomHeight) - self.bottomOffset //Needs to be Safelayout constant
             view.frame = CGRect(x: self.edgeOffset, y: y, width: Constants.kWidth - (self.edgeOffset * 2) , height: self.cutomHeight)
             self.fadeBackgroud.alpha = 0.5
         })
