@@ -56,7 +56,7 @@ class Browse_Game: UICollectionViewController {
 //Mark: MenuBarDelegate
 extension Browse_Game: MenuBarDelegate {
     func onMenuButtons(_ sender: UIButton) {
-        buyItem.openPageFor(.Filter)
+        buyItem.open(.Filter)
     }
 }
 

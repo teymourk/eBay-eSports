@@ -40,6 +40,6 @@ class Home_Header_Cell: UICollectionViewCell {
             title.centerYAnchor.constraint(equalTo: centerYAnchor),
             title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             title.trailingAnchor.constraint(equalTo: trailingAnchor)
-            ])
+        ])
     }
 }

@@ -12,7 +12,7 @@ class Buy: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .red
+        backgroundColor = .white
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -24,7 +24,7 @@ class Filter: UITableView {
     
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: .plain)
-        backgroundColor = .blue
+        backgroundColor = .white
     }
     
     required init?(coder aDecoder: NSCoder) {

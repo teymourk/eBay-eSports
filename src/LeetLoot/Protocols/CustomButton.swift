@@ -12,6 +12,7 @@ import UIKit
 protocol CustomButton {}
 
 extension CustomButton where Self: UIButton {
+    
      init(title: Menu.Options, imageName: String? = nil) {
         self.init(frame: .zero)
         let image = imageName == nil ? nil : UIImage(named: imageName!)
@@ -24,3 +25,4 @@ extension CustomButton where Self: UIButton {
 }
 
 extension UIButton: CustomButton {}
+
