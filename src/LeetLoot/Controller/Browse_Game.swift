@@ -12,11 +12,12 @@ class Browse_Game: UICollectionViewController {
     
     lazy var menuBar = { () -> Menu in
         let view = Menu(isMenu: false)
+            view.delegate = self
         return view
     }()
     
-    let buyItem = { () -> BuyItem in
-        let view = BuyItem()
+    let buyItem = { () -> Buy_Filter in
+        let view = Buy_Filter()
         return view
     }()
     
@@ -49,6 +50,13 @@ class Browse_Game: UICollectionViewController {
         navigationController?.navigationBar.isTranslucent = false;
         let likes = UIBarButtonItem(image: UIImage(named: "Path"), style: .plain, target: self, action: nil)
         navigationItem.rightBarButtonItem = likes
+    }
+}
+
+//Mark: MenuBarDelegate
+extension Browse_Game: MenuBarDelegate {
+    func onMenuButtons(_ sender: UIButton) {
+        buyItem.openPageFor(.Filter)
     }
 }
 
