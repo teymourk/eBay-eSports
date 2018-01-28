@@ -20,7 +20,7 @@ extension Browse_Game {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        buyItem.openPageFor(.Details)
+        buyItem.openPageFor(.Buy)
     }
 }
 
