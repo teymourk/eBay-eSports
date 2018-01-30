@@ -8,18 +8,9 @@
 
 import UIKit
 
-class CustomNavbar: UIView {
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
+class CustomNavbar: ParentView {
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    let titleImage = { () -> UIImageView in
+    private let titleImage = { () -> UIImageView in
         let image = UIImageView(image: #imageLiteral(resourceName: "rupee"))
             image.clipsToBounds = true
             image.contentMode = .scaleAspectFit
@@ -27,7 +18,7 @@ class CustomNavbar: UIView {
         return image
     }()
     
-    let title = { () -> UILabel in
+    private let title = { () -> UILabel in
         let label = UILabel()
             label.text = "ELITE LOOT"
             label.textColor = .lightBlue
@@ -36,7 +27,7 @@ class CustomNavbar: UIView {
         return label
     }()
     
-    private func setupView() {
+    override func setupView() {
         addSubview(titleImage)
         addSubview(title)
         

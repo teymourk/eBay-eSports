@@ -14,6 +14,7 @@
 		AB3CE83520068CC500EF3A5D /* Browse_Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CE83420068CC500EF3A5D /* Browse_Game.swift */; };
 		AB3CE83720068D0A00EF3A5D /* Merch_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CE83620068D0A00EF3A5D /* Merch_Cell.swift */; };
 		AB406EF01FF76E9600A1FD1D /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB406EEF1FF76E9600A1FD1D /* MenuBar.swift */; };
+		AB6B875D2020F5AE00C5B791 /* Parent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B875C2020F5AE00C5B791 /* Parent.swift */; };
 		AB6DA787200FF75500135CF5 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6DA786200FF75500135CF5 /* ScrollView.swift */; };
 		AB7847C61FDDFB24008EBD70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */; };
 		AB7847C81FDDFB24008EBD70 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847C71FDDFB24008EBD70 /* Home.swift */; };
@@ -57,6 +58,7 @@
 		AB3CE83420068CC500EF3A5D /* Browse_Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse_Game.swift; sourceTree = "<group>"; };
 		AB3CE83620068D0A00EF3A5D /* Merch_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merch_Cell.swift; sourceTree = "<group>"; };
 		AB406EEF1FF76E9600A1FD1D /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		AB6B875C2020F5AE00C5B791 /* Parent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parent.swift; sourceTree = "<group>"; };
 		AB6DA786200FF75500135CF5 /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
 		AB7847C21FDDFB24008EBD70 /* LeetLoot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeetLoot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				BE4625312011DA1A005789E6 /* Home_Header_Cell.swift */,
 				ABD41D962015C45500A61C95 /* CustomNavbar.swift */,
 				AB6DA786200FF75500135CF5 /* ScrollView.swift */,
+				AB6B875C2020F5AE00C5B791 /* Parent.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -388,11 +391,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LeetLoot/Pods-LeetLoot-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseTwitterAuthUI.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseTwitterAuthUI.bundle,
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
@@ -516,6 +519,7 @@
 				BE4625322011DA1A005789E6 /* Home_Header_Cell.swift in Sources */,
 				ABBC3F89201011330004C2C5 /* Constants.swift in Sources */,
 				ABA5A91520106DC9005D66D5 /* Buy_Filter.swift in Sources */,
+				AB6B875D2020F5AE00C5B791 /* Parent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

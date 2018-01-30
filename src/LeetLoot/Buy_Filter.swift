@@ -23,7 +23,7 @@ final class Buy_Filter: NSObject {
         return view
     }()
     
-    let stackView = { () -> UIStackView in
+    private let stackView = { () -> UIStackView in
         let view = UIView()
             view.backgroundColor = .red
         let view1 = UIView()

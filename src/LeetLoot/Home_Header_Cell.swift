@@ -9,17 +9,9 @@
 import Foundation
 import UIKit
 
-class Home_Header_Cell: UICollectionViewCell {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    let title = { ()-> UILabel in
+class Home_Header_Cell: ParentCell {
+
+    let title = { () -> UILabel in
         let label = UILabel()
             label.textColor = .black
             label.textAlignment = .left
@@ -28,7 +20,7 @@ class Home_Header_Cell: UICollectionViewCell {
         return label
     }()
     
-    private func setupView() {
+    override func setupView() {
         backgroundColor = UIColor(red: 238, green: 239, blue: 241)
         setupHeaderTitlle()
     }

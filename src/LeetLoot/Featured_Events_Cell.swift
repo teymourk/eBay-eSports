@@ -9,17 +9,8 @@
 import Foundation
 import UIKit
 
-class Featured_Events_Cell: UICollectionViewCell{
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupView() {
+class Featured_Events_Cell: ParentCell{    
+    override func setupView() {
         backgroundColor = .white
     }
 }

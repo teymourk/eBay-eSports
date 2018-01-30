@@ -12,10 +12,10 @@ protocol MenuBarDelegate {
     func onMenuButtons(_ sender: UIButton)
 }
 
-final class Menu: UIView {
+final class Menu: ParentView {
 
     //Menu Enum
-    enum Options: String {
+    internal enum Options: String {
         case Home, Browse, Filters
         
         static var menu = Menu.Options() //Singleton
@@ -50,14 +50,14 @@ final class Menu: UIView {
                                 [result, UIView(), UIView(), filtering]
     }
     
-    private lazy var horizontalBar = { () -> UIView in
+    private let horizontalBar = { () -> UIView in
         let view = UIView()
             view.backgroundColor = .lightBlue
             view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private lazy var result = { () -> UILabel in
+    private let result = { () -> UILabel in
         let label = UILabel()
             label.textColor = .black
             label.text = "215 Results"
@@ -79,7 +79,7 @@ final class Menu: UIView {
         return button
     }()
     
-    private lazy var filtering = { () -> UIButton in
+    private let filtering = { () -> UIButton in
         let button = UIButton(title: .Filters,
                               imageName: "Filters")
             button.titleEdgeInsets.left = 10
@@ -130,23 +130,11 @@ final class Menu: UIView {
         filtering.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
     convenience init(isMenu: Bool) {
         self.init(frame: .zero)
         self.isMenu = isMenu
-        setupView()
-        setupLayoutContraints()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .white
+        setupLayoutContraints()
     }
 }

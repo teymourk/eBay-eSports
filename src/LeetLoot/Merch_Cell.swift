@@ -8,9 +8,9 @@
 
 import UIKit
 
-final class Merch_Cell: UICollectionViewCell {
+class Merch_Cell: ParentCell {
     
-    let merchImage = { () -> UIImageView in
+    private let merchImage = { () -> UIImageView in
         let image = UIImageView()
             image.contentMode = .scaleAspectFit
             image.layer.borderWidth = 0.5
@@ -20,7 +20,7 @@ final class Merch_Cell: UICollectionViewCell {
         return image
     }()
     
-    lazy var merchTitle = { () -> UITextView in
+    private let merchTitle = { () -> UITextView in
         let textView = UITextView()
             textView.isEditable = false
             textView.isSelectable = false
@@ -68,18 +68,9 @@ final class Merch_Cell: UICollectionViewCell {
         ])
     }
     
-    private func setupView() {
+    override func setupView() {
+        setupLayoutContraints()
         //Set title and price of merch from data object
         attributedFor("Poker Fanart", price: "14.99")
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-        setupLayoutContraints()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

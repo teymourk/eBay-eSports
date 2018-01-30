@@ -11,13 +11,13 @@ import UIKit
 
 class PageView: UIViewController {
     
-    lazy var menuBar = { () -> Menu in
+    private lazy var menuBar = { () -> Menu in
         let view = Menu(isMenu: true)
             view.delegate = self
         return view
     }()
     
-    var pages: [UIViewController] = {
+    private let pages: [UIViewController] = {
         let home = Home(collectionViewLayout: UICollectionViewFlowLayout())
         let browse = Browse()
         return [home, browse]
@@ -25,7 +25,7 @@ class PageView: UIViewController {
     
     private var menuOp = Menu.Options.menu
     
-    lazy var pageCarousel = { () -> ScrollView in
+    private lazy var pageCarousel = { () -> ScrollView in
         let scrollView = ScrollView()
             scrollView.createScrollableViews(forPages: pages, controller: self)
             scrollView.contentSize.width = view.bounds.size.width * CGFloat(pages.count)
@@ -34,7 +34,7 @@ class PageView: UIViewController {
     }()
 
     //Custom Title view for the nav bar
-    let titleView = { () -> CustomNavbar in
+    private let titleView = { () -> CustomNavbar in
         let view = CustomNavbar(frame: CGRect(x: 0, y: 0, width: Constants.kWidth * (1/2), height: 50))
             return view
     }()
