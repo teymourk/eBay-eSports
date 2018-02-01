@@ -22,6 +22,7 @@ class Merch_Cell: ParentCell {
             textView.isEditable = false
             textView.isSelectable = false
             textView.isScrollEnabled = false
+            textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
     
@@ -36,9 +37,10 @@ class Merch_Cell: ParentCell {
         addSubview(stackView)
         
         NSLayoutConstraint.activate([
+            merchImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+            
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.heightAnchor.constraint(equalTo: heightAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
     }
@@ -48,6 +50,8 @@ class Merch_Cell: ParentCell {
         merchImage.layer.borderColor = UIColor.lightGray.cgColor
         merchImage.clipsToBounds = true
         merchImage.heightAnchor.constraint(equalTo: widthAnchor).isActive = true
+        
+        merchTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -5).isActive = true
         merchTitle.attributedFor("League Of Legends", price: "$414.99")
     }
     

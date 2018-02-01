@@ -15,6 +15,7 @@ class Buy: Merch_Cell {
             button.setTitle("See More Product Details >", for: .normal)
             button.contentHorizontalAlignment = .left
             button.setTitleColor(.black, for: .normal)
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
             button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -32,9 +33,10 @@ class Buy: Merch_Cell {
         
         NSLayoutConstraint.activate([
             merchImage.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 3.7/5),
+            merchTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             
-            moreDetails.bottomAnchor.constraint(equalTo: buyNow.topAnchor, constant: -10),
-            moreDetails.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            moreDetails.bottomAnchor.constraint(equalTo: buyNow.topAnchor, constant: -15),
+            moreDetails.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             moreDetails.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             buyNow.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),

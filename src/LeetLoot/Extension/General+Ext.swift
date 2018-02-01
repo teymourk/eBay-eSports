@@ -44,8 +44,6 @@ extension UITextView {
         let ratingImage = NSTextAttachment()
             ratingImage.image = UIImage(named: "fiveStars") //Rating Icons
         let ratingAttributedString = NSAttributedString(attachment: ratingImage)
-        let paragraph = NSMutableParagraphStyle()
-            paragraph.alignment = .left
         
         //Appending the attributes
         attributedText.append(ratingAttributedString)
