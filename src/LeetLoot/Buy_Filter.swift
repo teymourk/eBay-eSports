@@ -23,15 +23,14 @@ final class Buy_Filter: NSObject {
         return view
     }()
     
-    private let stackView = { () -> UIStackView in
-        let view = UIView()
-            view.backgroundColor = .red
+    let stackView = { () -> UIStackView in
+        let view = UIImageView(image: #imageLiteral(resourceName: "DownArrow"))
+            view.contentMode = .scaleAspectFit
         let view1 = UIView()
-            view1.backgroundColor = .yellow
         let view2 = UIView()
-            view2.backgroundColor = .blue
-        let stack = UIStackView(arrangedSubviews: [view,view1,view2])
+        let stack = UIStackView(arrangedSubviews: [view1,view,view2])
             stack.distribution = .fillEqually
+            stack.alignment = .center
             stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -60,7 +59,7 @@ final class Buy_Filter: NSObject {
     private let (width, height, window, cutomHeight, device) = (Constants.kWidth,
                                                                 Constants.kHeight,
                                                                 Constants.kWindow,
-                                                                Constants.kHeight * (3.5/5),
+                                                                Constants.kHeight * (3.7/5),
                                                                 Constants.deviceType.None.isDevice())
     private let edgeOffset: CGFloat = 10.0
     
@@ -109,6 +108,7 @@ final class Buy_Filter: NSObject {
         }, completion: { (true) in
             self.parentView.removeFromSuperview()
             self.fadeBackgroud.removeFromSuperview()
+            self.filterView.isDescendant(of: self.parentView) ? self.filterView.removeFromSuperview() : self.buyView.removeFromSuperview()
         })
     }
     

@@ -61,6 +61,7 @@ final class Menu: ParentView {
         let label = UILabel()
             label.textColor = .black
             label.text = "215 Results"
+            label.textAlignment = .right
             label.font = .systemFont(ofSize: 15)
         return label
     }()
@@ -126,8 +127,8 @@ final class Menu: ParentView {
         horizontalBar.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         horizontalBar.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
-        result.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        filtering.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
+        result.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        filtering.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
     
     convenience init(isMenu: Bool) {

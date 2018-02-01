@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		141690F0C6C00E83139AC50A /* Pods_LeetLootTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7756037293945067944C34A /* Pods_LeetLootTests.framework */; };
-		AB0220E12016F37400BEFFCD /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0220E02016F37400BEFFCD /* CustomButton.swift */; };
+		AB29EAA3202312D000F27A3B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB29EAA2202312D000F27A3B /* Filter.swift */; };
 		AB310E69201DA3070085EBA8 /* Buy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB310E68201DA3070085EBA8 /* Buy.swift */; };
 		AB3CE83320068CAA00EF3A5D /* Browse_Game+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CE83220068CAA00EF3A5D /* Browse_Game+Ext.swift */; };
 		AB3CE83520068CC500EF3A5D /* Browse_Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CE83420068CC500EF3A5D /* Browse_Game.swift */; };
@@ -52,7 +52,7 @@
 		2332B1B8B9901E9E01AC1AE7 /* Pods_LeetLoot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeetLoot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26B939428E35986B807F8E56 /* Pods-LeetLootTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7A1F30C730B697589D58797A /* Pods-LeetLootTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.release.xcconfig"; sourceTree = "<group>"; };
-		AB0220E02016F37400BEFFCD /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		AB29EAA2202312D000F27A3B /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		AB310E68201DA3070085EBA8 /* Buy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buy.swift; sourceTree = "<group>"; };
 		AB3CE83220068CAA00EF3A5D /* Browse_Game+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browse_Game+Ext.swift"; sourceTree = "<group>"; };
 		AB3CE83420068CC500EF3A5D /* Browse_Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse_Game.swift; sourceTree = "<group>"; };
@@ -118,7 +118,6 @@
 		AB00877A201965490003F94C /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				AB0220E02016F37400BEFFCD /* CustomButton.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -212,6 +211,7 @@
 				AB406EEF1FF76E9600A1FD1D /* MenuBar.swift */,
 				ABA5A91420106DC9005D66D5 /* Buy_Filter.swift */,
 				AB310E68201DA3070085EBA8 /* Buy.swift */,
+				AB29EAA2202312D000F27A3B /* Filter.swift */,
 				AB3CE83620068D0A00EF3A5D /* Merch_Cell.swift */,
 				BE46252D2011D305005789E6 /* Featured_Events_Cell.swift */,
 				BE4625332011DA4F005789E6 /* Favorites_Cell.swift */,
@@ -502,11 +502,11 @@
 				BE4625302011D544005789E6 /* Home+Ext.swift in Sources */,
 				BE4625342011DA4F005789E6 /* Favorites_Cell.swift in Sources */,
 				BE4625292011C367005789E6 /* Twitter.swift in Sources */,
-				AB0220E12016F37400BEFFCD /* CustomButton.swift in Sources */,
 				AB310E69201DA3070085EBA8 /* Buy.swift in Sources */,
 				ABD41D972015C45500A61C95 /* CustomNavbar.swift in Sources */,
 				AB6DA787200FF75500135CF5 /* ScrollView.swift in Sources */,
 				AB7847C81FDDFB24008EBD70 /* Home.swift in Sources */,
+				AB29EAA3202312D000F27A3B /* Filter.swift in Sources */,
 				BE46252E2011D305005789E6 /* Featured_Events_Cell.swift in Sources */,
 				BE24D7381FF585C600E745E6 /* Browse.swift in Sources */,
 				AB7847C61FDDFB24008EBD70 /* AppDelegate.swift in Sources */,
