@@ -26,12 +26,14 @@ eBay would like to make use of recently released public buying APIs in order to 
 
 ## Installing 
 
-oepn terminal and run ```sudo gem install cocoapods``` to install cocoapods 
+Open terminal and run ```sudo gem install cocoapods``` to install cocoapods
 
 Clone or Download the project
 
 ```git clone https://github.com/teymourk/eBay-eSports.git ```
 
-```$ cd``` into your project directory.
+```$ cd``` into  ```/eBay-eSports/src```
 
 run  ```pod install```  to download all the dependencies
+
+Open ```LeetLoot.xcworkspace``` to run the current build.
