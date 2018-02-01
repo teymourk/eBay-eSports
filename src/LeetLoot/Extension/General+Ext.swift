@@ -61,10 +61,10 @@ extension UITextView {
 
 //Mark: - UIButton {
 extension UIButton {
-    convenience init(title: Menu.Options, imageName: String? = nil) {
+    convenience init(title: String, imageName: String? = nil) {
         self.init(frame: .zero)
         let image = imageName == nil ? nil : UIImage(named: imageName!)
-        setTitle(title.title, for: .normal)
+        setTitle(title, for: .normal)
         titleLabel?.font = .systemFont(ofSize: 15)
         setImage(image, for: .normal)
         setTitleColor(.darkText , for: .normal)

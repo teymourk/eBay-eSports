@@ -46,8 +46,8 @@ final class Menu: ParentView {
     
     //Stack view arrangedsubviews based on isMenu value
     private var options: [UIView] {
-        return isMenu == true ? [UIView(), home, browse, UIView()] :
-                                [result, UIView(), UIView(), filtering]
+        return isMenu == true ? [UIView(), menuButton.Home, menuButton.Browse, UIView()] :
+                                [result, UIView(), UIView(), menuButton.Fitler]
     }
     
     private let horizontalBar = { () -> UIView in
@@ -66,28 +66,25 @@ final class Menu: ParentView {
         return label
     }()
     
-    private let home = { () -> UIButton in
-        let button = UIButton(title: .Home)
-            button.addTarget(self, action: #selector(onMenuOptions(_:)), for: .touchUpInside)
-            button.tag = 0
-        return button
-    }()
+    private var menuButton: (Home:UIButton, Browse:UIButton, Fitler:UIButton) {
+        let button = createButtons(.Home,
+                                   .Browse,
+                                   .Filters)
+        return (button[0],
+                button[1],
+                button[2])
+    }
     
-    private var browse = { () -> UIButton in
-        let button = UIButton(title: .Browse)
-            button.addTarget(self, action: #selector(onMenuOptions(_:)), for: .touchUpInside)
-            button.tag = 1
-        return button
-    }()
-    
-    private let filtering = { () -> UIButton in
-        let button = UIButton(title: .Filters,
-                              imageName: "Filters")
-            button.titleEdgeInsets.left = 10
-            button.addTarget(self, action: #selector(onMenuOptions(_:)), for: .touchUpInside)
-            button.tag = 2
-        return button
-    }()
+    //Create Multiple buttoms of same attributes
+    private func createButtons(_ title: Options...) -> [UIButton] {
+        return title.enumerated().map({ (index,name) in
+            let button = UIButton(title: name.rawValue, imageName: name.title)
+                button.addTarget(self, action: #selector(onMenuOptions(_ :)), for: .touchUpInside)
+                button.tag = index
+                button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        })
+    }
     
     private lazy var stackView = { () -> UIStackView in
         let stack = UIStackView(arrangedSubviews: options)
@@ -126,9 +123,6 @@ final class Menu: ParentView {
         }
         horizontalBar.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         horizontalBar.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        
-        result.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        filtering.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
     
     convenience init(isMenu: Bool) {
