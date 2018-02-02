@@ -16,11 +16,9 @@ final class Menu: ParentView {
 
     //Menu Enum
     internal enum Options: String {
-        case Home, Browse, Filters
+        case Home, Browse, Filters, Results
         
         static var menu = Menu.Options() //Singleton
-    
-        var title: String { return self.rawValue }
         
         private init() {
             self = .Home
@@ -66,6 +64,7 @@ final class Menu: ParentView {
         return label
     }()
     
+<<<<<<< HEAD
     private var menuButton: (Home:UIButton, Browse:UIButton, Fitler:UIButton) {
         let button = createButtons(.Home,
                                    .Browse,
@@ -80,6 +79,28 @@ final class Menu: ParentView {
         return title.enumerated().map({ (index,name) in
             let button = UIButton(title: name.rawValue, imageName: name.title)
                 button.addTarget(self, action: #selector(onMenuOptions(_ :)), for: .touchUpInside)
+=======
+    private var menuButton: (   Home:UIButton,
+                                Browse:UIButton,
+                                Fitler:UIButton) {
+    
+        let button = createButtons(.Home,
+                                   .Browse,
+                                   .Filters)
+        
+        return (button[0], //Return Home
+                button[1], //Return Browse
+                button[2]) //Return Filters
+    }
+
+    //Create Multiple buttoms of same attributes
+    private func createButtons(_ buttonTitle: Options...) -> [UIButton] {
+        return buttonTitle.enumerated().map({ (index,name) in
+            let title = name.rawValue
+            let button = UIButton(title: title, imageName: title)
+                button.addTarget(self, action: #selector(onMenuOptions(_ :)), for: .touchUpInside)
+                button.titleEdgeInsets.left = buttonTitle[index] == .Filters ? 10 : 0
+>>>>>>> Filter
                 button.tag = index
                 button.translatesAutoresizingMaskIntoConstraints = false
             return button
