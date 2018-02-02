@@ -25,6 +25,7 @@
 		ABA5A91520106DC9005D66D5 /* Buy_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA5A91420106DC9005D66D5 /* Buy_Filter.swift */; };
 		ABBC3F89201011330004C2C5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBC3F88201011320004C2C5 /* Constants.swift */; };
 		ABD41D972015C45500A61C95 /* CustomNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD41D962015C45500A61C95 /* CustomNavbar.swift */; };
+		ABF26A3D2023CB4300FE1473 /* Filter_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF26A3C2023CB4300FE1473 /* Filter_Cell.swift */; };
 		BA25D71E3395478B222BCCA7 /* Pods_LeetLoot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2332B1B8B9901E9E01AC1AE7 /* Pods_LeetLoot.framework */; };
 		BE24D7381FF585C600E745E6 /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24D7371FF585C600E745E6 /* Browse.swift */; };
 		BE24D73A1FF585EC00E745E6 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24D7391FF585EC00E745E6 /* PageView.swift */; };
@@ -73,6 +74,7 @@
 		ABA5A91420106DC9005D66D5 /* Buy_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buy_Filter.swift; sourceTree = "<group>"; };
 		ABBC3F88201011320004C2C5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ABD41D962015C45500A61C95 /* CustomNavbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavbar.swift; sourceTree = "<group>"; };
+		ABF26A3C2023CB4300FE1473 /* Filter_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter_Cell.swift; sourceTree = "<group>"; };
 		B32F9ADFD97BBE109C6F27A6 /* Pods-LeetLoot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLoot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLoot/Pods-LeetLoot.debug.xcconfig"; sourceTree = "<group>"; };
 		B7756037293945067944C34A /* Pods_LeetLootTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeetLootTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE24D7371FF585C600E745E6 /* Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				ABA5A91420106DC9005D66D5 /* Buy_Filter.swift */,
 				AB310E68201DA3070085EBA8 /* Buy.swift */,
 				AB29EAA2202312D000F27A3B /* Filter.swift */,
+				ABF26A3C2023CB4300FE1473 /* Filter_Cell.swift */,
 				AB3CE83620068D0A00EF3A5D /* Merch_Cell.swift */,
 				BE46252D2011D305005789E6 /* Featured_Events_Cell.swift */,
 				BE4625332011DA4F005789E6 /* Favorites_Cell.swift */,
@@ -500,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE4625302011D544005789E6 /* Home+Ext.swift in Sources */,
+				ABF26A3D2023CB4300FE1473 /* Filter_Cell.swift in Sources */,
 				BE4625342011DA4F005789E6 /* Favorites_Cell.swift in Sources */,
 				BE4625292011C367005789E6 /* Twitter.swift in Sources */,
 				AB310E69201DA3070085EBA8 /* Buy.swift in Sources */,

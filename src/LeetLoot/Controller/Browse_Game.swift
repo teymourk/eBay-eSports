@@ -16,7 +16,7 @@ class Browse_Game: UICollectionViewController {
         return view
     }()
     
-    let buyItem = { () -> Buy_Filter in
+    lazy var buyItem = { () -> Buy_Filter in
         let view = Buy_Filter()
         return view
     }()
