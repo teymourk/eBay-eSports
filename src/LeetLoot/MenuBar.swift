@@ -63,23 +63,7 @@ final class Menu: ParentView {
             label.font = .systemFont(ofSize: 15)
         return label
     }()
-    
-<<<<<<< HEAD
-    private var menuButton: (Home:UIButton, Browse:UIButton, Fitler:UIButton) {
-        let button = createButtons(.Home,
-                                   .Browse,
-                                   .Filters)
-        return (button[0],
-                button[1],
-                button[2])
-    }
-    
-    //Create Multiple buttoms of same attributes
-    private func createButtons(_ title: Options...) -> [UIButton] {
-        return title.enumerated().map({ (index,name) in
-            let button = UIButton(title: name.rawValue, imageName: name.title)
-                button.addTarget(self, action: #selector(onMenuOptions(_ :)), for: .touchUpInside)
-=======
+            
     private var menuButton: (   Home:UIButton,
                                 Browse:UIButton,
                                 Fitler:UIButton) {
@@ -100,7 +84,6 @@ final class Menu: ParentView {
             let button = UIButton(title: title, imageName: title)
                 button.addTarget(self, action: #selector(onMenuOptions(_ :)), for: .touchUpInside)
                 button.titleEdgeInsets.left = buttonTitle[index] == .Filters ? 10 : 0
->>>>>>> Filter
                 button.tag = index
                 button.translatesAutoresizingMaskIntoConstraints = false
             return button
