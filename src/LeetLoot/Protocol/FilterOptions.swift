@@ -8,6 +8,7 @@
 
 import UIKit
 
+//
 protocol FilterOptions {
     var sectionTitle: String { get }
     var options: [EnumTitles] { get }
@@ -24,22 +25,22 @@ extension EnumTitles {
 }
 
 struct Sort: FilterOptions {
-    var options: [EnumTitles] { return [option.All, option.Toys, option.Wow] }
+    var options: [EnumTitles] { return [option.Relevance, option.Rating] }
     
     var sectionTitle: String { return "Sort by" }
-    
+
     enum option: EnumTitles {
-        case All, Toys, Wow
+        case Relevance, Rating
     }
 }
 
 struct Type: FilterOptions {
-    var options: [EnumTitles] { return [option.Kia, option.Me] }
+    var options: [EnumTitles] { return [option.All, option.Toys, option.Clothing] }
     
     var sectionTitle: String { return "Filter by" }
     
     enum option: EnumTitles {
-        case Kia, Me
+        case All, Toys, Clothing
     }
 }
 

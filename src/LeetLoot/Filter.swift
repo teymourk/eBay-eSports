@@ -44,6 +44,8 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as? Filter_Cell
+        let options = filterMenu[indexPath.section].options[indexPath.row]
+        cell?.textLabel?.text = options.title
         return cell ?? UITableViewCell()
     }
 
