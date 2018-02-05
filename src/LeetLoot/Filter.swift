@@ -10,23 +10,15 @@ import UIKit
 
 class Filter: UITableView {
     
-    fileprivate var filterMenu: Dictionary<String, Any> {
-        return ["Sory by": sort.self,
-                "Item Type": itemType.self,
-                "Price": CGFloat()]
-    }
-    
-    private enum sort {
-        case Relevance, Rating, All, Toys, Clothing
-    }
-    
-    private enum itemType {
-        case  All, Toys, Clothing
+    fileprivate var filterMenu: [FilterOptions] {
+        return [Sort(), Type(), Price()]
     }
     
     private func setupTableView() {
         backgroundColor = .white
         register(Filter_Cell.self, forCellReuseIdentifier: "FilterCell")
+        self.delegate = self
+        self.dataSource = self
     }
     
     override init(frame: CGRect, style: UITableViewStyle) {
@@ -47,12 +39,27 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filterMenu.values.count
+        return filterMenu[section].options.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as? Filter_Cell
+        cell?.backgroundColor = indexPath.section == 0 ? .red : .blue
         return cell ?? UITableViewCell()
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+            view.backgroundColor = .lightGray
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
 }
 
