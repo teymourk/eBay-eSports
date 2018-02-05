@@ -41,7 +41,7 @@ class Home: UICollectionViewController,FUIAuthDelegate {
         collectionView?.backgroundColor = .customGray
         collectionView?.register(Featured_Events_Cell.self, forCellWithReuseIdentifier: "Cell")
         collectionView?.register(Favorites_Cell.self, forCellWithReuseIdentifier: "Cells")
-        collectionView?.register(Home_Header_Cell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "Cells")
+        collectionView?.register(Header_Cell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "Cells")
         collectionView?.delegate = self
         collectionView?.dataSource = self
     }

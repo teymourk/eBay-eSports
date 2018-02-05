@@ -41,9 +41,9 @@ extension Home: UICollectionViewDelegateFlowLayout {
 extension Home {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Cells", for: indexPath) as? Home_Header_Cell
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Cells", for: indexPath) as? Header_Cell
         
-        header?.title.text = indexPath.section == 0 ? "Featured Events" : "Favorites"
+        header?.title = indexPath.section == 0 ? "Featured Events" : "Favorites"
         
         return header ?? UICollectionViewCell()
     }

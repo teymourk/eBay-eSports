@@ -9,9 +9,15 @@
 import Foundation
 import UIKit
 
-class Home_Header_Cell: ParentCell {
+class Header_Cell: ParentCell {
 
-    let title = { () -> UILabel in
+    var title: String?{
+        didSet {
+            sectionTitle.text = title != nil ? title : ""
+        }
+    }
+    
+    private let sectionTitle = { () -> UILabel in
         let label = UILabel()
             label.textColor = .black
             label.textAlignment = .left
@@ -26,12 +32,12 @@ class Home_Header_Cell: ParentCell {
     }
     
     private func setupHeaderTitlle() {
-        addSubview(title)
+        addSubview(sectionTitle)
         
         NSLayoutConstraint.activate([
-            title.centerYAnchor.constraint(equalTo: centerYAnchor),
-            title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            title.trailingAnchor.constraint(equalTo: trailingAnchor)
+            sectionTitle.centerYAnchor.constraint(equalTo: centerYAnchor),
+            sectionTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            sectionTitle.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
 }

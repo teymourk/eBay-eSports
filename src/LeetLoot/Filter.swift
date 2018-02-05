@@ -48,8 +48,8 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = Home_Header_Cell()
-            view.title.text = filterMenu[section].sectionTitle
+        let view = Header_Cell()
+            view.title = filterMenu[section].sectionTitle
         return view
     }
     
