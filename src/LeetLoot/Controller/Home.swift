@@ -38,7 +38,7 @@ class Home: UICollectionViewController,FUIAuthDelegate {
         try Auth.auth()!.signOut();
     }*/
     private func setupCollectionView() {
-        collectionView?.backgroundColor = UIColor(red: 238, green: 239, blue: 241)
+        collectionView?.backgroundColor = .customGray
         collectionView?.register(Featured_Events_Cell.self, forCellWithReuseIdentifier: "Cell")
         collectionView?.register(Favorites_Cell.self, forCellWithReuseIdentifier: "Cells")
         collectionView?.register(Home_Header_Cell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "Cells")

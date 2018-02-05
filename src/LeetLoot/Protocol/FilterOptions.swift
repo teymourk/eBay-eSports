@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FilterOptions {
-    var section: String { get }
+    var sectionTitle: String { get }
     var options: [EnumTitles] { get }
 }
 
@@ -26,7 +26,7 @@ extension EnumTitles {
 struct Sort: FilterOptions {
     var options: [EnumTitles] { return [option.All, option.Toys, option.Wow] }
     
-    var section: String { return "Sort by" }
+    var sectionTitle: String { return "Sort by" }
     
     enum option: EnumTitles {
         case All, Toys, Wow
@@ -36,7 +36,7 @@ struct Sort: FilterOptions {
 struct Type: FilterOptions {
     var options: [EnumTitles] { return [option.Kia, option.Me] }
     
-    var section: String { return "Filter by" }
+    var sectionTitle: String { return "Filter by" }
     
     enum option: EnumTitles {
         case Kia, Me

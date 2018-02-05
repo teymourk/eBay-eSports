@@ -44,13 +44,12 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as? Filter_Cell
-        cell?.backgroundColor = indexPath.section == 0 ? .red : .blue
         return cell ?? UITableViewCell()
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-            view.backgroundColor = .lightGray
+        let view = Home_Header_Cell()
+            view.title.text = filterMenu[section].sectionTitle
         return view
     }
     

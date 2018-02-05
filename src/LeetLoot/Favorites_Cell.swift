@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Favorites_Cell: ParentCell{
+class Favorites_Cell: ParentCell {
     override func setupView() {
         backgroundColor = .white
     }

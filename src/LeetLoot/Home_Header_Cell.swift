@@ -21,7 +21,7 @@ class Home_Header_Cell: ParentCell {
     }()
     
     override func setupView() {
-        backgroundColor = UIColor(red: 238, green: 239, blue: 241)
+        backgroundColor = .customGray
         setupHeaderTitlle()
     }
     
