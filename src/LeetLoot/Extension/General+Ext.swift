@@ -18,6 +18,7 @@ extension UIColor {
     
     //Secondary Color -> Blue
     static var lightBlue: UIColor { return UIColor(red: 18, green: 149, blue: 232) }
+    static var customGray: UIColor { return UIColor(red: 238, green: 239, blue: 241) }
 }
 
 //Mark: - Int

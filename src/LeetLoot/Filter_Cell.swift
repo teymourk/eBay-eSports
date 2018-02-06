@@ -13,7 +13,7 @@ class Filter_Cell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        backgroundColor = .white
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
