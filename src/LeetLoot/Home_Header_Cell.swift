@@ -22,7 +22,7 @@ class Home_Header_Cell: ParentCell {
     
     override func setupView() {
         backgroundColor = .customGray
-        setupHeaderTitlle()
+        setupHeaderTitle()
     }
     
     private func setupHeaderTitle() {

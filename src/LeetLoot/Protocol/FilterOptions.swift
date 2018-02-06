@@ -44,7 +44,7 @@ struct Type: FilterOptions {
 }
 
 struct Price: FilterOptions {
-    var section: String { return "Price" }
+    var sectionTitle: String { return "Price" }
     
     var options: [EnumTitles] {
         return [Price.price]
