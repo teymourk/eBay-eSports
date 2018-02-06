@@ -28,12 +28,11 @@ class Header_Cell: ParentCell {
     
     override func setupView() {
         backgroundColor = .customGray
-        setupHeaderTitlle()
+        setupHeaderTitle()
     }
-    
-    private func setupHeaderTitlle() {
+    private func setupHeaderTitle() {
         addSubview(sectionTitle)
-        
+
         NSLayoutConstraint.activate([
             sectionTitle.centerYAnchor.constraint(equalTo: centerYAnchor),
             sectionTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),

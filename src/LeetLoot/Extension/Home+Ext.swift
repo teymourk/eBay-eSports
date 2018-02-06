@@ -24,16 +24,24 @@ extension Home: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
             let featuredEventsCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? Featured_Events_Cell,
+            let twitterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "TCell", for: indexPath) as? Twitter_Cell,
             let favoritesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cells", for: indexPath) as? Favorites_Cell  else { return UICollectionViewCell() }
         
-        return indexPath.section == 0 ? featuredEventsCell : favoritesCell
+        if indexPath.section == 0 {
+            return indexPath.row == 0 ? featuredEventsCell : twitterCell
+        }
+        return favoritesCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let sectionOne = CGSize(width: view.frame.width, height: 200)
-        let sectionTwo = CGSize(width: view.frame.width, height: view.frame.height)
+        let eventRow = CGSize(width: view.frame.width, height: 200)
+        let twitterRow = CGSize(width: view.frame.width, height: 348)
         
-        return indexPath.section == 0 ? sectionOne : sectionTwo
+        if indexPath.section == 0 {
+            return indexPath.row == 0 ? eventRow : twitterRow
+        }
+        
+        return CGSize(width: view.frame.width, height: 200)
     }
 }
 

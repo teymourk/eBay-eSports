@@ -22,7 +22,7 @@ class CustomNavbar: ParentView {
         let label = UILabel()
             label.text = "ELITE LOOT"
             label.textColor = .lightBlue
-            label.font = UIFont(name: "Futura-Bold", size: 22)
+            label.font = UIFont(name: "Futura-Bold", size: 24)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

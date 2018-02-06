@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Featured_Events_Cell: ParentCell{    
+class Featured_Events_Cell: ParentCell{
     override func setupView() {
         backgroundColor = .white
     }
