@@ -202,7 +202,7 @@
 				ABBC3F88201011320004C2C5 /* Constants.swift */,
 				BE4625282011C367005789E6 /* Twitter.swift */,
 			);
-			name = Model;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		AB7847E81FDDFC2A008EBD70 /* View */ = {
@@ -223,7 +223,7 @@
 				AB6B875C2020F5AE00C5B791 /* Parent.swift */,
 				BED4A5F62024F1AA00D06AE1 /* Twitter_Cell.swift */,
 			);
-			name = View;
+			path = View;
 			sourceTree = "<group>";
 		};
 		AB7CE63F1FF88FFD0050125C /* Extension */ = {
