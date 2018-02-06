@@ -19,7 +19,7 @@ extension ReusableView where Self: UIView {
 }
 
 extension UICollectionView {
-    func registerCell<T: UICollectionViewCell>(_ cell: T.Type, isHeader:Bool? = nil) {
+    func registerCell<T: ParentCell>(_ cell: T.Type, isHeader:Bool? = nil) {
         isHeader == nil ?   register(cell,
                                      forCellWithReuseIdentifier: T.identifier) :
                             register(cell,
@@ -27,20 +27,20 @@ extension UICollectionView {
                                      withReuseIdentifier: T.identifier)
     }
     
-    func reusableCell<T: UICollectionViewCell>(indexPath: IndexPath, kind: String? = nil ) -> T {
+    func reusableCell<T: ParentCell>(indexPath: IndexPath, kind: String? = nil ) -> T {
         if kind != nil {
             let header = dequeueReusableSupplementaryView(ofKind: kind!,
                                                           withReuseIdentifier: T.identifier,
-                                                          for: indexPath) as? T
-            return header ?? T()
+                                                          for: indexPath) as? T ?? T()
+            return header
         }
         
         let cell = dequeueReusableCell(withReuseIdentifier: T.identifier,
-                                       for: indexPath) as? T
-        return cell ?? T()
+                                       for: indexPath) as? T ?? T()
+        return cell
     }
 }
 
-extension UICollectionViewCell: ReusableView {}
+extension ParentCell: ReusableView {}
 
 

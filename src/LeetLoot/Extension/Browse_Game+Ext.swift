@@ -15,8 +15,8 @@ extension Browse_Game {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? Merch_Cell
-        return cell ?? UICollectionViewCell()
+        let cell: Merch_Cell = collectionView.reusableCell(indexPath: indexPath)
+        return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

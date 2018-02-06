@@ -22,10 +22,9 @@ extension Home: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard
-            let featuredEventsCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? Featured_Events_Cell,
-            let twitterCell = collectionView.dequeueReusableCell(withReuseIdentifier: "TCell", for: indexPath) as? Twitter_Cell,
-            let favoritesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cells", for: indexPath) as? Favorites_Cell  else { return UICollectionViewCell() }
+        let featuredEventsCell: Featured_Events_Cell = collectionView.reusableCell(indexPath: indexPath)
+        let twitterCell: Twitter_Cell = collectionView.reusableCell(indexPath: indexPath)
+        let favoritesCell: Favorites_Cell = collectionView.reusableCell(indexPath: indexPath)
         
         if indexPath.section == 0 {
             return indexPath.row == 0 ? featuredEventsCell : twitterCell
@@ -48,12 +47,10 @@ extension Home: UICollectionViewDelegateFlowLayout {
 //Mark: - CollectionHeader
 extension Home {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Cells", for: indexPath) as? Header_Cell
-        
-        header?.title = indexPath.section == 0 ? "Featured Events" : "Favorites"
-        
-        return header ?? UICollectionViewCell()
+        let header: Header_Cell = collectionView.reusableCell(indexPath: indexPath, kind: kind)
+            header.title = indexPath.section == 0 ? "Featured Events" : "Favorites"
+
+        return header
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width,

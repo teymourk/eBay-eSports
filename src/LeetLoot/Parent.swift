@@ -33,5 +33,4 @@ class ParentCell: UICollectionViewCell {
     }
     
     func setupView() {}
-    
 }

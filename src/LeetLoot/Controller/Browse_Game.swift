@@ -29,7 +29,7 @@ class Browse_Game: UICollectionViewController {
     }
     
     private func setupCollectionView() {
-        collectionView?.register(Merch_Cell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView?.registerCell(Merch_Cell.self)
         collectionView?.backgroundColor = .white
         title = "Game Title"
     }

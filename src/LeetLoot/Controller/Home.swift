@@ -39,10 +39,10 @@ class Home: UICollectionViewController, FUIAuthDelegate {
     }*/
     private func setupCollectionView() {
         collectionView?.backgroundColor = .customGray
-        collectionView?.register(Featured_Events_Cell.self, forCellWithReuseIdentifier: "Cell")
-        collectionView?.register(Twitter_Cell.self, forCellWithReuseIdentifier: "TCell")
-        collectionView?.register(Favorites_Cell.self, forCellWithReuseIdentifier: "Cells")
-        collectionView?.register(Header_Cell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "Cells")
+        collectionView?.registerCell(Featured_Events_Cell.self)
+        collectionView?.registerCell(Twitter_Cell.self)
+        collectionView?.registerCell(Favorites_Cell.self)
+        collectionView?.registerCell(Header_Cell.self, isHeader: true)
         collectionView?.delegate = self
         collectionView?.dataSource = self
     }
