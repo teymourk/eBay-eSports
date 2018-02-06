@@ -22,10 +22,10 @@ class Home_Header_Cell: ParentCell {
     
     override func setupView() {
         backgroundColor = UIColor(red: 238, green: 239, blue: 241)
-        setupHeaderTitlle()
+        setupHeaderTitle()
     }
     
-    private func setupHeaderTitlle() {
+    private func setupHeaderTitle() {
         addSubview(title)
         
         NSLayoutConstraint.activate([

@@ -12,7 +12,7 @@ import Firebase
 import FirebaseAuthUI
 
 
-class Home: UICollectionViewController,FUIAuthDelegate {
+class Home: UICollectionViewController, FUIAuthDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,7 @@ class Home: UICollectionViewController,FUIAuthDelegate {
     private func setupCollectionView() {
         collectionView?.backgroundColor = UIColor(red: 238, green: 239, blue: 241)
         collectionView?.register(Featured_Events_Cell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView?.register(Twitter_Cell.self, forCellWithReuseIdentifier: "TCell")
         collectionView?.register(Favorites_Cell.self, forCellWithReuseIdentifier: "Cells")
         collectionView?.register(Home_Header_Cell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "Cells")
         collectionView?.delegate = self

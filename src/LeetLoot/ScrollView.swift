@@ -33,11 +33,9 @@ extension ScrollView {
             addSubview(value.view)
             value.didMove(toParentViewController: controller)
             
-            if index > 0 {
-                var pageFrame = CGRect()
-                pageFrame.origin.x = controller.view.frame.width * CGFloat(index)
-                value.view.frame = pageFrame
-            }
+            var pageFrame = CGRect()
+            pageFrame.origin.x = controller.view.frame.width * CGFloat(index)
+            value.view.frame = pageFrame
         }
     }
     

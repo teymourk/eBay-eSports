@@ -35,6 +35,7 @@
 		BE4625322011DA1A005789E6 /* Home_Header_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625312011DA1A005789E6 /* Home_Header_Cell.swift */; };
 		BE4625342011DA4F005789E6 /* Favorites_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625332011DA4F005789E6 /* Favorites_Cell.swift */; };
 		BE7D2B1220170F950063BF7E /* Futura Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BE7D2B1120170F950063BF7E /* Futura Bold.otf */; };
+		BED4A5F72024F1AA00D06AE1 /* Twitter_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4A5F62024F1AA00D06AE1 /* Twitter_Cell.swift */; };
 		E86A6F231FEC81C6003188BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E86A6F221FEC81C5003188BB /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		BE4625312011DA1A005789E6 /* Home_Header_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home_Header_Cell.swift; sourceTree = "<group>"; };
 		BE4625332011DA4F005789E6 /* Favorites_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites_Cell.swift; sourceTree = "<group>"; };
 		BE7D2B1120170F950063BF7E /* Futura Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Futura Bold.otf"; path = "LeetLoot/Supporting Files/Futura Bold.otf"; sourceTree = SOURCE_ROOT; };
+		BED4A5F62024F1AA00D06AE1 /* Twitter_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twitter_Cell.swift; sourceTree = "<group>"; };
 		E86A6F221FEC81C5003188BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -222,6 +224,7 @@
 				ABD41D962015C45500A61C95 /* CustomNavbar.swift */,
 				AB6DA786200FF75500135CF5 /* ScrollView.swift */,
 				AB6B875C2020F5AE00C5B791 /* Parent.swift */,
+				BED4A5F62024F1AA00D06AE1 /* Twitter_Cell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				ABBC3F89201011330004C2C5 /* Constants.swift in Sources */,
 				ABA5A91520106DC9005D66D5 /* Buy_Filter.swift in Sources */,
 				AB6B875D2020F5AE00C5B791 /* Parent.swift in Sources */,
+				BED4A5F72024F1AA00D06AE1 /* Twitter_Cell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
