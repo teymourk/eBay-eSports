@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		141690F0C6C00E83139AC50A /* Pods_LeetLootTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7756037293945067944C34A /* Pods_LeetLootTests.framework */; };
 		AB29EAA3202312D000F27A3B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB29EAA2202312D000F27A3B /* Filter.swift */; };
+		AB2CE5542029B9BF0025DA69 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2CE5532029B9BF0025DA69 /* ReusableView.swift */; };
 		AB310E69201DA3070085EBA8 /* Buy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB310E68201DA3070085EBA8 /* Buy.swift */; };
 		AB38512A2026F58C008D6B71 /* FilterOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3851292026F58C008D6B71 /* FilterOptions.swift */; };
 		AB3CE83320068CAA00EF3A5D /* Browse_Game+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3CE83220068CAA00EF3A5D /* Browse_Game+Ext.swift */; };
@@ -33,7 +34,7 @@
 		BE4625292011C367005789E6 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625282011C367005789E6 /* Twitter.swift */; };
 		BE46252E2011D305005789E6 /* Featured_Events_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE46252D2011D305005789E6 /* Featured_Events_Cell.swift */; };
 		BE4625302011D544005789E6 /* Home+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE46252F2011D544005789E6 /* Home+Ext.swift */; };
-		BE4625322011DA1A005789E6 /* Home_Header_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625312011DA1A005789E6 /* Home_Header_Cell.swift */; };
+		BE4625322011DA1A005789E6 /* Header_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625312011DA1A005789E6 /* Header_Cell.swift */; };
 		BE4625342011DA4F005789E6 /* Favorites_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625332011DA4F005789E6 /* Favorites_Cell.swift */; };
 		BE7D2B1220170F950063BF7E /* Futura Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BE7D2B1120170F950063BF7E /* Futura Bold.otf */; };
 		BED4A5F72024F1AA00D06AE1 /* Twitter_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4A5F62024F1AA00D06AE1 /* Twitter_Cell.swift */; };
@@ -56,6 +57,7 @@
 		26B939428E35986B807F8E56 /* Pods-LeetLootTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7A1F30C730B697589D58797A /* Pods-LeetLootTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.release.xcconfig"; sourceTree = "<group>"; };
 		AB29EAA2202312D000F27A3B /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		AB2CE5532029B9BF0025DA69 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		AB310E68201DA3070085EBA8 /* Buy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buy.swift; sourceTree = "<group>"; };
 		AB3851292026F58C008D6B71 /* FilterOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptions.swift; sourceTree = "<group>"; };
 		AB3CE83220068CAA00EF3A5D /* Browse_Game+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browse_Game+Ext.swift"; sourceTree = "<group>"; };
@@ -85,7 +87,7 @@
 		BE4625282011C367005789E6 /* Twitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
 		BE46252D2011D305005789E6 /* Featured_Events_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Featured_Events_Cell.swift; sourceTree = "<group>"; };
 		BE46252F2011D544005789E6 /* Home+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home+Ext.swift"; sourceTree = "<group>"; };
-		BE4625312011DA1A005789E6 /* Home_Header_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home_Header_Cell.swift; sourceTree = "<group>"; };
+		BE4625312011DA1A005789E6 /* Header_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header_Cell.swift; sourceTree = "<group>"; };
 		BE4625332011DA4F005789E6 /* Favorites_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites_Cell.swift; sourceTree = "<group>"; };
 		BE7D2B1120170F950063BF7E /* Futura Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Futura Bold.otf"; path = "LeetLoot/Supporting Files/Futura Bold.otf"; sourceTree = SOURCE_ROOT; };
 		BED4A5F62024F1AA00D06AE1 /* Twitter_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twitter_Cell.swift; sourceTree = "<group>"; };
@@ -215,7 +217,7 @@
 				AB3CE83620068D0A00EF3A5D /* Merch_Cell.swift */,
 				BE46252D2011D305005789E6 /* Featured_Events_Cell.swift */,
 				BE4625332011DA4F005789E6 /* Favorites_Cell.swift */,
-				BE4625312011DA1A005789E6 /* Home_Header_Cell.swift */,
+				BE4625312011DA1A005789E6 /* Header_Cell.swift */,
 				ABD41D962015C45500A61C95 /* CustomNavbar.swift */,
 				AB6DA786200FF75500135CF5 /* ScrollView.swift */,
 				AB6B875C2020F5AE00C5B791 /* Parent.swift */,
@@ -238,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				AB3851292026F58C008D6B71 /* FilterOptions.swift */,
+				AB2CE5532029B9BF0025DA69 /* ReusableView.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -521,13 +524,14 @@
 				BE46252E2011D305005789E6 /* Featured_Events_Cell.swift in Sources */,
 				BE24D7381FF585C600E745E6 /* Browse.swift in Sources */,
 				AB7847C61FDDFB24008EBD70 /* AppDelegate.swift in Sources */,
+				AB2CE5542029B9BF0025DA69 /* ReusableView.swift in Sources */,
 				AB3CE83720068D0A00EF3A5D /* Merch_Cell.swift in Sources */,
 				AB7CE6411FF8901C0050125C /* General+Ext.swift in Sources */,
 				BE24D73A1FF585EC00E745E6 /* PageView.swift in Sources */,
 				AB3CE83320068CAA00EF3A5D /* Browse_Game+Ext.swift in Sources */,
 				AB406EF01FF76E9600A1FD1D /* MenuBar.swift in Sources */,
 				AB3CE83520068CC500EF3A5D /* Browse_Game.swift in Sources */,
-				BE4625322011DA1A005789E6 /* Home_Header_Cell.swift in Sources */,
+				BE4625322011DA1A005789E6 /* Header_Cell.swift in Sources */,
 				ABBC3F89201011330004C2C5 /* Constants.swift in Sources */,
 				ABA5A91520106DC9005D66D5 /* Buy_Filter.swift in Sources */,
 				AB6B875D2020F5AE00C5B791 /* Parent.swift in Sources */,
