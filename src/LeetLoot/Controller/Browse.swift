@@ -9,15 +9,46 @@
 import Foundation
 import UIKit
 
-class Browse: UIViewController {
+class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        //load custom view
+        setupCollectionView()
+        
+    }
+
+    //Sets up the custom collection view for browse
+    private func setupCollectionView(){
+        collectionView?.backgroundColor = .customGray
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+        
+        
+        
+        
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //how many cells
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
     }
+    
+    //cell itself
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
+        cell.backgroundColor = .white
+        
+        return cell
+    }
+    
+    //sizing of cells
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: 265)
+    }
+  
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return CGFloat(15)
+    }
+    
 }
