@@ -33,7 +33,6 @@ class Buy: Merch_Cell {
         
         NSLayoutConstraint.activate([
             merchImage.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 3.7/5),
-            merchTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             
             moreDetails.bottomAnchor.constraint(equalTo: buyNow.topAnchor, constant: -15),
             moreDetails.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
@@ -43,6 +42,8 @@ class Buy: Merch_Cell {
             buyNow.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             buyNow.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
         ])
+        
+        merchTitle.textContainerInset = UIEdgeInsets(top: 5, left: 10, bottom: 0, right: 0)
     
         merchTitle.attributedFor("League Of Legends Kindred New T-Shirt 3D Gaming ", price: "US $14.99", details: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis")
     }

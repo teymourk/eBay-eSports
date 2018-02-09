@@ -51,8 +51,9 @@ class Merch_Cell: ParentCell {
         merchImage.clipsToBounds = true
         merchImage.heightAnchor.constraint(equalTo: widthAnchor).isActive = true
         
-        merchTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -5).isActive = true
-        merchTitle.attributedFor("League Of Legends", price: "$414.99")
+        merchTitle.textContainerInset = UIEdgeInsets(top: 5, left: -5, bottom: 0, right: 0)
+        
+        merchTitle.attributedFor("League Of Legends Kindred New T-Shirt", price: "$14.99")
     }
     
     override func setupView() {

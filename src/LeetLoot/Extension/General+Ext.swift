@@ -34,13 +34,13 @@ extension Int {
 extension UITextView {
     //Attributed string for the title, price and rating Icon
     func attributedFor(_ title: String, price: String, details:String? = nil) {
-        guard   let textFont = UIFont(name: "Helvetica", size: 15) else { return }
+        guard   let textFont = UIFont(name: "Helvetica", size: 14) else { return }
         let attributedFont: Dictionary<NSAttributedStringKey, UIFont> = [.font :   textFont]
         
         let attributedText = NSMutableAttributedString(string: "\(title)\n", //Initialize Merch Details
             attributes: attributedFont)
-        let priceAttributedString =  NSMutableAttributedString(string: "\n\(price)\n\n", //Price
-            attributes: [.font: UIFont.boldSystemFont(ofSize: 15)])
+        let priceAttributedString =  NSMutableAttributedString(string: "\n\n\(price)\n\n", //Price
+            attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
         
         let ratingImage = NSTextAttachment()
             ratingImage.image = UIImage(named: "fiveStars") //Rating Icons
