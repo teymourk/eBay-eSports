@@ -48,17 +48,16 @@ class PageView: UIViewController {
     //Setup navigation bar
     private func setupNavBar() {
         navigationController?.navigationBar.isTranslucent = false;
-        let signIn = UIBarButtonItem(title: "Browse", style: .plain, target: self, action: #selector(onSignIn(sender: )))
+        let profilePic: UIImage = #imageLiteral(resourceName: "ProfileIcon").withRenderingMode(.alwaysOriginal)
+        let signIn = UIBarButtonItem(image: profilePic, style: .plain, target: self, action: #selector(onSignIn(sender:)))
         navigationItem.leftBarButtonItem = signIn
         navigationItem.titleView = titleView
     }
     
     @objc
     private func onSignIn(sender: UIBarButtonItem) {
-        //signIn.openMenu()
-        let layout = UICollectionViewFlowLayout()
-        let myPge = Browse_Game(collectionViewLayout: layout)
-        navigationController?.pushViewController(myPge, animated: true)
+        //Put signin here
+        
     }
     
     private func setupMenuBar() {
