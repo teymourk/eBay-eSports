@@ -19,7 +19,7 @@ class PageView: UIViewController {
     
     private let pages: [UIViewController] = {
         let home = Home(collectionViewLayout: UICollectionViewFlowLayout())
-        let browse = Browse()
+        let browse = Browse(collectionViewLayout: UICollectionViewFlowLayout())
         return [home, browse]
     }()
     

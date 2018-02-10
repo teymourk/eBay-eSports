@@ -9,15 +9,34 @@
 import Foundation
 import UIKit
 
-class Browse: UIViewController {
+class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    private let cellId = "cellId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        //collectionView?.contentInsetAdjustmentBehavior = .never
+        collectionView?.backgroundColor = .customGray
+        collectionView?.register(BrowseCell.self, forCellWithReuseIdentifier: cellId)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BrowseCell
+        return cell
+    }
+    
+    //num cells
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    //sizing of cells
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: 265)
+    }
+    
+    //adjust line spacing between cells
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return CGFloat(15)
     }
 }
