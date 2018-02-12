@@ -26,6 +26,7 @@
 		AB7847D01FDDFB24008EBD70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB7847CE1FDDFB24008EBD70 /* LaunchScreen.storyboard */; };
 		AB7847DB1FDDFB24008EBD70 /* LeetLootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847DA1FDDFB24008EBD70 /* LeetLootTests.swift */; };
 		AB7CE6411FF8901C0050125C /* General+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7CE6401FF8901C0050125C /* General+Ext.swift */; };
+		AB94227D20316175002E7311 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB94227C20316174002E7311 /* Networking.swift */; };
 		ABA5A91520106DC9005D66D5 /* Buy_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA5A91420106DC9005D66D5 /* Buy_Filter.swift */; };
 		ABBC3F89201011330004C2C5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBC3F88201011320004C2C5 /* Constants.swift */; };
 		ABD41D972015C45500A61C95 /* CustomNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD41D962015C45500A61C95 /* CustomNavbar.swift */; };
@@ -81,6 +82,7 @@
 		AB7847DA1FDDFB24008EBD70 /* LeetLootTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetLootTests.swift; sourceTree = "<group>"; };
 		AB7847DC1FDDFB24008EBD70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB7CE6401FF8901C0050125C /* General+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "General+Ext.swift"; sourceTree = "<group>"; };
+		AB94227C20316174002E7311 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		ABA5A91420106DC9005D66D5 /* Buy_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buy_Filter.swift; sourceTree = "<group>"; };
 		ABBC3F88201011320004C2C5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ABD41D962015C45500A61C95 /* CustomNavbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavbar.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 			children = (
 				AB3851292026F58C008D6B71 /* FilterOptions.swift */,
 				AB2CE5532029B9BF0025DA69 /* ReusableView.swift */,
+				AB94227C20316174002E7311 /* Networking.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -412,25 +415,18 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LeetLoot/Pods-LeetLoot-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseFacebookAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebasePhoneAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseTwitterAuthUI.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseTwitterAuthUI.bundle,
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseFacebookAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseGoogleAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebasePhoneAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseTwitterAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterShareExtensionUIResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -555,6 +551,7 @@
 				ABA5A91520106DC9005D66D5 /* Buy_Filter.swift in Sources */,
 				AB6B875D2020F5AE00C5B791 /* Parent.swift in Sources */,
 				BED4A5F72024F1AA00D06AE1 /* Twitter_Cell.swift in Sources */,
+				AB94227D20316175002E7311 /* Networking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
