@@ -10,6 +10,14 @@ import UIKit
 
 class Merch_Cell: ParentCell {
     
+    internal var item: itemSummaries? {
+        didSet {
+            let title = item?.title ?? ""
+            
+            merchTitle.attributedFor(title, price: "US $14.99")
+        }
+    }
+    
     let merchImage = { () -> UIImageView in
         let image = UIImageView(image: #imageLiteral(resourceName: "testImg"))
             image.contentMode = .scaleAspectFit
@@ -26,7 +34,7 @@ class Merch_Cell: ParentCell {
         return textView
     }()
     
-    lazy var stackView: UIStackView = {
+    lazy private var stackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [merchImage, merchTitle])
             stack.axis = .vertical
             stack.translatesAutoresizingMaskIntoConstraints = false
@@ -52,8 +60,6 @@ class Merch_Cell: ParentCell {
         merchImage.heightAnchor.constraint(equalTo: widthAnchor).isActive = true
         
         merchTitle.textContainerInset = UIEdgeInsets(top: 5, left: -5, bottom: 0, right: 0)
-        
-        merchTitle.attributedFor("League Of Legends Kindred New T-Shirt", price: "$14.99")
     }
     
     override func setupView() {

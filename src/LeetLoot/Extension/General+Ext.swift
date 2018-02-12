@@ -34,10 +34,11 @@ extension Int {
 extension UITextView {
     //Attributed string for the title, price and rating Icon
     func attributedFor(_ title: String, price: String, details:String? = nil) {
+        
         guard   let textFont = UIFont(name: "Helvetica", size: 14) else { return }
         let attributedFont: Dictionary<NSAttributedStringKey, UIFont> = [.font :   textFont]
         
-        let attributedText = NSMutableAttributedString(string: "\(title)\n", //Initialize Merch Details
+        let attributedText = NSMutableAttributedString(string: "\(title[0...30].appending("..."))\n", //Initialize Merch Details
             attributes: attributedFont)
         let priceAttributedString =  NSMutableAttributedString(string: "\n\n\(price)\n\n", //Price
             attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
@@ -70,6 +71,15 @@ extension UIButton {
         setImage(image, for: .normal)
         setTitleColor(.darkText , for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
+    }
+}
+
+//Mark: - String {
+extension String {
+    subscript (r: CountableClosedRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: r.lowerBound)
+        let end = index(startIndex, offsetBy: r.upperBound)
+        return String(self[Range(start ..< end)])
     }
 }
 

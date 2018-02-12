@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol BrowseAPI: Networking where Model == Merchendise {
-    func searchByKeyWord(Key: String, completion: @escaping ([Merchendise]?) ->())
+protocol BrowseAPI: Networking where Model == Root {
+    func searchByKeyWord(Key: String, completion: @escaping ([Root]?) ->())
 }
 
 extension BrowseAPI {
-    func searchByKeyWord(Key: String, completion: @escaping ([Merchendise]?) ->()) {
-        guard let url = URL(string: "https://api.ebay.com/buy/browse/v1/item_summary/search?q=D\(Key)+2&price=10&limit=5") else { return }
-        var merchendise:[Merchendise]? = [Merchendise]()
+    func searchByKeyWord(Key: String, completion: @escaping ([Root]?) ->()) {
+        guard let url = URL(string: "https://api.ebay.com/buy/browse/v1/item_summary/search?q=\(Key)&price=10&limit=5") else { return }
+        var merchendise:[Root]? = [Root]()
         requestData(forUrl: url) { (_response, _merchendise) in
             switch _response {
             case let .error(errorDesctiption):
@@ -24,6 +24,7 @@ extension BrowseAPI {
             case let .success(successDesctiption):
                 guard let merchObj = _merchendise else { return }
                 merchendise?.append(merchObj)
+                print(merchObj)
                 DispatchQueue.main.async {
                     completion(merchendise)
                     print(successDesctiption)

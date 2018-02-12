@@ -9,10 +9,16 @@
 import UIKit
 
 
-struct Merchendise:Decodable, BrowseAPI {
-    typealias Model = Merchendise
+struct Root:Decodable, BrowseAPI {
+    typealias Model = Root
     
     var total: Int?
-
+    var itemSummaries: [itemSummaries]?
 }
 
+struct itemSummaries:Decodable {
+    var itemId: String?
+    var title: String?
+    var itemWebUrl: String?
+    var condition: String?
+}

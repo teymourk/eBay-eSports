@@ -10,6 +10,12 @@ import UIKit
 
 class Browse_Game: UICollectionViewController {
     
+    fileprivate var root: [Root]? {
+        didSet {
+            collectionView?.reloadData()
+        }
+    }
+    
     lazy var menuBar = { () -> Menu in
         let view = Menu(isMenu: false)
             view.delegate = self
@@ -26,6 +32,12 @@ class Browse_Game: UICollectionViewController {
         setupCollectionView()
         setupMenuBar()
         setupNavBar()
+        requestDataFromAPI()
+    }
+    
+    private func requestDataFromAPI() {
+        let root = Root()
+            root.searchByKeyWord(Key: "League+of+legends", completion: { self.root = $0 })
     }
     
     private func setupCollectionView() {
@@ -56,11 +68,12 @@ class Browse_Game: UICollectionViewController {
 // Mark: - UICollectionViewDelegate
 extension Browse_Game {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return root?.first?.itemSummaries?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: Merch_Cell = collectionView.reusableCell(indexPath: indexPath)
+            cell.item = root?.first?.itemSummaries?[indexPath.row]
         return cell
     }
     
