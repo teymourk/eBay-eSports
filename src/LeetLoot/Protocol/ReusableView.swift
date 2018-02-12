@@ -20,11 +20,14 @@ extension ReusableView where Self: UIView {
 
 extension UICollectionView {
     func registerCell<T: ParentCell>(_ cell: T.Type, isHeader:Bool? = nil) {
-        isHeader == nil ?   register(cell,
-                                     forCellWithReuseIdentifier: T.identifier) :
-                            register(cell,
-                                     forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
-                                     withReuseIdentifier: T.identifier)
+        if isHeader != nil {
+            register(cell,
+                    forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                    withReuseIdentifier: T.identifier)
+            return
+        }
+        register(cell,
+                 forCellWithReuseIdentifier: T.identifier)
     }
     
     func reusableCell<T: ParentCell>(indexPath: IndexPath, kind: String? = nil ) -> T {
