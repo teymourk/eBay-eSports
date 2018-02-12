@@ -31,10 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         
-        //UINavigationShadow
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        
         //Connect to the Twitter API
         TWTRTwitter.sharedInstance().start(withConsumerKey:"9BnvFFtOYulbdyXkUCGhgBbgY", consumerSecret:"b8AjQP6QWCP1gnRb5jfL7LP8wWFurpSLxfSgbEM67XrwztyfrS")
         
