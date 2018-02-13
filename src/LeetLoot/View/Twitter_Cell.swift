@@ -18,8 +18,12 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+        return button;
     }()
+    
+    func buttonAction(sender: UIButton!) {
+        print("Button tapped")
+    }
     
     lazy var tweetView:TWTRTweetView = {
         let tweetView = TWTRTweetView()

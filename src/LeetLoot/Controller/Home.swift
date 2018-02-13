@@ -46,5 +46,11 @@ class Home: UICollectionViewController, FUIAuthDelegate {
         collectionView?.delegate = self
         collectionView?.dataSource = self
     }
+    
+    func showTwitterTimeline() {
+        let twitterTimeline = Twitter_Timeline()
+        self.navigationController?.pushViewController(twitterTimeline, animated: true)
+    }
+    
 }
 

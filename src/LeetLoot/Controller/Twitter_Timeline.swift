@@ -9,7 +9,7 @@
 import UIKit
 import TwitterKit
 
-class ViewController: TWTRTimelineViewController {
+class Twitter_Timeline: TWTRTimelineViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
