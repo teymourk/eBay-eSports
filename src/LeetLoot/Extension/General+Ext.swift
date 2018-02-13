@@ -33,28 +33,36 @@ extension Int {
 //Mark: - UITextField
 extension UITextView {
     //Attributed string for the title, price and rating Icon
-    func attributedFor(_ title: String, price: String, details:String? = nil) {
+    func attributedFor(_ title: String, condition: String, price: String, shipping: String, details:String? = nil) {
         
         guard   let textFont = UIFont(name: "Helvetica", size: 14) else { return }
         let attributedFont: Dictionary<NSAttributedStringKey, UIFont> = [.font :   textFont]
+        let customText = title[0...30].appending("...")
         
-        let attributedText = NSMutableAttributedString(string: "\(title[0...30].appending("..."))\n", //Initialize Merch Details
-            attributes: attributedFont)
-        let priceAttributedString =  NSMutableAttributedString(string: "\n\n\(price)\n\n", //Price
-            attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString( string: "\(customText)\n", //Initialize Merch Details
+                                                        attributes: attributedFont)
         
-        let ratingImage = NSTextAttachment()
-            ratingImage.image = UIImage(named: "fiveStars") //Rating Icons
-        let ratingAttributedString = NSAttributedString(attachment: ratingImage)
+        let conditionAttributedString = NSMutableAttributedString(  string: "\(condition)\n\n", //Item Condition
+                                                                    attributes: [.font: UIFont.systemFont(ofSize: 13),
+                                                                                .foregroundColor: UIColor.lightGray])
+        
+        let priceAttributedString =  NSMutableAttributedString( string: "\(price)\n", //Price
+                                                                attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
+        
+        let shippingAttributedString = NSMutableAttributedString(  string: "\(shipping)\n\n", //Item Condition
+                                                                   attributes: [.font: UIFont.systemFont(ofSize: 13),
+                                                                                .foregroundColor: UIColor.lightGray])
         
         //Appending the attributes
-        attributedText.append(ratingAttributedString)
+        attributedText.append(conditionAttributedString)
         attributedText.append(priceAttributedString)
+        attributedText.append(shippingAttributedString)
         self.attributedText = attributedText
+
         
         guard   let itemDetail = details else { return }
-                let attributedDetailsText = NSMutableAttributedString(string: itemDetail, //Initialize Merch Details
-            attributes: attributedFont)
+        let attributedDetailsText = NSMutableAttributedString(  string: itemDetail, //Initialize Merch Details
+                                                                attributes: attributedFont)
         
         attributedText.append(attributedDetailsText)
         self.attributedText = attributedText
