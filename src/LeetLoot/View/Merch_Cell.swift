@@ -10,16 +10,15 @@ import UIKit
 
 class Merch_Cell: ParentCell {
     
-    internal var item: itemSummaries? {
+    internal var items: itemSummaries? {
         didSet {
-            let title = item?.title ?? ""
-            
-            merchTitle.attributedFor(title, price: "US $14.99")
+            guard let item = items else { return }
+            configureCellFor(item)
         }
     }
     
     let merchImage = { () -> UIImageView in
-        let image = UIImageView(image: #imageLiteral(resourceName: "testImg"))
+        let image = UIImageView(image: #imageLiteral(resourceName: "eBay"))
             image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -40,7 +39,17 @@ class Merch_Cell: ParentCell {
             stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    
+
+    private func configureCellFor(_ items: itemSummaries) {
+        let title = items.title ?? ""
+        let condition = items.condition ?? ""
+        let price = items.price?.value ?? "0.0"
+        let currency = items.price?.currency ?? "USD"
+        let imgUrl = items.thumbnailImages?.first?.imageUrl ?? ""
+        merchTitle.attributedFor(title, price: "\(currency) $\(price)", condition: condition)
+        merchImage.loadImages(url: imgUrl)
+    }
+
     private func setupStackView() {
         addSubview(stackView)
         
@@ -65,5 +74,21 @@ class Merch_Cell: ParentCell {
     override func setupView() {
         setupStackView()
         setupLayoutAttributes()
+    }
+}
+
+
+extension UIImageView {
+    func loadImages(url: String) {
+        
+        if let url = URL(string: url) {
+            URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+                guard error == nil else { return }
+                DispatchQueue.main.async {
+                    self.image = UIImage(data: data!)
+                }
+            }.resume()
+        }
     }
 }

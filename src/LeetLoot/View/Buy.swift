@@ -45,6 +45,6 @@ class Buy: Merch_Cell {
         
         merchTitle.textContainerInset = UIEdgeInsets(top: 5, left: 10, bottom: 0, right: 0)
     
-        merchTitle.attributedFor("League Of Legends Kindred New T-Shirt 3D Gaming ", price: "US $14.99", details: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis")
+        merchTitle.attributedFor("League Of Legends Kindred New T-Shirt 3D Gaming ", price: "US $14.99", condition: "New", details: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis")
     }
 }

@@ -12,7 +12,9 @@ class Browse_Game: UICollectionViewController {
     
     fileprivate var root: [Root]? {
         didSet {
-            collectionView?.reloadData()
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+            }
         }
     }
     
@@ -37,7 +39,7 @@ class Browse_Game: UICollectionViewController {
     
     private func requestDataFromAPI() {
         let root = Root()
-            root.searchByKeyWord(Key: "League+of+legends", completion: { self.root = $0 })
+            root.searchByKeyWord(Key: "phone", completion: { self.root = $0 })
     }
     
     private func setupCollectionView() {
@@ -59,7 +61,6 @@ class Browse_Game: UICollectionViewController {
     
     //Setup navigation bar
     private func setupNavBar() {
-        navigationController?.navigationBar.isTranslucent = false;
         let likes = UIBarButtonItem(image: UIImage(named: "Path"), style: .plain, target: self, action: nil)
         navigationItem.rightBarButtonItem = likes
     }
@@ -73,7 +74,7 @@ extension Browse_Game {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: Merch_Cell = collectionView.reusableCell(indexPath: indexPath)
-            cell.item = root?.first?.itemSummaries?[indexPath.row]
+            cell.items = root?.first?.itemSummaries?[indexPath.row]
         return cell
     }
     
@@ -85,7 +86,7 @@ extension Browse_Game {
 // Mark: - UICollectionViewDelegateFlowLayout
 extension Browse_Game: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = Constants.kWidth * (1/2) - 30
+        let width = Constants.kWidth * (1/2) - 25
         return CGSize(width: width,
                       height: width * 1.6) //Height Based on Text
     }
@@ -95,9 +96,9 @@ extension Browse_Game: UICollectionViewDelegateFlowLayout {
         let height = menuBar.frame.height + 20
         collectionView.scrollIndicatorInsets.top = height
         return UIEdgeInsets(top: height,
-                            left: 20,
+                            left: 15,
                             bottom: 0,
-                            right: 20)
+                            right: 15)
     }
 }
 
