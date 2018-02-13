@@ -14,15 +14,16 @@ enum RequestRespnse: Error {
 }
 
 protocol Networking {
-    associatedtype Model:Decodable
+    associatedtype Model: Codable
     func requestData(forUrl url: URL, completion: @escaping (RequestRespnse, Model?) -> ())
     func decode(data: Data) -> Model?
 }
 
 extension Networking {
     private var token: String {
-        return "v^1.1#i^1#p^1#f^0#r^0#I^3#t^H4sIAAAAAAAAAOVXa2wUVRTu9hmklRjlIVazTCEGZGbvzO7O7o7smqWFtFBoYbcEyqPenbnTjp2d2cy9a1mjsTaCEDCBmDRRg21MNJKIwgpGYzQoiS8UGpTEEA3+wZCi+AMChpfemd2WbSU8i5A4fyZz7rnnft93zj13LuguHzdrff36s1WuiuL+btBd7HLx48G48rLH7i0pnlpWBAocXP3d07tLe0qOz8EwqaekpQinTAMj99qkbmDJMYaZtGVIJsQalgyYRFgishSLLmqUBA5IKcskpmzqjLuhLswEggkeCgjQlwBDfpFajaGYcTPMKLwv4EeyLIYSohr0++g4xmnUYGACDRJmBMAHWSCwvBAHoiT4JS/PBXihlXEvQxbWTIO6cICJOHAlZ65VgPXqUCHGyCI0CBNpiM6PNUUb6uYtjs/xFMSK5HWIEUjSeORXrakg9zKop9HVl8GOtxRLyzLCmPFEciuMDCpFh8DcBHxH6hCUBSHAA9EvKGIioI6JlPNNKwnJ1XHYFk1hVcdVQgbRSOZailI1Ek8hmeS/FtMQDXVu+7UkDXVN1ZAVZubNja6INjczkYUatCDuiLONCJFG0yRs89I6NsB7fSioBgRWEWSvGEyI+YVy0fIyj1qp1jQUzRYNuxebZC6iqNFobfgCbahTk9FkRVViIyr0Cw5pCHytdlJzWUyTDsPOK0pSIdzO57UzMDybEEtLpAkajjB6wJEozMBUSlOY0YNOLebLZy0OMx2EpCSPp6uri+vycqbV7hEA4D3LFzXG5A6UhAz1tfd6zl+79gRWc6jIiM7EmkQyKYplLa1VCsBoZyKC6Pd6/XndR8KKjLb+y1DA2TNyR4zVDoGy1++TVdknJECIF8ak2UTyReqxcaAEzLBJaHUiktKhjFiZ1lk6iSxNkbx+VfAGVcQqYkhlfSFVZRN+RWR5FSGAUCIhh4L/p41yvaUek80UajZ1Tc6MScGPWbF7LaUZWiQTQ7pODddb9VckiW2St52evddviKIdA9MgMKVxdm1zspn0mJA2NdvU5qC+Jd4aPQ/vqqRSgjmmmpI7yDiHLoefljkLYTNt0TOca7L7etzsRAbdJcQydR1Zy/hbUmLsOvod6uZXZCXrGpWx7W5jdoNt8iZrG5I7yLq0x7XyCsx5Px/08WLAe2vVWuvkNZ75D5rWDSW23sQEKbfhB8Qz8joUKXIevse1B/S4dtEbFfCAGXwNmFZe0lJaUjkVawRxGlQ5rLUb9C/fQlwnyqSgZhWXu1ZW79zeVnAB618NpgxfwcaV8OML7mOg+vJIGT9hchUfBAIvAFHwe/lWUHN5tJSfVPrA7v1/ZtWHohsmdx6+8M1HLFy9s+h5UDXs5HKVFdHKKJqx4OilRdsu6G/9dJK8OfHI4Re/ilZ8lq5/bs2M9ODF6OOnl7T8cWng8L5TMwfXnH7iu+JNEwNbP1lfMWnvI7UHvo8caM8uZYjgfq8tNC3sem1gzdSX90UHzyx/EH97aveP4qwT2449+mT4pf0wW5sNTTu0dx33dvWmeyqNzCHjzOtTftni+3vVr/d1ZI+eZTsern+j71S0a+NeT4U8s298c1NLzQu971b29vUOfLDiZ+5g/HzlyUw1+m2wZfOGhRufnbAD/XXyh/Nfz9738YILe5o+3HLii893lM1et2v7xXdeWRdOtf7e+yoZyBp7vmzJHuve/P5+7fjF1q2XPp10f6L83O5VFdPPPeM7ODMsHMml7x9jjz/3Gg8AAA=="
+        return"v^1.1#i^1#f^0#p^1#r^0#I^3#t^H4sIAAAAAAAAAOVXW2wUVRjutts2hJtBBEIKWQaFcJnZMzM7exnYNUsLsljahV1qWyBkduZMO3Z3ZpxzlnYFkqYJrQkPYBOioggoqLUQUIMXAn0w8CD6ICTyIODlhYuJEYzEhJjomdmlbCvhWoTEfdnMf/7zn+/7/v8/F9BZMWpu99LuP8e6Kkt3d4LOUpeLHQ1GVZTPG1dWOrW8BBQ5uHZ3Pt3p7iq7tBBJmbQproTINHQEPR2ZtI5ExximspYuGhLSkKhLGYhELIuJ6PJakWOAaFoGNmQjTXliNWHKHwhJPjXlExRfKKQGJGLVb8RMGmEKqpziD0KWZYMgEAopZByhLIzpCEs6DlMcYIM04GiWT3KcyAqiwDNBLthMeRqghTRDJy4MoCIOXNGZaxVhvT1UCSFoYRKEisSiSxL10VjN4rrkQm9RrEhBhwSWcBYN/ao2FOhpkNJZePtlkOMtJrKyDBGivJH8CkODitEbYO4DviN1EAYCii/FBQGnSlAYGSmXGFZGwrfHYVs0hVYdVxHqWMO5OylK1Ei9CGVc+KojIWI1HvtvRVZKa6oGrTC1eFG0KRqPU5HnNcmSUGuSroUQ1xoGpuMra+gAy/tgUA1wtMLJvD+Y8hcWykcryDxspWpDVzRbNOSpM/AiSFDD4dqAIm2IU71eb0VVbCMa9PMlARjUkG22k5rPYha36nZeYYYI4XE+75yBwdkYW1oqi+FghOEDjkRhSjJNTaGGDzq1WCifDhSmWjE2Ra+3vb2daecZw2rxcgCw3sbltQm5FWZIM3Zk7F7P+2t3nkBrDhUZkplIE3HOJFg6SK0SAHoLFeH8As8LBd2HwooMt/7LUMTZO7QjRqpDfDzHKT6Bk1kpJQgcOxIdEikUqdfGAVNSjs5IVhvEZlqSIS2TOstmoKUpIi+oHB9UIa34QyrtC6kqnRIUP82qEAIIUyk5FPw/NcrdlnpCNkwYN9KanBuRgh+xYuctJS5ZOJeA6TQx3G3V35Ikskk+dHp2r98TRTsGIkEkU2Ps2mZkI+M1JLKp2aZ1DuoH4q2R8/CxSiohmGeqKfmDjHHoMmi9zFgQGVmLnOFMvb2vJ402qJMuwZaRTkOrgX0gJUZuR39Eu/ktWclpjci47nFjdo/b5H3WtoQfIWt3l2v1LZizAhsU/IAV+AfiVu3kNZn7Dzate0rsUgNhqDyEC4h36HMoUuL82C7XYdDl+oi8qIAXPMPOBDMqyla5y8ZMRRqGjCapDNJadHLLtyDTBnOmpFmlFa7VVYf61hU9wHavBVMGn2CjytjRRe8xUHVzpJwdP3kseShxLLnIsILAN4OZN0fd7CT3xIELO55bvuroyX518/HPGre4rp167S0wdtDJ5SovIZVRsvfq1jH9m7rdR+OzK5PTL72xtWfb+omHfoDyU+jqX2vKTpsTl1Xt/Ny9/fvzvxkn3n1njmvl+ZYLtccm6VdmTaiaMqXjvaa+J5mLa1IfX//6XE/zGUH9pneCa+Ph/Qc3XYErTs0YqN6MrjRNPnzs8oa92/p6fwk0bJGzz549MO7orJd753x1be7Uk0/MPDL+0gJzOt3/3bzXz0VSVzec+aNn39xru5Z98OOEZUt9+1H1gf298z85vuX4wJzqnT8dWPvpEX+PsPHE2y8lT7f19p08tWagKf776aa/S6/PutzYXln388GB2Fnw5YfZ/vmV0xrHvfrKDt8Xey7zszMXfy3ppmsW7NoTe3Pa+9F9Lyz2fJtP3z/soAxeGg8AAA=="
     }
+    
     func requestData(forUrl url: URL, completion: @escaping (RequestRespnse, Model?) -> ()) {
         
         let authString = "Bearer \(token)"
@@ -44,7 +45,7 @@ extension Networking {
         do {
             return try JSONDecoder().decode(Model.self, from: data)
         } catch let error {
-            print("Error Decoding \(error.localizedDescription)")
+            print("Error Decoding: \(error.localizedDescription)")
             return nil
         }
     }

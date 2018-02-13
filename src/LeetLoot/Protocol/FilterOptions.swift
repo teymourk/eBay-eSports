@@ -39,8 +39,10 @@ struct Type: FilterOptions {
     
     var sectionTitle: String { return "Filter by" }
     
-    enum option: EnumTitles {
-        case All, Toys, Clothing
+    enum option: String, Codable, EnumTitles {
+        case All = ""
+        case Toys = "220"
+        case Clothing = "1059"
     }
 }
 

@@ -9,12 +9,23 @@
 import UIKit
 
 protocol BrowseAPI: Networking where Model == Root {
-    func searchByKeyWord(Key: String, completion: @escaping ([Root]?) ->())
+    var keyWord: String? { get set }
+    var groupingBy: Type.option? { get set }
+    func searchByKeyWord(_ completion: @escaping ([Root]?) ->())
 }
 
 extension BrowseAPI {
-    func searchByKeyWord(Key: String, completion: @escaping ([Root]?) ->()) {
-        guard let url = URL(string: "https://api.ebay.com/buy/browse/v1/item_summary/search?q=\(Key)&price=10&limit=5") else { return }
+    private var endPoint: URL? {
+        let baseUrl = "https://api.ebay.com/buy/browse/v1/item_summary/search?"
+        let query = "q=\(keyWord ?? "")&"
+        let groupBy = "category_ids=\(groupingBy?.rawValue ?? "")&"
+        let limit = "limit=30"
+        return URL(string: baseUrl + query + groupBy + limit)
+    }
+    
+    func searchByKeyWord(_ completion: @escaping ([Root]?) ->()) {
+        guard let url = endPoint else { return }
+        print(url)
         var merchendise:[Root]? = [Root]()
         requestData(forUrl: url) { (_response, _merchendise) in
             switch _response {
@@ -24,7 +35,6 @@ extension BrowseAPI {
             case let .success(successDesctiption):
                 guard let merchObj = _merchendise else { return }
                 merchendise?.append(merchObj)
-                print(merchObj)
                 DispatchQueue.main.async {
                     completion(merchendise)
                     print(successDesctiption)
@@ -33,3 +43,7 @@ extension BrowseAPI {
         }
     }
 }
+
+//Group ID
+//220 Toys
+//1059 T-shirts
