@@ -41,13 +41,19 @@ class Merch_Cell: ParentCell {
     }()
 
     private func configureCellFor(_ items: itemSummaries) {
-        let title = items.title ?? ""
-        let condition = items.condition ?? ""
-        let price = items.price?.value ?? "0.0"
-        let currency = items.price?.currency ?? "USD"
-        let imgUrl = items.thumbnailImages?.first?.imageUrl ?? ""
-        merchTitle.attributedFor(title, price: "\(currency) $\(price)", condition: condition)
-        merchImage.loadImages(url: imgUrl)
+        let price = items.price,
+            thumbnail = items.thumbnailImages?.first,
+            shipping = items.shippingOptions?.first
+
+        let title = items.title ?? "",
+            itemCondition = items.condition == "New" ? "Brand New" : "Pre-Owned",
+        	itemPrice = price?.value ?? "0.0",
+            currency = price?.currency ?? "USD",
+            thubmnailImgUrl = thumbnail?.imageUrl ?? "",
+            itemShipping = shipping?.shippingCostType == "CALCULATED" ? "+ Shipping" : "Free Shipping"
+
+        merchTitle.attributedFor(title, condition: itemCondition, price: "\(currency) $\(itemPrice)", shipping: itemShipping)
+        merchImage.loadImages(url: thubmnailImgUrl)
     }
 
     private func setupStackView() {

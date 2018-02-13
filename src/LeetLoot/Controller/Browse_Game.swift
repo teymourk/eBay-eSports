@@ -38,8 +38,8 @@ class Browse_Game: UICollectionViewController {
     }
     
     private func requestDataFromAPI() {
-        let root = Root()
-            root.searchByKeyWord(Key: "phone", completion: { self.root = $0 })
+        let root = Root(queryKey: "Leagues+of+legends", groupBy: .Toys)
+            root.searchByKeyWord({ self.root = $0 })
     }
     
     private func setupCollectionView() {
@@ -86,7 +86,7 @@ extension Browse_Game {
 // Mark: - UICollectionViewDelegateFlowLayout
 extension Browse_Game: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = Constants.kWidth * (1/2) - 25
+        let width = Constants.kWidth * (1/2) - 15
         return CGSize(width: width,
                       height: width * 1.6) //Height Based on Text
     }
@@ -96,9 +96,9 @@ extension Browse_Game: UICollectionViewDelegateFlowLayout {
         let height = menuBar.frame.height + 20
         collectionView.scrollIndicatorInsets.top = height
         return UIEdgeInsets(top: height,
-                            left: 15,
+                            left: 10,
                             bottom: 0,
-                            right: 15)
+                            right: 10)
     }
 }
 
