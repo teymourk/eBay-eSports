@@ -11,6 +11,16 @@ import TwitterKit
 
 class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
     
+    private lazy var twitterTimeline: UIButton = {
+        let button = UIButton()
+        button.setTitle("See more Tweets >", for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     lazy var tweetView:TWTRTweetView = {
         let tweetView = TWTRTweetView()
         tweetView.translatesAutoresizingMaskIntoConstraints = false;
@@ -29,12 +39,20 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
     }
     
     override func setupView() {
-        addSubview(tweetView);
+        addSubview(tweetView)
+        addSubview(twitterTimeline)
+        
         backgroundColor = .white
         NSLayoutConstraint.activate([
-            tweetView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            tweetView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            tweetView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
+    
+            tweetView.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            tweetView.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
+            tweetView.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            tweetView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -45),
+            
+            twitterTimeline.topAnchor.constraint(equalTo: tweetView.bottomAnchor, constant: 15),
+            twitterTimeline.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            twitterTimeline.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
         ])
         
         // Swift

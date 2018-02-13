@@ -39,6 +39,7 @@
 		BE4625322011DA1A005789E6 /* Header_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625312011DA1A005789E6 /* Header_Cell.swift */; };
 		BE4625342011DA4F005789E6 /* Favorites_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625332011DA4F005789E6 /* Favorites_Cell.swift */; };
 		BE7D2B1220170F950063BF7E /* Futura Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BE7D2B1120170F950063BF7E /* Futura Bold.otf */; };
+		BEBE73482032247400032325 /* Twitter_Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE73472032247400032325 /* Twitter_Timeline.swift */; };
 		BED4A5F72024F1AA00D06AE1 /* Twitter_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4A5F62024F1AA00D06AE1 /* Twitter_Cell.swift */; };
 		E86A6F231FEC81C6003188BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E86A6F221FEC81C5003188BB /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -94,6 +95,7 @@
 		BE4625312011DA1A005789E6 /* Header_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header_Cell.swift; sourceTree = "<group>"; };
 		BE4625332011DA4F005789E6 /* Favorites_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites_Cell.swift; sourceTree = "<group>"; };
 		BE7D2B1120170F950063BF7E /* Futura Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Futura Bold.otf"; path = "LeetLoot/Supporting Files/Futura Bold.otf"; sourceTree = SOURCE_ROOT; };
+		BEBE73472032247400032325 /* Twitter_Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twitter_Timeline.swift; sourceTree = "<group>"; };
 		BED4A5F62024F1AA00D06AE1 /* Twitter_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twitter_Cell.swift; sourceTree = "<group>"; };
 		E86A6F221FEC81C5003188BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,6 +198,7 @@
 				BE24D7371FF585C600E745E6 /* Browse.swift */,
 				BE24D7391FF585EC00E745E6 /* PageView.swift */,
 				AB3CE83420068CC500EF3A5D /* Browse_Game.swift */,
+				BEBE73472032247400032325 /* Twitter_Timeline.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				ABD41D972015C45500A61C95 /* CustomNavbar.swift in Sources */,
 				AB6DA787200FF75500135CF5 /* ScrollView.swift in Sources */,
 				AB7847C81FDDFB24008EBD70 /* Home.swift in Sources */,
+				BEBE73482032247400032325 /* Twitter_Timeline.swift in Sources */,
 				AB29EAA3202312D000F27A3B /* Filter.swift in Sources */,
 				BE46252E2011D305005789E6 /* Featured_Events_Cell.swift in Sources */,
 				BE24D7381FF585C600E745E6 /* Browse.swift in Sources */,
