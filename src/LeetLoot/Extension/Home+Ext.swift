@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 //Mark: - CollectionViewDelegate + DataSource + DelegateFlowLayout
-extension Home: UICollectionViewDelegateFlowLayout {
+extension Home: UICollectionViewDelegateFlowLayout, TwitterDelegate {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -25,11 +25,16 @@ extension Home: UICollectionViewDelegateFlowLayout {
         let featuredEventsCell: Featured_Events_Cell = collectionView.reusableCell(indexPath: indexPath)
         let twitterCell: Twitter_Cell = collectionView.reusableCell(indexPath: indexPath)
         let favoritesCell: Favorites_Cell = collectionView.reusableCell(indexPath: indexPath)
-        
+        twitterCell.delegate = self
         if indexPath.section == 0 {
             return indexPath.row == 0 ? featuredEventsCell : twitterCell
         }
         return favoritesCell
+    }
+    
+    func showTwitterTimeline() {
+        let twitterTimeline = Twitter_Timeline()
+        self.navigationController?.pushViewController(twitterTimeline, animated: true)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

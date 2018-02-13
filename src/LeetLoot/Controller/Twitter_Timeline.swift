@@ -13,7 +13,7 @@ class Twitter_Timeline: TWTRTimelineViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.dataSource = TWTRUserTimelineDataSource(screenName: "blizzard_ent", apiClient: TWTRAPIClient())
+        title = "Overwatch League"
+        self.dataSource = TWTRUserTimelineDataSource(screenName: "overwatchleague", apiClient: TWTRAPIClient())
     }
 }

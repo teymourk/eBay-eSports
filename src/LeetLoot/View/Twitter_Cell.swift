@@ -9,9 +9,13 @@
 import Foundation
 import TwitterKit
 
+protocol TwitterDelegate: class {
+    func showTwitterTimeline()
+}
+
 class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
     
-    private lazy var twitterTimeline: UIButton = {
+    private lazy var timelineButton: UIButton = {
         let button = UIButton()
         button.setTitle("See more Tweets >", for: .normal)
         button.contentHorizontalAlignment = .left
@@ -20,10 +24,6 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
         button.translatesAutoresizingMaskIntoConstraints = false
         return button;
     }()
-    
-    func buttonAction(sender: UIButton!) {
-        print("Button tapped")
-    }
     
     lazy var tweetView:TWTRTweetView = {
         let tweetView = TWTRTweetView()
@@ -44,7 +44,9 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
     
     override func setupView() {
         addSubview(tweetView)
-        addSubview(twitterTimeline)
+        addSubview(timelineButton)
+        
+        timelineButton.addTarget(self, action: #selector(displayTimeline), for: .touchUpInside)
         
         backgroundColor = .white
         NSLayoutConstraint.activate([
@@ -54,9 +56,9 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
             tweetView.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             tweetView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -45),
             
-            twitterTimeline.topAnchor.constraint(equalTo: tweetView.bottomAnchor, constant: 15),
-            twitterTimeline.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
-            twitterTimeline.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+            timelineButton.topAnchor.constraint(equalTo: tweetView.bottomAnchor, constant: 15),
+            timelineButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            timelineButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
         ])
         
         // Swift
@@ -68,6 +70,14 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
             } else {
                 print("Failed to load Tweet: \(error?.localizedDescription)")
             }
+        }
+    }
+    
+    weak var delegate:TwitterDelegate?
+    
+    @objc func displayTimeline() {
+        if let del = self.delegate {
+            del.showTwitterTimeline()
         }
     }
     
