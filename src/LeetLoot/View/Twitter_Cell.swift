@@ -17,7 +17,7 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
     
     private lazy var timelineButton: UIButton = {
         let button = UIButton()
-        button.setTitle("See more Tweets >", for: .normal)
+        button.setTitle("See more Tweets", for: .normal)
         button.contentHorizontalAlignment = .left
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
