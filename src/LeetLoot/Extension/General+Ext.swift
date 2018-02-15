@@ -46,12 +46,8 @@ extension UITextView {
         let priceAttributedString =  NSMutableAttributedString( string: "\(price)\n", //Price
                                                                 attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
         
-        let shippingAttributedString = NSMutableAttributedString(  string: "\(shipping)\n\n", //Item Condition
-                                                                   attributes: [.font: UIFont.systemFont(ofSize: 13),
-                                                                                .foregroundColor: UIColor.lightGray])
         //Appending the attributes
         attributedText.append(priceAttributedString)
-        attributedText.append(shippingAttributedString)
         self.attributedText = attributedText
 
         

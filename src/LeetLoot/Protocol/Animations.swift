@@ -2,7 +2,7 @@
 //  Animations.swift
 //  LeetLoot
 //
-//  Created by Kiarash Teymoury on 2/13/18.
+//  Created by Kiarash Teymoury on 2/14/18.
 //  Copyright © 2018 Kiarash Teymoury. All rights reserved.
 //
 
