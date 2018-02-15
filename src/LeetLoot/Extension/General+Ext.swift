@@ -42,9 +42,6 @@ extension UITextView {
         let attributedText = NSMutableAttributedString( string: "\(customText)\n", //Initialize Merch Details
                                                         attributes: attributedFont)
         
-        let conditionAttributedString = NSMutableAttributedString(  string: "\(condition)\n\n", //Item Condition
-                                                                    attributes: [.font: UIFont.systemFont(ofSize: 13),
-                                                                                .foregroundColor: UIColor.lightGray])
         
         let priceAttributedString =  NSMutableAttributedString( string: "\(price)\n", //Price
                                                                 attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
@@ -52,9 +49,7 @@ extension UITextView {
         let shippingAttributedString = NSMutableAttributedString(  string: "\(shipping)\n\n", //Item Condition
                                                                    attributes: [.font: UIFont.systemFont(ofSize: 13),
                                                                                 .foregroundColor: UIColor.lightGray])
-        
         //Appending the attributes
-        attributedText.append(conditionAttributedString)
         attributedText.append(priceAttributedString)
         attributedText.append(shippingAttributedString)
         self.attributedText = attributedText
@@ -90,4 +85,3 @@ extension String {
         return String(self[Range(start ..< end)])
     }
 }
-
