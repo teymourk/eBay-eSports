@@ -8,8 +8,11 @@
 
 import UIKit
 
+protocol FilterMenuDelegate {
+
+}
+
 class Filter: UITableView {
-    
     fileprivate var filterMenu: [FilterOptions] {
         return [Sort(), Type(), Price()]
     }
@@ -46,9 +49,15 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as? Filter_Cell
         let options = filterMenu[indexPath.section].options[indexPath.row]
         cell?.textLabel?.text = options.title
+     
         return cell ?? UITableViewCell()
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let menuOptions = filterMenu[indexPath.section].options[indexPath.item]
+        
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = Header_Cell()
             view.title = filterMenu[section].sectionTitle

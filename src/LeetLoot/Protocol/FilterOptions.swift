@@ -8,7 +8,11 @@
 
 import UIKit
 
-//
+struct MenuOptions {
+    var filtering: Type.option
+    var sorting: Sort.option
+}
+
 protocol FilterOptions {
     var sectionTitle: String { get }
     var options: [EnumTitles] { get }
@@ -25,35 +29,31 @@ extension EnumTitles {
 }
 
 struct Sort: FilterOptions {
-    var options: [EnumTitles] { return [option.Relevance, option.Rating] }
+    var options: [EnumTitles] { return [option.Best_Match, option.Lowest_Price, option.Highest_Price] }
     
     var sectionTitle: String { return "Sort by" }
 
-    enum option: EnumTitles {
-        case Relevance, Rating
+    enum option: String, Codable, EnumTitles {
+        case Best_Match = "fieldgroups=MATCHING_ITEMS"
+        case Lowest_Price = "sort=price"
+        case Highest_Price = "sort=-price"
     }
 }
 
 struct Type: FilterOptions {
-    var options: [EnumTitles] { return [option.All, option.Toys, option.Clothing] }
+    var options: [EnumTitles] { return [option.All_Items, option.Toys, option.Clothing] }
     
     var sectionTitle: String { return "Filter by" }
     
     enum option: String, Codable, EnumTitles {
-        case All = ""
-        case Toys = "220"
-        case Clothing = "1059"
+        case All_Items = "1249,1059,220,15687,155183,63859,155206" //Viedeo Games | Toys | Cothing
+        case Toys = "220" //Toys and Hobbies
+        case Clothing = "15687,155183,63859,155206" //Mens T-Shirts + Sweaters | Woments Clothing
     }
 }
 
 struct Price: FilterOptions {
     var sectionTitle: String { return "Price" }
     
-    var options: [EnumTitles] {
-        return [Price.price]
-    }
-    
-    enum Price: EnumTitles {
-        case price
-    }
+    var options: [EnumTitles] { return [] }
 }
