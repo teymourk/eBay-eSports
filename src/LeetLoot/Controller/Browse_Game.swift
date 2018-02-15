@@ -37,9 +37,15 @@ class Browse_Game: UICollectionViewController {
         requestDataFromAPI()
     }
     
+    private var merchRoot: Root {
+        return Root(queryKey: "League+of+legends", groupBy: .Toys, sortBy: .Best_Match)
+    }
+    
     private func requestDataFromAPI() {
-        let root = Root(queryKey: "Leagues+of+legends", groupBy: .Toys)
-            root.searchByKeyWord({ self.root = $0 })
+        merchRoot.searchByKeyWord({
+            self.root = $0
+            self.menuBar.results = $0?.first?.total
+        })
     }
     
     private func setupCollectionView() {
@@ -75,7 +81,30 @@ extension Browse_Game {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: Merch_Cell = collectionView.reusableCell(indexPath: indexPath)
             cell.items = root?.first?.itemSummaries?[indexPath.row]
+            cell.handleCellAnimation()
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard   let root = root?.first,
+                let nextOffset = root.next,
+                let summariesCount = root.itemSummaries?.count,
+                let url = URL(string: nextOffset) else { return }
+        if indexPath.item == summariesCount - 10 {
+            merchRoot.requestData(forUrl: url, completion: { (_respne, merchObj) in
+                if  let newMerch = merchObj,
+                    let itemSummaries = newMerch.itemSummaries {
+                        self.root?[0].next = newMerch.next
+                    for i in itemSummaries {
+                        self.root?[0].itemSummaries?.append(i)
+                        DispatchQueue.main.async {
+                            collectionView.reloadData()
+                            print(url)
+                        }
+                    }
+                }
+            })
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -86,7 +115,7 @@ extension Browse_Game {
 // Mark: - UICollectionViewDelegateFlowLayout
 extension Browse_Game: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = Constants.kWidth * (1/2) - 15
+        let width = Constants.kWidth * (1/2) - 28.5
         return CGSize(width: width,
                       height: width * 1.6) //Height Based on Text
     }
@@ -96,9 +125,9 @@ extension Browse_Game: UICollectionViewDelegateFlowLayout {
         let height = menuBar.frame.height + 20
         collectionView.scrollIndicatorInsets.top = height
         return UIEdgeInsets(top: height,
-                            left: 10,
+                            left: 19,
                             bottom: 0,
-                            right: 10)
+                            right: 19)
     }
 }
 
