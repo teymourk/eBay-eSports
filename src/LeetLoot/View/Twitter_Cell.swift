@@ -15,6 +15,8 @@ protocol TwitterDelegate: class {
 
 class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
     
+    var tweetSize:CGSize = CGSize()
+    
     private lazy var timelineButton: UIButton = {
         let button = UIButton()
         button.setTitle("See more Tweets", for: .normal)
@@ -30,8 +32,6 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
         tweetView.translatesAutoresizingMaskIntoConstraints = false;
         return tweetView;
     }()
-    
-    var tweetSize:CGSize = CGSize()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,12 +56,11 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
             tweetView.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             tweetView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -45),
             
-            timelineButton.topAnchor.constraint(equalTo: tweetView.bottomAnchor, constant: 15),
             timelineButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
-            timelineButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+            timelineButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9),
         ])
         
-        // Swift
+        // Create Twitter client and load the tweet with a specific ID
         let client = TWTRAPIClient()
         client.loadTweet(withID: "959124212198686720") { (tweet, error) in
             if let t = tweet {
