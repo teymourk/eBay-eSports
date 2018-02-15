@@ -13,6 +13,14 @@ protocol MenuBarDelegate {
 }
 
 final class Menu: ParentView {
+    
+    var results: Int? {
+        didSet {
+            DispatchQueue.main.async {
+                self.result.text = "\(self.results ?? 0) Results"
+            }
+        }
+    }
 
     //Menu Enum
     internal enum Options: String {

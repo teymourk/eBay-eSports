@@ -15,15 +15,17 @@ struct Root:Codable, BrowseAPI {
     var total: Int?
     var next: String?
     var itemSummaries: [itemSummaries]?
-    
+
     //It counts it in the Decode ? Anyways to not without using
     //Customization
     var keyWord: String?
     var groupingBy: Type.option?
+    var sortBy: Sort.option?
     
-    init(queryKey: String, groupBy: Type.option) {
+    init(queryKey: String, groupBy: Type.option, sortBy: Sort.option) {
         self.keyWord = queryKey
         self.groupingBy = groupBy
+        self.sortBy = sortBy
     }
 }
 

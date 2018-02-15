@@ -17,8 +17,8 @@ class Merch_Cell: ParentCell {
         }
     }
     
-    let merchImage = { () -> UIImageView in
-        let image = UIImageView(image: #imageLiteral(resourceName: "eBay"))
+    let merchImage = { () -> customeImage in
+        let image = customeImage()
             image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -49,11 +49,11 @@ class Merch_Cell: ParentCell {
             itemCondition = items.condition == "New" ? "Brand New" : "Pre-Owned",
         	itemPrice = price?.value ?? "0.0",
             currency = price?.currency ?? "USD",
-            thubmnailImgUrl = thumbnail?.imageUrl ?? "",
+            imgUrl = thumbnail?.imageUrl ?? "",
             itemShipping = shipping?.shippingCostType == "CALCULATED" ? "+ Shipping" : "Free Shipping"
 
         merchTitle.attributedFor(title, condition: itemCondition, price: "\(currency) $\(itemPrice)", shipping: itemShipping)
-        merchImage.loadImages(url: thubmnailImgUrl)
+        merchImage.downloadImages(url: imgUrl)
     }
 
     private func setupStackView() {
@@ -80,21 +80,5 @@ class Merch_Cell: ParentCell {
     override func setupView() {
         setupStackView()
         setupLayoutAttributes()
-    }
-}
-
-
-extension UIImageView {
-    func loadImages(url: String) {
-        
-        if let url = URL(string: url) {
-            URLSession.shared.dataTask(with: url) {
-            (data, response, error) in
-                guard error == nil else { return }
-                DispatchQueue.main.async {
-                    self.image = UIImage(data: data!)
-                }
-            }.resume()
-        }
     }
 }

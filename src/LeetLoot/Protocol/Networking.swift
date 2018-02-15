@@ -19,13 +19,12 @@ protocol Networking {
     func decode(data: Data) -> Model?
 }
 
-extension Networking {
+extension Networking where Self == Model {
     private var token: String {
-        return"v^1.1#i^1#f^0#p^1#r^0#I^3#t^H4sIAAAAAAAAAOVXW2wUVRjutts2hJtBBEIKWQaFcJnZMzM7exnYNUsLsljahV1qWyBkduZMO3Z3ZpxzlnYFkqYJrQkPYBOioggoqLUQUIMXAn0w8CD6ICTyIODlhYuJEYzEhJjomdmlbCvhWoTEfdnMf/7zn+/7/v8/F9BZMWpu99LuP8e6Kkt3d4LOUpeLHQ1GVZTPG1dWOrW8BBQ5uHZ3Pt3p7iq7tBBJmbQproTINHQEPR2ZtI5ExximspYuGhLSkKhLGYhELIuJ6PJakWOAaFoGNmQjTXliNWHKHwhJPjXlExRfKKQGJGLVb8RMGmEKqpziD0KWZYMgEAopZByhLIzpCEs6DlMcYIM04GiWT3KcyAqiwDNBLthMeRqghTRDJy4MoCIOXNGZaxVhvT1UCSFoYRKEisSiSxL10VjN4rrkQm9RrEhBhwSWcBYN/ao2FOhpkNJZePtlkOMtJrKyDBGivJH8CkODitEbYO4DviN1EAYCii/FBQGnSlAYGSmXGFZGwrfHYVs0hVYdVxHqWMO5OylK1Ei9CGVc+KojIWI1HvtvRVZKa6oGrTC1eFG0KRqPU5HnNcmSUGuSroUQ1xoGpuMra+gAy/tgUA1wtMLJvD+Y8hcWykcryDxspWpDVzRbNOSpM/AiSFDD4dqAIm2IU71eb0VVbCMa9PMlARjUkG22k5rPYha36nZeYYYI4XE+75yBwdkYW1oqi+FghOEDjkRhSjJNTaGGDzq1WCifDhSmWjE2Ra+3vb2daecZw2rxcgCw3sbltQm5FWZIM3Zk7F7P+2t3nkBrDhUZkplIE3HOJFg6SK0SAHoLFeH8As8LBd2HwooMt/7LUMTZO7QjRqpDfDzHKT6Bk1kpJQgcOxIdEikUqdfGAVNSjs5IVhvEZlqSIS2TOstmoKUpIi+oHB9UIa34QyrtC6kqnRIUP82qEAIIUyk5FPw/NcrdlnpCNkwYN9KanBuRgh+xYuctJS5ZOJeA6TQx3G3V35Ikskk+dHp2r98TRTsGIkEkU2Ps2mZkI+M1JLKp2aZ1DuoH4q2R8/CxSiohmGeqKfmDjHHoMmi9zFgQGVmLnOFMvb2vJ402qJMuwZaRTkOrgX0gJUZuR39Eu/ktWclpjci47nFjdo/b5H3WtoQfIWt3l2v1LZizAhsU/IAV+AfiVu3kNZn7Dzate0rsUgNhqDyEC4h36HMoUuL82C7XYdDl+oi8qIAXPMPOBDMqyla5y8ZMRRqGjCapDNJadHLLtyDTBnOmpFmlFa7VVYf61hU9wHavBVMGn2CjytjRRe8xUHVzpJwdP3kseShxLLnIsILAN4OZN0fd7CT3xIELO55bvuroyX518/HPGre4rp167S0wdtDJ5SovIZVRsvfq1jH9m7rdR+OzK5PTL72xtWfb+omHfoDyU+jqX2vKTpsTl1Xt/Ny9/fvzvxkn3n1njmvl+ZYLtccm6VdmTaiaMqXjvaa+J5mLa1IfX//6XE/zGUH9pneCa+Ph/Qc3XYErTs0YqN6MrjRNPnzs8oa92/p6fwk0bJGzz549MO7orJd753x1be7Uk0/MPDL+0gJzOt3/3bzXz0VSVzec+aNn39xru5Z98OOEZUt9+1H1gf298z85vuX4wJzqnT8dWPvpEX+PsPHE2y8lT7f19p08tWagKf776aa/S6/PutzYXln388GB2Fnw5YfZ/vmV0xrHvfrKDt8Xey7zszMXfy3ppmsW7NoTe3Pa+9F9Lyz2fJtP3z/soAxeGg8AAA=="
+        return "v^1.1#i^1#r^0#p^1#I^3#f^0#t^H4sIAAAAAAAAAOVXa2wUVRTudtuShldJULGCWQYRCpnZO8/uTtglC6VpoS/ZpfKQNLMzd+jY3Zlh7l3aNSiliUUD8Q9pGiPEJiZaxBBL8BFCEP2BqUGiEhQSEsXgK0ajgYSIYrwzu5RtJTyLkLh/Nvfcc88933e+c+9c0F1WvqC3rvfiZN+E4oFu0F3s87ETQXlZ6cIp/uLK0iJQ4OAb6H6su6TH/+MipKRTtrwSItsyEQx0pVMmkj1jhMo4pmwpyECyqaQhkrEqx2ONDTLHANl2LGypVooK1NdEKIkVkoIU1qCiSEpS5YnVvBIzYUUolWUBp+phyHJhSdVEMo9QBtabCCsmjlAcYEM04GhWTAAgC4Is8kw4FFpLBVqhgwzLJC4MoKJeurK31inI9fqpKghBB5MgVLQ+VhtvjtXXLGtKLAoWxIrmeYhjBWfQ6NFSS4OBViWVgdffBnnecjyjqhAhKhjN7TA6qBy7ksxtpO9RzQmioHIiD6AWlkK8Mi5U1lpOWsHXz8O1GBqte64yNLGBszdilLCRfBqqOD9qIiHqawLu3xMZJWXoBnQi1LIlsTWxlhYqusJQHAW1J+gGCHGDZWG6ZWUNXc3yAgzp1RytcSovhZJSfqNctDzNY3Zaapma4ZKGAk0WXgJJ1nAsN3wBN8Sp2Wx2Yjp2Myr040Y45Ne6Rc1VMYPbTbeuME2ICHjDG1dgZDXGjpHMYDgSYeyER1GEUmzb0Kixk54W8/LpQhGqHWNbDgY7OzuZTp6xnA1BDgA2uLqxIa62wzRRSFfa7fWcv3HjBbThQVEhWYkMGWdtkksX0SpJwNxARTlJ5Hkxz/votKJjrf8yFGAOju6I8eqQalHnBA3qanUyqScFfTw6JJoXadDNAyaVLJ1WnA6I7ZSiQlolOsukoWNoMk8250M6pDUprNNCWNfppKhJNKtDCCBMJtVw6P/UKDcr9bhq2bDFShlqdlwEP25i5x2tRXFwNg5TKWK4WdVfEyRyQd51eG6v3xJENwYiQRTbYFxtM6qVDloKOdRcU5uX9R3hNsh9eF8VlQDMITW03EXGeHAZtEllHIisjEPucKbZPdcTVgc0SZdgx0qloNPK3hET43ei36PT/Jqo1JRBaGy735Dd4jF5m9pW8D1EXdLjW3cN5KzIhiRRFML8HWFb6tU1kf0PDq1bKmydhTDU7sIHSHD0cyha5P3YHt87oMc3RF5UIAjmsnPA7DL/qhL/pEpkYMgYis4gY4NJvvIdyHTArK0YTnGZb93Mt/e0FTzABtaDGSNPsHI/O7HgPQZmXp0pZac+NJkNAY4VARAEkV8L5lydLWEfLJk+0Bd+dvPw9kO7z1xqOvrtxTR/VnoPTB5x8vlKi4gyijZXVKxsO79A+Llq97rLgw3fb39yyskJe991ts38e+FAmb3w4Dm+8tSsN6Nbf0kPHnjr98pXuV/379nXe6ztRPjjxhOhXdykc30/Lf/sgY7FtRf/qJrd3/rKjOGnjtVOkyo28q9t+qD9yLYvyk/FaSM6Fex7WH9koyYtunBy/p/fzfV/LQxVLT80POTb2tU7lJ5WP2XFkY3TimZ8OOjI31w6+/jn/fuH3xhoPPXR6q8+je9IdE719zegF87Mm11e8/5pY+L8T5afL9/Z2zQ4vFuct/7A5rrkwcPrn2mM7jo8/fTLfV3H535Zc+HwrMVV/XuP7ni9l7Mb67Y0rUrYj17+66Xfdq05/qL5w/NbKp6bfiRXvn8AI4sOaBoPAAA="
     }
     
     func requestData(forUrl url: URL, completion: @escaping (RequestRespnse, Model?) -> ()) {
-        
         let authString = "Bearer \(token)"
         let config = URLSessionConfiguration.default
             config.httpAdditionalHeaders = ["Authorization" : authString]
@@ -47,6 +46,41 @@ extension Networking {
         } catch let error {
             print("Error Decoding: \(error.localizedDescription)")
             return nil
+        }
+    }
+}
+
+
+class customeImage: UIImageView {
+
+    private var imageCache = NSCache<NSString, UIImage>()
+        
+    func downloadImages(url: String) {
+        let urlString = NSString(string: url)
+        
+        if let cachedImage = imageCache.object(forKey: urlString) {
+            self.image = cachedImage
+            return
+        }
+        
+        guard let imageURL = URL(string: url) else {
+            self.image = UIImage(named: "eBay")
+            return
+        }
+    
+        DispatchQueue.global(qos: .userInitiated).async {
+            URLSession.shared.dataTask(with: imageURL) {
+                (data, response, error) in
+                guard error == nil else { return }
+                
+                if let imgData = data {
+                    DispatchQueue.main.async {
+                        let cachedImage = UIImage(data: imgData)
+                        self.imageCache.setObject(cachedImage!, forKey: urlString)
+                        self.image = cachedImage
+                    }
+                }
+            }.resume()
         }
     }
 }
