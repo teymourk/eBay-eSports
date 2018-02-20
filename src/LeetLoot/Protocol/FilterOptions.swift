@@ -50,6 +50,10 @@ struct Filters: FilterOptions {
 struct Price: FilterOptions {
     var sectionTitle: String { return "Price" }
     
-    var options: [EnumTitles] { return [] }
+    var options: [EnumTitles] { return [prices.range(0.0 ..< 100.0)] }
+    
+    enum prices: EnumTitles {
+        case range(Range<Double>)
+    }
 }
 
