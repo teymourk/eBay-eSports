@@ -53,7 +53,9 @@ extension Home: UICollectionViewDelegateFlowLayout, TwitterDelegate {
             cellHeight = CGFloat(333)
         }
         let eventRow = CGSize(width: view.frame.width, height: cellHeight)
-        let twitterRow = CGSize(width: view.frame.width, height: 390)
+        //Correct cell height = tweet height + 43 for iPhone 8 Plus
+        //Correct cell height = tweet height + 61 for iPhone 8 & iPhone X
+        let twitterRow = CGSize(width: view.frame.width, height: 201.67)
         
         if indexPath.section == 0 {
             return indexPath.row == 0 ? eventRow : twitterRow
