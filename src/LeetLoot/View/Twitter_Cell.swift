@@ -89,7 +89,22 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
                 guard let data = data else { return }
                 print(data)
                 //let tweetID = try JSONDecoder().decode(main.self, from: data!)
-                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                guard
+                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? NSArray,
+                    let dicVal = json[0] as? NSDictionary,
+                    let tweetID = dicVal["id_str"] as? String else { return }
+                
+                print("Tweet id:", tweetID)
+                
+                client.loadTweet(withID: tweetID) { (tweet, error) in
+                    if let t = tweet {
+                        self.tweetView.configure(with: t)
+                        self.setTweetSize(t:self.tweetView)
+                    } else {
+                        print("Failed to load Tweet: \(error?.localizedDescription)")
+                    }
+                }
+                
                 print("Json response: ", json)
                 //let tweetID = json!["id_str"]
                 //print("tweet id please: \(tweetID)")
@@ -99,14 +114,7 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
         }
         
         // Create Twitter client and load the tweet with a specific ID
-        client.loadTweet(withID: "959124212198686720") { (tweet, error) in
-            if let t = tweet {
-                self.tweetView.configure(with: t)
-                self.setTweetSize(t:self.tweetView)
-            } else {
-                print("Failed to load Tweet: \(error?.localizedDescription)")
-            }
-        }
+
     }
     
     weak var delegate:TwitterDelegate?

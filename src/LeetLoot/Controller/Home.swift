@@ -50,6 +50,5 @@ class Home: UICollectionViewController, FUIAuthDelegate {
     private func setupTwitter() {
         
     }
-    
 }
 
