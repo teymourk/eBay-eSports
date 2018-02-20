@@ -46,7 +46,7 @@ extension Home: UICollectionViewDelegateFlowLayout, TwitterDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let eventRow = CGSize(width: view.frame.width, height: 304)
+        let eventRow = CGSize(width: view.frame.width, height: 320)
         let twitterRow = CGSize(width: view.frame.width, height: 390)
         
         if indexPath.section == 0 {

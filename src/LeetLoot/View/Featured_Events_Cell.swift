@@ -13,6 +13,14 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
     
     private let cellId = "cellId"
     
+    
+    private lazy var eventBanner: UIImageView = {
+        let banner = UIImageView()
+        banner.image = UIImage(named: "E3Banner.png")
+        banner.translatesAutoresizingMaskIntoConstraints = false
+        return banner
+    }()
+    
     private lazy var merchButton: UIButton = {
         let button = UIButton()
         button.setTitle("See more", for: .normal)
@@ -49,6 +57,7 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
     }
     
     override func setupView() {
+        addSubview(eventBanner)
         addSubview(carouselCollectionView)
         addSubview(merchButton)
         
@@ -59,15 +68,19 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
         //register item cell to the collection view
         carouselCollectionView.register(CarouselCollectionView.self, forCellWithReuseIdentifier: cellId)
         
-        //expand from left to right edge
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": carouselCollectionView]))
-        
-        //expand from top to bottom
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-85-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": carouselCollectionView]))
-        
         NSLayoutConstraint.activate([
+            eventBanner.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            eventBanner.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
+            eventBanner.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            eventBanner.bottomAnchor.constraint(equalTo: carouselCollectionView.topAnchor, constant: -15),
+            
+            carouselCollectionView.topAnchor.constraint(equalTo: eventBanner.bottomAnchor, constant:0),
+            carouselCollectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0),
+            carouselCollectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
+            carouselCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -47),
+
             merchButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
-            merchButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9),
+            merchButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             ])
         
         backgroundColor = .white

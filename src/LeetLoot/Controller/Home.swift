@@ -47,5 +47,9 @@ class Home: UICollectionViewController, FUIAuthDelegate {
         collectionView?.dataSource = self
     }
     
+    private func setupTwitter() {
+        
+    }
+    
 }
 

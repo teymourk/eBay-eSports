@@ -13,6 +13,16 @@ protocol TwitterDelegate: class {
     func showTwitterTimeline()
 }
 
+struct SingleTweet: Decodable {
+    let id: String?
+    //let created_at: String?
+}
+
+struct main: Decodable {
+    let SingleTweet = Array<SingleTweet>()
+    //let created_at: String?
+}
+
 class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
     
     var tweetSize:CGSize = CGSize()
@@ -60,8 +70,35 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
             timelineButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9),
         ])
         
-        // Create Twitter client and load the tweet with a specific ID
+        // Swift
         let client = TWTRAPIClient()
+        let statusesShowEndpoint = "https://api.twitter.com/1.1/statuses/user_timeline.json"
+        let params = ["screen_name": "E3", "count": "1"]
+        var clientError : NSError?
+        
+        let request = client.urlRequest(withMethod: "GET", urlString: statusesShowEndpoint, parameters: params, error: &clientError)
+        
+        client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
+            if connectionError != nil {
+                print("Error: \(connectionError)")
+            }
+            
+            do {
+                //let json = try JSONSerialization.jsonObject(with: data!, options: [])
+                //print("json: \(json)")
+                guard let data = data else { return }
+                print(data)
+                //let tweetID = try JSONDecoder().decode(main.self, from: data!)
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                print("Json response: ", json)
+                //let tweetID = json!["id_str"]
+                //print("tweet id please: \(tweetID)")
+            } catch let jsonError as NSError {
+                print("json error: \(jsonError.localizedDescription)")
+            }
+        }
+        
+        // Create Twitter client and load the tweet with a specific ID
         client.loadTweet(withID: "959124212198686720") { (tweet, error) in
             if let t = tweet {
                 self.tweetView.configure(with: t)
