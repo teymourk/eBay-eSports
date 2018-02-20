@@ -11,6 +11,8 @@ target 'LeetLoot' do
   
   # Pods for Twitter
   pod 'TwitterKit'
+  
+  pod 'WARangeSlider'
 
   target 'LeetLootTests' do
     inherit! :search_paths
