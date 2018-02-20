@@ -10,22 +10,34 @@ import UIKit
 
 class Browse_Game: UICollectionViewController {
     
+    private var m: [Root]? {
+        get {
+            return root
+        }set {
+            root?.removeAll()
+            root = newValue
+        }
+    }
+    
     fileprivate var root: [Root]? {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
+                self.collectionView?.scrollsToTop = true
+                self.menuBar.results = self.root?.first?.total
             }
         }
     }
     
     lazy var menuBar = { () -> Menu in
         let view = Menu(isMenu: false)
-            view.delegate = self
+        view.delegate = self
         return view
     }()
     
     lazy var buyItem = { () -> Buy_Filter in
         let view = Buy_Filter()
+        view.delegate = self
         return view
     }()
     
@@ -37,14 +49,13 @@ class Browse_Game: UICollectionViewController {
         requestDataFromAPI()
     }
     
-    private var merchRoot: Root {
-        return Root(queryKey: "League+of+legends", groupBy: .Toys, sortBy: .Best_Match)
-    }
+    private lazy var merchRoot: Root = {
+        return Root(queryKey: "League+of+legends", filterBy: .All_Items, sortBy: .Best_Match)
+    }()
     
     private func requestDataFromAPI() {
         merchRoot.searchByKeyWord({
-            self.root = $0
-            self.menuBar.results = $0?.first?.total
+            self.m = $0
         })
     }
     
@@ -62,7 +73,7 @@ class Browse_Game: UICollectionViewController {
             menuBar.heightAnchor.constraint(equalToConstant: 45),
             menuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             menuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
+            ])
     }
     
     //Setup navigation bar
@@ -80,28 +91,23 @@ extension Browse_Game {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: Merch_Cell = collectionView.reusableCell(indexPath: indexPath)
-            cell.items = root?.first?.itemSummaries?[indexPath.row]
-            cell.handleCellAnimation()
+        cell.items = root?.first?.itemSummaries?[indexPath.row]
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard   let root = root?.first,
-                let nextOffset = root.next,
-                let summariesCount = root.itemSummaries?.count,
-                let url = URL(string: nextOffset) else { return }
+            let nextOffset = root.next,
+            let summariesCount = root.itemSummaries?.count,
+            let url = URL(string: nextOffset) else { return }
         if indexPath.item == summariesCount - 10 {
             merchRoot.requestData(forUrl: url, completion: { (_respne, merchObj) in
                 if  let newMerch = merchObj,
                     let itemSummaries = newMerch.itemSummaries {
-                        self.root?[0].next = newMerch.next
-                    for i in itemSummaries {
-                        self.root?[0].itemSummaries?.append(i)
-                        DispatchQueue.main.async {
-                            collectionView.reloadData()
-                            print(url)
-                        }
-                    }
+                    self.root?[0].next = newMerch.next
+                    itemSummaries.forEach({
+                        self.root?[0].itemSummaries?.append($0)
+                    })
                 }
             })
         }
@@ -138,3 +144,9 @@ extension Browse_Game: MenuBarDelegate {
     }
 }
 
+//Mark: BuyFilterDelegate
+extension Browse_Game: BuyFilterDelegate {
+    func updateNewData(_ newData: [Root]?) {
+        self.m =  newData
+    }
+}

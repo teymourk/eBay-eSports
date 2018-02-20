@@ -8,32 +8,38 @@
 
 import UIKit
 
+protocol BuyFilterDelegate {
+    func updateNewData(_ newData: [Root]?)
+}
+
 final class Buy_Filter: NSObject {
     
     private lazy var parentView = { ()-> UIView in
         let view = UIView(frame: customFrame(height))
-            view.backgroundColor = .white
+        view.backgroundColor = .white
         return view
     }()
     
     private lazy var fadeBackgroud = { ()-> UIView in
         let view = UIView(frame: window.frame)
-            view.backgroundColor = .black
-            view.alpha = 0
+        view.backgroundColor = .black
+        view.alpha = 0
         return view
     }()
     
     let stackView = { () -> UIStackView in
         let view = UIImageView(image: #imageLiteral(resourceName: "DownArrow"))
-            view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFit
         let view1 = UIView()
         let view2 = UIView()
         let stack = UIStackView(arrangedSubviews: [view1,view,view2])
-            stack.distribution = .fillEqually
-            stack.alignment = .center
-            stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.distribution = .fillEqually
+        stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    
+    var delegate: BuyFilterDelegate?
     
     internal enum Option {
         case Filter, Buy, None
@@ -46,13 +52,14 @@ final class Buy_Filter: NSObject {
                       height: self.cutomHeight)
     }
     
-    private let buyView = { () -> Buy in
+    private lazy var buyView = { () -> Buy in
         let view = Buy()
         return view
     }()
     
-    private let filterView = { () -> Filter in
+    private lazy var filterView = { () -> Filter in
         let view = Filter()
+            view.filteringDelegate = self
         return view
     }()
     
@@ -75,10 +82,10 @@ final class Buy_Filter: NSObject {
         UIView.animate(withDuration: 0.5,
                        delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         
-            let y = (self.height) - (self.cutomHeight) - self.bottomOffset
-            self.parentView.frame = self.customFrame(y)
-            self.fadeBackgroud.alpha = 0.5
-            view == .Buy ? self.setupViewFor(self.buyView) : self.setupViewFor(self.filterView)
+                        let y = (self.height) - (self.cutomHeight) - self.bottomOffset
+                        self.parentView.frame = self.customFrame(y)
+                        self.fadeBackgroud.alpha = 0.5
+                        view == .Buy ? self.setupViewFor(self.buyView) : self.setupViewFor(self.filterView)
         })
     }
     
@@ -96,15 +103,15 @@ final class Buy_Filter: NSObject {
             view.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: parentView.trailingAnchor),
             view.bottomAnchor.constraint(equalTo: parentView.bottomAnchor)
-        ])
+            ])
     }
     
     private func close() {
         UIView.animate(withDuration: 0.2,
                        delay: 0, options: .curveEaseIn, animations: {
-
-                self.parentView.frame = self.customFrame(self.height)
-                self.fadeBackgroud.alpha = 0
+                        
+                        self.parentView.frame = self.customFrame(self.height)
+                        self.fadeBackgroud.alpha = 0
         }, completion: { (true) in
             self.parentView.removeFromSuperview()
             self.fadeBackgroud.removeFromSuperview()
@@ -114,7 +121,7 @@ final class Buy_Filter: NSObject {
     
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTap(_: )))
-            tapGesture.numberOfTapsRequired = 1
+        tapGesture.numberOfTapsRequired = 1
         fadeBackgroud.addGestureRecognizer(tapGesture)
     }
     
@@ -128,3 +135,15 @@ final class Buy_Filter: NSObject {
         setupGesture()
     }
 }
+
+//Filtering MenuDelegate
+extension Buy_Filter: FilterMenuDelegate {
+    func selctedQuery(_ query: Root) {
+        close()
+        guard delegate != nil else { return }
+        query.searchByKeyWord { (m) in
+            self.delegate?.updateNewData(m)
+        }
+    }
+}
+

@@ -15,16 +15,16 @@ struct Root:Codable, BrowseAPI {
     var total: Int?
     var next: String?
     var itemSummaries: [itemSummaries]?
-
+    
     //It counts it in the Decode ? Anyways to not without using
     //Customization
     var keyWord: String?
-    var groupingBy: Type.option?
+    var filterBy: Filters.option?
     var sortBy: Sort.option?
     
-    init(queryKey: String, groupBy: Type.option, sortBy: Sort.option) {
+    init(queryKey: String, filterBy: Filters.option, sortBy: Sort.option) {
         self.keyWord = queryKey
-        self.groupingBy = groupBy
+        self.filterBy = filterBy
         self.sortBy = sortBy
     }
 }
@@ -40,7 +40,7 @@ struct itemSummaries:Codable {
     var shippingOptions: [shippingOptions]?
     
 }
-//Item Shipping 
+//Item Shipping
 struct shippingOptions:Codable {
     var shippingCostType: String?
 }
@@ -62,3 +62,4 @@ struct thumbnailImages:Codable {
 struct additionalImages:Codable {
     var imageUrl: String?
 }
+

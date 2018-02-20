@@ -9,12 +9,18 @@
 import UIKit
 
 protocol FilterMenuDelegate {
-
+    func selctedQuery(_ query: Root)
 }
 
 class Filter: UITableView {
+    
+    var sorting: Sort.option = .Best_Match
+    var filtering: Filters.option = .All_Items
+    
+    var filteringDelegate: FilterMenuDelegate?
+    
     fileprivate var filterMenu: [FilterOptions] {
-        return [Sort(), Type(), Price()]
+        return [Sort(), Filters(), Price()]
     }
     
     private func setupTableView() {
@@ -48,19 +54,30 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as? Filter_Cell
         let options = filterMenu[indexPath.section].options[indexPath.row]
+        
         cell?.textLabel?.text = options.title
-     
+        cell?.textLabel?.font = UIFont.systemFont(ofSize: 13)
         return cell ?? UITableViewCell()
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let menuOptions = filterMenu[indexPath.section].options[indexPath.item]
+        switch indexPath.section {
+        case 0:
+            guard let sort = filterMenu[0].options[indexPath.item] as? Sort.option else { return }
+            sorting = sort
+        case 1:
+            guard let filter = filterMenu[1].options[indexPath.item] as? Filters.option else { return }
+            filtering = filter
+        default: break
+        }
         
+        let query = Root(queryKey: "League+of+legends", filterBy: filtering, sortBy: sorting)
+        filteringDelegate?.selctedQuery(query)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = Header_Cell()
-            view.title = filterMenu[section].sectionTitle
+        view.title = filterMenu[section].sectionTitle
         return view
     }
     
@@ -72,5 +89,3 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
         return 50
     }
 }
-
-

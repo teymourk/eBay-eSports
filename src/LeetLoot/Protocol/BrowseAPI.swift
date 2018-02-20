@@ -10,7 +10,7 @@ import UIKit
 
 protocol BrowseAPI: Networking where Model == Root {
     var keyWord: String? { get set }
-    var groupingBy: Type.option? { get set }
+    var filterBy: Filters.option? { get set }
     var sortBy: Sort.option? { get set }
     func searchByKeyWord(_ completion: @escaping ([Root]?) ->())
 }
@@ -19,8 +19,8 @@ extension BrowseAPI {
     private var endPoint: URL? {
         let baseUrl = "https://api.ebay.com/buy/browse/v1/item_summary/search?",
             query = "q=\(keyWord ?? "")&",
-            groupBy = "category_ids=\(groupingBy?.rawValue ?? "")&",
-            limit = "limit=30&",
+            groupBy = "category_ids=\(filterBy?.rawValue ?? "")&",
+            limit = "limit=100&",
             buyOption = "buyingOptions%3A%7BFIXED_PRICE%7D",
             condition = "conditions%3A%7BNEW%7D&",
             filter = "filter=\(buyOption),\(condition)",
