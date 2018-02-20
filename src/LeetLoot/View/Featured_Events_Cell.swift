@@ -69,18 +69,17 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
         carouselCollectionView.register(CarouselCollectionView.self, forCellWithReuseIdentifier: cellId)
         
         NSLayoutConstraint.activate([
-            eventBanner.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
-            eventBanner.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
-            eventBanner.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            eventBanner.bottomAnchor.constraint(equalTo: carouselCollectionView.topAnchor, constant: -15),
-            
-            carouselCollectionView.topAnchor.constraint(equalTo: eventBanner.bottomAnchor, constant:0),
-            carouselCollectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0),
+            carouselCollectionView.leftAnchor.constraint(equalTo: leftAnchor),
             carouselCollectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
             carouselCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -47),
 
             merchButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             merchButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            
+            eventBanner.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            eventBanner.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
+            eventBanner.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            eventBanner.bottomAnchor.constraint(equalTo: carouselCollectionView.topAnchor, constant: -15),
             ])
         
         backgroundColor = .white

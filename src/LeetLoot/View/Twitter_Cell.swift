@@ -13,16 +13,6 @@ protocol TwitterDelegate: class {
     func showTwitterTimeline()
 }
 
-struct SingleTweet: Decodable {
-    let id: String?
-    //let created_at: String?
-}
-
-struct main: Decodable {
-    let SingleTweet = Array<SingleTweet>()
-    //let created_at: String?
-}
-
 class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
     
     var tweetSize:CGSize = CGSize()
@@ -70,7 +60,6 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
             timelineButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -9),
         ])
         
-        // Swift
         let client = TWTRAPIClient()
         let statusesShowEndpoint = "https://api.twitter.com/1.1/statuses/user_timeline.json"
         let params = ["screen_name": "E3", "count": "1"]
@@ -91,10 +80,8 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
                 //let tweetID = try JSONDecoder().decode(main.self, from: data!)
                 guard
                     let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? NSArray,
-                    let dicVal = json[0] as? NSDictionary,
-                    let tweetID = dicVal["id_str"] as? String else { return }
-                
-                print("Tweet id:", tweetID)
+                    let dict = json[0] as? NSDictionary,
+                    let tweetID = dict["id_str"] as? String else { return }
                 
                 client.loadTweet(withID: tweetID) { (tweet, error) in
                     if let t = tweet {
@@ -105,16 +92,10 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
                     }
                 }
                 
-                print("Json response: ", json)
-                //let tweetID = json!["id_str"]
-                //print("tweet id please: \(tweetID)")
             } catch let jsonError as NSError {
                 print("json error: \(jsonError.localizedDescription)")
             }
         }
-        
-        // Create Twitter client and load the tweet with a specific ID
-
     }
     
     weak var delegate:TwitterDelegate?
