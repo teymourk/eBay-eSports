@@ -25,6 +25,7 @@
 		AB7847D01FDDFB24008EBD70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB7847CE1FDDFB24008EBD70 /* LaunchScreen.storyboard */; };
 		AB7847DB1FDDFB24008EBD70 /* LeetLootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847DA1FDDFB24008EBD70 /* LeetLootTests.swift */; };
 		AB7CE6411FF8901C0050125C /* General+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7CE6401FF8901C0050125C /* General+Ext.swift */; };
+		AB90BC0D203D14540052C685 /* Browse_Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB90BC0C203D14540052C685 /* Browse_Event.swift */; };
 		AB94227D20316175002E7311 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB94227C20316174002E7311 /* Networking.swift */; };
 		AB94227F2031674C002E7311 /* Merchendise.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB94227E2031674C002E7311 /* Merchendise.swift */; };
 		AB94228120316F17002E7311 /* BrowseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB94228020316F17002E7311 /* BrowseAPI.swift */; };
@@ -82,6 +83,7 @@
 		AB7847DA1FDDFB24008EBD70 /* LeetLootTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetLootTests.swift; sourceTree = "<group>"; };
 		AB7847DC1FDDFB24008EBD70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB7CE6401FF8901C0050125C /* General+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "General+Ext.swift"; sourceTree = "<group>"; };
+		AB90BC0C203D14540052C685 /* Browse_Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse_Event.swift; sourceTree = "<group>"; };
 		AB94227C20316174002E7311 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		AB94227E2031674C002E7311 /* Merchendise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merchendise.swift; sourceTree = "<group>"; };
 		AB94228020316F17002E7311 /* BrowseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAPI.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */,
 				AB7847C71FDDFB24008EBD70 /* Home.swift */,
 				BE24D7371FF585C600E745E6 /* Browse.swift */,
+				AB90BC0C203D14540052C685 /* Browse_Event.swift */,
 				BE24D7391FF585EC00E745E6 /* PageView.swift */,
 				AB3CE83420068CC500EF3A5D /* Browse_Game.swift */,
 				BEBE73472032247400032325 /* Twitter_Timeline.swift */,
@@ -497,6 +500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE4625302011D544005789E6 /* Home+Ext.swift in Sources */,
+				AB90BC0D203D14540052C685 /* Browse_Event.swift in Sources */,
 				A1F1F116202EA7F40048AD45 /* CarouselCollectionView.swift in Sources */,
 				AB38512A2026F58C008D6B71 /* FilterOptions.swift in Sources */,
 				ABF26A3D2023CB4300FE1473 /* Filter_Cell.swift in Sources */,

@@ -32,3 +32,11 @@ class Home: UICollectionViewController {
     }
 }
 
+//Mark: FeaturedEventDelegate
+extension Home: FeaturedEventDelegate {
+    func onEventBanner(_ sender: UITapGestureRecognizer) {
+        let layout = UICollectionViewFlowLayout()
+        let browseEvent = Browse_Event(collectionViewLayout: layout)
+        navigationController?.pushViewController(browseEvent, animated: true)
+    }
+}

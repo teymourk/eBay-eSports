@@ -65,7 +65,7 @@ class Browse_Game: UICollectionViewController {
         title = "Game Title"
     }
     
-    private func setupMenuBar() {
+    func setupMenuBar() {
         view.addSubview(menuBar)
         
         NSLayoutConstraint.activate([
@@ -91,7 +91,7 @@ extension Browse_Game {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: Merch_Cell = collectionView.reusableCell(indexPath: indexPath)
-        cell.items = root?.first?.itemSummaries?[indexPath.row]
+            cell.items = root?.first?.itemSummaries?[indexPath.row]
         return cell
     }
     

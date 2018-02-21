@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol FeaturedEventDelegate {
+    func onEventBanner(_ sender: UITapGestureRecognizer)
+}
+
 class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     private let cellId = "cellId"
@@ -17,6 +21,7 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
     private lazy var eventBanner: UIImageView = {
         let banner = UIImageView()
         banner.image = UIImage(named: "E3Banner.png")
+        banner.isUserInteractionEnabled = true
         banner.translatesAutoresizingMaskIntoConstraints = false
         return banner
     }()
@@ -42,6 +47,8 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
         
         return collectionView
     }()
+    
+    var delegate: FeaturedEventDelegate?
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
@@ -54,6 +61,12 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
     //sizing of cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: 130)
+    }
+    
+    @objc
+    fileprivate func onEventBanner(_ sender: UITapGestureRecognizer) {
+        guard   delegate != nil else { return }
+                delegate?.onEventBanner(sender)
     }
     
     override func setupView() {
@@ -82,6 +95,10 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
             merchButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             merchButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             ])
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onEventBanner(_:)))
+            tapGesture.numberOfTapsRequired = 1
+        self.eventBanner.addGestureRecognizer(tapGesture)
         
         backgroundColor = .white
     }

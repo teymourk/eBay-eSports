@@ -23,9 +23,10 @@ extension Home: UICollectionViewDelegateFlowLayout, TwitterDelegate {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let featuredEventsCell: Featured_Events_Cell = collectionView.reusableCell(indexPath: indexPath)
+            featuredEventsCell.delegate = self
         let twitterCell: Twitter_Cell = collectionView.reusableCell(indexPath: indexPath)
+            twitterCell.delegate = self
         let favoritesCell: Favorites_Cell = collectionView.reusableCell(indexPath: indexPath)
-        twitterCell.delegate = self
         if indexPath.section == 0 {
             return indexPath.row == 0 ? featuredEventsCell : twitterCell
         }

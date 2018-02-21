@@ -9,8 +9,6 @@
 import UIKit
 import Firebase
 import TwitterKit
-import FirebaseAuthUI
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
