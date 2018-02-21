@@ -37,6 +37,7 @@ struct itemSummaries:Codable {
     var condition: String?
     var price: price?
     var thumbnailImages: [thumbnailImages]?
+    var additionalImages: [thumbnailImages]?
     var shippingOptions: [shippingOptions]?
     
 }
@@ -54,12 +55,4 @@ struct price:Codable {
 //Thumbnail Image
 struct thumbnailImages:Codable {
     var imageUrl: String?
-    
-    var additionalImages: [additionalImages]?
 }
-
-//Additional Images
-struct additionalImages:Codable {
-    var imageUrl: String?
-}
-

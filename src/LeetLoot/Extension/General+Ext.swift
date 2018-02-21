@@ -33,7 +33,7 @@ extension Int {
 //Mark: - UITextField
 extension UITextView {
     //Attributed string for the title, price and rating Icon
-    func attributedFor(_ title: String, condition: String, price: String, shipping: String, details:String? = nil) {
+    func attributedFor(_ title: String, price: String, details:String? = nil) {
         
         guard   let textFont = UIFont(name: "Helvetica", size: 14) else { return }
         let attributedFont: Dictionary<NSAttributedStringKey, UIFont> = [.font :   textFont]

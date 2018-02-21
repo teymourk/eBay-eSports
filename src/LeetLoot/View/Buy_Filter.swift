@@ -16,26 +16,26 @@ final class Buy_Filter: NSObject {
     
     private lazy var parentView = { ()-> UIView in
         let view = UIView(frame: customFrame(height))
-        view.backgroundColor = .white
+            view.backgroundColor = .white
         return view
     }()
     
     private lazy var fadeBackgroud = { ()-> UIView in
         let view = UIView(frame: window.frame)
-        view.backgroundColor = .black
-        view.alpha = 0
+            view.backgroundColor = .black
+            view.alpha = 0
         return view
     }()
     
     let stackView = { () -> UIStackView in
         let view = UIImageView(image: #imageLiteral(resourceName: "DownArrow"))
-        view.contentMode = .scaleAspectFit
-        let view1 = UIView()
-        let view2 = UIView()
-        let stack = UIStackView(arrangedSubviews: [view1,view,view2])
-        stack.distribution = .fillEqually
-        stack.alignment = .center
-        stack.translatesAutoresizingMaskIntoConstraints = false
+            view.contentMode = .scaleAspectFit
+        let view1 = UIView(),
+            view2 = UIView(),
+            stack = UIStackView(arrangedSubviews: [view1,view,view2])
+            stack.distribution = .fillEqually
+            stack.alignment = .center
+            stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     

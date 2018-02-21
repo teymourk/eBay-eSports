@@ -21,7 +21,7 @@ protocol Networking {
 
 extension Networking where Self == Model {
     private var token: String {
-        return "v^1.1#i^1#p^1#r^0#I^3#f^0#t^H4sIAAAAAAAAAOVXa2wUVRTu9kUKVEosUJDHOmCiwMzemdmd3R3ZjUuX2g19ybYNlGiZnblDx+7OTObepV1MsFZsQkiMIf5QadLGBwT1B6ioP4gmJo0QDKE24RGNAX8YQCBWJBqJxjuzS9lWwrMIiTs/NnPuueee7zvfuXcu6CktW9pX2/d7uWtK4WAP6Cl0udhpoKy0ZNlDRYXzSgpAnoNrsGdJT3Fv0ZkVSEolTXENRKahI+juTiV1JDrGEJW2dNGQkIZEXUpBJGJZjEfq60SOAaJpGdiQjSTljkVDFKsEvD6O83G8X/YBRSJW/WrMZiNEBRKC4vNyIGB7eBOAjCOUhjEdYUnHIYoDbIAGHM2BZsCLLC96AcPzXBvlboUW0gyduDCACjvpis5cKy/XG6cqIQQtTIJQ4VikJt4YiUVXNTSv8OTFCud4iGMJp9H4t2pDge5WKZmGN14GOd5iPC3LECHKE86uMD6oGLmazB2k71CteoUAK5OHU+SgAIRJobLGsFISvnEetkVTaNVxFaGONZy5GaOEjcTzUMa5twYSIhZ123/PpKWkpmrQClGrVkbWRZqaqPBqTbIk1NFM10GI6wwD001rorSf5b0woPo5WuFkXiBSyi2UjZajecJK1YauaDZpyN1g4JWQZA0ncgPyuCFOjXqjFVGxnVG+n+8qhxzfZhc1W8U07tDtusIUIcLtvN68AmOzMba0RBrDsQgTBxyKQpRkmppCTRx0tJiTTzcKUR0Ym6LH09XVxXTxjGFt9HAAsJ619XVxuQOmSDN2p+xez/prN59Aaw4UGZKZSBNxxiS5dBOtkgT0jVSYE3w878vxPj6t8ETrvwx5mD3jO2KyOgQGAz5eELx+WRCkRCIxGR0SzonUY+cBE1KGTklWJ8RmUpIhLROdpVPQ0hSR96kcH1AhrQhBlfYGVZVO+BSBZlUIAYSJhBwM/J8a5ValHpcNEzYZSU3OTIrgJ03svKU0SRbOxGEySQy3qvrrgkQ2yHsOz+7124Jox0AkiGRqjK1tRjZSHkMim5ptaneyvivcGjkPH6iiEoBZpJqSPcgYBy6DNsmMBZGRtsgZzjTa+3qz0Ql10iXYMpJJaLWyd8XE5O3o92k3vy4qOakRGtsfNGS3uU3eobYlfB9RF/e61l8HOetjgyAokC/uu8JW7dS1OfMfbFq3VdhaA2Go3IMPEM/461C4wPmxva79oNe1j9yogAc8xi4Gj5YWtRQXTZ+HNAwZTVIZpG3UyVe+BZlOmDElzSosda2fv3dPe94FbPBZUDV2BSsrYqfl3cfA/GsjJeyMOeVsAHCEFJ6IFbSBxddGi9nZxZWvLNnTVzL8m9+/rGLTjt1bv908fOAiKB9zcrlKCogyCt4+1n5k4ZMLPtp7fPWI+f7g1u920i/6pxqVZzd/uevc/urzUx8frZhxbNny/toNzOzRg21rZo3stLZsunLlr/qjsZeG6KrKHyo/4D97OFQ1+ol0kYZPzd09feS49HXfUEvNdh/Fz41+v6hmTtmJ1/kt6W/Q0pnLjy+6cPhCTz9zavisuWvRn2tXnS8/WYjNXwY+3fJx/baoOuvX1PqFRUfeuHw6tYMejAR2Vj13aV3w3aFDfQtPHMAna/2XdoidI9urnj46/AT88dXDZ06/EN23unGUYZvOvTeT+vzUW1MWzLy8be7BodJDjwwMfPHVzw1L973zWvjNig2xir/39BuzSj483Ppy409Wyx/pltPZ8v0DlClIWhoPAAA="
+        return "v^1.1#i^1#f^0#p^1#I^3#r^0#t^H4sIAAAAAAAAAOVXa2wUVRTu9rGkqQVJGlAgYZkiGGBm7+x09jGhmyx9QKV0W3apQiXlzsyddujuzGbuXcqqjbUoBh+JQf0BhGTRkGhMpJiof8SoIGhUYiSS4AuQSCSUNEpEDZB4Z3Yp20p4FiFx/2zm3HPP/b7vPGYu6HeXz9u4ZOOfla4Jxdl+0F/scvEVoNxdNn9iSfG0siJQ4ODK9s/uLx0o+XUhhslESlqOcMo0MPKsTyYMLDnGWiZtGZIJsY4lAyYRlogixSLLmiUfB6SUZRJTMROMp6m+lgkoAd4noKAgKwKQRZFajUsx42Yt40MiVAOqEBAUQfYLKl3HOI2aDEygQeg64IMs8LE+Pg5EqcYviSHOVwNWMZ52ZGHdNKgLB5iwA1dy9loFWK8OFWKMLEKDMOGmSGMsGmmqb2iJL/QWxArndYgRSNJ49FOdqSJPO0yk0dWPwY63FEsrCsKY8YZzJ4wOKkUugbkJ+I7UYkgLwGBAFgSFBwLUxkXKRtNKQnJ1HLZFV1nNcZWQQXSSuZaiVA15LVJI/qmFhmiq99h/bWmY0DUdWbVMw6LIykhrKxNeqkML4u4424wQaTZNwrYur2cDvFCDglrAx6o+RfAHZX/+oFy0vMxjTqozDVW3RcOeFpMsQhQ1GquNUKANdYoaUSuiERtRoV/gkoYCv8pOai6LadJt2HlFSSqEx3m8dgZGdhNi6XKaoJEIYxcciWoZmErpKjN20anFfPmsx7VMNyEpyevt7e3legXOtLq8PgB47yPLmmNKN0pChvravZ7z16+9gdUdKgqiO7EukUyKYllPa5UCMLqYsM8vCoKY1300rPBY678MBZy9oztivDpEEWXglwWRFxWoKqHAeHRIOF+kXhsHkmGGTUKrB5FUAiqIVWidpZPI0lVJEDWfENQQq/pDGlsT0jRWFlU/y2sIAYRkWQkF/0+Ncr2lHlPMFGo1E7qSGZeCH7diFyy1FVokE0OJBDVcb9VfkSS2Sd52enav3xBFOwamQWBK5+za5hQz6TUhHWq2qdNBfUu8dfo+vKuSSgnmmOpq7kXGOXQ5vE7hLITNtEXf4VzUnutxswcZtEuIZSYSyGrnb0mJ8Zvod2iaX5GVktCpjJ13G7MbHJM3WduQ3EHWpQOujisw50U+xIfodA7dErc6J6/xzH8wtG4osUtMTJB6Gz5AvKOvQ+Ei58cPuN4FA67d9EYFvOABvhrMcpesKC25ZxrWCeJ0qHFY7zLoV76FuB6USUHdKna7OmYMvtlZcAHLrgb3jVzBykv4ioL7GJhxeaWMnzS1kg8Cn48HYo1fDK0C1ZdXS/kppVW/r5v+/O72B08Yx83K9m1r2nbBlcdA5YiTy1VWRCujaLmslvN/zznzQdHsukH3mueklsaj2Lw4vBd/vPPeg39Ya889WrVlwdtfnfzrUNuFCx3RSSfdv0x54fCcqubf+l5k/Tu+3XDmwoSKp5+YqHXHq7tWn90eubhpMX6y8f3zk08dPnt6F5r7ekXFvs2PfTTtQHT/0tPa3persjOX7n0NHBv+tPrzl4yJw4PHfzhy6Pstpa8+Uz/3i4aWlUe+PNW37pUFbzzet3/fjupv5n94cJvc/J47tSV7wBweatvWI+34+aGNT339U3aD2Jdh98z/rv6TwWdPHy3Zunje1K3ed4ZaT8hv+at2Rjd1XlzSAJomnxtqm97b2bHncHbWZ8fOb546e+b9+tDmFQcXPOz9cXsuff8AXRSTYhoPAAA="
     }
     
     func requestData(forUrl url: URL, completion: @escaping (RequestRespnse, Model?) -> ()) {
@@ -50,7 +50,6 @@ extension Networking where Self == Model {
     }
 }
 
-
 class customeImage: UIImageView {
 
     private var imageCache = NSCache<NSString, UIImage>()
@@ -73,10 +72,9 @@ class customeImage: UIImageView {
                 (data, response, error) in
                 guard error == nil else { return }
                 
-                if let imgData = data {
+                if let imgData = data, let cachedImage = UIImage(data: imgData) {
                     DispatchQueue.main.async {
-                        let cachedImage = UIImage(data: imgData)
-                        self.imageCache.setObject(cachedImage!, forKey: urlString)
+                        self.imageCache.setObject(cachedImage, forKey: urlString)
                         self.image = cachedImage
                     }
                 }

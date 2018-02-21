@@ -42,17 +42,13 @@ class Merch_Cell: ParentCell {
 
     private func configureCellFor(_ items: itemSummaries) {
         let price = items.price,
-            thumbnail = items.thumbnailImages?.first,
-            shipping = items.shippingOptions?.first
-
-        let title = items.title ?? "",
-            itemCondition = items.condition == "New" ? "Brand New" : "Pre-Owned",
+            title = items.title ?? "",
         	itemPrice = price?.value ?? "0.0",
-            currency = price?.currency ?? "USD",
-            imgUrl = thumbnail?.imageUrl ?? "",
-            itemShipping = shipping?.shippingCostType == "CALCULATED" ? "+ Shipping" : "Free Shipping"
+            currency = price?.currency ?? "USD"
 
-        merchTitle.attributedFor(title, condition: itemCondition, price: "\(currency) $\(itemPrice)", shipping: itemShipping)
+        let imgUrl = items.thumbnailImages?.first?.imageUrl ?? ""
+
+        merchTitle.attributedFor(title, price: "\(currency) $\(itemPrice)")
         merchImage.downloadImages(url: imgUrl)
     }
 

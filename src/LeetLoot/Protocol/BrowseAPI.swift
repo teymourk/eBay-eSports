@@ -20,7 +20,7 @@ extension BrowseAPI {
         let baseUrl = "https://api.ebay.com/buy/browse/v1/item_summary/search?",
             query = "q=\(keyWord ?? "")&",
             groupBy = "category_ids=\(filterBy?.rawValue ?? "")&",
-            limit = "limit=100&",
+            limit = "limit=50&",
             buyOption = "buyingOptions%3A%7BFIXED_PRICE%7D",
             condition = "conditions%3A%7BNEW%7D&",
             filter = "filter=\(buyOption),\(condition)",
