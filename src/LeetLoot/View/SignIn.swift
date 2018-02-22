@@ -20,9 +20,10 @@ class SignIn: ParentView {
         return image
     }()
     
-    private lazy var back = { () -> UIButton in
+    lazy var back = { () -> UIButton in
         let button = UIButton(imageName: "Back")
             button.addTarget(self, action: #selector(onScreenButtons(_ :)), for: .touchUpInside)
+            button.isHidden = true
             button.tag = 0
         return button
     }()
@@ -59,19 +60,31 @@ class SignIn: ParentView {
         delegate?.onScreenButtons(sender)
     }
     
+    //Dont Touch
     override func setupView() {
+        setupLayoutAttributes()
         backgroundColor = .white
         transform = CGAffineTransform(scaleX: 1, y: 1)
-        
         addSubview(stackView)
-        addSubview(register)
+
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
+        ])
+    }
+    
+    //Register
+    func setupRegister() {
+        addSubview(register)
+        NSLayoutConstraint.activate([
             register.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
             register.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
+    }
+    
+    //Put layout here
+    func setupLayoutAttributes() {
+        setupRegister()
     }
 }

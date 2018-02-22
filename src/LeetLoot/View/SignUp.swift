@@ -10,4 +10,8 @@ import UIKit
 
 class SignUp: SignIn {
 
+    //Layout Here
+    override func setupLayoutAttributes() {
+        back.isHidden = false
+    }
 }
