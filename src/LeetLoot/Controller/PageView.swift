@@ -10,6 +10,12 @@ import Foundation
 import UIKit
 
 class PageView: UIViewController {
+    lazy var signIn = { () -> ParentModal in
+        let signin = ParentModal()
+            signin.signIn.delegate = self
+            signin.signUp.delegate = self
+        return signin
+    }()
     
     private lazy var menuBar = { () -> Menu in
         let view = Menu(isMenu: true)
@@ -56,8 +62,7 @@ class PageView: UIViewController {
     
     @objc
     private func onSignIn(sender: UIBarButtonItem) {
-        //Put signin here
-        
+        signIn.action = .open
     }
     
     private func setupMenuBar() {
@@ -105,5 +110,19 @@ extension PageView: MenuBarDelegate {
             self.pageCarousel.contentOffset.x = self.menuOp == .Home ? (Constants.kWidth - Constants.kWidth) : Constants.kWidth
             self.view.layoutIfNeeded()
         })
+    }
+}
+
+extension PageView: RegisterPagesDelegate {
+    func onScreenButtons(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            signIn.action = .login
+        case 1:
+            signIn.action = .close
+        case 2:
+            signIn.action = .signUp
+        default: break
+        }
     }
 }
