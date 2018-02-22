@@ -41,7 +41,6 @@
 		BE24D73A1FF585EC00E745E6 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24D7391FF585EC00E745E6 /* PageView.swift */; };
 		BE4625292011C367005789E6 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625282011C367005789E6 /* Twitter.swift */; };
 		BE46252E2011D305005789E6 /* Featured_Events_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE46252D2011D305005789E6 /* Featured_Events_Cell.swift */; };
-		BE4625302011D544005789E6 /* Home+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE46252F2011D544005789E6 /* Home+Ext.swift */; };
 		BE4625322011DA1A005789E6 /* Header_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625312011DA1A005789E6 /* Header_Cell.swift */; };
 		BE4625342011DA4F005789E6 /* Favorites_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4625332011DA4F005789E6 /* Favorites_Cell.swift */; };
 		BE7D2B1220170F950063BF7E /* Futura Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BE7D2B1120170F950063BF7E /* Futura Bold.otf */; };
@@ -103,7 +102,6 @@
 		BE24D7391FF585EC00E745E6 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		BE4625282011C367005789E6 /* Twitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
 		BE46252D2011D305005789E6 /* Featured_Events_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Featured_Events_Cell.swift; sourceTree = "<group>"; };
-		BE46252F2011D544005789E6 /* Home+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home+Ext.swift"; sourceTree = "<group>"; };
 		BE4625312011DA1A005789E6 /* Header_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header_Cell.swift; sourceTree = "<group>"; };
 		BE4625332011DA4F005789E6 /* Favorites_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites_Cell.swift; sourceTree = "<group>"; };
 		BE7D2B1120170F950063BF7E /* Futura Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Futura Bold.otf"; path = "LeetLoot/Supporting Files/Futura Bold.otf"; sourceTree = SOURCE_ROOT; };
@@ -256,7 +254,6 @@
 			isa = PBXGroup;
 			children = (
 				AB7CE6401FF8901C0050125C /* General+Ext.swift */,
-				BE46252F2011D544005789E6 /* Home+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -511,7 +508,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE4625302011D544005789E6 /* Home+Ext.swift in Sources */,
 				AB90BC0D203D14540052C685 /* Browse_Event.swift in Sources */,
 				A1F1F116202EA7F40048AD45 /* CarouselCollectionView.swift in Sources */,
 				AB38512A2026F58C008D6B71 /* FilterOptions.swift in Sources */,
