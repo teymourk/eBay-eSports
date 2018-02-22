@@ -22,7 +22,8 @@ class CustomNavbar: ParentView {
         addSubview(titleImage)
         
         NSLayoutConstraint.activate([
-            titleImage.topAnchor.constraint(equalTo: topAnchor, constant: -17),
+            titleImage.heightAnchor.constraint(equalTo: heightAnchor),
+            titleImage.topAnchor.constraint(equalTo: topAnchor, constant: -1),
             titleImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             titleImage.trailingAnchor.constraintLessThanOrEqualToSystemSpacingAfter(trailingAnchor, multiplier: 1/2),
         ])
