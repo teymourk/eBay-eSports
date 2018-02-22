@@ -17,7 +17,6 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
     
     private let cellId = "cellId"
     
-    
     private lazy var eventBanner: UIImageView = {
         let banner = UIImageView()
         banner.image = UIImage(named: "E3Banner.png")
@@ -27,12 +26,19 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
     }()
     
     private lazy var merchButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("See more", for: .normal)
-        button.contentHorizontalAlignment = .left
+        let button = UIButton(title: "See more", imageName: "Arrow.png")
+
+        //button.contentHorizontalAlignment = .left
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, -9, 0, 0)
+    
+        button.imageView?.translatesAutoresizingMaskIntoConstraints = false
+        button.imageView?.leftAnchor.constraint(equalTo: button.leftAnchor, constant: 65).isActive = true
+        button.imageView?.bottomAnchor.constraint(equalTo: button.bottomAnchor, constant: -10).isActive = true
+        button.imageView?.centerYAnchor.constraint(equalTo: button.centerYAnchor, constant: 0.0).isActive = true
+        
         return button;
     }()
     
@@ -85,12 +91,12 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
             eventBanner.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             eventBanner.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
             eventBanner.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            eventBanner.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -190.7),
+            eventBanner.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -195.7),
             
             carouselCollectionView.topAnchor.constraint(equalTo: eventBanner.bottomAnchor, constant: 15),
             carouselCollectionView.leftAnchor.constraint(equalTo: leftAnchor),
             carouselCollectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
-            carouselCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -47),
+            carouselCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
 
             merchButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             merchButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),

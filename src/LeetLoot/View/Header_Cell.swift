@@ -19,9 +19,9 @@ class Header_Cell: ParentCell {
     
     private let sectionTitle = { () -> UILabel in
         let label = UILabel()
-            label.textColor = .black
+            label.textColor = .coolGrey
             label.textAlignment = .left
-            label.font = UIFont.systemFont(ofSize: 15)
+            label.font = UIFont.boldSystemFont(ofSize: 14)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

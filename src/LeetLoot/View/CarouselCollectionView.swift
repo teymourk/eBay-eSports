@@ -95,7 +95,9 @@ class ItemCell: UICollectionViewCell{
     }
     
     func setupViews(){
-        backgroundColor = .customGray
+        backgroundColor = .clear
+        layer.borderWidth = 0.5
+        layer.borderColor = UIColor.softGrey.cgColor
     }
     
 }

@@ -20,12 +20,18 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
     var tweetID = "20"
     
     private lazy var timelineButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("See more Tweets", for: .normal)
+        let button = UIButton(title: "See more tweets", imageName: "Arrow.png")
         button.contentHorizontalAlignment = .left
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, -9, 0, 0)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.imageView?.translatesAutoresizingMaskIntoConstraints = false
+        button.imageView?.leftAnchor.constraint(equalTo: button.leftAnchor, constant: 111).isActive = true
+        button.imageView?.bottomAnchor.constraint(equalTo: button.bottomAnchor, constant: -10).isActive = true
+        button.imageView?.centerYAnchor.constraint(equalTo: button.centerYAnchor, constant: 0.0).isActive = true
+        
         return button;
     }()
     

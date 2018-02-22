@@ -63,14 +63,14 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
-        var cellHeight = CGFloat(320)
+        var cellHeight = CGFloat(325)
         if (screenWidth > 375) {
-            cellHeight = CGFloat(333)
+            cellHeight = CGFloat(338)
         }
         let eventRow = CGSize(width: view.frame.width, height: cellHeight)
         //Correct cell height = tweet height + 43 for iPhone 8 Plus
         //Correct cell height = tweet height + 61 for iPhone 8 & iPhone X
-        let twitterRow = CGSize(width: view.frame.width, height: 201.67)
+        let twitterRow = CGSize(width: view.frame.width, height: 158)
         
         if indexPath.section == 0 {
             return indexPath.row == 0 ? eventRow : twitterRow
@@ -93,7 +93,7 @@ extension Home: FeaturedEventDelegate {
 extension Home {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header: Header_Cell = collectionView.reusableCell(indexPath: indexPath, kind: kind)
-        header.title = indexPath.section == 0 ? "Featured Events" : "Favorites"
+        header.title = indexPath.section == 0 ? "Featured Event" : "Favorites"
         
         return header
     }

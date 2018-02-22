@@ -66,7 +66,7 @@ class Merch_Cell: ParentCell {
     
     internal func setupLayoutAttributes() {
         merchImage.layer.borderWidth = 0.5
-        merchImage.layer.borderColor = UIColor.lightGray.cgColor
+        merchImage.layer.borderColor = UIColor.softGrey.cgColor
         merchImage.clipsToBounds = true
         merchImage.heightAnchor.constraint(equalTo: widthAnchor).isActive = true
         
