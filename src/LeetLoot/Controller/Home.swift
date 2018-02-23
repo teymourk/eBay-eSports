@@ -17,43 +17,6 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         super.viewDidLoad()
         setupCollectionView()
     }
-    
-    private var tweetSize = CGSize()
-    
-    func getCell(completion: @escaping (TWTRTweet) -> ()) {
-        let client = TWTRAPIClient()
-        //Construct URL to query the most recent tweet from the featured event twitter account
-        let statusesShowEndpoint = "https://api.twitter.com/1.1/statuses/user_timeline.json"
-        let params = ["screen_name": "E3", "count": "1"]
-        var clientError : NSError?
-        
-        let request = client.urlRequest(withMethod: "GET", urlString: statusesShowEndpoint, parameters: params, error: &clientError)
-        
-        client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
-            if connectionError != nil { print("Error: with Connection") }
-            
-            do {
-                guard let data = data else { return }
-                
-                guard
-                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? NSArray,
-                    let dict = json[0] as? NSDictionary,
-                    let tweetID = dict["id_str"] as? String else { return }
-                
-                // Load the tweet in the Tweet view based on the ID retrieved
-                client.loadTweet(withID: tweetID) { (tweet, error) in
-                    if let t = tweet {
-                        DispatchQueue.main.async {
-                            completion(t)
-                        }
-                    }
-                }
-                
-            } catch let jsonError as NSError {
-                print("json error: \(jsonError.localizedDescription)")
-            }
-        }
-    }
 
     private func setupCollectionView() {
         collectionView?.backgroundColor = .customGray
@@ -89,11 +52,11 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     }
     
     private func setupTwitterFor(_ cell: Twitter_Cell) -> Twitter_Cell {
-        self.getCell(completion: { [weak self] (tweet) in
+        getTweet(completion: { [weak self] (tweet) in
             cell.tweetView.configure(with: tweet)
-            self?.tweetSize = cell.tweetView.sizeThatFits(cell.frame.size)
-            self?.tweetSize.width = Constants.kWidth
+            tweetSize = cell.tweetView.sizeThatFits(cell.frame.size)
             self?.collectionView?.collectionViewLayout.invalidateLayout()
+            cell.tweetView.showBorder = false
         })
         return cell
     }
@@ -116,14 +79,16 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
 
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
-        var cellHeight = CGFloat(325)
+        var eventHeight = CGFloat(325)
+        let tweet = CGSize(width: Constants.kWidth, height: tweetSize.height + CGFloat(40))
+       
         if (screenWidth > 375) {
-            cellHeight = CGFloat(338)
+            eventHeight = CGFloat(338)
         }
-        
-        let eventRow = CGSize(width: view.frame.width, height: cellHeight)
+
+        let eventRow = CGSize(width: view.frame.width, height: eventHeight)
         if indexPath.section == 0 {
-            return indexPath.row == 0 ? eventRow : self.tweetSize
+            return indexPath.row == 0 ? eventRow : tweet
         }
         
         return CGSize(width: view.frame.width, height: 200)
