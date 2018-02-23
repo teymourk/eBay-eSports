@@ -1,15 +1,16 @@
 //
-//  CarouselCollectionView.swift
+//  BrowseCarousel.swift
 //  LeetLoot
 //
-//  Created by Katherine Bajno on 2/9/18.
+//  Created by Katherine Bajno on 2/23/18.
 //  Copyright © 2018 Kiarash Teymoury. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 
-class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     private let cellId = "cellId"
     
@@ -44,7 +45,7 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
         itemsCollectionView.delegate = self
         
         //register item cell to the collection view
-        itemsCollectionView.register(ItemCell.self, forCellWithReuseIdentifier: cellId)
+        itemsCollectionView.register(browseItemCell.self, forCellWithReuseIdentifier: cellId)
         
         //expand from left to right edge
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))
@@ -55,7 +56,7 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
         
     }
     
-   //number of cells return in section, this will change based on if it's events or games
+    //number of cells return in section, this will change based on if it's events or games
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         return 5
@@ -64,12 +65,12 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
     }
-
-
+    
+    
     
     /*func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-    }*/
+     return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+     }*/
     
     //sizing of cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -83,21 +84,37 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
 }
 
 //cell where the event, game, or merch is displayed in carousel
-class ItemCell: UICollectionViewCell{
+class browseItemCell: UICollectionViewCell{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
     
+    let imageView: UIImageView = {
+        let iv = UIImageView()
+        iv.image = UIImage(named: "e3browse")
+        return iv
+    }()
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func setupViews(){
+        
+        //addSubview(imageView)
+        //imageView.frame = CGRectMake(0, 0, frame.width, frame.height)
+
+        
         backgroundColor = .clear
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.softGrey.cgColor
+    }
+    
+    //function to allow for CGRectMake in Swift 4
+    func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
+        return CGRect(x: x, y: y, width: width, height: height)
     }
     
 }

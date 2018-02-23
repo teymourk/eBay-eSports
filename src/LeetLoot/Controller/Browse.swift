@@ -12,18 +12,26 @@ import UIKit
 class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private let cellId = "cellId"
+   // var browseCategories: [BrowseCategory]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         //collectionView?.contentInsetAdjustmentBehavior = .never
         collectionView?.backgroundColor = .customGray
         collectionView?.register(BrowseCell.self, forCellWithReuseIdentifier: cellId)
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BrowseCell
+        
         return cell
     }
+    
+    
     
     //num cells
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -39,4 +47,5 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(15)
     }
+
 }
