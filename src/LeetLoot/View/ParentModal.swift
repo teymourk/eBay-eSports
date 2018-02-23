@@ -35,19 +35,26 @@ class ParentModal: NSObject {
     
     private lazy var signInFrames: (CGFloat,CGFloat) -> CGRect = {
         return CGRect(x: $0,
-                      y: $1,
+                      y: $1 + self.topAnchor,
                       width: self.width - (self.edgeOffset * 2),
                       height: self.width - 20)
     }
     
     private lazy var signUpInitialFrame: (CGFloat,CGFloat) -> CGRect = {
         return CGRect(x: $0,
-                      y: $1,
+                      y: $1 + self.topAnchor,
                       width: self.width - (self.edgeOffset * 2),
                       height: self.width)
     }
     
     private let edgeOffset: CGFloat = 8
+    
+    var topAnchor: CGFloat {
+        get {
+            let device = Constants.deviceType.None.isDevice()
+            return device == .X ? 30 : 0
+        }
+    }
     
     var action: PageAction = .open {
         willSet {
@@ -80,6 +87,8 @@ class ParentModal: NSObject {
     
         UIView.animate(withDuration: 0.3, animations: {
             self.fadeBackground.alpha = 0
+            self.signUp.frame = self.signInFrames(self.edgeOffset, -(self.width))
+            self.signIn.frame = self.signInFrames(self.edgeOffset, -(self.width))
     
         }, completion: { (true) in
             self.fadeBackground.removeFromSuperview()
