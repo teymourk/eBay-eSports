@@ -23,7 +23,6 @@ class Browse_Game: UICollectionViewController {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
-                self.collectionView?.scrollsToTop = true
                 self.menuBar.results = self.root?.first?.total
             }
         }
@@ -31,13 +30,13 @@ class Browse_Game: UICollectionViewController {
     
     lazy var menuBar = { () -> Menu in
         let view = Menu(isMenu: false)
-        view.delegate = self
+            view.delegate = self
         return view
     }()
     
     lazy var buyItem = { () -> Buy_Filter in
         let view = Buy_Filter()
-        view.delegate = self
+            view.delegate = self
         return view
     }()
     
@@ -49,12 +48,12 @@ class Browse_Game: UICollectionViewController {
         requestDataFromAPI()
     }
     
-    private lazy var merchRoot: Root = {
-        return Root(queryKey: "League+of+legends", filterBy: .All_Items, sortBy: .Best_Match)
-    }()
-    
+    private var merchRoot = Root(queryKey: "League+of+legends",
+                                            filterBy: .All_Items,
+                                            sortBy: .Best_Match)
+
     private func requestDataFromAPI() {
-        merchRoot.searchByKeyWord({
+        merchRoot.retrieveDataByName(offset: 0, {
             self.m = $0
         })
     }
@@ -73,7 +72,7 @@ class Browse_Game: UICollectionViewController {
             menuBar.heightAnchor.constraint(equalToConstant: 45),
             menuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             menuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            ])
+        ])
     }
     
     //Setup navigation bar
@@ -97,15 +96,11 @@ extension Browse_Game {
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard   let root = root?.first,
-            let nextOffset = root.next,
-            let summariesCount = root.itemSummaries?.count,
-            let url = URL(string: nextOffset) else { return }
+                let summariesCount = root.itemSummaries?.count else { return }
         if indexPath.item == summariesCount - 10 {
-            merchRoot.requestData(forUrl: url, completion: { (_respne, merchObj) in
-                if  let newMerch = merchObj,
-                    let itemSummaries = newMerch.itemSummaries {
-                    self.root?[0].next = newMerch.next
-                    itemSummaries.forEach({
+            merchRoot.retrieveDataByName(offset: summariesCount, {
+                if let items = $0?.first?.itemSummaries {
+                    items.forEach({
                         self.root?[0].itemSummaries?.append($0)
                     })
                 }
@@ -146,7 +141,12 @@ extension Browse_Game: MenuBarDelegate {
 
 //Mark: BuyFilterDelegate
 extension Browse_Game: BuyFilterDelegate {
-    func updateNewData(_ newData: [Root]?) {
-        self.m =  newData
+    func updateNewData(for query: Root) {
+        self.merchRoot = query
+        query.retrieveDataByName(offset: 0, {
+            self.m = $0
+        })
     }
 }
+
+

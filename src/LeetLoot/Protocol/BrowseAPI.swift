@@ -12,11 +12,11 @@ protocol BrowseAPI: Networking where Model == Root {
     var keyWord: String? { get set }
     var filterBy: Filters.option? { get set }
     var sortBy: Sort.option? { get set }
-    func searchByKeyWord(_ completion: @escaping ([Root]?) ->())
+    func retrieveDataByName(offset: Int, _ completion: @escaping ([Root]?) ->())
 }
 
 extension BrowseAPI {
-    private var endPoint: URL? {
+    private var endPoint: String {
         let baseUrl = "https://api.ebay.com/buy/browse/v1/item_summary/search?",
             query = "q=\(keyWord ?? "")&",
             groupBy = "category_ids=\(filterBy?.rawValue ?? "")&",
@@ -25,12 +25,14 @@ extension BrowseAPI {
             condition = "conditions%3A%7BNEW%7D&",
             filter = "filter=\(buyOption),\(condition)",
             sort = sortBy?.rawValue ?? ""
-        return URL(string: baseUrl + query + groupBy + limit + filter + sort)
+        return baseUrl + query + groupBy + limit + filter + sort
     }
     
-    func searchByKeyWord(_ completion: @escaping ([Root]?) ->()) {
-        guard let url = endPoint else { return }
+    func retrieveDataByName(offset: Int, _ completion: @escaping ([Root]?) ->()) {
+        guard let url = URL(string: endPoint+"&offset=\(offset)") else { return }
+        
         print(url)
+        
         var merchendise:[Root]? = [Root]()
         requestData(forUrl: url) { (_response, _merchendise) in
             switch _response {
@@ -48,7 +50,3 @@ extension BrowseAPI {
         }
     }
 }
-
-//Group ID
-//220 Toys
-//1059 T-shirts

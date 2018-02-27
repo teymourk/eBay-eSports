@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BuyFilterDelegate {
-    func updateNewData(_ newData: [Root]?)
+    func updateNewData(for query: Root)
 }
 
 final class Buy_Filter: NSObject {
@@ -141,9 +141,7 @@ extension Buy_Filter: FilterMenuDelegate {
     func selctedQuery(_ query: Root) {
         close()
         guard delegate != nil else { return }
-        query.searchByKeyWord { (m) in
-            self.delegate?.updateNewData(m)
-        }
+        self.delegate?.updateNewData(for: query)
     }
 }
 

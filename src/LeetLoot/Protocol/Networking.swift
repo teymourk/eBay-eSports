@@ -21,7 +21,7 @@ protocol Networking {
 
 extension Networking where Self == Model {
     private var token: String {
-        return "v^1.1#i^1#r^0#p^1#f^0#I^3#t^H4sIAAAAAAAAAOVXW2wUVRjudrclBYoxUKwNJMtQjEFn9sxlZ3cn7Oq25bJQ2sIuBEEpszNn2qGzM5s5Z23XSNyUgLFiAF8Q1KQEVEQ0QsTEgOGlKCZekAdI0GiCPvCiKJDgA17OzC5lWwnXIiTuy2b+85//fN/3X2YOKFTXzN64YOOlWs+4ysECKFR6POwEUFNd9dgkb2VDVQUoc/AMFhoLvn7v2TlIzhhZaSlEWctE0N+XMUwkucYolbNNyZKRjiRTzkAkYUVKxhe3ShwDpKxtYUuxDMqfaIlSogKDvCgIQTUSTqcVnljNKzFTVpSCPM9rSkgO8aqW5gVA1hHKwYSJsGziKMUBNkwDjub4FMdJbEgSeEbgxJWUfzm0kW6ZxIUBVMyFK7l77TKs14cqIwRtTIJQsUR8XrI9nmiZ25aaEyiLFSvpkMQyzqGRT82WCv3LZSMHr38Mcr2lZE5RIEJUIFY8YWRQKX4FzG3Ad6VmgypUABCFiBIEIZYbEynnWXZGxtfH4Vh0ldZcVwmaWMf5GylK1EivhQouPbWREIkWv/O3JCcbuqZDO0rNbYo/Fe/ooGKLdNmWUXeKboUQt1oWpjuWttAhlhdgWAtxtMopvBhOi6WDitFKMo86qdkyVd0RDfnbLNwECWo4WhtQpg1xajfb7biGHUTDfkIKgCsasmClk9RiFnO423TyCjNECL/7eOMMDO/G2NbTOQyHI4xecCWKUnI2q6vU6EW3Fkvl04eiVDfGWSkQ6O3tZXp5xrK7AhwAbGDF4tak0g0zMkV8nV4v+us33kDrLhUFkp1Il3A+S7D0kVolAMwuKsaJQZ4PlnQfCSs22vovQxnnwMiOGKsO4TghrKos6Q1F4LmwOBYdEisVacDBAdNyns7Idg/EWUNWIK2QOstloK2rEh/UOD6sQVoVIxotRDSNTgdVkWY1CAGEZDhGwv+nRrnZUk8qVhZ2WIau5Mek4Mes2Hlb7ZBtnE9CwyCGm636a5JEDsm7Ts/p9Vui6MRAJIic1RmnthnFygQsmQw1x9Tpor4j3jp5H95XSSUEi0x1tfgiY1y6DHpWYWyIrJxN3uFMuzPXU1YPNEmXYNsyDGgvZ+9IibGb6Pdoml+TlWLoRMbO+43ZLY7J26xtGd9D1r5+z6prMGeDbETgyMTm74hbs5vXVP4/GFq3lNgFFsJQvQsfIIGR16FYhftj+z0HQb9nP7lRgQCYxc4EM6q9y3zeiQ1Ix5DRZY1BepdJvvJtyPTAfFbW7cpqz6ppH77bWXYBG3wG1A9fwWq87ISy+xiYdnWlin3goVo2DDiO5zg2JPArwcyrqz52qm+KdGqJ9Meuuj2Pt1Evrv9656wDm56vArXDTh5PVQWpjIrvHqxTqz+bePLS6tA3R47x+7595+fJ3qnhiwfrL+z95YNJHzU++dpeuOXHXbKYXHgMto0Tz/26un7c+vNdm89v3L7hlUePe+q3DO37Ijo9o6z68tiaH9Zd6hEHPv0rMDj/75ZPQN+JbW9y04d2DnRvmCHN/Pzldaff2pM4MH2Z/PvaR+wdwuVd8yYmkpfHgwnskf2Tc5tf3f59g8S2+n+rrRh6uub18fzWc5XowlD1G5sOLXphxewzZ/70deqH+05mX/q4Eew+mwp6M4y9pm4xdzSxp0m5WDBONnU8N/DEwwMzpswunLj806H3B5rfbmlvfe/4NiYiLz3cGJa+qrvAHF04/3TDwlO+3YuEHcX0/QO2WXmBGg8AAA=="
+        return "v^1.1#i^1#p^1#r^0#I^3#f^0#t^H4sIAAAAAAAAAOVXbWwURRju9dqaCi2WD9GKci7yB9i92d372Ft7F4+WSqW0hTsqlpC6tztLl97tnjtztocBjxqJIqIkJahRLComJJWPBFTUEEVRCYkIf4j8QU1DEEGiAUWC4uzeUa6V8FmExPtzmXfeeed9nvd5Z3ZApqR00rLpy/4oc9xW2JMBmUKHgx0GSkuKJ5c7CyuLC0Ceg6Mn80CmqMt5pApJiXhSnA1R0tARdHUm4joSbWOQSpm6aEhIQ6IuJSASsSxGwjPrRY4BYtI0sCEbccpVVxOkvIIHsAoUfAEBAtUfIFb9fMyoEaRYhVUlxaMCmff4A4JM5hFKwTodYUnHQYoDrEADjub8UcCLgBM9PMMJgRbK1QxNpBk6cWEAFbLTFe21Zl6ul05VQgiamAShQnXh2khjuK5mWkO0yp0XK5TjIYIlnEIDR9WGAl3NUjwFL70Nsr3FSEqWIUKUO5TdYWBQMXw+mWtI36aaVQKqIBGOeZn3xqA0JFTWGmZCwpfOw7JoCq3ariLUsYbTl2OUsBFbCGWcGzWQEHU1LutvVkqKa6oGzSA1bWr4sXBTExWaoUmmhNqidD2EuN4wMN00u4b2s7wHCqqfoxVO5n1CzJfbKBstR/OgnaoNXdEs0pCrwcBTIckaDuSGE7153BCnRr3RDKvYyijfz9vPId9iFTVbxRRu0626wgQhwmUPL1+B/tUYm1oshWF/hMETNkVBSkomNYUaPGlrMSefThSk2jBOim53R0cH08EzhrnAzQHAuufOrI/IbTBBFNKZsHo9669dfgGt2VBkSFYiTcTpJMmlk2iVJKAvoEKcz8vz3hzvA9MKDbb+y5CH2T2wI4aqQ1QO+Dgo8B5JkFje7x2KDgnlROq28oAxKU0nJLMd4mRckiEtE52lEtDUFJH3qhwvqJBWfAGV9gRUlY55FR/NqhACCGMxOSD8nxrlSqUekY0kbDLimpweEsEPmdh5U2mSTJyOwHicGK5U9RcFiSyQNxye1etXBdGKgUgQKakxlrYZ2Ui4DYkcapap1c76unBr5D68pYpKAGaRakr2ImNsuAx6UmZMiIyUSe5wptE616NGO9RJl2DTiMeh2cxeFxNDd6LfpNP8oqjkuEZobL3VkF3lMXmN2pbwTURd1OWYdxHkrJcN+AHw+vjrwlZt1zWa/g8Orasq7HQDYajcgA8Q98DnUKjA/rFdjm2gy7GFvKiAG0xkJ4D7S5xzipzDK5GGIaNJKoO0BTr5yjch0w7TSUkzC0sc88Zt3tCa9wDrmQ/u6n+ClTrZYXnvMTDuwkwxO2JsGSsAjvMDHnAevgVMuDBbxN5ZNLqUfxntTvf2OXekZ993ev7G8auHnwZl/U4OR3EBUUZB98nNO0+M++VMUcue9RXrJnVXnqr9eetHVeFTv36y6825XYuOnJ3B9z2yf/L25b9v2TQ+XHLoWf30zrX7l47JvFQ+pzX91KhFE39jPrh976Zzjy/MKIuP7+7tdX767Wd7lz2zomrXrGGPHm7eNSuE15ydEv3p7JJzjoOdU7btW3Rszzbj+7dw++qj8vNfr3/juRGvV4/sRqdW3v0ePfb4j4deODZmzomRo40nPhzT3HdwY7fwzsol69+/l9s+6rD20JrjX3a3rYt2fFH9YuX8wCq1or2ib8fWRt/iDSteK3+67MwPtZ8f2Nf3Z/nHtSunfLWK/e6eyWDi0Vde/XvayQfb3y356+2lJ3u/edi7ac/aO3yOzooD2fL9A8IOEJEaDwAA"
     }
     
     func requestData(forUrl url: URL, completion: @escaping (RequestRespnse, Model?) -> ()) {
@@ -29,7 +29,7 @@ extension Networking where Self == Model {
         let config = URLSessionConfiguration.default
             config.httpAdditionalHeaders = ["Authorization" : authString]
         let session = URLSession(configuration: config)
-        
+
         let task = session.dataTask(with: url) {
             (dataObj, respnse, error) in
             guard       error == nil,
@@ -67,7 +67,7 @@ class customeImage: UIImageView {
             return
         }
     
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .background).async {
             URLSession.shared.dataTask(with: imageURL) {
                 (data, response, error) in
                 guard error == nil else { return }
