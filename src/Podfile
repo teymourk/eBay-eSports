@@ -12,7 +12,7 @@ target 'LeetLoot' do
   pod 'TwitterKit'
 
   # Pods for Slider
-  pod 'WARangeSlider'
+  pod 'RangeSeekSlider'
 
   target 'LeetLootTests' do
     inherit! :search_paths

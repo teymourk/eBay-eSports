@@ -14,19 +14,23 @@ protocol FilterOptions {
 }
 
 protocol EnumTitles {
-    var title: String { get }
+    var name: String { get }
+}
+
+extension FilterOptions {
+    var sectionTitle: String {
+        return String(describing: Self.self)
+    }
 }
 
 extension EnumTitles {
-    var title: String {
-        return String(describing: self)
+    var name: String {
+        return String(describing: self).replacingOccurrences(of: "_", with: " ")
     }
 }
 
 struct Sort: FilterOptions {
     var options: [EnumTitles] { return [option.Best_Match, option.Lowest_Price, option.Highest_Price] }
-    
-    var sectionTitle: String { return "Sort by" }
     
     enum option: String, Codable, EnumTitles {
         case Best_Match = "fieldgroups=MATCHING_ITEMS"
@@ -38,8 +42,6 @@ struct Sort: FilterOptions {
 struct Filters: FilterOptions {
     var options: [EnumTitles] { return [option.All_Items, option.Toys, option.Clothing] }
     
-    var sectionTitle: String { return "Filter by" }
-    
     enum option: String, Codable, EnumTitles {
         case All_Items = "1249,1059,220,15687,155183,63859,155206" //Viedeo Games | Toys | Cothing
         case Toys = "220" //Toys and Hobbies
@@ -48,7 +50,6 @@ struct Filters: FilterOptions {
 }
 
 struct Price: FilterOptions {
-    var sectionTitle: String { return "Price" }
     
     var options: [EnumTitles] { return [prices.range(0.0 ..< 100.0)] }
     
