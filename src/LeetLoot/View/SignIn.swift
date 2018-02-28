@@ -170,7 +170,7 @@ class SignIn: ParentView {
         NSLayoutConstraint.activate([
             emailTextField.leftAnchor.constraint(equalTo: emailContainerView.leftAnchor, constant: 20),
             emailTextField.topAnchor.constraint(equalTo: emailContainerView.topAnchor,constant:15),
-            emailTextField.widthAnchor.constraint(equalToConstant: 37),
+            emailTextField.widthAnchor.constraint(equalTo:emailContainerView.widthAnchor),
             emailTextField.heightAnchor.constraint(equalToConstant: 17)
             ])
     }
@@ -179,7 +179,8 @@ class SignIn: ParentView {
         NSLayoutConstraint.activate([ passwordContainerView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 116),passwordContainerView.leftAnchor.constraint(equalTo: leftAnchor, constant: 23), passwordContainerView.widthAnchor.constraint(equalToConstant: 329),            passwordContainerView.heightAnchor.constraint(equalToConstant: 50)
             ])
         addSubview(passwordTextField)
-        NSLayoutConstraint.activate([ passwordTextField.leftAnchor.constraint(equalTo: passwordContainerView.leftAnchor, constant: 20), passwordTextField.topAnchor.constraint(equalTo: passwordContainerView.topAnchor,constant:15), passwordTextField.widthAnchor.constraint(equalToConstant: 64), passwordTextField.heightAnchor.constraint(equalToConstant: 17)
+        NSLayoutConstraint.activate([ passwordTextField.leftAnchor.constraint(equalTo: passwordContainerView.leftAnchor, constant: 20), passwordTextField.topAnchor.constraint(equalTo: passwordContainerView.topAnchor,constant:15), passwordTextField.widthAnchor.constraint(equalTo:passwordContainerView.widthAnchor),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 17)
             ])
     }
 
