@@ -145,7 +145,7 @@ class SignUp: ParentView {
         NSLayoutConstraint.activate([
             emailTextField.leftAnchor.constraint(equalTo: emailContainerView.leftAnchor, constant: 20),
             emailTextField.topAnchor.constraint(equalTo: emailContainerView.topAnchor,constant:15),
-            emailTextField.widthAnchor.constraint(equalToConstant: 37),
+            emailTextField.widthAnchor.constraint(equalTo: emailContainerView.widthAnchor),
             emailTextField.heightAnchor.constraint(equalToConstant: 17)
             ])
         
@@ -163,7 +163,7 @@ class SignUp: ParentView {
         NSLayoutConstraint.activate([
             passwordTextField.leftAnchor.constraint(equalTo: passwordContainerView.leftAnchor, constant: 20),
             passwordTextField.topAnchor.constraint(equalTo: passwordContainerView.topAnchor,constant:15),
-            passwordTextField.widthAnchor.constraint(equalToConstant: 64),
+            passwordTextField.widthAnchor.constraint(equalTo:passwordContainerView.widthAnchor),
             passwordTextField.heightAnchor.constraint(equalToConstant: 17)
             ])
     }
@@ -180,7 +180,7 @@ class SignUp: ParentView {
         NSLayoutConstraint.activate([
             confirmPasswordTextField.leftAnchor.constraint(equalTo: confirmPasswordContainerView.leftAnchor, constant: 20),
             confirmPasswordTextField.topAnchor.constraint(equalTo: confirmPasswordContainerView.topAnchor,constant:15),
-            confirmPasswordTextField.widthAnchor.constraint(equalToConstant: 118),
+            confirmPasswordTextField.widthAnchor.constraint(equalTo: confirmPasswordContainerView.widthAnchor),
             confirmPasswordTextField.heightAnchor.constraint(equalToConstant: 17)
             ])
         
