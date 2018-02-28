@@ -13,6 +13,8 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     
     private let cellId = "cellId"
     
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -36,9 +38,9 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     
     func setupViews(){
         backgroundColor = .white
-        
+        loadData()
         addSubview(itemsCollectionView)
-        
+
         //to generate multiple cells in nested collection view
         itemsCollectionView.dataSource = self
         itemsCollectionView.delegate = self
@@ -58,18 +60,21 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
    //number of cells return in section, this will change based on if it's events or games
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return 5
+        return root?.first?.itemSummaries?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ItemCell {
+            let imageURL = root?.first?.itemSummaries?[indexPath.item].additionalImages?.first?.imageUrl
+            cell.merchImage.downloadImages(url: imageURL ?? "")
+            return cell
+        }
+        return UICollectionViewCell()
     }
-
-
     
-    /*func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-    }*/
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        buyItem.open(.Buy)
+    }
     
     //sizing of cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -80,10 +85,37 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(15)
     }
+    
+    fileprivate var root: [Root]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.itemsCollectionView.reloadData()
+            }
+        }
+    }
+    
+    func loadData() {
+        let query = Root(queryKey: "nintendo", filterBy: .All_Items, sortBy: .Best_Match)
+        query.retrieveDataByName(offset: 0) { (eventMerch) in
+            self.root = eventMerch
+        }
+    }
+    
+    lazy var buyItem = { () -> Buy_Filter in
+        let view = Buy_Filter()
+        return view
+    }()
 }
 
 //cell where the event, game, or merch is displayed in carasel
 class ItemCell: UICollectionViewCell{
+    
+    let merchImage = { () -> customeImage in
+        let image = customeImage()
+        image.contentMode = .scaleAspectFit
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -98,6 +130,14 @@ class ItemCell: UICollectionViewCell{
         backgroundColor = .clear
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.softGrey.cgColor
+        addSubview(merchImage)
+        
+        NSLayoutConstraint.activate([
+            merchImage.leftAnchor.constraint(equalTo: leftAnchor),
+            merchImage.rightAnchor.constraint(equalTo: rightAnchor),
+            merchImage.topAnchor.constraint(equalTo: topAnchor),
+            merchImage.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
     }
     
 }
