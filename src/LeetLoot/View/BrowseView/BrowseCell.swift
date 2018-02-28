@@ -20,19 +20,8 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
             }
             
             if let imageName = browseCategory?.imageName {
-                let url = NSURL(string: imageName)
-                URLSession.shared.dataTask(with: url! as URL,completionHandler: {(data, response, error) in
-                    if error != nil{
-                        print(error)
-                        return
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.imageView.image = UIImage(data: data!)}
-                    //self.imageView.image = UIImage(data: data!)
-                }).resume()
-                
-                
+                imageView.downloadImages(url: imageName)
+
             }
             
         }
@@ -47,12 +36,12 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
         fatalError("init(coder:) has not been implemented")
     }
     
-    let imageView: UIImageView = {
-        let iv = UIImageView()
+    let imageView: customeImage = {
+        let iv = customeImage()
         iv.image = UIImage(named: "")
         return iv
     }()
-    
+
     //view for image (browse, games)
     let titleImageView: UIImageView = {
         let imageView = UIImageView()
@@ -68,13 +57,7 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
         label.font = UIFont(name: "Helvetica-Bold", size: 60)
         return label
     }()
-    
-    /*let textLabel = UILabel(frame: CGRectMake(0, 0, 375, 107))
-    textLabel.textAlignment = .center
-    textLabel.text = "Events"
-    textLabel.textColor = .white
-    textLabel.font = UIFont(name: "Helvetica-Bold", size: 60)*/
-    
+  
     let browseCarousel: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
