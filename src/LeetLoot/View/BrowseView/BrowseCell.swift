@@ -12,8 +12,24 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
     
     private let cellId = "cellId"
     
+    var browseCategories: [BrowseCategory]?
+    
+    var browseCategory: BrowseCategory? {
+        didSet{
+            if let name = browseCategory?.name {
+                textLabel.text = name
+            }
+            
+            if let imageName = browseCategory?.imageName {
+                imageView.image = UIImage(named: imageName)
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        
         setupViews()
     }
     
@@ -34,6 +50,21 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
         return imageView
     }()
     
+    let textLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = "Events"
+        label.textColor = .white
+        label.font = UIFont(name: "Helvetica-Bold", size: 60)
+        return label
+    }()
+    
+    /*let textLabel = UILabel(frame: CGRectMake(0, 0, 375, 107))
+    textLabel.textAlignment = .center
+    textLabel.text = "Events"
+    textLabel.textColor = .white
+    textLabel.font = UIFont(name: "Helvetica-Bold", size: 60)*/
+    
     let browseCarousel: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -51,10 +82,20 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
         backgroundColor = .clear
         
         //image (browse, games)
-        //addSubview(titleImageView)
-        //titleImageView.frame = CGRectMake(0, 0, 375, 107)
         addSubview(imageView)
         imageView.frame = CGRectMake(0, 0, 375, 107)
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.alpha = 0.5
+        blurEffectView.frame = CGRectMake(0, 0, 375, 107)
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(blurEffectView)
+        
+       
+        addSubview(textLabel)
+        textLabel.frame = CGRectMake(0, 0, 375, 107)
+        
         
         addSubview(browseCarousel)
         
@@ -74,7 +115,6 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
 
     }
     
-    //number of cells return in section, this will change based on if it's events or games
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }

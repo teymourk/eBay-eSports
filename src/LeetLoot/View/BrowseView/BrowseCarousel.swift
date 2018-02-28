@@ -17,6 +17,8 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+        
+        //categories = Categories.sampleCategories()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,7 +50,7 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
         itemsCollectionView.register(browseItemCell.self, forCellWithReuseIdentifier: cellId)
         
         //expand from left to right edge
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[v0]-15-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))
         
         //expand from top to bottom
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))
@@ -59,6 +61,11 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
     //number of cells return in section, this will change based on if it's events or games
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        /*if let count = categories?.count{
+            return count
+        }
+        return 0*/
+        
         return 5
     }
     
@@ -86,6 +93,16 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
 //cell where the event, game, or merch is displayed in carousel
 class browseItemCell: UICollectionViewCell{
     
+    var categories: [Categories]?
+
+    var category: Categories? {
+        didSet{
+            if let imageName = category?.imageName {
+                imageView.image = UIImage(named: imageName)
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -94,6 +111,7 @@ class browseItemCell: UICollectionViewCell{
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "e3browse")
+        iv.contentMode = .scaleAspectFit
         return iv
     }()
     
@@ -103,8 +121,8 @@ class browseItemCell: UICollectionViewCell{
     
     func setupViews(){
         
-        //addSubview(imageView)
-        //imageView.frame = CGRectMake(0, 0, frame.width, frame.height)
+        addSubview(imageView)
+        imageView.frame = CGRectMake(0, 0, frame.width, frame.height)
 
         
         backgroundColor = .clear
