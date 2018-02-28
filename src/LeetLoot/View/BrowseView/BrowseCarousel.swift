@@ -14,11 +14,19 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
     
     private let cellId = "cellId"
     
+    var categories: [Categories]?
+    
+    var itemCategory: BrowseCategory? {
+        didSet{
+            let browseCategories = itemCategory?.categories
+                categories = browseCategories
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
         
-        //categories = Categories.sampleCategories()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,11 +74,16 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
         }
         return 0*/
         
-        return 5
+        if let count = categories?.count {
+            return count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! browseItemCell
+        cell.category = categories?[indexPath.item]
+        return cell
     }
     
     
@@ -93,7 +106,7 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
 //cell where the event, game, or merch is displayed in carousel
 class browseItemCell: UICollectionViewCell{
     
-    var categories: [Categories]?
+    //var categories: [Categories]?
 
     var category: Categories? {
         didSet{

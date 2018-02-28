@@ -12,8 +12,6 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
     
     private let cellId = "cellId"
     
-    var browseCategories: [BrowseCategory]?
-    
     var browseCategory: BrowseCategory? {
         didSet{
             if let name = browseCategory?.name {
@@ -23,13 +21,12 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
             if let imageName = browseCategory?.imageName {
                 imageView.image = UIImage(named: imageName)
             }
+            
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        
         setupViews()
     }
     
@@ -120,7 +117,9 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BrowseCarousel
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BrowseCarousel
+        cell.itemCategory = browseCategory
+        return cell
     }
     
     //sizing of cells
