@@ -27,6 +27,8 @@ class Filter: UITableView {
         backgroundColor = .white
         register(Filter_Cell.self, forCellReuseIdentifier: "FilterCell")
         register(PriceRange.self, forCellReuseIdentifier: "T")
+        self.isScrollEnabled = false
+        self.showsVerticalScrollIndicator = false
         self.delegate = self
         self.dataSource = self
         self.bounces = false
@@ -45,6 +47,15 @@ class Filter: UITableView {
 //Mark: -TableView DataSource/Delegate
 extension Filter: UITableViewDataSource, UITableViewDelegate {
     
+    private var customHeight: (Header: CGFloat, PriceRange: CGFloat) {
+        let device = Constants.deviceType.None.isDevice()
+        guard   let parentHeight = superview?.frame.height else { return (40, 40) }
+                let ratioaBasedOnDevice:CGFloat = device == .X ? 12.5 : 13.0
+                let optionsHeight = CGFloat(parentHeight / ratioaBasedOnDevice)
+                let priceRangeHeight = CGFloat(parentHeight - (optionsHeight * 11) + 10)
+        return (optionsHeight, priceRangeHeight)
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return filterMenu.count
     }
@@ -63,7 +74,7 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as? Filter_Cell
         let options = filterMenu[indexPath.section].options[indexPath.row]
         
-        cell?.textLabel?.text = options.title
+        cell?.textLabel?.text = options.name
         cell?.textLabel?.font = UIFont.systemFont(ofSize: 14)
         return cell ?? UITableViewCell()
     }
@@ -82,7 +93,6 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
         
         let query = Root(queryKey: "League+of+legends", filterBy: filtering, sortBy: sorting)
         filteringDelegate?.selctedQuery(query)
-        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -90,85 +100,16 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
             view.title = filterMenu[section].sectionTitle
         return view
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 2 {
-            return 100
+            return customHeight.PriceRange
         }
-        return 45
+        return customHeight.Header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 45
+        return customHeight.Header
     }
 }
 
-import WARangeSlider
-
-class PriceRange: UITableViewCell {
-    
-    let minValue = { () -> UILabel in
-        let label = UILabel()
-            label.textColor = .black
-            label.text = "0"
-            label.font = UIFont.systemFont(ofSize: 13)
-            label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let maxValue = { () -> UILabel in
-        let label = UILabel()
-            label.textColor = .black
-            label.text = "100"
-            label.font = UIFont.systemFont(ofSize: 13)
-            label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var priceSlider = { () -> RangeSlider in
-        let priceSlider = RangeSlider(frame: CGRect(x: 15, y: 30, width: frame.width, height: 20))
-            priceSlider.minimumValue = 0
-            priceSlider.maximumValue = 100
-            priceSlider.lowerValue = 0
-            priceSlider.upperValue = 100
-            priceSlider.trackHighlightTintColor = .lightBlue
-            priceSlider.thumbBorderColor = .white
-            priceSlider.thumbBorderColor = .lightGray
-            priceSlider.addTarget(self, action: #selector(onSlider(_:)), for: .valueChanged)
-        return priceSlider
-    }()
-    
-    private func setupView() {
-        addSubview(priceSlider)
-        addSubview(minValue)
-        addSubview(maxValue)
-        
-        NSLayoutConstraint.activate([
-            minValue.topAnchor.constraint(equalTo: priceSlider.bottomAnchor, constant: 10),
-            minValue.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            
-            maxValue.topAnchor.constraint(equalTo: minValue.topAnchor),
-            maxValue.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-        ])
-    }
-    
-    @objc
-    private func onSlider(_ slider: RangeSlider) {
-        let lowValue = Int(slider.lowerValue),
-            highValue = Int(slider.upperValue)
-        
-        minValue.text = "\(lowValue)"
-        maxValue.text = "\(highValue)"
-
-    }
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .white
-        setupView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}

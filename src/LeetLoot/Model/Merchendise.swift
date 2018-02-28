@@ -9,11 +9,10 @@
 import UIKit
 
 //Root of the API Call
-struct Root:Codable, BrowseAPI {
+struct Root:Codable, BrowseAPI {    
     typealias Model = Root
     
     var total: Int?
-    var next: String?
     var itemSummaries: [itemSummaries]?
     
     //It counts it in the Decode ? Anyways to not without using

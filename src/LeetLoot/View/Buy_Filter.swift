@@ -9,10 +9,14 @@
 import UIKit
 
 protocol BuyFilterDelegate {
-    func updateNewData(_ newData: [Root]?)
+    func updateNewData(for query: Root)
 }
 
 final class Buy_Filter: NSObject {
+    
+    internal enum Option {
+        case Filter, Buy, None
+    }
     
     private lazy var parentView = { ()-> UIView in
         let view = UIView(frame: customFrame(height))
@@ -27,30 +31,18 @@ final class Buy_Filter: NSObject {
         return view
     }()
     
-    let stackView = { () -> UIStackView in
-        let view = UIImageView(image: #imageLiteral(resourceName: "DownArrow"))
-            view.contentMode = .scaleAspectFit
-        let view1 = UIView(),
-            view2 = UIView(),
-            stack = UIStackView(arrangedSubviews: [view1,view,view2])
-            stack.distribution = .fillEqually
-            stack.alignment = .center
-            stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
+    let downArrow = { () -> UIImageView in
+        let image = UIImageView(image:  #imageLiteral(resourceName: "DownArrow"))
+            image.contentMode = .scaleAspectFit
+            image.translatesAutoresizingMaskIntoConstraints = false
+        return image
     }()
     
-    var delegate: BuyFilterDelegate?
-    
-    internal enum Option {
-        case Filter, Buy, None
-    }
-    
-    private lazy var customFrame: (CGFloat) -> CGRect = {
-        return CGRect(x: self.edgeOffset,
-                      y: $0,
-                      width: self.width - (self.edgeOffset * 2),
-                      height: self.cutomHeight)
-    }
+    private lazy var buy_reset = { () -> UIButton in
+        let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     private lazy var buyView = { () -> Buy in
         let view = Buy()
@@ -59,63 +51,84 @@ final class Buy_Filter: NSObject {
     
     private lazy var filterView = { () -> Filter in
         let view = Filter()
-            view.filteringDelegate = self
+        view.filteringDelegate = self
         return view
     }()
+    
+    var delegate: BuyFilterDelegate?
+    
+    private lazy var customFrame: (CGFloat) -> CGRect = {
+        return CGRect(x: self.edgeOffset,
+                      y: $0,
+                      width: self.width - (self.edgeOffset * 2),
+                      height: self.cutomHeight)
+    }
+    
+    private var currentView = UIView()
+    private let edgeOffset: CGFloat = 10.0
     
     private let (width, height, window, cutomHeight, device) = (Constants.kWidth,
                                                                 Constants.kHeight,
                                                                 Constants.kWindow,
                                                                 Constants.kHeight * (3.7/5),
                                                                 Constants.deviceType.None.isDevice())
-    private let edgeOffset: CGFloat = 10.0
     
     private var bottomOffset: CGFloat {
         get { return device == .X ? 40 : 10 }
     }
     
-    func open(_ view: Option) {
+    private lazy var setupOptions: (Option) -> () = {
+        let image = $0 == .Filter ? "Reset" : "BuyNow"
+        self.buy_reset.setImage(UIImage(named: image), for: .normal)
+        self.currentView = $0 == .Buy ? self.setupViewFor(self.buyView) : self.setupViewFor(self.filterView)
+    }
+    
+    func open(_ view: Option) { 
         window.addSubview(fadeBackgroud)
         window.addSubview(parentView)
         
         parentView.layer.cornerRadius = 5
         UIView.animate(withDuration: 0.5,
-                       delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                       delay: 0, usingSpringWithDamping: 0.7,
+                       initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                         
-                        let y = (self.height) - (self.cutomHeight) - self.bottomOffset
-                        self.parentView.frame = self.customFrame(y)
-                        self.fadeBackgroud.alpha = 0.5
-                        view == .Buy ? self.setupViewFor(self.buyView) : self.setupViewFor(self.filterView)
+                let y = (self.height) - (self.cutomHeight) - self.bottomOffset
+                self.parentView.frame = self.customFrame(y)
+                self.fadeBackgroud.alpha = 0.5
+                self.setupOptions(view)
         })
     }
     
-    private func setupViewFor(_ view: UIView) {
-        view.translatesAutoresizingMaskIntoConstraints = false
-        parentView.addSubview(stackView)
-        parentView.addSubview(view)
+    private func setupViewFor(_ currentView: UIView) -> UIView {
+        currentView.translatesAutoresizingMaskIntoConstraints = false
+        parentView.addSubview(downArrow)
+        parentView.addSubview(buy_reset)
+        parentView.addSubview(currentView)
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: parentView.topAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 40),
-            stackView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor),
+            downArrow.topAnchor.constraint(equalTo: parentView.topAnchor, constant: 10),
+            downArrow.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
             
-            view.topAnchor.constraint(equalTo: stackView.bottomAnchor),
-            view.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
-            view.trailingAnchor.constraint(equalTo: parentView.trailingAnchor),
-            view.bottomAnchor.constraint(equalTo: parentView.bottomAnchor)
-            ])
+            buy_reset.bottomAnchor.constraint(equalTo: parentView.bottomAnchor, constant: -5),
+            buy_reset.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
+            
+            currentView.topAnchor.constraint(equalTo: downArrow.bottomAnchor, constant: 10),
+            currentView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
+            currentView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor),
+            currentView.bottomAnchor.constraint(equalTo: buy_reset.topAnchor, constant: -10)
+        ])
+        
+        return currentView
     }
     
     private func close() {
         UIView.animate(withDuration: 0.2,
                        delay: 0, options: .curveEaseIn, animations: {
-                        
-                        self.parentView.frame = self.customFrame(self.height)
-                        self.fadeBackgroud.alpha = 0
+                self.parentView.frame = self.customFrame(self.height)
+                self.fadeBackgroud.alpha = 0
         }, completion: { (true) in
             self.parentView.removeFromSuperview()
             self.fadeBackgroud.removeFromSuperview()
-            self.filterView.isDescendant(of: self.parentView) ? self.filterView.removeFromSuperview() : self.buyView.removeFromSuperview()
+            self.currentView.removeFromSuperview()
         })
     }
     
@@ -141,9 +154,6 @@ extension Buy_Filter: FilterMenuDelegate {
     func selctedQuery(_ query: Root) {
         close()
         guard delegate != nil else { return }
-        query.searchByKeyWord { (m) in
-            self.delegate?.updateNewData(m)
-        }
+        self.delegate?.updateNewData(for: query)
     }
 }
-

@@ -79,7 +79,7 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
         addSubview(eventBanner)
         addSubview(carouselCollectionView)
         addSubview(merchButton)
-        
+
         //to generate multiple cells in nested collection view
         carouselCollectionView.dataSource = self
         carouselCollectionView.delegate = self
@@ -108,5 +108,4 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
         
         backgroundColor = .white
     }
-    
 }

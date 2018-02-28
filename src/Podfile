@@ -15,7 +15,7 @@ target 'LeetLoot' do
   pod 'TwitterKit'
 
   # Pods for Slider
-  pod 'WARangeSlider'
+  pod 'RangeSeekSlider', :git => 'https://github.com/WorldDownTown/RangeSeekSlider.git', :branch => 'swift_4'
 
   target 'LeetLootTests' do
     inherit! :search_paths

@@ -33,6 +33,7 @@
 		AB94227F2031674C002E7311 /* Merchendise.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB94227E2031674C002E7311 /* Merchendise.swift */; };
 		AB94228120316F17002E7311 /* BrowseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB94228020316F17002E7311 /* BrowseAPI.swift */; };
 		ABA5A91520106DC9005D66D5 /* Buy_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA5A91420106DC9005D66D5 /* Buy_Filter.swift */; };
+		ABB05B2C2045096100F5EDF5 /* PriceRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB05B2B2045096100F5EDF5 /* PriceRangeCell.swift */; };
 		ABBC3F89201011330004C2C5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBC3F88201011320004C2C5 /* Constants.swift */; };
 		ABCD6638203E1EB700F01DB2 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCD6637203E1EB700F01DB2 /* SignIn.swift */; };
 		ABD41D972015C45500A61C95 /* CustomNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD41D962015C45500A61C95 /* CustomNavbar.swift */; };
@@ -95,6 +96,7 @@
 		AB94227E2031674C002E7311 /* Merchendise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merchendise.swift; sourceTree = "<group>"; };
 		AB94228020316F17002E7311 /* BrowseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseAPI.swift; sourceTree = "<group>"; };
 		ABA5A91420106DC9005D66D5 /* Buy_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buy_Filter.swift; sourceTree = "<group>"; };
+		ABB05B2B2045096100F5EDF5 /* PriceRangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRangeCell.swift; sourceTree = "<group>"; };
 		ABBC3F88201011320004C2C5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ABCD6637203E1EB700F01DB2 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		ABD41D962015C45500A61C95 /* CustomNavbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavbar.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				ABDF266C203E25F8005E603B /* SignUp.swift */,
 				AB310E68201DA3070085EBA8 /* Buy.swift */,
 				AB29EAA2202312D000F27A3B /* Filter.swift */,
+				ABB05B2B2045096100F5EDF5 /* PriceRangeCell.swift */,
 				ABF26A3C2023CB4300FE1473 /* Filter_Cell.swift */,
 				AB3CE83620068D0A00EF3A5D /* Merch_Cell.swift */,
 				BE46252D2011D305005789E6 /* Featured_Events_Cell.swift */,
@@ -499,18 +502,18 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-LeetLoot/Pods-LeetLoot-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/RangeSeekSlider/RangeSeekSlider.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
-				"${BUILT_PRODUCTS_DIR}/WARangeSlider/WARangeSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RangeSeekSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WARangeSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -548,6 +551,7 @@
 				AB7CE6411FF8901C0050125C /* General+Ext.swift in Sources */,
 				BE24D73A1FF585EC00E745E6 /* PageView.swift in Sources */,
 				AB94227F2031674C002E7311 /* Merchendise.swift in Sources */,
+				ABB05B2C2045096100F5EDF5 /* PriceRangeCell.swift in Sources */,
 				AB406EF01FF76E9600A1FD1D /* MenuBar.swift in Sources */,
 				AB3CE83520068CC500EF3A5D /* Browse_Game.swift in Sources */,
 				BE4625322011DA1A005789E6 /* Header_Cell.swift in Sources */,
