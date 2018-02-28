@@ -107,7 +107,7 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     }()
 }
 
-//cell where the event, game, or merch is displayed in carasel
+//cell where the event, game, or merch is displayed in carousel
 class ItemCell: UICollectionViewCell{
     
     let merchImage = { () -> customeImage in
