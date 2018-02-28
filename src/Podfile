@@ -8,6 +8,9 @@ target 'LeetLoot' do
   # Pods for Firebase
   pod 'Firebase/Core'
   
+  # Pods for Firebase Storage
+  pod 'Firebase/Storage'
+  
   # Pods for Twitter
   pod 'TwitterKit'
 

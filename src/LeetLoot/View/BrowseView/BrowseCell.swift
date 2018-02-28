@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
@@ -19,7 +20,19 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
             }
             
             if let imageName = browseCategory?.imageName {
-                imageView.image = UIImage(named: imageName)
+                let url = NSURL(string: imageName)
+                URLSession.shared.dataTask(with: url! as URL,completionHandler: {(data, response, error) in
+                    if error != nil{
+                        print(error)
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.imageView.image = UIImage(data: data!)}
+                    //self.imageView.image = UIImage(data: data!)
+                }).resume()
+                
+                
             }
             
         }
@@ -36,7 +49,7 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
     
     let imageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "events")
+        iv.image = UIImage(named: "")
         return iv
     }()
     

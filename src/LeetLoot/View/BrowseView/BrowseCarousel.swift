@@ -111,7 +111,18 @@ class browseItemCell: UICollectionViewCell{
     var category: Categories? {
         didSet{
             if let imageName = category?.imageName {
-                imageView.image = UIImage(named: imageName)
+                //imageView.image = UIImage(named: imageName)
+                let url = NSURL(string: imageName)
+                URLSession.shared.dataTask(with: url! as URL,completionHandler: {(data, response, error) in
+                    if error != nil{
+                        print(error)
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.imageView.image = UIImage(data: data!)}
+                    //self.imageView.image = UIImage(data: data!)
+                }).resume()
             }
         }
     }
@@ -123,7 +134,7 @@ class browseItemCell: UICollectionViewCell{
     
     let imageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "e3browse")
+        iv.image = UIImage(named: "")
         iv.contentMode = .scaleAspectFit
         return iv
     }()
