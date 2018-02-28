@@ -69,10 +69,6 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
     //number of cells return in section, this will change based on if it's events or games
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        /*if let count = categories?.count{
-            return count
-        }
-        return 0*/
         
         if let count = categories?.count {
             return count
@@ -86,12 +82,7 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
         return cell
     }
     
-    
-    
-    /*func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-     return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-     }*/
-    
+
     //sizing of cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 130, height: 130)
@@ -111,18 +102,8 @@ class browseItemCell: UICollectionViewCell{
     var category: Categories? {
         didSet{
             if let imageName = category?.imageName {
-                //imageView.image = UIImage(named: imageName)
-                let url = NSURL(string: imageName)
-                URLSession.shared.dataTask(with: url! as URL,completionHandler: {(data, response, error) in
-                    if error != nil{
-                        print(error)
-                        return
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.imageView.image = UIImage(data: data!)}
-                    //self.imageView.image = UIImage(data: data!)
-                }).resume()
+                
+                imageView.downloadImages(url: imageName)
             }
         }
     }
@@ -132,8 +113,8 @@ class browseItemCell: UICollectionViewCell{
         setupViews()
     }
     
-    let imageView: UIImageView = {
-        let iv = UIImageView()
+    let imageView: customeImage = {
+        let iv = customeImage()
         iv.image = UIImage(named: "")
         iv.contentMode = .scaleAspectFit
         return iv
