@@ -49,8 +49,8 @@ class Browse_Game: UICollectionViewController {
     }
     
     private var merchRoot = Root(queryKey: "League+of+legends",
-                                            filterBy: .All_Items,
-                                            sortBy: .Best_Match)
+                                 filterBy: .All_Items,
+                                 sortBy: .Best_Match)
 
     private func requestDataFromAPI() {
         merchRoot.retrieveDataByName(offset: 0, {
