@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol RegisterPagesDelegate {
     func onScreenButtons(_ sender: UIButton)
@@ -99,6 +100,7 @@ class SignIn: ParentView {
         button.layer.cornerRadius = 5
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont .boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(signinAction), for: .touchUpInside);
         return button
         
     }()
@@ -210,5 +212,38 @@ class SignIn: ParentView {
         setupEmail()
 
     }
+    func setsigninbuttonenabled(enabled:Bool){
+        if(enabled)
+        {
+            register.isEnabled = true
+        }
+        else{
+            register.isEnabled = false
+        }
+        
+    }
+    @objc
+    func signinAction(){
+        guard let em = emailTextField.text else {return }
+        guard let pass = passwordTextField.text else {return }
+        //guard let confirmPassword = confirmPasswordTextField.text else {return}
+        
+        /*if(password != confirmPassword)
+         {
+         setupErrorLabel();
+         }*/
+        setsigninbuttonenabled(enabled:false);
+        Auth.auth().signIn(withEmail: em, password: pass) { user,error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else if let user = user {
+                print("user id:" + user.uid)
+            }
+        
+    }
+}
+    
+    
 }
 

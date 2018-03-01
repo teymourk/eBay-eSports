@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol HomePagesDelegate {
     func onScreenButtons(_ sender: UIButton)
@@ -42,6 +43,13 @@ class SignUp: ParentView {
         lb.translatesAutoresizingMaskIntoConstraints = false;
         return lb;
     }()
+    private let errorLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "Passwords do not match"
+        lb.textColor = .red
+        lb.translatesAutoresizingMaskIntoConstraints = false;
+        return lb;
+    }()
     private lazy var emailContainerView : UIView = {
         
         let emailContainerView = UIView()
@@ -56,7 +64,7 @@ class SignUp: ParentView {
         textfield.placeholder = "Email"
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.keyboardType = .emailAddress
-        textfield.font = UIFont(name:"Helvectica",size:14)
+        //textfield.font = UIFont(name:"Helvectica",size:14)
         return textfield;}()
 
         private lazy var passwordContainerView : UIView = {
@@ -73,7 +81,7 @@ class SignUp: ParentView {
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.keyboardType = .emailAddress
         textfield.isSecureTextEntry = true
-        textfield.font = UIFont(name:"Helvectica",size:14)
+       // textfield.font = UIFont(name:"Helvectica",size:14)
         return textfield;
     }()
     private lazy var confirmPasswordContainerView : UIView = {
@@ -101,7 +109,7 @@ class SignUp: ParentView {
         button.layer.cornerRadius = 4
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont .boldSystemFont(ofSize: 14)
-        // button.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(registerAction), for: .touchUpInside);
         return button
         
     }()
@@ -196,10 +204,51 @@ class SignUp: ParentView {
             register.heightAnchor.constraint(equalToConstant: 40)
             ])
     }
-    func setupLayoutAttributes() {
+    /*func setupErrorLabel(){
+        addSubview(errorLabel)
+        NSLayoutConstraint.activate([
+            errorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 65)
+            ])
+    }*/
+func setupLayoutAttributes() {
         setupEmail();
         setupPassword();
         setupConfirmPassword();
         setupRegister();
+        
+        }
+    
+func setregisterbuttonenabled(enabled:Bool){
+    if(enabled)
+    {
+        register.isEnabled = true
+    }
+    else{
+        register.isEnabled = false
+        }
+    
+    }
+    @objc func registerAction(){
+        guard let em = emailTextField.text else {return }
+        guard let pass = passwordTextField.text else {return }
+        //guard let confirmPassword = confirmPasswordTextField.text else {return}
+        
+        /*if(password != confirmPassword)
+        {
+            setupErrorLabel();
+        }*/
+        setregisterbuttonenabled(enabled:false);
+        Auth.auth().createUser(withEmail: em, password: pass) { user,error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else if let user = user {
+                print("Sign Up Successfully. \(user.uid)")
+            }
+            
+        }
+    }
+    
 }
-}
+    
+
