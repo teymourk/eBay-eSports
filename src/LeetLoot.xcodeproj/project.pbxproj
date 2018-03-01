@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		141690F0C6C00E83139AC50A /* Pods_LeetLootTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7756037293945067944C34A /* Pods_LeetLootTests.framework */; };
+		A13F4BB72040D07A008E042E /* BrowseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13F4BB62040D07A008E042E /* BrowseCategory.swift */; };
+		A13F4BB92040D83D008E042E /* BrowseCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13F4BB82040D83D008E042E /* BrowseCarousel.swift */; };
 		A1A64DD2202E849000F89E19 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A64DD1202E849000F89E19 /* BrowseCell.swift */; };
 		A1F1F116202EA7F40048AD45 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F1F115202EA7F40048AD45 /* CarouselCollectionView.swift */; };
 		AB29EAA3202312D000F27A3B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB29EAA2202312D000F27A3B /* Filter.swift */; };
@@ -65,6 +67,8 @@
 		2332B1B8B9901E9E01AC1AE7 /* Pods_LeetLoot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeetLoot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26B939428E35986B807F8E56 /* Pods-LeetLootTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7A1F30C730B697589D58797A /* Pods-LeetLootTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.release.xcconfig"; sourceTree = "<group>"; };
+		A13F4BB62040D07A008E042E /* BrowseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseCategory.swift; sourceTree = "<group>"; };
+		A13F4BB82040D83D008E042E /* BrowseCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseCarousel.swift; sourceTree = "<group>"; };
 		A1A64DD1202E849000F89E19 /* BrowseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseCell.swift; sourceTree = "<group>"; };
 		A1F1F115202EA7F40048AD45 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
 		AB29EAA2202312D000F27A3B /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
@@ -139,6 +143,15 @@
 				B7756037293945067944C34A /* Pods_LeetLootTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A13F4BBA2040D905008E042E /* BrowseView */ = {
+			isa = PBXGroup;
+			children = (
+				A1A64DD1202E849000F89E19 /* BrowseCell.swift */,
+				A13F4BB82040D83D008E042E /* BrowseCarousel.swift */,
+			);
+			path = BrowseView;
 			sourceTree = "<group>";
 		};
 		AB310E67201D98720085EBA8 /* Recovered References */ = {
@@ -219,6 +232,7 @@
 		AB7847E71FDDFC1F008EBD70 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A13F4BB62040D07A008E042E /* BrowseCategory.swift */,
 				ABBC3F88201011320004C2C5 /* Constants.swift */,
 				BE4625282011C367005789E6 /* TwitterAPI.swift */,
 				AB94227E2031674C002E7311 /* Merchendise.swift */,
@@ -229,6 +243,7 @@
 		AB7847E81FDDFC2A008EBD70 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A13F4BBA2040D905008E042E /* BrowseView */,
 				AB7847CE1FDDFB24008EBD70 /* LaunchScreen.storyboard */,
 				A1F1F115202EA7F40048AD45 /* CarouselCollectionView.swift */,
 				AB406EEF1FF76E9600A1FD1D /* MenuBar.swift */,
@@ -248,7 +263,6 @@
 				AB6DA786200FF75500135CF5 /* ScrollView.swift */,
 				AB6B875C2020F5AE00C5B791 /* Parent.swift */,
 				BED4A5F62024F1AA00D06AE1 /* Twitter_Cell.swift */,
-				A1A64DD1202E849000F89E19 /* BrowseCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -521,12 +535,14 @@
 				BE4625342011DA4F005789E6 /* Favorites_Cell.swift in Sources */,
 				BE4625292011C367005789E6 /* TwitterAPI.swift in Sources */,
 				AB310E69201DA3070085EBA8 /* Buy.swift in Sources */,
+				A13F4BB72040D07A008E042E /* BrowseCategory.swift in Sources */,
 				ABD41D972015C45500A61C95 /* CustomNavbar.swift in Sources */,
 				AB6DA787200FF75500135CF5 /* ScrollView.swift in Sources */,
 				AB7847C81FDDFB24008EBD70 /* Home.swift in Sources */,
 				BEBE73482032247400032325 /* Twitter_Timeline.swift in Sources */,
 				AB29EAA3202312D000F27A3B /* Filter.swift in Sources */,
 				BE46252E2011D305005789E6 /* Featured_Events_Cell.swift in Sources */,
+				A13F4BB92040D83D008E042E /* BrowseCarousel.swift in Sources */,
 				BE24D7381FF585C600E745E6 /* Browse.swift in Sources */,
 				AB7847C61FDDFB24008EBD70 /* AppDelegate.swift in Sources */,
 				A1A64DD2202E849000F89E19 /* BrowseCell.swift in Sources */,

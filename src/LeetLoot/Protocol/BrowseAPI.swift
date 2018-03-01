@@ -12,19 +12,20 @@ protocol BrowseAPI: Networking where Model == Root {
     var keyWord: String? { get set }
     var filterBy: Filters.option? { get set }
     var sortBy: Sort.option? { get set }
+    var fetchLimit: Int? { get set }
     func retrieveDataByName(offset: Int, _ completion: @escaping ([Root]?) ->())
 }
 
 extension BrowseAPI {
     private var token: String {
-        return "v^1.1#i^1#r^0#f^0#I^3#p^1#t^H4sIAAAAAAAAAOVXa2wUVRTuttsqlodBgfJIWIZHojizd2a6O7MTduPS0rRSaGHXCiWm3J29w067O7POvdt2TTRroUQSYgzKK0TtD/0BgmiIQHwjGNRU4g8JxtcvoiUxKREjpBDxznRbtpXwLELi/tnMueeee77vfOc+QK5s3KMbazeen+C6r7gnB3LFLhdfDsaVlS6cWFI8o7QIFDi4enLzcu6ukr5FGKaSaWUlwmnTwMjTmUoaWHGMQSZjGYoJsY4VA6YQVoiqRMLL6hWBA0raMompmknGU1cdZATNz/M+SQSSHPfF+Bi1GkMxo2aQkZFfklWfhgQQ03x+kY5jnEF1BibQIHQ+4GUWCKwgR4GkiJLCBzgx4G9mPE3IwrppUBcOMCEnXcWZaxXkeu1UIcbIIjQIE6oL10QawnXVS5ZHF3kLYoXyPEQIJBk88qvKjCNPE0xm0LWXwY63EsmoKsKY8YYGVxgZVAkPJXML6TtUIz4g+4CoIlHjAfTBMaGyxrRSkFw7D9uix1nNcVWQQXSSvR6jlI1YK1JJ/ms5DVFX7bH/VmRgUtd0ZAWZJYvDq8ONjUxoqQ4tiBNRth4hUm+ahG1cWc1KvFiJZE0S2Ligin455s8vNBgtT/OolapMI67bpGHPcpMsRjRrNJoboYAb6tRgNFhhjdgZFfoFhjiUqZ93qIoZkjDsuqIUJcLjfF6/AsOzCbH0WIag4QijBxyKggxMp/U4M3rQ0WJePp04yCQISSteb0dHB9chcqa1zisAwHtXLauPqAmUogrpTNm9PuivX38CqztQVERnYl0h2TTNpZNqlSZgrGNCgt8nir487yPTCo22/stQgNk7siPGqkMCqgh4WBmjolERL8pj0SGhvEi9dh4oBrNsClptiKSTUEWsSnWWSSFLjyuiTxNEWUNs3B/Q2MqAprExX9zP8hpCAKFYTA3I/6dGuVGpR1QzjRrNpK5mx0TwYyZ20Yo3QotkIyiZpIYbVf1VQWIb5B2HZ/f6TUG0Y2AaBKZ1ztY2p5oprwnppmabWpysbwu3Ts/De6qoFOAgUj0+eJBxDlwOt6uchbCZsegZzjXY+3rUbEMG7RJimckkspr422Ji7Hb0u7SbXxWVmtQpjS33GrKb3CZvUduQ3EXU7i7Xmqsg5330lgjESjFwW9iqnLpGs//BpnVTha01MUHxO3AB8Y58DoWKnB/f5XofdLneoy8q4AXz+blgTlnJk+6S8TOwThCnQ43D+jqD3vItxLWhbBrqVnGZa82sd3e3FDzAep4GFcNPsHElfHnBewzMujJSyk+aNoGXgSDIQBIlPtAM5l4ZdfNT3Q/nTp1csvPomu+azu15eduvP6DJUuNLYMKwk8tVWkSVUTRz++lo68qZ1e769tS5n54PnP7lg7ZdUX1rn6vvsYkH3z52pH9V3+zWHVVNivn5tM2JydvEE8ePt6zd+tvJ8m9O9Zaf/WLBx380TVlNehOHo7uUZ3dcHHi899uP3gyu2H/pQLcp7V361wP8mQulX/9odLRt2rRn6sCLta0P7Zy+YGBbz+zs+oNHL3+ytjfWvf7Ymeb9r4D2N5RnBmYeev3nfVNqp7griqTf95/t6v80UVlRk3vqTOXeI/M2PLL98lsnlFR/+/c90muQm1SGP/xs/IE/Dx2G3Xz/+vsbIvpXF09u6Zr+XF3xhgd3F/09e/7E883dC9/ZN3nW+SdmzNk+74JWgtsuhSs2u7984VXTP1i+fwDmCJl9Gg8AAA=="
+        return "v^1.1#i^1#I^3#p^1#f^0#r^0#t^H4sIAAAAAAAAAOVXbWwURRjutb1ChYJpFAhWc24picDuztz2vlZ6crQUKqUtvbNKEcnc7my7crd77MxxvURjKQEEUgIYg0KgKCai8gOEasIPIgo/iMQgP9QoGokR0Ih/iR9EZ7dHuRbCZxESL9lc9p133nmf533emR3QXVI6bc28NRfLXKMKd3WD7kKXC44BpSXu6eOKCie7C0Ceg2tX95Tu4p6i8zMJSiZScismKdMg2NOVTBhEdow1XNoyZBMRncgGSmIiU0WORhY0yl4ByCnLpKZiJjhPQ10N5wUajgc1L4wHYBCrkFmNyzFjZg0XwpIah8gb8vlAyB9iw4SkcYNBKDKoPR0GeSDxAMaAJAMo+6AAvIF2ztOGLaKbBnMRABd2spWduVZeqtfPFBGCLcqCcOGGSH20OdJQN6cpNlPMixXO0RCliKbJ0LdaU8WeNpRI4+svQxxvOZpWFEwIJ4YHVhgaVI5cTuY20neYDmkKZlSjAAgo1Yo6MlTWm1YS0evnYVt0ldccVxkbVKfZGzHK2Ii/iBWae2tiIRrqPPbfwjRK6JqOrRpuzuzIokhLCxeeryMLkc4Y34gxbTRNyre01vEBKFXjoBbw8qpXkfzBuD+30EC0HM3DVqo1DVW3SSOeJpPOxixrPJQbLyPmCjfMqdlotiIatTPK9/Nd5hB62+2iDlQxTTsNu644yYjwOK83rsDgbEotPZ6meDDC8AGHohoOpVK6yg0fdLSYk08XqeE6KU3JopjJZISMJJhWh+gFAIrPLWiMKp04iTjb1+51x1+/8QRed6AomM0kukyzKZZLF9MqS8Do4MJev0+SfDneh6YVHm69ypCHWRzaESPVIdUhNaBISEJxSWPdAkaiQ8I5kYp2HjiOsnwSWcswTSWQgnmF6SydxJauypJP80pBDfOqP6Tx1SFN4+M+1c9DDWPAGjeuhIL/p0a5WalHFTOFW8yErmRHRvAjJXbJUluQRbNRnEgww82q/pogiQ3y7sOze/1WINoxCAuCUrpga1tQzKRoIrap2aalTtZ3hFtn5+F9VVQGcACprg4cZIIDVyArFMHCxExb7AwXmu19PWYuwwbrEmqZiQS22uAdMTGCO/q92c2viUpJ6IzGpfcbslvcJm9T24jeS9TFPa72q5FDHwwFA5IE70yttU5dY9n/YtO6lcLOMwnF6l34ABGH3obCBc4P9rj6QY9rP7tQARFUwUrweEnRM8VFYycTnWJBR5pA9A6DfeVbWFiGsymkW4UlrsUV+95bmnf/2rUETBq8gZUWwTF51zFQcWXEDcdPLINBIAFoPz7YDiqvjBbDCcUPhdaKf+9euWg7tyTc++qUqVXBjQ9OAGWDTi6Xu4AJo8Do23YitWCaG4+eG/+nd/O6Get6frIuhX/1bxCPJT/68pD/+9azqe6x6z98bc8kyb1v/puVsP/AE0d++/m7An3iK6vE1Su2ZxrB5/PFGYdn1ZXXj+1/9q3aTd+s7mu7+MCmeVzTwkdHCaerZn/6sHB4vLJlx+9nzmzd2Xt88Z5Vx0ddqDw9dd1Xm984N65+8fNftE4s9fJV7xzo+uxY786332/Z1n7pcFnH+g1F5RXll85xB+t+dDcGChuObJ119NSJk3zhQf+36RfOvpRZDvtWnjwy7cmKpz4Gp37Y/snoE4cyF+u0vvWRHerLj/S//u758qOPVe394K+50y/8Eti/9+k/xvy5/8CFePnyLWjt17tjA+X7F59sgS4ZDwAA"
     }
     
     private var endPoint: String {
         let baseUrl = "https://api.ebay.com/buy/browse/v1/item_summary/search?",
             query = "q=\(keyWord ?? "")&",
             groupBy = "category_ids=\(filterBy?.rawValue ?? "")&",
-            limit = "limit=50&",
+            limit = "limit=\(fetchLimit ?? 30)&",
             buyOption = "buyingOptions%3A%7BFIXED_PRICE%7D",
             condition = "conditions%3A%7BNEW%7D&",
             filter = "filter=\(buyOption),\(condition)",

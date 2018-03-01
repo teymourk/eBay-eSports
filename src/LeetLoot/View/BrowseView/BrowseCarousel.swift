@@ -1,23 +1,32 @@
 //
-//  CarouselCollectionView.swift
+//  BrowseCarousel.swift
 //  LeetLoot
 //
-//  Created by Katherine Bajno on 2/9/18.
+//  Created by Katherine Bajno on 2/23/18.
 //  Copyright © 2018 Kiarash Teymoury. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 
-class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     private let cellId = "cellId"
     
+    var categories: [Categories]?
     
+    var itemCategory: BrowseCategory? {
+        didSet{
+            let browseCategories = itemCategory?.categories
+                categories = browseCategories
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,18 +47,18 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     
     func setupViews(){
         backgroundColor = .white
-        loadData()
+        
         addSubview(itemsCollectionView)
-
+        
         //to generate multiple cells in nested collection view
         itemsCollectionView.dataSource = self
         itemsCollectionView.delegate = self
         
         //register item cell to the collection view
-        itemsCollectionView.register(ItemCell.self, forCellWithReuseIdentifier: cellId)
+        itemsCollectionView.register(browseItemCell.self, forCellWithReuseIdentifier: cellId)
         
         //expand from left to right edge
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[v0]-15-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))
         
         //expand from top to bottom
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))
@@ -57,25 +66,23 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
         
     }
     
-   //number of cells return in section, this will change based on if it's events or games
+    //number of cells return in section, this will change based on if it's events or games
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return root?.first?.itemSummaries?.count ?? 0
+        
+        if let count = categories?.count {
+            return count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ItemCell {
-            let imageURL = root?.first?.itemSummaries?[indexPath.item].additionalImages?.first?.imageUrl
-            cell.merchImage.downloadImages(url: imageURL ?? "")
-            return cell
-        }
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! browseItemCell
+        cell.category = categories?[indexPath.item]
+        return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        buyItem.open(.Buy)
-    }
-    
+
     //sizing of cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 130, height: 130)
@@ -85,59 +92,52 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(15)
     }
-    
-    fileprivate var root: [Root]? {
-        didSet {
-            DispatchQueue.main.async {
-                self.itemsCollectionView.reloadData()
-            }
-        }
-    }
-    
-    func loadData() {
-        let query = Root(queryKey: "nintendo", filterBy: .All_Items, sortBy: .Best_Match, limit: 8)
-        query.retrieveDataByName(offset: 0) { (eventMerch) in
-            self.root = eventMerch
-        }
-    }
-    
-    lazy var buyItem = { () -> Buy_Filter in
-        let view = Buy_Filter()
-        return view
-    }()
 }
 
 //cell where the event, game, or merch is displayed in carousel
-class ItemCell: UICollectionViewCell{
+class browseItemCell: UICollectionViewCell{
     
-    let merchImage = { () -> customeImage in
-        let image = customeImage()
-        image.contentMode = .scaleAspectFit
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
+    //var categories: [Categories]?
+
+    var category: Categories? {
+        didSet{
+            if let imageName = category?.imageName {
+                
+                imageView.downloadImages(url: imageName)
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
     
+    let imageView: customeImage = {
+        let iv = customeImage()
+        iv.image = UIImage(named: "")
+        iv.contentMode = .scaleAspectFit
+        return iv
+    }()
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func setupViews(){
+        
+        addSubview(imageView)
+        imageView.frame = CGRectMake(0, 0, frame.width, frame.height)
+
+        
         backgroundColor = .clear
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.softGrey.cgColor
-        addSubview(merchImage)
-        
-        NSLayoutConstraint.activate([
-            merchImage.leftAnchor.constraint(equalTo: leftAnchor),
-            merchImage.rightAnchor.constraint(equalTo: rightAnchor),
-            merchImage.topAnchor.constraint(equalTo: topAnchor),
-            merchImage.bottomAnchor.constraint(equalTo: bottomAnchor),
-        ])
+    }
+    
+    //function to allow for CGRectMake in Swift 4
+    func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
+        return CGRect(x: x, y: y, width: width, height: height)
     }
     
 }

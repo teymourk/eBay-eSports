@@ -20,11 +20,13 @@ struct Root:Codable, BrowseAPI {
     var keyWord: String?
     var filterBy: Filters.option?
     var sortBy: Sort.option?
+    var fetchLimit: Int?
     
-    init(queryKey: String, filterBy: Filters.option, sortBy: Sort.option) {
+    init(queryKey: String, filterBy: Filters.option, sortBy: Sort.option, limit: Int? = nil) {
         self.keyWord = queryKey
         self.filterBy = filterBy
         self.sortBy = sortBy
+        self.fetchLimit = limit
     }
 }
 

@@ -12,31 +12,8 @@ import FirebaseAuth
 protocol HomePagesDelegate {
     func onScreenButtons(_ sender: UIButton)
 }
-class SignUp: ParentView {
-        private let eliteLootLogo = { () -> UIImageView in
-            let image = UIImageView(image: #imageLiteral(resourceName: "EliteLootLogo"))
-            image.contentMode = .scaleAspectFit
-            return image
-        }()
-    lazy var back = { () -> UIButton in
-        let button = UIButton(imageName: "Back")
-        button.addTarget(self, action: #selector(onScreenButtons(_ :)), for: .touchUpInside)
-        button.isHidden = true
-        button.tag = 0
-        return button
-    }()
-    private lazy var close = { () -> UIButton in
-        let button = UIButton(imageName: "Close")
-        button.addTarget(self, action: #selector(onScreenButtons(_ :)), for: .touchUpInside)
-        button.tag = 1
-        return button
-    }()
-    private lazy var stackView = { () -> UIStackView in
-        let stack = UIStackView(arrangedSubviews: [back, eliteLootLogo, close])
-        stack.distribution = .fillProportionally
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
+class SignUp: SignIn {
+
     private let signInLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Register"
@@ -113,34 +90,17 @@ class SignUp: ParentView {
         return button
         
     }()
-    var delegate:RegisterPagesDelegate?
-    @objc
-    func onScreenButtons(_ sender: UIButton) {
-        guard delegate != nil else { return }
-        delegate?.onScreenButtons(sender)
-    }
-    override func setupView() {
-        
-        backgroundColor = .white
-        transform = CGAffineTransform(scaleX: 1, y: 1)
-        addSubview(stackView)
-        
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            ])
-        
+
+    override func registerLabel() {
         addSubview(signInLabel)
         NSLayoutConstraint.activate([
             //setup constraints
             signInLabel.topAnchor.constraint(equalTo: topAnchor, constant: 63),
             signInLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 23)
-            
-            ])
-        setupLayoutAttributes()
+        ])
     }
-    func setupEmail(){
+    
+    override func setupEmail(){
         addSubview(emailContainerView)
         NSLayoutConstraint.activate([
             //setup constraints
@@ -158,7 +118,7 @@ class SignUp: ParentView {
             ])
         
     }
-    func setupPassword(){
+    override func setupPassword(){
         addSubview(passwordContainerView)
         NSLayoutConstraint.activate([
             passwordContainerView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 116),
@@ -193,7 +153,7 @@ class SignUp: ParentView {
             ])
         
     }
-    func setupRegister(){
+    override func setupRegister(){
         addSubview(register)
         //setup constraints
         NSLayoutConstraint.activate([
@@ -204,18 +164,21 @@ class SignUp: ParentView {
             register.heightAnchor.constraint(equalToConstant: 40)
             ])
     }
+
     /*func setupErrorLabel(){
         addSubview(errorLabel)
         NSLayoutConstraint.activate([
             errorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 65)
             ])
     }*/
-func setupLayoutAttributes() {
+
+    override func setupLayoutAttributes() {
+        back.isHidden = false
+
         setupEmail();
         setupPassword();
         setupConfirmPassword();
         setupRegister();
-        
         }
     
 func setregisterbuttonenabled(enabled:Bool){
@@ -250,5 +213,6 @@ func setregisterbuttonenabled(enabled:Bool){
     }
     
 }
-    
-
+   
+    }
+}
