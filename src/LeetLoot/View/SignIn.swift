@@ -35,7 +35,7 @@ class SignIn: ParentView {
         return button
     }()
     
-    private lazy var stackView = { () -> UIStackView in
+    lazy var stackView = { () -> UIStackView in
         let stack = UIStackView(arrangedSubviews: [back, eliteLootLogo, close])
             stack.distribution = .fillProportionally
             stack.translatesAutoresizingMaskIntoConstraints = false
@@ -112,9 +112,6 @@ class SignIn: ParentView {
         button.titleLabel?.font = UIFont .boldSystemFont(ofSize: 16)
         return button
     }()
-
-
-
     
     var delegate:RegisterPagesDelegate?
     
@@ -126,25 +123,31 @@ class SignIn: ParentView {
     
     //Dont Touch
     override func setupView() {
-        
         backgroundColor = .white
         transform = CGAffineTransform(scaleX: 1, y: 1)
-        addSubview(stackView)
 
+        setupStackView()
+        setupLayoutAttributes()
+        registerLabel()
+    }
+    
+    func setupStackView() {
+        addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
+    }
+    
+    func registerLabel() {
         addSubview(signInLabel)
         NSLayoutConstraint.activate([
             //setup constraints
             signInLabel.topAnchor.constraint(equalTo: topAnchor, constant: 63),
             signInLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 23)
             
-            ])
-        setupLayoutAttributes()
-
+        ])
     }
     
     //Register
