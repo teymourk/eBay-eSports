@@ -30,7 +30,7 @@ class SignUp: SignIn {
     private lazy var emailContainerView : UIView = {
         
         let emailContainerView = UIView()
-        emailContainerView.backgroundColor = .lightGray
+        emailContainerView.backgroundColor = UIColor(red:238, green: 239, blue: 241)
         emailContainerView.translatesAutoresizingMaskIntoConstraints=false
         emailContainerView.layer.cornerRadius = 4
         emailContainerView.layer.masksToBounds = true
@@ -46,7 +46,7 @@ class SignUp: SignIn {
 
         private lazy var passwordContainerView : UIView = {
             let passwordContainerView = UIView()
-            passwordContainerView.backgroundColor = .lightGray
+            passwordContainerView.backgroundColor = UIColor(red:238, green: 239, blue: 241)
             passwordContainerView.translatesAutoresizingMaskIntoConstraints=false
             passwordContainerView.layer.cornerRadius = 4
             passwordContainerView.layer.masksToBounds = true
@@ -63,7 +63,7 @@ class SignUp: SignIn {
     }()
     private lazy var confirmPasswordContainerView : UIView = {
         let passwordContainerView = UIView()
-        passwordContainerView.backgroundColor = .lightGray
+        passwordContainerView.backgroundColor = UIColor(red:238, green: 239, blue: 241)
         passwordContainerView.translatesAutoresizingMaskIntoConstraints=false
         passwordContainerView.layer.cornerRadius = 4
         passwordContainerView.layer.masksToBounds = true
@@ -105,8 +105,8 @@ class SignUp: SignIn {
         NSLayoutConstraint.activate([
             //setup constraints
             emailContainerView.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 51),
-            emailContainerView.leftAnchor.constraint(equalTo: leftAnchor, constant:23),
-            emailContainerView.widthAnchor.constraint(equalToConstant: 329),
+            emailContainerView.leftAnchor.constraint(equalTo: leftAnchor, constant:15),
+            emailContainerView.widthAnchor.constraint(equalTo:widthAnchor,constant:-30),
             emailContainerView.heightAnchor.constraint(equalToConstant: 50)
             ])
         addSubview(emailTextField)
@@ -122,8 +122,8 @@ class SignUp: SignIn {
         addSubview(passwordContainerView)
         NSLayoutConstraint.activate([
             passwordContainerView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 116),
-            passwordContainerView.leftAnchor.constraint(equalTo: leftAnchor, constant: 23),
-            passwordContainerView.widthAnchor.constraint(equalToConstant: 329),
+            passwordContainerView.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            passwordContainerView.widthAnchor.constraint(equalTo:widthAnchor,constant:-30),
             passwordContainerView.heightAnchor.constraint(equalToConstant: 50)
             ])
         
@@ -139,8 +139,8 @@ class SignUp: SignIn {
         addSubview(confirmPasswordContainerView)
         NSLayoutConstraint.activate([
             confirmPasswordContainerView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 181),
-            confirmPasswordContainerView.leftAnchor.constraint(equalTo:leftAnchor, constant: 23),
-            confirmPasswordContainerView.widthAnchor.constraint(equalToConstant: 329),
+            confirmPasswordContainerView.leftAnchor.constraint(equalTo:leftAnchor, constant: 15),
+            confirmPasswordContainerView.widthAnchor.constraint(equalTo:widthAnchor,constant:-30),
             confirmPasswordContainerView.heightAnchor.constraint(equalToConstant: 50)
             ])
         
@@ -158,10 +158,10 @@ class SignUp: SignIn {
         //setup constraints
         NSLayoutConstraint.activate([
             register.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 283),
-            register.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            register.trailingAnchor.constraint(equalTo: trailingAnchor,constant: 5),
+            
             register.widthAnchor.constraint(equalTo: widthAnchor,constant:-10),
-            register.heightAnchor.constraint(equalToConstant: 40)
+            register.centerXAnchor.constraint(equalTo:centerXAnchor)
+            
             ])
     }
 
@@ -214,5 +214,4 @@ func setregisterbuttonenabled(enabled:Bool){
     
 }
    
-    }
-}
+

@@ -42,7 +42,15 @@ class SignIn: ParentView {
             stack.translatesAutoresizingMaskIntoConstraints = false
        return stack
     }()
-    
+    lazy var stack = { () -> UIStackView in
+        let stack = UIStackView(arrangedSubviews: [forgot,signin])
+        stack.distribution = .fillProportionally
+        stack.axis = .horizontal
+        stackView.setCustomSpacing(15.0, after: forgot)
+        stackView.setCustomSpacing(15.0, after: signin)
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
     private let register = { () -> UIButton in
         let button = UIButton(title: "Register")
             button.setTitleColor(.lightBlue, for: .normal)
@@ -62,13 +70,13 @@ class SignIn: ParentView {
         let textfield = UITextField()
         textfield.placeholder = "Email"
         textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.font = UIFont(name:"Helvectica",size:14)
+        //textfield.font = UIFont(name:"Helvectica",size:14)
         textfield.keyboardType = .emailAddress
         return textfield;
     }()
     private lazy var passwordContainerView : UIView = {
         let passwordContainerView = UIView()
-        passwordContainerView.backgroundColor = UIColor.lightGray
+        passwordContainerView.backgroundColor = UIColor(red:238, green: 239, blue: 241)
         passwordContainerView.translatesAutoresizingMaskIntoConstraints=false
         passwordContainerView.layer.cornerRadius = 4
         passwordContainerView.layer.masksToBounds = true
@@ -78,14 +86,14 @@ class SignIn: ParentView {
         let textfield = UITextField()
         textfield.placeholder = "Password"
         textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.font = UIFont(name:"Helvectica",size:14)
+        //textfield.font = UIFont(name:"Helvectica",size:14)
         textfield.keyboardType = .emailAddress
         textfield.isSecureTextEntry = true
         return textfield
     }()
     private lazy var emailContainerView: UIView = {
         let emailContainerView = UIView()
-        emailContainerView.backgroundColor = UIColor.lightGray
+        emailContainerView.backgroundColor = UIColor(red:238, green: 239, blue: 241)
         emailContainerView.translatesAutoresizingMaskIntoConstraints=false
         emailContainerView.layer.cornerRadius = 4
         emailContainerView.layer.masksToBounds = true
@@ -127,8 +135,8 @@ class SignIn: ParentView {
     override func setupView() {
         backgroundColor = .white
         transform = CGAffineTransform(scaleX: 1, y: 1)
-
         setupStackView()
+        setupStack()
         setupLayoutAttributes()
         registerLabel()
     }
@@ -140,6 +148,16 @@ class SignIn: ParentView {
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
+    }
+    func setupStack() {
+        addSubview(stack)
+        NSLayoutConstraint.activate([
+            stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -77),
+            stack.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            ])
+        setupSignin()
+        setupForgot()
     }
     
     func registerLabel() {
@@ -166,8 +184,8 @@ class SignIn: ParentView {
         NSLayoutConstraint.activate([
             //setup constraints
             emailContainerView.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 51),
-            emailContainerView.leftAnchor.constraint(equalTo: leftAnchor, constant:23),
-            emailContainerView.widthAnchor.constraint(equalToConstant: 329),
+            emailContainerView.leftAnchor.constraint(equalTo: leftAnchor, constant:15),
+            emailContainerView.widthAnchor.constraint(equalTo:widthAnchor,constant: -30),
             emailContainerView.heightAnchor.constraint(equalToConstant: 50)
             ])
         
@@ -175,13 +193,16 @@ class SignIn: ParentView {
         NSLayoutConstraint.activate([
             emailTextField.leftAnchor.constraint(equalTo: emailContainerView.leftAnchor, constant: 20),
             emailTextField.topAnchor.constraint(equalTo: emailContainerView.topAnchor,constant:15),
-            emailTextField.widthAnchor.constraint(equalTo:emailContainerView.widthAnchor),
+            emailTextField.widthAnchor.constraint(equalTo: widthAnchor,constant:15),
             emailTextField.heightAnchor.constraint(equalToConstant: 17)
             ])
     }
     func setupPassword(){
         addSubview(passwordContainerView)
-        NSLayoutConstraint.activate([ passwordContainerView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 116),passwordContainerView.leftAnchor.constraint(equalTo: leftAnchor, constant: 23), passwordContainerView.widthAnchor.constraint(equalToConstant: 329),            passwordContainerView.heightAnchor.constraint(equalToConstant: 50)
+        NSLayoutConstraint.activate([
+            passwordContainerView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 116),
+            passwordContainerView.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            passwordContainerView.widthAnchor.constraint(equalTo:widthAnchor,constant:-30),   passwordContainerView.heightAnchor.constraint(equalToConstant: 50)
             ])
         addSubview(passwordTextField)
         NSLayoutConstraint.activate([ passwordTextField.leftAnchor.constraint(equalTo: passwordContainerView.leftAnchor, constant: 20), passwordTextField.topAnchor.constraint(equalTo: passwordContainerView.topAnchor,constant:15), passwordTextField.widthAnchor.constraint(equalTo:passwordContainerView.widthAnchor),
@@ -189,20 +210,26 @@ class SignIn: ParentView {
             ])
     }
 
-        func setupSignin() {
-            addSubview(signin)
-            NSLayoutConstraint.activate([           signin.topAnchor.constraint(equalTo: topAnchor, constant: 228), signin.leftAnchor.constraint(equalTo:leftAnchor, constant:195), signin.widthAnchor.constraint(equalToConstant:157),
-                                                    //height
-                signin.heightAnchor.constraint(equalToConstant: 40)
-                ])
-        }
+    func setupSignin() {
+        addSubview(signin)
+        NSLayoutConstraint.activate([
+            signin.topAnchor.constraint(equalTo: topAnchor, constant: 228),
+           // signin.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+                                                //height
+           // signin.leftAnchor.constraint(equalTo: leftAnchor, constant: 187),
+            signin.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
+            signin.leadingAnchor.constraint(equalTo:forgot.trailingAnchor,constant:15),
+            signin.widthAnchor.constraint(equalToConstant:157)
+            
+            ])
+    }
         //Forgot
         func setupForgot() {
             addSubview(forgot)
             NSLayoutConstraint.activate([
-                
-                forgot.topAnchor.constraint(equalTo: topAnchor, constant: 228),  forgot.leftAnchor.constraint(equalTo:leftAnchor, constant: 23),
-                forgot.widthAnchor.constraint(equalToConstant: 157),     forgot.heightAnchor.constraint(equalToConstant: 40)  
+                forgot.topAnchor.constraint(equalTo: topAnchor, constant: 228),
+                forgot.leftAnchor.constraint(equalTo:leftAnchor, constant: 15),
+                forgot.widthAnchor.constraint(equalTo:signin.widthAnchor)
                 ])
         }
         
@@ -210,8 +237,8 @@ class SignIn: ParentView {
     func setupLayoutAttributes() {
         setupRegister()
         setupPassword()
-        setupSignin()
-        setupForgot()
+        //setupSignin()
+        //setupForgot()
         setupEmail()
 
     }
@@ -246,7 +273,16 @@ class SignIn: ParentView {
         
     }
 }
-    
-    
 }
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+}
+}
+    
+
 
