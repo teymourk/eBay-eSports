@@ -37,6 +37,7 @@ struct itemSummaries:Codable {
     var itemWebUrl: String?
     var condition: String?
     var price: price?
+    var image: thumbnailImages?
     var thumbnailImages: [thumbnailImages]?
     var additionalImages: [thumbnailImages]?
     var shippingOptions: [shippingOptions]?

@@ -46,7 +46,7 @@ class Merch_Cell: ParentCell {
         	itemPrice = price?.value ?? "0.0",
             currency = price?.currency ?? "USD"
 
-        let imgUrl = items.thumbnailImages?.first?.imageUrl ?? ""
+        let imgUrl = items.image?.imageUrl ?? ""
 
         merchTitle.attributedFor(title, price: "\(currency) $\(itemPrice)")
         merchImage.downloadImages(url: imgUrl)

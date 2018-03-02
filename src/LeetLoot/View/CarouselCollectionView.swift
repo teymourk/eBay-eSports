@@ -65,7 +65,7 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ItemCell {
-            let imageURL = root?.first?.itemSummaries?[indexPath.item].additionalImages?.first?.imageUrl
+            let imageURL = root?.first?.itemSummaries?[indexPath.item].image?.imageUrl
             cell.merchImage.downloadImages(url: imageURL ?? "")
             return cell
         }
