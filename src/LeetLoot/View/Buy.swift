@@ -10,9 +10,22 @@ import UIKit
 
 class Buy: Merch_Cell {
     
-    override func setupLayoutAttributes() {
-        merchTitle.textContainerInset = UIEdgeInsets(top: 5, left: 10, bottom: 0, right: 0)
+    var itemSummaries: items? {
+        didSet {
+            if let item = itemSummaries {
+                merchTitle.attributedFor("League", price: "US $14.99", details: item.shortDescription)
+                merchImage.downloadImages(url: "http://i.ebayimg.com/00/s/NjgyWDU4NQ==/z/ir8AAOSwzqFY~GMn/$_57.JPG?set_id=8800005007")
+            }
+        }
+    }
     
-        merchTitle.attributedFor("League Of Legends Kindred New T-Shirt 3D Gaming ", price: "US $14.99", details: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis")
+    override func setupLayoutAttributes() {
+        merchImage.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 2.5/3).isActive = true
+        merchTitle.textContainerInset = UIEdgeInsets(top: 5, left: 10, bottom: 0, right: 0)
+
     }
 }
+
+//2.5/3 for x
+//2/3 for 8+ / 8 
+

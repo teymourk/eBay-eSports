@@ -97,6 +97,7 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = Header_Cell()
+            view.backgroundColor = .customGray
             view.title = filterMenu[section].sectionTitle
         return view
     }

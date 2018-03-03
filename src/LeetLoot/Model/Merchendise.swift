@@ -13,6 +13,7 @@ struct Root:Codable, BrowseAPI {
     typealias Model = Root
     
     var total: Int?
+    var itemHref: ItemHerf?
     var itemSummaries: [itemSummaries]?
     
     //It counts it in the Decode ? Anyways to not without using
@@ -30,12 +31,14 @@ struct Root:Codable, BrowseAPI {
     }
 }
 
+
 //Root Constains and Array of all items with summaries
 struct itemSummaries:Codable {
     var itemId: String?
     var title: String?
     var itemWebUrl: String?
     var condition: String?
+    var itemGroupHref: String?
     var price: price?
     var image: thumbnailImages?
     var thumbnailImages: [thumbnailImages]?
@@ -43,6 +46,7 @@ struct itemSummaries:Codable {
     var shippingOptions: [shippingOptions]?
     
 }
+
 //Item Shipping
 struct shippingOptions:Codable {
     var shippingCostType: String?

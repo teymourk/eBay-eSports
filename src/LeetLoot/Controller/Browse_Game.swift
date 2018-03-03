@@ -109,7 +109,8 @@ extension Browse_Game {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        buyItem.open(.Buy)
+        let itemSummaries = root?.first?.itemHref?.items?[indexPath.item]
+        buyItem.itemSummaries = itemSummaries
     }
 }
 

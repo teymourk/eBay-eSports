@@ -14,6 +14,13 @@ protocol BuyFilterDelegate {
 
 final class Buy_Filter: NSObject {
     
+    var itemSummaries: items? {
+        didSet {
+            buyView.itemSummaries = itemSummaries
+            open(.Buy)
+        }
+    }
+    
     internal enum Option {
         case Filter, Buy, None
     }
@@ -83,7 +90,7 @@ final class Buy_Filter: NSObject {
         self.currentView = $0 == .Buy ? self.setupViewFor(self.buyView) : self.setupViewFor(self.filterView)
     }
     
-    func open(_ view: Option) { 
+    func open(_ view: Option) {
         window.addSubview(fadeBackgroud)
         window.addSubview(parentView)
         
@@ -113,8 +120,7 @@ final class Buy_Filter: NSObject {
             
             currentView.topAnchor.constraint(equalTo: downArrow.bottomAnchor, constant: 10),
             currentView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
-            currentView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor),
-            currentView.bottomAnchor.constraint(equalTo: buy_reset.topAnchor, constant: -10)
+            currentView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
         ])
         
         return currentView

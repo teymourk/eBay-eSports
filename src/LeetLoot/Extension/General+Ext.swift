@@ -39,9 +39,9 @@ extension UITextView {
         
         guard   let textFont = UIFont(name: "Helvetica", size: 14) else { return }
         let attributedFont: Dictionary<NSAttributedStringKey, UIFont> = [.font :   textFont]
-        let customText = title[0...30].appending("...")
+        //let customText = title[0...30].appending("...")
         
-        let attributedText = NSMutableAttributedString( string: "\(customText)\n", //Initialize Merch Details
+        let attributedText = NSMutableAttributedString( string: "\(title)\n", //Initialize Merch Details
                                                         attributes: attributedFont)
         
         

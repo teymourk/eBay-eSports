@@ -11,7 +11,7 @@ import UIKit
 class ParentModal: NSObject {
     
     enum PageAction {
-        case open, close, login, signUp
+        case open, close, login, signUp, none
     }
     
     lazy var signIn = { () -> SignIn in
@@ -47,8 +47,7 @@ class ParentModal: NSObject {
                       height: self.width)
     }
     
-    private let edgeOffset: CGFloat = 8
-    
+
     var topAnchor: CGFloat {
         get {
             let device = Constants.deviceType.None.isDevice()
@@ -56,7 +55,7 @@ class ParentModal: NSObject {
         }
     }
     
-    var action: PageAction = .open {
+    var action: PageAction = .none {
         willSet {
             switch newValue {
             case .open:
@@ -65,12 +64,14 @@ class ParentModal: NSObject {
                 switchBetweenPages(newValue)
             case .close:
                 closePage()
+            case .none: return
             }
         }
     }
     
-    private let window = Constants.kWindow,
-                width = Constants.kWidth
+    private let edgeOffset: CGFloat = 8
+    private let (window, width) =  (Constants.kWindow,
+                                    Constants.kWidth)
     
     private func openLogin() {
         window.windowLevel = UIWindowLevelStatusBar
@@ -87,8 +88,8 @@ class ParentModal: NSObject {
     
         UIView.animate(withDuration: 0.3, animations: {
             self.fadeBackground.alpha = 0
-            self.signUp.frame = self.signInFrames(self.edgeOffset, -(self.width))
-            self.signIn.frame = self.signInFrames(self.edgeOffset, -(self.width))
+            self.signUp.frame = self.signInFrames(self.signUp.frame.origin.x, -(self.width))
+            self.signIn.frame = self.signInFrames(self.signIn.frame.origin.x, -(self.width))
     
         }, completion: { (true) in
             self.fadeBackground.removeFromSuperview()
