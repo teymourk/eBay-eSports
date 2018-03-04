@@ -21,9 +21,9 @@ class Browse_Game: UICollectionViewController {
     
     fileprivate var root: [Root]? {
         didSet {
-            DispatchQueue.main.async {
-                self.collectionView?.reloadData()
-                self.menuBar.results = self.root?.first?.total
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView?.reloadData()
+                self?.menuBar.results = self?.root?.first?.total
             }
         }
     }
@@ -98,10 +98,10 @@ extension Browse_Game {
         guard   let root = root?.first,
                 let summariesCount = root.itemSummaries?.count else { return }
         if indexPath.item == summariesCount - 10 {
-            merchRoot.retrieveDataByName(offset: summariesCount, {
+            merchRoot.retrieveDataByName(offset: summariesCount, { [weak self] in
                 if let items = $0?.first?.itemSummaries {
                     items.forEach({
-                        self.root?[0].itemSummaries?.append($0)
+                        self?.root?[0].itemSummaries?.append($0)
                     })
                 }
             })

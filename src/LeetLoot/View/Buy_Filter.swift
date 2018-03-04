@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BuyFilterDelegate {
+protocol BuyFilterDelegate: class {
     func updateNewData(for query: Root)
 }
 
@@ -63,7 +63,7 @@ final class Buy_Filter: NSObject {
         return view
     }()
     
-    var delegate: BuyFilterDelegate?
+    weak var delegate: BuyFilterDelegate?
     
     private lazy var customFrame: (CGFloat) -> CGRect = {
         return CGRect(x: self.edgeOffset,
@@ -134,12 +134,13 @@ final class Buy_Filter: NSObject {
     private func close() {
         UIView.animate(withDuration: 0.2,
                        delay: 0, options: .curveEaseIn, animations: {
-                self.parentView.frame = self.customFrame(self.height)
-                self.fadeBackgroud.alpha = 0
-        }, completion: { (true) in
-            self.parentView.removeFromSuperview()
-            self.fadeBackgroud.removeFromSuperview()
-            self.currentView.removeFromSuperview()
+                        [pView = self.parentView, bView = self.fadeBackgroud, cFrame = self.customFrame] in
+                pView.frame = cFrame(self.height)
+                bView.alpha = 0
+        }, completion: { [weak self] (true) in
+            self?.parentView.removeFromSuperview()
+            self?.fadeBackgroud.removeFromSuperview()
+            self?.currentView.removeFromSuperview()
         })
     }
     

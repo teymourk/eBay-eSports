@@ -77,26 +77,32 @@ class ParentModal: NSObject {
         window.addSubview(fadeBackground)
         window.addSubview(signIn)
         
-        doSpringAnimation {
-            self.fadeBackground.alpha = 0.5
-            self.signIn.frame = self.signInFrames(self.edgeOffset, self.edgeOffset)
+        doSpringAnimation { [   weak fView = self.fadeBackground,
+                                weak Sview = self.signIn] in
+            fView?.alpha = 0.5
+            Sview?.frame = self.signInFrames(self.edgeOffset, self.edgeOffset)
         }
     }
     
     private func closePage() {
     
-        UIView.animate(withDuration: 0.3, animations: {
-            self.fadeBackground.alpha = 0
-            self.signUp.frame = self.signInFrames(self.signUp.frame.origin.x, -(self.width))
-            self.signIn.frame = self.signInFrames(self.signIn.frame.origin.x, -(self.width))
+        UIView.animate(withDuration: 0.3, animations: { [   weak fView = self.fadeBackground,
+                                                            weak Sview = self.signIn,
+                                                            weak SUview = self.signUp] in
+            fView?.alpha = 0
+            SUview?.frame = self.signInFrames(self.signUp.frame.origin.x, -(self.width))
+            Sview?.frame = self.signInFrames(self.signIn.frame.origin.x, -(self.width))
     
-        }, completion: { (true) in
-            self.fadeBackground.removeFromSuperview()
-            self.signIn.removeFromSuperview()
-            self.signUp.removeFromSuperview()
+            }, completion: { [  weak fView = self.fadeBackground,
+                                weak Sview = self.signIn,
+                                weak SUview = self.signUp] (true) in
+                
+            fView?.removeFromSuperview()
+            Sview?.removeFromSuperview()
+            SUview?.removeFromSuperview()
             
-            self.signIn.frame = self.signInFrames(self.edgeOffset, -(self.width))
-            self.signUp.frame = self.signUpInitialFrame(self.width, self.edgeOffset)
+            Sview?.frame = self.signInFrames(self.edgeOffset, -(self.width))
+            SUview?.frame = self.signUpInitialFrame(self.width, self.edgeOffset)
 
         })
     }
@@ -111,7 +117,7 @@ class ParentModal: NSObject {
         let viewToMove = page == .signUp ? signIn : signUp,
             viewToReplace = page == .signUp ? signUp : signIn
         
-        self.doSpringAnimation {
+        self.doSpringAnimation { 
             viewToMove.frame = moveFrame
             self.doSpringAnimation {
                 viewToReplace.frame = replaceFrame

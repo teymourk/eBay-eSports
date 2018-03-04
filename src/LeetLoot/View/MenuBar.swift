@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MenuBarDelegate {
+protocol MenuBarDelegate: class {
     func onMenuButtons(_ sender: UIButton)
 }
 
@@ -16,8 +16,8 @@ final class Menu: ParentView {
     
     var results: Int? {
         didSet {
-            DispatchQueue.main.async {
-                self.result.text = "\(self.results ?? 0) Results"
+            DispatchQueue.main.async { [weak self] in
+                self?.result.text = "\(self?.results ?? 0) Results"
             }
         }
     }
@@ -47,7 +47,7 @@ final class Menu: ParentView {
         }
     }
     
-    var delegate: MenuBarDelegate?
+    weak var delegate: MenuBarDelegate?
     private var isMenu: Bool = false
     
     //Stack view arrangedsubviews based on isMenu value
@@ -66,7 +66,6 @@ final class Menu: ParentView {
     private let result = { () -> UILabel in
         let label = UILabel()
             label.textColor = .black
-            label.text = "215 Results"
             label.textAlignment = .right
             label.font = .systemFont(ofSize: 15)
         return label

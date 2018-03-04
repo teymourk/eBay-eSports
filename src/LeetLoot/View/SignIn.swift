@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol RegisterPagesDelegate {
+protocol RegisterPagesDelegate: class {
     func onScreenButtons(_ sender: UIButton)
 }
 
@@ -113,7 +113,7 @@ class SignIn: ParentView {
         return button
     }()
     
-    var delegate:RegisterPagesDelegate?
+    weak var delegate:RegisterPagesDelegate?
     
     @objc
     func onScreenButtons(_ sender: UIButton) {

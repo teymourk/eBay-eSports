@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol FilterMenuDelegate {
+protocol FilterMenuDelegate: class {
     func selctedQuery(_ query: Root)
 }
 
@@ -17,7 +17,7 @@ class Filter: UITableView {
     var sorting: Sort.option = .Best_Match
     var filtering: Filters.option = .All_Items
     
-    var filteringDelegate: FilterMenuDelegate?
+    weak var filteringDelegate: FilterMenuDelegate?
     
     fileprivate var filterMenu: [FilterOptions] {
         return [Sort(), Filters(), Price()]
