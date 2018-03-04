@@ -10,16 +10,22 @@ import UIKit
 
 class Merch_Cell: ParentCell {
     
-    internal var items: itemSummaries? {
+    internal var items: (summary:itemSummaries?, href:ItemHerf?) {
         didSet {
-            guard let item = items else { return }
-            configureCellFor(item)
+            if let item = items.summary, let itemHref = items.href {
+                configureCellFor(item, itemHref: itemHref)
+            } else {
+                if let item = items.summary {
+                    configureCellFor(item)
+                }
+            }
         }
     }
     
     let merchImage = { () -> customeImage in
         let image = customeImage()
             image.contentMode = .scaleAspectFit
+            image.backgroundColor = .softGrey
             image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -40,16 +46,9 @@ class Merch_Cell: ParentCell {
         return stack
     }()
 
-    private func configureCellFor(_ items: itemSummaries) {
-        let price = items.price,
-            title = items.title ?? "",
-        	itemPrice = price?.value ?? "0.0",
-            currency = price?.currency ?? "USD"
-
-        let imgUrl = items.image?.imageUrl ?? ""
-
-        merchTitle.attributedFor(title, price: "\(currency) $\(itemPrice)")
-        merchImage.downloadImages(url: imgUrl)
+    func configureCellFor(_ item: itemSummaries, itemHref: ItemHerf? = nil) {
+        merchTitle.attributedFor(item.itemTitle, price: item.fullPrice)
+        merchImage.downloadImages(url: item.imgURL)
     }
 
     private func setupStackView() {

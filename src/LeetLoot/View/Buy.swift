@@ -10,22 +10,27 @@ import UIKit
 
 class Buy: Merch_Cell {
     
-    var itemSummaries: items? {
-        didSet {
-            if let item = itemSummaries {
-                merchTitle.attributedFor("League", price: "US $14.99", details: item.shortDescription)
-                merchImage.downloadImages(url: "http://i.ebayimg.com/00/s/NjgyWDU4NQ==/z/ir8AAOSwzqFY~GMn/$_57.JPG?set_id=8800005007")
-            }
+    override func configureCellFor(_ item: itemSummaries, itemHref: ItemHerf? = nil) {
+        if let itemHref = itemHref {
+            merchTitle.attributedFor("\(item.itemTitle)\n",
+                                    price: item.fullPrice,
+                                    IncludesShipping: item.shipping,
+                                    details: itemHref.description)
+            merchImage.downloadImages(url: itemHref.imgURL)
         }
     }
-    
+
     override func setupLayoutAttributes() {
-        merchImage.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 2.5/3).isActive = true
+        var imageHeight: CGFloat = CGFloat()
+        switch Constants.isDevice {
+        case .X: imageHeight = (2.5/3)
+        case .plus: imageHeight = (2/3)
+        case .regular: imageHeight = (1.5/3)
+        case .five: imageHeight = (1.3/3)
+        case .None: return }
+
+        merchImage.heightAnchor.constraint(equalTo: widthAnchor, multiplier: imageHeight).isActive = true
         merchTitle.textContainerInset = UIEdgeInsets(top: 5, left: 10, bottom: 0, right: 0)
 
     }
 }
-
-//2.5/3 for x
-//2/3 for 8+ / 8 
-

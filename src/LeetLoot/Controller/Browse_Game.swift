@@ -90,7 +90,7 @@ extension Browse_Game {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: Merch_Cell = collectionView.reusableCell(indexPath: indexPath)
-            cell.items = root?.first?.itemSummaries?[indexPath.row]
+            cell.items.summary = root?.first?.itemSummaries?[indexPath.row]
         return cell
     }
     
@@ -109,8 +109,11 @@ extension Browse_Game {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let itemSummaries = root?.first?.itemHref?.items?[indexPath.item]
-        buyItem.itemSummaries = itemSummaries
+        guard   let itemSummaries = root?.first?.itemSummaries?[indexPath.item],
+                let url = itemSummaries.hrefURL else { return }
+        
+        _ = ItemHerf(herfUrl: url) { [weak self] in self?.buyItem.items = (itemSummaries, $0) }
+
     }
 }
 

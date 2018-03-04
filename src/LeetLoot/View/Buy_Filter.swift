@@ -143,6 +143,15 @@ final class Buy_Filter: NSObject {
         })
     }
     
+    @objc private func onBuy_Reset(_ sender: UIButton) {
+        guard let itemUrl = URL(string: items.summary?.webURL ?? "") else { return }
+        
+        if UIApplication.shared.canOpenURL(itemUrl) {
+            UIApplication.shared.open(itemUrl, options: [:], completionHandler: nil)
+            return
+        }
+    }
+    
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTap(_: )))
         tapGesture.numberOfTapsRequired = 1

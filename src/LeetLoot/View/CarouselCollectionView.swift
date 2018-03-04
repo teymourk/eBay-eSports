@@ -65,7 +65,7 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ItemCell {
-            let imageURL = root?.first?.itemSummaries?[indexPath.item].image?.imageUrl
+            let imageURL = root?.first?.itemSummaries?[indexPath.item].imgURL
             cell.merchImage.downloadImages(url: imageURL ?? "")
             return cell
         }
@@ -73,7 +73,10 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        buyItem.open(.Buy)
+        guard   let itemSummaries = root?.first?.itemSummaries?[indexPath.item],
+                let url = itemSummaries.hrefURL else { return }
+        
+        _ = ItemHerf(herfUrl: url) { [weak self] in self?.buyItem.items = (itemSummaries, $0) }
     }
     
     //sizing of cells
