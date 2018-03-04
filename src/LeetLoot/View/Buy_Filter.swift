@@ -14,13 +14,13 @@ protocol BuyFilterDelegate {
 
 final class Buy_Filter: NSObject {
     
-    var itemSummaries: items? {
+    internal var items: (summary: itemSummaries?, href: ItemHerf?) {
         didSet {
-            buyView.itemSummaries = itemSummaries
+            buyView.items = items
             open(.Buy)
         }
     }
-    
+
     internal enum Option {
         case Filter, Buy, None
     }
@@ -47,6 +47,7 @@ final class Buy_Filter: NSObject {
     
     private lazy var buy_reset = { () -> UIButton in
         let button = UIButton()
+            button.addTarget(self, action: #selector(onBuy_Reset(_ :)), for: .touchUpInside)
             button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -58,7 +59,7 @@ final class Buy_Filter: NSObject {
     
     private lazy var filterView = { () -> Filter in
         let view = Filter()
-        view.filteringDelegate = self
+            view.filteringDelegate = self
         return view
     }()
     
@@ -74,14 +75,13 @@ final class Buy_Filter: NSObject {
     private var currentView = UIView()
     private let edgeOffset: CGFloat = 10.0
     
-    private let (width, height, window, cutomHeight, device) = (Constants.kWidth,
+    private let (width, height, window, cutomHeight) = (Constants.kWidth,
                                                                 Constants.kHeight,
                                                                 Constants.kWindow,
-                                                                Constants.kHeight * (3.7/5),
-                                                                Constants.deviceType.None.isDevice())
+                                                                Constants.kHeight * (3.7/5))
     
     private var bottomOffset: CGFloat {
-        get { return device == .X ? 40 : 10 }
+        get { return Constants.isDevice == .X ? 40 : 10 }
     }
     
     private lazy var setupOptions: (Option) -> () = {
@@ -116,12 +116,17 @@ final class Buy_Filter: NSObject {
             downArrow.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
             
             buy_reset.bottomAnchor.constraint(equalTo: parentView.bottomAnchor, constant: -5),
-            buy_reset.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
+            buy_reset.leadingAnchor.constraint(equalTo: parentView.leadingAnchor, constant: 5),
+            buy_reset.trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: -5),
             
             currentView.topAnchor.constraint(equalTo: downArrow.bottomAnchor, constant: 10),
             currentView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
             currentView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
         ])
+    
+        if currentView == filterView {
+            currentView.bottomAnchor.constraint(equalTo: buy_reset.topAnchor, constant: -10).isActive = true
+        }
         
         return currentView
     }

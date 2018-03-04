@@ -50,8 +50,7 @@ class ParentModal: NSObject {
 
     var topAnchor: CGFloat {
         get {
-            let device = Constants.deviceType.None.isDevice()
-            return device == .X ? 30 : 0
+            return Constants.isDevice == .X ? 30 : 0
         }
     }
     

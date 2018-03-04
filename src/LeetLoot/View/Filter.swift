@@ -48,9 +48,8 @@ class Filter: UITableView {
 extension Filter: UITableViewDataSource, UITableViewDelegate {
     
     private var customHeight: (Header: CGFloat, PriceRange: CGFloat) {
-        let device = Constants.deviceType.None.isDevice()
         guard   let parentHeight = superview?.frame.height else { return (40, 40) }
-                let ratioaBasedOnDevice:CGFloat = device == .X ? 12.5 : 13.0
+                let ratioaBasedOnDevice:CGFloat = Constants.isDevice == .X ? 12.5 : 13.0
                 let optionsHeight = CGFloat(parentHeight / ratioaBasedOnDevice)
                 let priceRangeHeight = CGFloat(parentHeight - (optionsHeight * 11) + 10)
         return (optionsHeight, priceRangeHeight)

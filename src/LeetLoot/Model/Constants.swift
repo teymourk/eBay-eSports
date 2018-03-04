@@ -12,6 +12,11 @@ struct Constants {
     static var kWindow: UIWindow { return UIApplication.shared.keyWindow! }
     static var kWidth: CGFloat { return kWindow.frame.width }
     static var kHeight: CGFloat { return kWindow.frame.height }
+    static var isDevice: deviceType {
+        get {
+            return deviceType.None.isDevice()
+        }
+    }
     
     enum deviceType {
         case five, regular, plus, X, None
