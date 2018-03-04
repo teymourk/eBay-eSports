@@ -22,10 +22,15 @@ class Merch_Cell: ParentCell {
         }
     }
     
-    let merchImage = { () -> customeImage in
+    let additionalImages = { () -> AdditionalImagesCV in
+        let view = AdditionalImagesCV()
+            view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let merchImage = { () -> customeImage in
         let image = customeImage()
             image.contentMode = .scaleAspectFit
-            image.backgroundColor = .softGrey
             image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -40,7 +45,8 @@ class Merch_Cell: ParentCell {
     }()
     
     lazy private var stackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [merchImage, merchTitle])
+        let subViews: [UIView] = self.isKind(of: Buy.self) ? [additionalImages, merchTitle] : [merchImage, merchTitle]
+        let stack = UIStackView(arrangedSubviews: subViews)
             stack.axis = .vertical
             stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -54,9 +60,13 @@ class Merch_Cell: ParentCell {
     private func setupStackView() {
         addSubview(stackView)
         
+        if self.isKind(of: Buy.self) {
+            additionalImages.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        } else {
+            merchImage.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        }
+        
         NSLayoutConstraint.activate([
-            merchImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.heightAnchor.constraint(equalTo: heightAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),

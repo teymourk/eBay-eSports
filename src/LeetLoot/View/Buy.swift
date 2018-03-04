@@ -16,7 +16,7 @@ class Buy: Merch_Cell {
                                     price: item.fullPrice,
                                     IncludesShipping: item.shipping,
                                     details: itemHref.description)
-            merchImage.downloadImages(url: itemHref.imgURL)
+            additionalImages.imagesCollection = itemHref.groupAadditionalImages
         }
     }
 
@@ -29,7 +29,7 @@ class Buy: Merch_Cell {
         case .five: imageHeight = (1.3/3)
         case .None: return }
 
-        merchImage.heightAnchor.constraint(equalTo: widthAnchor, multiplier: imageHeight).isActive = true
+        additionalImages.heightAnchor.constraint(equalTo: widthAnchor, multiplier: imageHeight).isActive = true
         merchTitle.textContainerInset = UIEdgeInsets(top: 5, left: 10, bottom: 0, right: 0)
 
     }

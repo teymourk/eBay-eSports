@@ -14,6 +14,7 @@ struct ItemHerf: Codable, Networking {
     
     var shortDescription: String?,
         image: thumbnailImages?,
+        additionalImages: [thumbnailImages]?,
         items: [items]?
     
     init?(herfUrl: String, completion: @escaping (ItemHerf) -> ()) {
@@ -33,12 +34,22 @@ struct ItemHerf: Codable, Networking {
         return groupHrefDescription != nil ? groupHrefDescription ?? "" : itemsHrefDescription ?? ""
     }
     
-    var imgURL: String {
-        let groupHrefImage = self.items?.first?.primaryItemGroup?.itemGroupImage?.imageUrl,
-            itemsHrefImage = self.image?.imageUrl
-        return groupHrefImage != nil ? groupHrefImage ?? "" : itemsHrefImage ?? ""
+    private var imgURL: thumbnailImages {
+        let groupHrefImage = self.items?.first?.primaryItemGroup?.itemGroupImage,
+            itemsHrefImage = self.image
+        return groupHrefImage != nil ? groupHrefImage! : itemsHrefImage!
     }
-}
+    
+    var groupAadditionalImages: [thumbnailImages] {
+        let itemAdditionalHrefImages = self.additionalImages,
+            addtionalGroupHrefIamges = items?.first?.primaryItemGroup?.itemGroupAdditionalImages
+        
+        var completeHrefImages = addtionalGroupHrefIamges != nil ? addtionalGroupHrefIamges ?? [] : itemAdditionalHrefImages ?? []
+            completeHrefImages.insert(imgURL, at: 0)
+        
+        return completeHrefImages
+    }
+ }
 
 struct items: Codable {
     let primaryItemGroup: primaryItemGroup?,
@@ -47,5 +58,6 @@ struct items: Codable {
 }
 
 struct primaryItemGroup: Codable {
-    let itemGroupImage: thumbnailImages?
+    let itemGroupImage: thumbnailImages?,
+        itemGroupAdditionalImages: [thumbnailImages]?
 }
