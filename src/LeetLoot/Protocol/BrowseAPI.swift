@@ -42,15 +42,11 @@ extension BrowseAPI {
                 print(errorDesctiption)
                 completion(nil)
             case let .success(successDesctiption):
-                guard let merchObj = _merchendise else { return }
-                var mutableMerch = merchObj
-                let url = "https://api.ebay.com/buy/browse/v1/item/get_items_by_item_group?item_group_id=172908133692"
-                                
+                guard   let merchObj = _merchendise else { return }
+                    
+                merchendise?.append(merchObj)
                 DispatchQueue.main.async {
-                    _ = ItemHerf(herfUrl:  url) { mutableMerch.itemHref = $0
-                        merchendise?.append(mutableMerch)
-                        completion(merchendise)
-                    }
+                    completion(merchendise)
                     print(successDesctiption)
                 }
             }
