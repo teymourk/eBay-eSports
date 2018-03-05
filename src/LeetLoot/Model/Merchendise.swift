@@ -28,6 +28,11 @@ struct Root:Codable, BrowseAPI {
     }
 }
 
+extension Array where Array == [Root] {
+    var itemsSummary: [itemSummaries]? {
+        return self.first?.itemSummaries
+    }
+}
 
 //Root Constains and Array of all items with summaries
 struct itemSummaries:Codable {

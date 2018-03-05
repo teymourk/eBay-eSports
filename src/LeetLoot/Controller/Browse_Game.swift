@@ -10,20 +10,19 @@ import UIKit
 
 class Browse_Game: UICollectionViewController {
     
-    private var m: [Root]? {
-        get {
-            return root
-        }set {
-            root?.removeAll()
-            root = newValue
-        }
-    }
+    var loading = { () -> UIActivityIndicatorView in
+        let l = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            l.translatesAutoresizingMaskIntoConstraints = false
+        return l
+    }()
     
     fileprivate var root: [Root]? {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.collectionView?.reloadData()
                 self?.menuBar.results = self?.root?.first?.total
+                self?.loading.stopAnimating()
+                print("Reloaded")
             }
         }
     }
@@ -53,15 +52,31 @@ class Browse_Game: UICollectionViewController {
                                  sortBy: .Best_Match)
 
     private func requestDataFromAPI() {
-        merchRoot.retrieveDataByName(offset: 0, {
-            self.m = $0
+        merchRoot.retrieveDataByName(offset: 0, { [weak self] in
+            self?.root = $0
         })
+    }
+    
+    private func loadMoreData(_ indexPath: IndexPath) {
+        guard   let root = root?.first,
+                let summariesCount = root.itemSummaries?.count else { return }
+        if indexPath.item == summariesCount - 10 {
+            merchRoot.retrieveDataByName(offset: summariesCount, { [weak self] in
+                if let items = $0?.first?.itemSummaries {
+                    self?.root?[0].itemSummaries?.append(contentsOf: items)
+                }
+            })
+        }
     }
     
     private func setupCollectionView() {
         collectionView?.registerCell(Merch_Cell.self)
         collectionView?.backgroundColor = .white
         title = "Game Title"
+        
+        view.addSubview(loading)
+        loading.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15).isActive = true
+        loading.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     func setupMenuBar() {
@@ -85,35 +100,23 @@ class Browse_Game: UICollectionViewController {
 // Mark: - UICollectionViewDelegate
 extension Browse_Game {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return root?.first?.itemSummaries?.count ?? 0
+        return root?.itemsSummary?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: Merch_Cell = collectionView.reusableCell(indexPath: indexPath)
-            cell.items.summary = root?.first?.itemSummaries?[indexPath.row]
+            cell.items.summary = root?.itemsSummary?[indexPath.row]
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard   let root = root?.first,
-                let summariesCount = root.itemSummaries?.count else { return }
-        if indexPath.item == summariesCount - 10 {
-            merchRoot.retrieveDataByName(offset: summariesCount, { [weak self] in
-                if let items = $0?.first?.itemSummaries {
-                    items.forEach({
-                        self?.root?[0].itemSummaries?.append($0)
-                    })
-                }
-            })
-        }
+        loadMoreData(indexPath)
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard   let itemSummaries = root?.first?.itemSummaries?[indexPath.item],
                 let url = itemSummaries.hrefURL else { return }
-        
         _ = ItemHerf(herfUrl: url) { [weak self] in self?.buyItem.items = (itemSummaries, $0) }
-
     }
 }
 
@@ -127,7 +130,7 @@ extension Browse_Game: UICollectionViewDelegateFlowLayout {
     
     //Space Between Header and Collection itself
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let height = menuBar.frame.height + 20
+        let height = menuBar.frame.height + 25
         collectionView.scrollIndicatorInsets.top = height
         return UIEdgeInsets(top: height,
                             left: 19,
@@ -147,10 +150,23 @@ extension Browse_Game: MenuBarDelegate {
 extension Browse_Game: BuyFilterDelegate {
     func updateNewData(for query: Root) {
         self.merchRoot = query
-        query.retrieveDataByName(offset: 0, {
-            self.m = $0
+        query.retrieveDataByName(offset: 0, { [weak self] in
+            self?.root?[0].itemSummaries?.removeAll(keepingCapacity: false)
+            self?.root?[0].itemSummaries?.append(contentsOf: $0?.first?.itemSummaries ?? [])
+            
+            let indexPath = IndexPath(item: 0, section: 0)
+            self?.collectionView?.scrollToItem(at: indexPath, at: .top, animated: true)
         })
     }
 }
 
-
+//Mark: ScrollViewDelegate
+extension Browse_Game {
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let currentOffset = scrollView.contentOffset.y
+        let maxOffset = scrollView.contentSize.height - scrollView.frame.height
+        if maxOffset - currentOffset <= 40 {
+            self.loading.startAnimating()
+        }
+    }
+}
