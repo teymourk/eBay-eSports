@@ -29,7 +29,7 @@ class Merch_Cell: ParentCell {
     }()
     
     private let merchImage = { () -> customeImage in
-        let image = customeImage()
+        let image = customeImage(frame: .zero)
             image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -74,16 +74,21 @@ class Merch_Cell: ParentCell {
     }
     
     internal func setupLayoutAttributes() {
-        merchImage.layer.borderWidth = 0.5
-        merchImage.layer.borderColor = UIColor.softGrey.cgColor
-        merchImage.clipsToBounds = true
         merchImage.heightAnchor.constraint(equalTo: widthAnchor).isActive = true
-        
         merchTitle.textContainerInset = UIEdgeInsets(top: 5, left: -5, bottom: 0, right: 0)
     }
     
     override func setupView() {
         setupStackView()
         setupLayoutAttributes()
+    }
+}
+
+extension UIView {
+    
+    func handleCellAnimation() { 
+        UIView.animate(withDuration: 0.55) {
+            self.alpha = 1
+        }
     }
 }

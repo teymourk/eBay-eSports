@@ -19,7 +19,7 @@ class AdditionalImagesCell: ParentCell {
     }
     
     let merchImage = { () -> customeImage in
-        let image = customeImage()
+        let image = customeImage(frame: .zero)
             image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false
         return image

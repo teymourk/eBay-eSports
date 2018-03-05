@@ -22,7 +22,7 @@ protocol Networking {
 extension Networking where Self == Model {
     
     private var token: String {
-        return "v^1.1#i^1#p^1#I^3#r^0#f^0#t^H4sIAAAAAAAAAOVXbWwURRjuXT/gAmg0yEeFcC6Cprp7s7v3tSs9PXoHNJS2cEfFAp6zu7Pt2r3dy86c7SX9URolqAEVYmJIxIaIKRETJCCEBH+YkPBDQH6QiIARAoagGIIhEj+Cu3tHuVbCZ1ES789l3nnnned53ved2QF9Nb661QtW/zbBM8Y70Af6vB4POw74aqqfeajSW1tdAcocPAN9T/ZV9Veem4NhVs+JSxDOmQZG/p6sbmDRNdZTecsQTYg1LBowi7BIZDEVX9QkcgwQc5ZJTNnUKX9jop5SI6rKyyoQ+GiQ5yXOthrXYqbNegoq0bAqqUgSBI6DYWDPY5xHjQYm0CD1FAfYKA14GgTTHC9yghiKMGFeaKf8bcjCmmnYLgygYi5c0V1rlWG9OVSIMbKIHYSKNcbnpVrijYlkc3pOoCxWrKRDikCSx8NHDaaC/G1Qz6Obb4NdbzGVl2WEMRWIFXcYHlSMXwNzF/BdqSNsFAVlTlYkFQYFOTgqUs4zrSwkN8fhWDSFVl1XERlEI4VbKWqrIb2KZFIaNdshGhN+529xHuqaqiGrnkrOjb8Ub22lYgs1aEHcmaabECJNpkno1iUJOsLyQRRVIxytcDIfjkrh0kbFaCWZR+zUYBqK5oiG/c0mmYts1GikNmyZNrZTi9FixVXiIBryC6UBO6Qh2+4ktZjFPOk0nLyirC2E3x3eOgNDqwmxNClP0FCEkROuRHbb5HKaQo2cdGuxVD49uJ7qJCQnBgLd3d1MN8+YVkeAA4ANLFvUlJI7URZStq/T60V/7dYLaM2lIiN7JdZEUsjZWHrsWrUBGB1UjAuHeD5U0n04rNhI6z8MZZwDwztitDpEiLISlARJCIXZIILsaHRIrFSkAQcHkmCBzkKrC5GcDmVEy3ad5bPI0hSRD6kcH1URrYQFlQ4KqkpLISVMsypCACFJkoXo/6lRbrfUU7KZQ62mrsmFUSn4USt23lJaoUUKKaTrtuF2q/6GJLFD8r7Tc3r9jig6MbAdBOY0xqltRjazARPah5pjyrio74m3Zt+HD1RSbYJFpppSvMgYly6DX5MZC2Ezb9l3ONPinOtpswsZdpcQy9R1ZLWx96TE6J3o/9FpfkNWsq7ZMmYeNGZ3eEzeZW1D8h+yrur3LL8BczbEAQ6EWSFyT9wa3LymC//CoXVHiV1gYoKU+/ABEhj+HIpVuD+237ML9Hs+t19UIABmsTPBEzWVS6sqx9dijSBGgyqDtQ7D/sq3ENOFCjmoWd4az/Jp27dmyh5gAyvBlKEnmK+SHVf2HgPTrs9Usw9PnsBGAQ+CHM8JoUg7mHl9toqdVDVx3Ue+FVse3bfJC6fFJwWvPrv+RO9FMGHIyeOprrAro2LtK49tn+rZmal97h364k79Qu1XJ311cu/azXXjL5JMDAnNh5fOOP/Wy3/N7PJ3v7mh7lRv4runrkymviZRrI3buH/9nvODl88ld35x6RB7/JGJOy4kOj7pONa8eOD9qunr3/0le3bdez/86R3ctXbr3l8bWy6fe/uDP/R1DbOXzT8PDz6/p+fs7qPp9kPbajLbt2Qz3k1w82czrh7dm461xX/8/tT+mo0nD28bnLpyxYmKM0e27P4wueHM7/tnLR4rTTn9xoHE6U8PZHzLxkyPRJWfW87OWLPp2yMr82vGHtzRe8k3eGVVwTz508HDG9r2JWcnk98cv8Q19Wx9+uNV88duZB9f6H3de+KFF788cKyYvr8BfFq8HhoPAAA="
+        return "v^1.1#i^1#I^3#p^1#r^0#f^0#t^H4sIAAAAAAAAAOVXbWwURRjuXT8EaiUxIKYpciwYsGb3ZnfvrtuFu3jQApXSFu7aSCk0c7uz7crd7rEzZ3sqeGkiCTQKSiIhNVhQqKAmtMEfENEfBvyKgYAao78kYjBGIx8CMZo4u3eUayV8FiHx/lzmnXfeeZ7nfd+ZHZApGV+5ftH6i2Wu+9z9GZBxu1x8KRhfUvz4A4Xu8uICkOfg6s/MzBT1FJ6ei2EinpSXIZw0DYw83Ym4gWXHGGRSliGbEOtYNmACYZkociS8pF4WOCAnLZOYihlnPHU1QYaXVEHjNSD5RVGRJIFajcsxo2aQiUmi6JN4P4BqVSAm8XQe4xSqMzCBBgkyAuAlFogs8EcFURYEGfi4APC1Mp4WZGHdNKgLB5iQA1d21lp5WK8NFWKMLEKDMKG68IJIY7iuprYhOtebFyuU0yFCIEnhkaP5poo8LTCeQtfeBjveciSlKAhjxhvK7jAyqBy+DOYW4DtSS35YBQKQB4JarUBJGRMpF5hWApJr47AtuspqjquMDKKT9PUUpWrEnkYKyY0aaIi6Go/9tzQF47qmIyvI1M4LLw83NTGhxTq0IO6MsvUIkXrTJGzTshq2ihd9SNKqBFYVFDEgxQK5jbLRcjKP2mm+aai6LRr2NJhkHqKo0Wht+DxtqFOj0WiFNWIjGvYLRAGf09Bf7W+1k5rNYop0GnZeUYIK4XGG18/A8GpCLD2WImg4wugJR6IgA5NJXWVGTzq1mCufbhxkOglJyl5vV1cX1yVyptXhFQDgvU8tqY8onSgBGepr93rWX7/+AlZ3qCiIrsS6TNJJiqWb1ioFYHQwISFA29yf030krNBo678MeZy9IztirDpEkXwA0HpBVUAQIFLHokNCuSL12jhQDKbZBLRWI5KMQwWxCq2zVAJZuiqLfk0QJQ2xaqBaY33VmsbG/GqA5TWEAEKxmFIt/Z8a5UZLPaKYSdRkxnUlPSYFP2bFLlpqE7RIOoLicWq40aq/Kklsk7zj9OxevymKdgxMg8Ckztm1zSlmwmtCeqjZpnYH9W3x1ul9eE8llRLMMtXV7EXGOXQ5/IzCWQibKYve4Vyjfa5HzdXIoF1CLDMeR1YLf1tKjN2JfpdO86uyUuI6lbH9XmN2k8fkLdY2JHeRdVGPa8VVmPN+AQjVAi/4bovbfCev0fR/cGjdVGIXmZgg9Q58gHhHPodCBc6P73G9D3pcg/RFBbzgUX4GmF5S2FxUeH851gnidKhxWO8w6Fe+hbjVKJ2EuuUuca2o2LenPe8B1r8SPDz8BBtfyJfmvcdAxZWZYn7ilDJeAiLwC6Ig0GsXzLgyW8Q/VDSptHdc796mWfpu79Fxhze63+1TeiaAsmEnl6u4gFZGQcn+DW3CtD+LM56Ye9fnqvnbwPZL5ws/PHdq27kftpIF8Z4Thz5dcfq9vWtOvXRp9sWBX84s/rYj88iGWSeeW7W2fvKxb/64oL91vP35Lz1r+7qPvLKQvHPmsSNbp363udJdNmn3gYGhY3WbHrzAL//6/I49J8q3/Vp6srdl1c+D05fWrGtYMq32k8qZ7Svbas9g72uvfyytX1sxNPim72Bbwca9P5ZvDg2enVy68+xHyb/xX2/v+F16cteU1s+2r5k6QcusfONY5RMvHlo8MNAmDU3ZVzl99vHWLw4EP9hTsb+v+ULRulWzKn6auq73/MFXt8xp/v6r5peHDid8zZfmlE7cUHZyoec42NIv73zh8I5nj2bT9w+dKzbQGg8AAA=="
     }
     
     private var urlSession: URLSession {
@@ -58,9 +58,35 @@ extension Networking where Self == Model {
 
 class customeImage: UIImageView {
     
-    var imageURLStringCheck: String?
-
+    var loadingIndicator = { () -> UIActivityIndicatorView in
+        let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            view.color = .lightBlue
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.startAnimating()
+        return view
+    }()
+        
+    private var imageURLStringCheck: String?
     private var imageCache = NSCache<NSString, UIImage>()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupIndicatorLayout()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupIndicatorLayout() {
+        addSubview(loadingIndicator)
+        
+        NSLayoutConstraint.activate([
+            loadingIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+    }
+    
     func downloadImages(url: String) {
         self.image = nil
         self.imageURLStringCheck = url
@@ -84,10 +110,13 @@ class customeImage: UIImageView {
                 
                 if let imgData = data, let cachedImage = UIImage(data: imgData) {
                     DispatchQueue.main.async {
+                        self?.alpha = 0
                         self?.imageCache.setObject(cachedImage, forKey: urlString)
                         
                         if url == self?.imageURLStringCheck {
+                            self?.loadingIndicator.stopAnimating()
                             self?.image = cachedImage
+                            self?.handleCellAnimation()
                         }
                     }
                 }

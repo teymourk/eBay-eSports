@@ -60,12 +60,12 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
    //number of cells return in section, this will change based on if it's events or games
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return root?.first?.itemSummaries?.count ?? 0
+        return root?.itemsSummary?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ItemCell {
-            let imageURL = root?.first?.itemSummaries?[indexPath.item].imgURL
+            let imageURL = root?.itemsSummary?[indexPath.item].imgURL
             cell.merchImage.downloadImages(url: imageURL ?? "")
             return cell
         }
@@ -114,7 +114,7 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
 class ItemCell: UICollectionViewCell{
     
     let merchImage = { () -> customeImage in
-        let image = customeImage()
+        let image = customeImage(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
