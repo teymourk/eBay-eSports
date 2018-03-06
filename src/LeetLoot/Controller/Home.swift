@@ -77,6 +77,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
         UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
+        
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
         var eventHeight = CGFloat(325)
