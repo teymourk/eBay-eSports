@@ -9,15 +9,26 @@
 import UIKit
 import RangeSeekSlider
 
+protocol priceRangeDelegate: class {
+    func onPriceRange(min: Int, max: Int)
+}
+
 class PriceRange: UITableViewCell {
     
     private lazy var priceSlider = { () -> RangeSeekSlider in
         let priceSlider = RangeSeekSlider()
             priceSlider.lineHeight = 2
+            priceSlider.handleBorderWidth = 0.5
+            priceSlider.colorBetweenHandles = .lightBlue
+            priceSlider.handleBorderColor = .lightBlue
+            priceSlider.handleColor = .white
+        
             priceSlider.delegate = self
             priceSlider.translatesAutoresizingMaskIntoConstraints = false
         return priceSlider
     }()
+    
+    weak var delegate: priceRangeDelegate?
     
     private func setupView() {
         addSubview(priceSlider)
@@ -41,6 +52,10 @@ class PriceRange: UITableViewCell {
 }
 
 extension PriceRange: RangeSeekSliderDelegate {
+    func rangeSeekSlider(_ slider: RangeSeekSlider, didChange minValue: CGFloat, maxValue: CGFloat) {
+        delegate?.onPriceRange(min: Int(minValue), max: Int(maxValue))
+    }
+    
     func rangeSeekSlider(_ slider: RangeSeekSlider, stringForMinValue minValue: CGFloat) -> String? {
         return "$\(Int(minValue))"
     }

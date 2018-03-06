@@ -8,14 +8,22 @@
 
 import UIKit
 
+extension String {
+    func reduceTextWith(_ charachters: Int) -> String {
+        let textSize = self.count <= charachters ? self.count : charachters
+        return self[0...textSize]
+    }
+}
+
 class Buy: Merch_Cell {
     
     override func configureCellFor(_ item: itemSummaries, itemHref: ItemHerf? = nil) {
         if let itemHref = itemHref {
+            
             merchTitle.attributedFor("\(item.itemTitle)\n",
                                     price: item.fullPrice,
                                     IncludesShipping: item.shipping,
-                                    details: itemHref.description)
+                                    details: itemHref.description.reduceTextWith(270))
             additionalImages.imagesCollection = itemHref.groupAadditionalImages
         }
     }

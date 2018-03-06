@@ -53,14 +53,12 @@ class Merch_Cell: ParentCell {
     }()
 
     func configureCellFor(_ item: itemSummaries, itemHref: ItemHerf? = nil) {
-        let detailsSize = item.itemTitle.size(withAttributes: [.font: UIFont.systemFont(ofSize: 14.0)])
+        //let detailsSize = item.itemTitle.size(withAttributes: [.font: UIFont.systemFont(ofSize: 14.0)])
     
-        let p =  80 / frame.width 
+        let p =  80 / frame.width
+        //print(item.itemTitle.count, p)
         
-        print(item.itemTitle.count, p)
-        
-        let textSize = item.itemTitle.count <= 53 ? item.itemTitle.count : 53
-        let reducedText = item.itemTitle[0...textSize].appending("...")
+        let reducedText = item.itemTitle.reduceTextWith(53)
         
         merchTitle.attributedFor(reducedText, price: item.fullPrice)
         merchImage.downloadImages(url: item.imgURL)

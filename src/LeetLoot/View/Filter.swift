@@ -8,16 +8,18 @@
 
 import UIKit
 
-protocol FilterMenuDelegate: class {
-    func selctedQuery(_ query: Root)
-}
-
 class Filter: UITableView {
     
-    var sorting: Sort.option = .Best_Match
-    var filtering: Filters.option = .All_Items
-    
-    weak var filteringDelegate: FilterMenuDelegate?
+    var sorting: Sort.option = .Best_Match,
+        filtering: Filters.option = .All_Items,
+        rangeQuery: String = "0.."
+
+    var rootQuery: Root {
+        return Root(  queryKey: "League+of+legends",
+                      filterBy: filtering,
+                      sortBy: sorting,
+                      range: rangeQuery)
+    }
     
     fileprivate var filterMenu: [FilterOptions] {
         return [Sort(), Filters(), Price()]
@@ -65,17 +67,17 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 2 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "T", for: indexPath) as? PriceRange
-                cell?.selectionStyle = .none
-            return cell ?? UITableViewCell()
+            let priceCell = tableView.dequeueReusableCell(withIdentifier: "T", for: indexPath) as? PriceRange
+                priceCell?.delegate = self
+            return priceCell ?? UITableViewCell()
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as? Filter_Cell
+        let filtersCell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as? Filter_Cell
         let options = filterMenu[indexPath.section].options[indexPath.row]
         
-        cell?.textLabel?.text = options.name
-        cell?.textLabel?.font = UIFont.systemFont(ofSize: 14)
-        return cell ?? UITableViewCell()
+        filtersCell?.textLabel?.text = options.name
+        filtersCell?.textLabel?.font = UIFont.systemFont(ofSize: 14)
+        return filtersCell ?? UITableViewCell()
     }
     
     fileprivate func menuOptions<T>(indexPath: IndexPath) -> T {
@@ -89,9 +91,6 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
             case 0: sorting = menuOptions(indexPath: indexPath)
             case 1: filtering = menuOptions(indexPath: indexPath)
         default: return }
-        
-        let query = Root(queryKey: "League+of+legends", filterBy: filtering, sortBy: sorting)
-        filteringDelegate?.selctedQuery(query)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -102,14 +101,29 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 2 {
-            return customHeight.PriceRange
-        }
-        return customHeight.Header
+        return indexPath.section == 2 ? customHeight.PriceRange : customHeight.Header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return customHeight.Header
+    }
+}
+
+//Mark: PriceRangeDelegate
+extension Filter: priceRangeDelegate {
+    func onPriceRange(min: Int, max: Int) {
+        if min < 100, max == 100 {
+            rangeQuery = "\(min).."
+            return
+        }
+        if min > 0, max < 100 {
+            rangeQuery = "\(min)..\(max)"
+            return
+        }
+        if min == 0, max < 100 {
+            rangeQuery = "\(0)..\(max)"
+            return
+        }
     }
 }
 

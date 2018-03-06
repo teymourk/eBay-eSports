@@ -13,6 +13,7 @@ protocol BrowseAPI: Networking where Model == Root {
     var filterBy: Filters.option? { get set }
     var sortBy: Sort.option? { get set }
     var fetchLimit: Int? { get set }
+    var range: String? { get set }
     func retrieveDataByName(offset: Int, _ completion: @escaping ([Root]?) ->())
 }
 
@@ -25,7 +26,9 @@ extension BrowseAPI {
             limit = "limit=\(fetchLimit ?? 100)&",
             buyOption = "buyingOptions%3A%7BFIXED_PRICE%7D",
             condition = "conditions%3A%7BNEW%7D&",
-            filter = "filter=\(buyOption),\(condition)",
+            priceCurrency = "priceCurrency%3AUSD%2C",
+            priceRange = "price%3A%5B\(range ?? "0..")%5D",
+            filter = "filter=\(priceCurrency)\(priceRange),\(buyOption),\(condition)",
             sort = sortBy?.rawValue ?? ""
         return baseUrl + query + groupBy + limit + filter + sort
     }

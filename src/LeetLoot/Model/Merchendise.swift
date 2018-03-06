@@ -9,7 +9,7 @@
 import UIKit
 
 //Root of the API Call
-struct Root:Codable, BrowseAPI {    
+struct Root:Codable, BrowseAPI {
     typealias Model = Root
     
     var total: Int?,
@@ -18,13 +18,15 @@ struct Root:Codable, BrowseAPI {
         keyWord: String?,
         filterBy: Filters.option?,
         sortBy: Sort.option?,
-        fetchLimit: Int?
+        fetchLimit: Int?,
+        range: String?
     
-    init(queryKey: String, filterBy: Filters.option, sortBy: Sort.option, limit: Int? = nil) {
+    init(queryKey: String, filterBy: Filters.option, sortBy: Sort.option, range: String? = nil, limit: Int? = nil) {
         self.keyWord = queryKey
         self.filterBy = filterBy
         self.sortBy = sortBy
         self.fetchLimit = limit
+        self.range = range
     }
 }
 
