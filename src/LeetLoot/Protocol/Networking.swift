@@ -78,7 +78,6 @@ class customeImage: UIImageView {
     }
     
     private func setupIndicatorLayout() {
-        self.alpha = 0
         addSubview(loadingIndicator)
         
         NSLayoutConstraint.activate([
@@ -107,7 +106,7 @@ class customeImage: UIImageView {
         
         guard let imageURL = URL(string: url) else {
             self.loadWithAnimation()
-            self.image = UIImage(named: "eBay")
+            self.image = #imageLiteral(resourceName: "eBay")
             return
         }
     
@@ -118,6 +117,7 @@ class customeImage: UIImageView {
                 
                 if let imgData = data, let cachedImage = UIImage(data: imgData) {
                     DispatchQueue.main.async {
+                        self?.alpha = 0
                         self?.imageCache.setObject(cachedImage, forKey: urlString)
                         
                         if url == self?.imageURLStringCheck {
