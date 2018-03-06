@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 protocol HomePagesDelegate {
     func onScreenButtons(_ sender: UIButton)
@@ -201,17 +202,39 @@ func setregisterbuttonenabled(enabled:Bool){
             setupErrorLabel();
         }*/
         setregisterbuttonenabled(enabled:false);
+    
         Auth.auth().createUser(withEmail: em, password: pass) { user,error in
             if let error = error {
                 print(error.localizedDescription)
             }
             else if let user = user {
                 print("Sign Up Successfully. \(user.uid)")
+                guard let uid = Auth.auth().currentUser?.uid else {return}
+                self.saveUID(UID:uid){ success in
+                    if success{
+                    print("Sucessfully saved in databse!")
+                }
             }
+        }
+            
+    }
+    }
+    func saveUID(UID:String,completion:@escaping((_ success:Bool)->()))
+    {
+        
+        let databaseRef = Database.database().reference().child("users/\(UID)")
+        let userObject = [
+            "favorites":""
+        ]
+            as [String:Any]
+        databaseRef.setValue(userObject){error, ref in completion(error == nil)
             
         }
+
     }
-    
 }
+    
+
+
    
 

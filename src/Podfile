@@ -8,6 +8,7 @@ target 'LeetLoot' do
   # Pods for Firebase
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
   
   # Pods for Firebase Storage
   pod 'Firebase/Storage'

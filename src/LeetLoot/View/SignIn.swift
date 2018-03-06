@@ -12,6 +12,9 @@ import FirebaseAuth
 protocol RegisterPagesDelegate {
     func onScreenButtons(_ sender: UIButton)
 }
+/*protocol signinPagesDelegate {
+    func onScreenButton(_ sender: UIButton)
+}*/
 
 class SignIn: ParentView {
     
@@ -120,6 +123,7 @@ class SignIn: ParentView {
         button.layer.cornerRadius = 5
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont .boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(forgotAction), for: .touchUpInside);
         return button
     }()
     
@@ -130,6 +134,15 @@ class SignIn: ParentView {
         guard delegate != nil else { return }
         delegate?.onScreenButtons(sender)
     }
+    
+   /* var delegate:signinPagesDelegate?
+    @objc
+    func onScreenButton(_ sender: UIButton) {
+        guard delegate != nil else { return }
+        delegate?.onScreenButtons(sender)
+    }*/
+    
+    
     
     //Dont Touch
     override func setupView() {
@@ -242,16 +255,29 @@ class SignIn: ParentView {
         setupEmail()
 
     }
+    //sigin helper
     func setsigninbuttonenabled(enabled:Bool){
         if(enabled)
         {
-            register.isEnabled = true
+            signin.isEnabled = true
         }
         else{
-            register.isEnabled = false
+            signin.isEnabled = false
         }
         
     }
+    //forgot helper
+    func setforgotbuttonenabled(enabled:Bool){
+        if(enabled)
+        {
+            forgot.isEnabled = true
+        }
+        else{
+            forgot.isEnabled = false
+        }
+        
+    }
+    //signin
     @objc
     func signinAction(){
         guard let em = emailTextField.text else {return }
@@ -272,6 +298,22 @@ class SignIn: ParentView {
             }
         
     }
+    }
+    //forgot
+    @objc
+    func forgotAction(){
+         guard let em = emailTextField.text else {return }
+        Auth.auth().sendPasswordReset(withEmail: em) {(error) in
+            if(error == nil)
+            {
+                print("password reset successfully")
+            }
+            else{
+                print(error!.localizedDescription)
+            }
+        }
+    
+            
 }
 }
 extension UIColor {
