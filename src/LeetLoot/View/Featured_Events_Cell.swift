@@ -26,7 +26,7 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
     }()
     
     private lazy var merchButton: UIButton = {
-        let button = UIButton(title: "See more", imageName: "Arrow.png")
+        let button = UIButton(title: "See more", imageName: #imageLiteral(resourceName: "Arrow"))
 
         //button.contentHorizontalAlignment = .left
         button.setTitleColor(.black, for: .normal)

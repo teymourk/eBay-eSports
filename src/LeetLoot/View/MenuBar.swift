@@ -88,7 +88,7 @@ final class Menu: ParentView {
     private func createButtons(_ buttonTitle: Options...) -> [UIButton] {
         return buttonTitle.enumerated().map({ (index,name) in
             let title = name.rawValue
-            let button = UIButton(title: title, imageName: title)
+            let button = UIButton(title: title, imageName: UIImage(named: title))
                 button.addTarget(self, action: #selector(onMenuOptions(_ :)), for: .touchUpInside)
                 button.titleEdgeInsets.left = buttonTitle[index] == .Filters ? 10 : 0
                 button.tag = index

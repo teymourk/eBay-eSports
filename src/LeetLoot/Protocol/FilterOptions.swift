@@ -51,10 +51,10 @@ struct Filters: FilterOptions {
 
 struct Price: FilterOptions {
     
-    var options: [EnumTitles] { return [prices.range(0.0 ..< 100.0)] }
+    var options: [EnumTitles] { return [prices.range(NSRange(location: 0, length: 100))] }
     
     enum prices: EnumTitles {
-        case range(Range<Double>)
+        case range(NSRange)
     }
 }
 

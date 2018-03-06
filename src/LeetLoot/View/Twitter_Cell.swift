@@ -16,7 +16,7 @@ protocol TwitterDelegate: class {
 class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
     
     private lazy var timelineButton: UIButton = {
-        let button = UIButton(title: "See more tweets", imageName: "Arrow.png")
+        let button = UIButton(title: "See more tweets", imageName: #imageLiteral(resourceName: "Arrow"))
         button.contentHorizontalAlignment = .left
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)

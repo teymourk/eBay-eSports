@@ -18,12 +18,10 @@ class Browse_Game: UICollectionViewController {
     
     fileprivate var root: [Root]? {
         didSet {
-            DispatchQueue.main.async { [weak self] in
-                self?.collectionView?.reloadData()
-                self?.menuBar.results = self?.root?.first?.total
-                self?.loading.stopAnimating()
-                print("Reloaded")
-            }
+            collectionView?.reloadData()
+            menuBar.results = self.root?.first?.total
+            loading.stopAnimating()
+            print("Reloaded")
         }
     }
     
@@ -149,10 +147,10 @@ extension Browse_Game: MenuBarDelegate {
 //Mark: BuyFilterDelegate
 extension Browse_Game: BuyFilterDelegate {
     func updateNewData(for query: Root) {
+        self.root?[0].itemSummaries?.removeAll(keepingCapacity: false)
         self.merchRoot = query
         query.retrieveDataByName(offset: 0, { [weak self] in
-            self?.root?[0].itemSummaries?.removeAll(keepingCapacity: false)
-            self?.root?[0].itemSummaries?.append(contentsOf: $0?.first?.itemSummaries ?? [])
+            self?.root = $0
             
             let indexPath = IndexPath(item: 0, section: 0)
             self?.collectionView?.scrollToItem(at: indexPath, at: .top, animated: true)

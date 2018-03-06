@@ -25,24 +25,26 @@ final class Buy_Filter: NSObject {
         case Filter, Buy, None
     }
     
-    private lazy var parentView = { ()-> UIView in
+    private var menuOption: Option = .None
+    
+    private lazy var parentView = { () -> UIView in
         let view = UIView(frame: customFrame(height))
             view.backgroundColor = .white
         return view
     }()
     
-    private lazy var fadeBackgroud = { ()-> UIView in
+    private lazy var fadeBackgroud = { () -> UIView in
         let view = UIView(frame: window.frame)
             view.backgroundColor = .black
             view.alpha = 0
         return view
     }()
     
-    let downArrow = { () -> UIImageView in
-        let image = UIImageView(image:  #imageLiteral(resourceName: "DownArrow"))
-            image.contentMode = .scaleAspectFit
-            image.translatesAutoresizingMaskIntoConstraints = false
-        return image
+    private lazy var close_done = { () -> UIButton in
+        let button = UIButton(imageName: #imageLiteral(resourceName: "DownArrow"))
+            button.addTarget(self, action: #selector(onClose_Done(_ :)), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private lazy var buy_reset = { () -> UIButton in
@@ -59,7 +61,6 @@ final class Buy_Filter: NSObject {
     
     private lazy var filterView = { () -> Filter in
         let view = Filter()
-            view.filteringDelegate = self
         return view
     }()
     
@@ -104,22 +105,24 @@ final class Buy_Filter: NSObject {
                 self.fadeBackgroud.alpha = 0.5
                 self.setupOptions(view)
         })
+        
+        menuOption = view
     }
     
     private func setupViewFor(_ currentView: UIView) -> UIView {
         currentView.translatesAutoresizingMaskIntoConstraints = false
-        parentView.addSubview(downArrow)
+        parentView.addSubview(close_done)
         parentView.addSubview(buy_reset)
         parentView.addSubview(currentView)
         NSLayoutConstraint.activate([
-            downArrow.topAnchor.constraint(equalTo: parentView.topAnchor, constant: 10),
-            downArrow.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
+            close_done.topAnchor.constraint(equalTo: parentView.topAnchor, constant: 10),
+            close_done.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
             
             buy_reset.bottomAnchor.constraint(equalTo: parentView.bottomAnchor, constant: -5),
             buy_reset.leadingAnchor.constraint(equalTo: parentView.leadingAnchor, constant: 5),
             buy_reset.trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: -5),
             
-            currentView.topAnchor.constraint(equalTo: downArrow.bottomAnchor, constant: 10),
+            currentView.topAnchor.constraint(equalTo: close_done.bottomAnchor, constant: 10),
             currentView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
             currentView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
         ])
@@ -144,7 +147,20 @@ final class Buy_Filter: NSObject {
         })
     }
     
-    @objc private func onBuy_Reset(_ sender: UIButton) {
+    @objc
+    private func onClose_Done(_ sender: UIButton) {
+        switch menuOption {
+        case .Buy:
+            close()
+        case .Filter:
+            close()
+            delegate?.updateNewData(for: filterView.rootQuery)
+        case .None: break
+        }
+    }
+    
+    @objc
+    private func onBuy_Reset(_ sender: UIButton) {
         guard let itemUrl = URL(string: items.summary?.webURL ?? "") else { return }
         
         if UIApplication.shared.canOpenURL(itemUrl) {
@@ -167,14 +183,5 @@ final class Buy_Filter: NSObject {
     override init() {
         super.init()
         setupGesture()
-    }
-}
-
-//Filtering MenuDelegate
-extension Buy_Filter: FilterMenuDelegate {
-    func selctedQuery(_ query: Root) {
-        close()
-        guard delegate != nil else { return }
-        self.delegate?.updateNewData(for: query)
     }
 }
