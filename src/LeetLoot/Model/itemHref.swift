@@ -54,7 +54,6 @@ struct ItemHerf: Codable, Networking {
 struct items: Codable {
     let primaryItemGroup: primaryItemGroup?,
         shortDescription: String?
-
 }
 
 struct primaryItemGroup: Codable {
