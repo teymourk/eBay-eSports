@@ -60,9 +60,8 @@ class customeImage: UIImageView {
     
     var loadingIndicator = { () -> UIActivityIndicatorView in
         let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-            view.color = .lightBlue
+            view.color = .coolGrey
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.startAnimating()
         return view
     }()
         
@@ -79,6 +78,7 @@ class customeImage: UIImageView {
     }
     
     private func setupIndicatorLayout() {
+        self.alpha = 0
         addSubview(loadingIndicator)
         
         NSLayoutConstraint.activate([
@@ -87,18 +87,26 @@ class customeImage: UIImageView {
         ])
     }
     
+    private func loadWithAnimation() {
+        self.loadingIndicator.stopAnimating()
+        self.handleCellAnimation()
+    }
+    
     func downloadImages(url: String) {
+        loadingIndicator.startAnimating()
         self.image = nil
         self.imageURLStringCheck = url
         
         let urlString = NSString(string: url)
 
         if let cachedImage = imageCache.object(forKey: urlString) {
+            self.loadWithAnimation()
             self.image = cachedImage
             return
         }
         
         guard let imageURL = URL(string: url) else {
+            self.loadWithAnimation()
             self.image = UIImage(named: "eBay")
             return
         }
@@ -110,13 +118,11 @@ class customeImage: UIImageView {
                 
                 if let imgData = data, let cachedImage = UIImage(data: imgData) {
                     DispatchQueue.main.async {
-                        self?.alpha = 0
                         self?.imageCache.setObject(cachedImage, forKey: urlString)
                         
                         if url == self?.imageURLStringCheck {
-                            self?.loadingIndicator.stopAnimating()
+                            self?.loadWithAnimation()
                             self?.image = cachedImage
-                            self?.handleCellAnimation()
                         }
                     }
                 }

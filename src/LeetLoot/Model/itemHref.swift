@@ -37,7 +37,7 @@ struct ItemHerf: Codable, Networking {
     private var imgURL: thumbnailImages {
         let groupHrefImage = self.items?.first?.primaryItemGroup?.itemGroupImage,
             itemsHrefImage = self.image
-        return groupHrefImage != nil ? groupHrefImage! : itemsHrefImage!
+        return groupHrefImage != nil ? groupHrefImage ?? thumbnailImages(imageUrl: "") : itemsHrefImage ?? thumbnailImages(imageUrl: "")
     }
     
     var groupAadditionalImages: [thumbnailImages] {
