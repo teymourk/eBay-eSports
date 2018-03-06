@@ -10,15 +10,26 @@ import UIKit
 
 class Merch_Cell: ParentCell {
     
-    internal var items: itemSummaries? {
+    internal var items: (summary:itemSummaries?, href:ItemHerf?) {
         didSet {
-            guard let item = items else { return }
-            configureCellFor(item)
+            if let item = items.summary, let itemHref = items.href {
+                configureCellFor(item, itemHref: itemHref)
+            } else {
+                if let item = items.summary {
+                    configureCellFor(item)
+                }
+            }
         }
     }
     
-    let merchImage = { () -> customeImage in
-        let image = customeImage()
+    let additionalImages = { () -> AdditionalImagesCV in
+        let view = AdditionalImagesCV()
+            view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let merchImage = { () -> customeImage in
+        let image = customeImage(frame: .zero)
             image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -34,30 +45,37 @@ class Merch_Cell: ParentCell {
     }()
     
     lazy private var stackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [merchImage, merchTitle])
+        let subViews: [UIView] = self.isKind(of: Buy.self) ? [additionalImages, merchTitle] : [merchImage, merchTitle]
+        let stack = UIStackView(arrangedSubviews: subViews)
             stack.axis = .vertical
             stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
 
-    private func configureCellFor(_ items: itemSummaries) {
-        let price = items.price,
-            title = items.title ?? "",
-        	itemPrice = price?.value ?? "0.0",
-            currency = price?.currency ?? "USD"
-
-        let imgUrl = items.image?.imageUrl ?? ""
-
-        merchTitle.attributedFor(title, price: "\(currency) $\(itemPrice)")
-        merchImage.downloadImages(url: imgUrl)
+    func configureCellFor(_ item: itemSummaries, itemHref: ItemHerf? = nil) {
+        let detailsSize = item.itemTitle.size(withAttributes: [.font: UIFont.systemFont(ofSize: 14.0)])
+    
+        let p =  80 / frame.width 
+        
+        print(item.itemTitle.count, p)
+        
+        let textSize = item.itemTitle.count <= 53 ? item.itemTitle.count : 53
+        let reducedText = item.itemTitle[0...textSize].appending("...")
+        
+        merchTitle.attributedFor(reducedText, price: item.fullPrice)
+        merchImage.downloadImages(url: item.imgURL)
     }
 
     private func setupStackView() {
         addSubview(stackView)
         
+        if self.isKind(of: Buy.self) {
+            additionalImages.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        } else {
+            merchImage.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        }
+        
         NSLayoutConstraint.activate([
-            merchImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.heightAnchor.constraint(equalTo: heightAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -65,16 +83,21 @@ class Merch_Cell: ParentCell {
     }
     
     internal func setupLayoutAttributes() {
-        merchImage.layer.borderWidth = 0.5
-        merchImage.layer.borderColor = UIColor.softGrey.cgColor
-        merchImage.clipsToBounds = true
         merchImage.heightAnchor.constraint(equalTo: widthAnchor).isActive = true
-        
         merchTitle.textContainerInset = UIEdgeInsets(top: 5, left: -5, bottom: 0, right: 0)
     }
     
     override func setupView() {
         setupStackView()
         setupLayoutAttributes()
+    }
+}
+
+extension UIView {
+    
+    func handleCellAnimation() { 
+        UIView.animate(withDuration: 0.55) {
+            self.alpha = 1
+        }
     }
 }

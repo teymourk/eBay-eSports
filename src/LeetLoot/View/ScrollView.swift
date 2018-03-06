@@ -39,15 +39,4 @@ extension ScrollView {
             value.view.frame = pageFrame
         }
     }
-    
-    func createScrollable(_ number: Int, view: UICollectionViewCell) {
-        let colors: [UIColor] = [.red, .blue, .yellow]
-        number.doTask {
-            let image = UIImageView()
-                image.backgroundColor = colors[$0]
-                image.frame.size = view.bounds.size
-                image.frame.origin.x = CGFloat($0) * view.bounds.size.width
-            addSubview(image)
-        }
-    }
 }

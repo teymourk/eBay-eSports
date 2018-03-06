@@ -8,12 +8,19 @@
 
 import UIKit
 
-protocol BuyFilterDelegate {
+protocol BuyFilterDelegate: class {
     func updateNewData(for query: Root)
 }
 
 final class Buy_Filter: NSObject {
     
+    internal var items: (summary: itemSummaries?, href: ItemHerf?) {
+        didSet {
+            buyView.items = items
+            open(.Buy)
+        }
+    }
+
     internal enum Option {
         case Filter, Buy, None
     }
@@ -40,6 +47,7 @@ final class Buy_Filter: NSObject {
     
     private lazy var buy_reset = { () -> UIButton in
         let button = UIButton()
+            button.addTarget(self, action: #selector(onBuy_Reset(_ :)), for: .touchUpInside)
             button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -51,11 +59,11 @@ final class Buy_Filter: NSObject {
     
     private lazy var filterView = { () -> Filter in
         let view = Filter()
-        view.filteringDelegate = self
+            view.filteringDelegate = self
         return view
     }()
     
-    var delegate: BuyFilterDelegate?
+    weak var delegate: BuyFilterDelegate?
     
     private lazy var customFrame: (CGFloat) -> CGRect = {
         return CGRect(x: self.edgeOffset,
@@ -67,14 +75,13 @@ final class Buy_Filter: NSObject {
     private var currentView = UIView()
     private let edgeOffset: CGFloat = 10.0
     
-    private let (width, height, window, cutomHeight, device) = (Constants.kWidth,
+    private let (width, height, window, cutomHeight) = (Constants.kWidth,
                                                                 Constants.kHeight,
                                                                 Constants.kWindow,
-                                                                Constants.kHeight * (3.7/5),
-                                                                Constants.deviceType.None.isDevice())
+                                                                Constants.kHeight * (3.7/5))
     
     private var bottomOffset: CGFloat {
-        get { return device == .X ? 40 : 10 }
+        get { return Constants.isDevice == .X ? 40 : 10 }
     }
     
     private lazy var setupOptions: (Option) -> () = {
@@ -83,7 +90,7 @@ final class Buy_Filter: NSObject {
         self.currentView = $0 == .Buy ? self.setupViewFor(self.buyView) : self.setupViewFor(self.filterView)
     }
     
-    func open(_ view: Option) { 
+    func open(_ view: Option) {
         window.addSubview(fadeBackgroud)
         window.addSubview(parentView)
         
@@ -109,13 +116,17 @@ final class Buy_Filter: NSObject {
             downArrow.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
             
             buy_reset.bottomAnchor.constraint(equalTo: parentView.bottomAnchor, constant: -5),
-            buy_reset.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
+            buy_reset.leadingAnchor.constraint(equalTo: parentView.leadingAnchor, constant: 5),
+            buy_reset.trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: -5),
             
             currentView.topAnchor.constraint(equalTo: downArrow.bottomAnchor, constant: 10),
             currentView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
-            currentView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor),
-            currentView.bottomAnchor.constraint(equalTo: buy_reset.topAnchor, constant: -10)
+            currentView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
         ])
+    
+        if currentView == filterView {
+            currentView.bottomAnchor.constraint(equalTo: buy_reset.topAnchor, constant: -10).isActive = true
+        }
         
         return currentView
     }
@@ -123,13 +134,23 @@ final class Buy_Filter: NSObject {
     private func close() {
         UIView.animate(withDuration: 0.2,
                        delay: 0, options: .curveEaseIn, animations: {
-                self.parentView.frame = self.customFrame(self.height)
-                self.fadeBackgroud.alpha = 0
-        }, completion: { (true) in
-            self.parentView.removeFromSuperview()
-            self.fadeBackgroud.removeFromSuperview()
-            self.currentView.removeFromSuperview()
+                        [pView = self.parentView, bView = self.fadeBackgroud, cFrame = self.customFrame] in
+                pView.frame = cFrame(self.height)
+                bView.alpha = 0
+        }, completion: { [weak self] (true) in
+            self?.parentView.removeFromSuperview()
+            self?.fadeBackgroud.removeFromSuperview()
+            self?.currentView.removeFromSuperview()
         })
+    }
+    
+    @objc private func onBuy_Reset(_ sender: UIButton) {
+        guard let itemUrl = URL(string: items.summary?.webURL ?? "") else { return }
+        
+        if UIApplication.shared.canOpenURL(itemUrl) {
+            UIApplication.shared.open(itemUrl, options: [:], completionHandler: nil)
+            return
+        }
     }
     
     private func setupGesture() {

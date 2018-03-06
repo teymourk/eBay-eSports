@@ -60,12 +60,12 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
    //number of cells return in section, this will change based on if it's events or games
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return root?.first?.itemSummaries?.count ?? 0
+        return root?.itemsSummary?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ItemCell {
-            let imageURL = root?.first?.itemSummaries?[indexPath.item].image?.imageUrl
+            let imageURL = root?.itemsSummary?[indexPath.item].imgURL
             cell.merchImage.downloadImages(url: imageURL ?? "")
             return cell
         }
@@ -73,7 +73,10 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        buyItem.open(.Buy)
+        guard   let itemSummaries = root?.first?.itemSummaries?[indexPath.item],
+                let url = itemSummaries.hrefURL else { return }
+        
+        _ = ItemHerf(herfUrl: url) { [weak self] in self?.buyItem.items = (itemSummaries, $0) }
     }
     
     //sizing of cells
@@ -111,7 +114,7 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
 class ItemCell: UICollectionViewCell{
     
     let merchImage = { () -> customeImage in
-        let image = customeImage()
+        let image = customeImage(frame: .zero)
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         return image

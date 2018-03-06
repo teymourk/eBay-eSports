@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol FeaturedEventDelegate {
+protocol FeaturedEventDelegate: class {
     func onEventBanner(_ sender: UITapGestureRecognizer)
 }
 
@@ -54,7 +54,7 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
         return collectionView
     }()
     
-    var delegate: FeaturedEventDelegate?
+    weak var delegate: FeaturedEventDelegate?
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1

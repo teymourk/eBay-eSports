@@ -11,7 +11,7 @@ import UIKit
 class ParentModal: NSObject {
     
     enum PageAction {
-        case open, close, login, signUp
+        case open, close, login, signUp, none
     }
     
     lazy var signIn = { () -> SignIn in
@@ -47,16 +47,14 @@ class ParentModal: NSObject {
                       height: self.width)
     }
     
-    private let edgeOffset: CGFloat = 8
-    
+
     var topAnchor: CGFloat {
         get {
-            let device = Constants.deviceType.None.isDevice()
-            return device == .X ? 30 : 0
+            return Constants.isDevice == .X ? 30 : 0
         }
     }
     
-    var action: PageAction = .open {
+    var action: PageAction = .none {
         willSet {
             switch newValue {
             case .open:
@@ -65,38 +63,46 @@ class ParentModal: NSObject {
                 switchBetweenPages(newValue)
             case .close:
                 closePage()
+            case .none: return
             }
         }
     }
     
-    private let window = Constants.kWindow,
-                width = Constants.kWidth
+    private let edgeOffset: CGFloat = 8
+    private let (window, width) =  (Constants.kWindow,
+                                    Constants.kWidth)
     
     private func openLogin() {
         window.windowLevel = UIWindowLevelStatusBar
         window.addSubview(fadeBackground)
         window.addSubview(signIn)
         
-        doSpringAnimation {
-            self.fadeBackground.alpha = 0.5
-            self.signIn.frame = self.signInFrames(self.edgeOffset, self.edgeOffset)
+        doSpringAnimation { [   weak fView = self.fadeBackground,
+                                weak Sview = self.signIn] in
+            fView?.alpha = 0.5
+            Sview?.frame = self.signInFrames(self.edgeOffset, self.edgeOffset)
         }
     }
     
     private func closePage() {
     
-        UIView.animate(withDuration: 0.3, animations: {
-            self.fadeBackground.alpha = 0
-            self.signUp.frame = self.signInFrames(self.edgeOffset, -(self.width))
-            self.signIn.frame = self.signInFrames(self.edgeOffset, -(self.width))
+        UIView.animate(withDuration: 0.3, animations: { [   weak fView = self.fadeBackground,
+                                                            weak Sview = self.signIn,
+                                                            weak SUview = self.signUp] in
+            fView?.alpha = 0
+            SUview?.frame = self.signInFrames(self.signUp.frame.origin.x, -(self.width))
+            Sview?.frame = self.signInFrames(self.signIn.frame.origin.x, -(self.width))
     
-        }, completion: { (true) in
-            self.fadeBackground.removeFromSuperview()
-            self.signIn.removeFromSuperview()
-            self.signUp.removeFromSuperview()
+            }, completion: { [  weak fView = self.fadeBackground,
+                                weak Sview = self.signIn,
+                                weak SUview = self.signUp] (true) in
+                
+            fView?.removeFromSuperview()
+            Sview?.removeFromSuperview()
+            SUview?.removeFromSuperview()
             
-            self.signIn.frame = self.signInFrames(self.edgeOffset, -(self.width))
-            self.signUp.frame = self.signUpInitialFrame(self.width, self.edgeOffset)
+            Sview?.frame = self.signInFrames(self.edgeOffset, -(self.width))
+            SUview?.frame = self.signUpInitialFrame(self.width, self.edgeOffset)
 
         })
     }
@@ -111,7 +117,7 @@ class ParentModal: NSObject {
         let viewToMove = page == .signUp ? signIn : signUp,
             viewToReplace = page == .signUp ? signUp : signIn
         
-        self.doSpringAnimation {
+        self.doSpringAnimation { 
             viewToMove.frame = moveFrame
             self.doSpringAnimation {
                 viewToReplace.frame = replaceFrame

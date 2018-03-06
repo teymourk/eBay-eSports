@@ -37,7 +37,7 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
     }
     
     let imageView: customeImage = {
-        let iv = customeImage()
+        let iv = customeImage(frame: .zero)
         iv.image = UIImage(named: "")
         return iv
     }()

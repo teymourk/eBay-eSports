@@ -114,7 +114,7 @@ class browseItemCell: UICollectionViewCell{
     }
     
     let imageView: customeImage = {
-        let iv = customeImage()
+        let iv = customeImage(frame: .zero)
         iv.image = UIImage(named: "")
         iv.contentMode = .scaleAspectFit
         return iv

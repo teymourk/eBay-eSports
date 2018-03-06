@@ -35,24 +35,31 @@ extension Int {
 //Mark: - UITextField
 extension UITextView {
     //Attributed string for the title, price and rating Icon
-    func attributedFor(_ title: String, price: String, details:String? = nil) {
+    func attributedFor(_ title: String, price: String, IncludesShipping:String? = nil, details:String? = nil) {
         
         guard   let textFont = UIFont(name: "Helvetica", size: 14) else { return }
-        let attributedFont: Dictionary<NSAttributedStringKey, UIFont> = [.font :   textFont]
-        let customText = title[0...30].appending("...")
+                let attributedFont: Dictionary<NSAttributedStringKey, UIFont> = [.font :   textFont]
         
-        let attributedText = NSMutableAttributedString( string: "\(customText)\n", //Initialize Merch Details
+
+        let attributedText = NSMutableAttributedString( string: "\(title)\n", //Initialize Merch Details
                                                         attributes: attributedFont)
         
         
-        let priceAttributedString =  NSMutableAttributedString( string: "\(price)\n", //Price
-                                                                attributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
+        let fontSize:CGFloat = IncludesShipping == nil ? 13 : 16
+        let priceWithShipping = IncludesShipping == nil ? price : "\(price) \(IncludesShipping ?? "") \n"
+        
+        let priceAttributedString =  NSMutableAttributedString( string: "\(priceWithShipping)\n", //Price
+                                                                attributes: [.font: UIFont.boldSystemFont(ofSize: fontSize)])
+        if let shipping = IncludesShipping {
+            priceAttributedString.addAttributes([.font: UIFont.systemFont(ofSize: 13)],
+                                                range: NSRange(location: price.count + 1 - shipping.startIndex.encodedOffset,
+                                                               length: shipping.count))
+        }
         
         //Appending the attributes
         attributedText.append(priceAttributedString)
         self.attributedText = attributedText
 
-        
         guard   let itemDetail = details else { return }
         let attributedDetailsText = NSMutableAttributedString(  string: itemDetail, //Initialize Merch Details
                                                                 attributes: attributedFont)
