@@ -21,7 +21,7 @@ class SignIn: ParentView {
     }()
     
     lazy var back = { () -> UIButton in
-        let button = UIButton(imageName: "Back")
+        let button = UIButton(imageName: #imageLiteral(resourceName: "Back"))
             button.addTarget(self, action: #selector(onScreenButtons(_ :)), for: .touchUpInside)
             button.isHidden = true
             button.tag = 0
@@ -29,7 +29,7 @@ class SignIn: ParentView {
     }()
     
     private lazy var close = { () -> UIButton in
-        let button = UIButton(imageName: "Close")
+        let button = UIButton(imageName: #imageLiteral(resourceName: "Close"))
             button.addTarget(self, action: #selector(onScreenButtons(_ :)), for: .touchUpInside)
             button.tag = 1
         return button

@@ -71,9 +71,9 @@ extension UITextView {
 
 //Mark: - UIButton {
 extension UIButton {
-    convenience init(title: String? = nil, imageName: String? = nil) {
+    convenience init(title: String? = nil, imageName: UIImage? = nil) {
         self.init(frame: .zero)
-        let image = imageName == nil ? nil : UIImage(named: imageName!),
+        let image = imageName == nil ? nil : imageName,
             text = title == nil ? nil : title!
         setTitle(text, for: .normal)
         titleLabel?.font = .systemFont(ofSize: 15)
