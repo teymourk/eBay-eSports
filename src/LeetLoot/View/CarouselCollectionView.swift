@@ -99,7 +99,7 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     
     func loadData() {
         let query = Root(queryKey: "nintendo", filterBy: .All_Items, sortBy: .Best_Match, limit: 8)
-        query.retrieveDataByName(offset: 0) { (eventMerch) in
+        query.retrieveDataByName(offset: 0, loadingImage: UIImageView()) { (eventMerch) in
             self.root = eventMerch
         }
     }

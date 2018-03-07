@@ -9,11 +9,12 @@
 import UIKit
 
 class Browse_Game: UICollectionViewController {
-    
-    var loading = { () -> UIActivityIndicatorView in
-        let l = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-            l.translatesAutoresizingMaskIntoConstraints = false
-        return l
+
+    private let loading = { () -> UIImageView in
+        let view = UIImageView()
+            view.contentMode = .scaleAspectFit
+            view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     fileprivate var root: [Root]? {
@@ -50,7 +51,7 @@ class Browse_Game: UICollectionViewController {
                                  sortBy: .Best_Match)
 
     private func requestDataFromAPI() {
-        merchRoot.retrieveDataByName(offset: 0, { [weak self] in
+        merchRoot.retrieveDataByName(offset: 0, loadingImage: loading, { [weak self] in
             self?.root = $0
         })
     }
@@ -59,7 +60,7 @@ class Browse_Game: UICollectionViewController {
         guard   let root = root?.first,
                 let summariesCount = root.itemSummaries?.count else { return }
         if indexPath.item == summariesCount - 10 {
-            merchRoot.retrieveDataByName(offset: summariesCount, { [weak self] in
+            merchRoot.retrieveDataByName(offset: summariesCount, loadingImage: loading, { [weak self] in
                 if let items = $0?.first?.itemSummaries {
                     self?.root?[0].itemSummaries?.append(contentsOf: items)
                 }
@@ -71,10 +72,23 @@ class Browse_Game: UICollectionViewController {
         collectionView?.registerCell(Merch_Cell.self)
         collectionView?.backgroundColor = .white
         title = "Game Title"
-        
+        setupLoader()
+    }
+    
+    private func setupPaginationLoader() {
         view.addSubview(loading)
-        loading.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15).isActive = true
-        loading.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            loading.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15),
+            loading.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+    
+    private func setupLoader() {
+        view.addSubview(loading)
+        NSLayoutConstraint.activate([
+        loading.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        loading.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     func setupMenuBar() {
@@ -147,9 +161,10 @@ extension Browse_Game: MenuBarDelegate {
 //Mark: BuyFilterDelegate
 extension Browse_Game: BuyFilterDelegate {
     func updateNewData(for query: Root) {
+        self.setupLoader()
         self.root?[0].itemSummaries?.removeAll(keepingCapacity: false)
         self.merchRoot = query
-        query.retrieveDataByName(offset: 0, { [weak self] in
+        query.retrieveDataByName(offset: 0, loadingImage: loading, { [weak self] in
             self?.root = $0
             
             let indexPath = IndexPath(item: 0, section: 0)
@@ -164,7 +179,7 @@ extension Browse_Game {
         let currentOffset = scrollView.contentOffset.y
         let maxOffset = scrollView.contentSize.height - scrollView.frame.height
         if maxOffset - currentOffset <= 40 {
-            self.loading.startAnimating()
+            self.setupPaginationLoader()
         }
     }
 }

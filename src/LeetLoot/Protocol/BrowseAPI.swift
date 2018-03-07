@@ -14,7 +14,7 @@ protocol BrowseAPI: Networking where Model == Root {
     var sortBy: Sort.option? { get set }
     var fetchLimit: Int? { get set }
     var range: String? { get set }
-    func retrieveDataByName(offset: Int, _ completion: @escaping ([Root]?) ->())
+    func retrieveDataByName(offset: Int, loadingImage: UIImageView, _ completion: @escaping ([Root]?) ->())
 }
 
 extension BrowseAPI {
@@ -33,9 +33,9 @@ extension BrowseAPI {
         return baseUrl + query + groupBy + limit + filter + sort
     }
     
-    func retrieveDataByName(offset: Int, _ completion: @escaping ([Root]?) ->()) {
+    func retrieveDataByName(offset: Int, loadingImage: UIImageView, _ completion: @escaping ([Root]?) ->()) {
         guard let url = URL(string: endPoint+"&offset=\(offset)") else { return }
-        
+        loadingImage.playsAnimation(For: "Loading", numberOfImages: 30, withAnimation: 1)
         print("URL: \(url)")
         
         var merchendise:[Root]? = [Root]()
@@ -50,6 +50,8 @@ extension BrowseAPI {
                 merchendise?.append(merchObj)
                 DispatchQueue.main.async {
                     completion(merchendise)
+                    loadingImage.stopAnimating()
+                    loadingImage.removeFromSuperview()
                     print(successDesctiption)
                 }
             }
