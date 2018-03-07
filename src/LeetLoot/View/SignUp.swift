@@ -221,6 +221,13 @@ func setregisterbuttonenabled(enabled:Bool){
             
         }
         else{
+            ErrorLabel.isHidden = true;
+            passwordContainerView.layer.borderWidth = 0
+           // passwordContainerView.layer.borderColor = paleGray.cgcolor
+            confirmPasswordContainerView.layer.borderWidth = 0
+            //confirmPasswordContainerView.layer.borderColor = .paleGray.cgcolor
+            
+            
         setregisterbuttonenabled(enabled:false);
     
         Auth.auth().createUser(withEmail: em, password: pass) { user,error in
