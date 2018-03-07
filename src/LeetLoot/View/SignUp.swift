@@ -220,7 +220,7 @@ func setregisterbuttonenabled(enabled:Bool){
             confirmPasswordContainerView.layer.borderColor = UIColor.red.cgColor
             
         }
-        
+        else{
         setregisterbuttonenabled(enabled:false);
     
         Auth.auth().createUser(withEmail: em, password: pass) { user,error in
@@ -237,6 +237,7 @@ func setregisterbuttonenabled(enabled:Bool){
             }
         }
     }
+}
     }
     func saveUID(UID:String,completion:@escaping((_ success:Bool)->()))
     {
