@@ -56,13 +56,7 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
         
         //register item cell to the collection view
         itemsCollectionView.register(browseItemCell.self, forCellWithReuseIdentifier: cellId)
-        
-        /*//expand from left to right edge
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[v0]-15-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))
-        
-        //expand from top to bottom
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))*/
-        
+
         NSLayoutConstraint.activate([
             itemsCollectionView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             itemsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
@@ -100,61 +94,4 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(15)
     }
-}
-
-//cell where the event, game, or merch is displayed in carousel
-class browseItemCell: UICollectionViewCell{
-    
-    //var categories: [Categories]?
-
-    var category: Categories? {
-        didSet{
-            if let imageName = category?.imageName {
-                
-                imageView.downloadImages(url: imageName)
-            }
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    let imageView: customeImage = {
-        let iv = customeImage(frame: .zero)
-        iv.image = UIImage(named: "")
-        iv.contentMode = .scaleAspectFit
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        return iv
-    }()
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setupViews(){
-        
-        addSubview(imageView)
-        //imageView.frame = CGRectMake(0, 0, frame.width, frame.height)
-        
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-            imageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 5),
-            imageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -5),
-
-            ])
-
-        
-        backgroundColor = .clear
-        layer.borderWidth = 0.5
-        layer.borderColor = UIColor.softGrey.cgColor
-    }
-    
-    //function to allow for CGRectMake in Swift 4
-    func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
-        return CGRect(x: x, y: y, width: width, height: height)
-    }
-    
 }
