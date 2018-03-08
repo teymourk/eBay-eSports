@@ -117,6 +117,7 @@ class browseItemCell: UICollectionViewCell{
         let iv = customeImage(frame: .zero)
         iv.image = UIImage(named: "")
         iv.contentMode = .scaleAspectFit
+        iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
     
@@ -127,7 +128,15 @@ class browseItemCell: UICollectionViewCell{
     func setupViews(){
         
         addSubview(imageView)
-        imageView.frame = CGRectMake(0, 0, frame.width, frame.height)
+        //imageView.frame = CGRectMake(0, 0, frame.width, frame.height)
+        
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            imageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 5),
+            imageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -5),
+
+            ])
 
         
         backgroundColor = .clear
