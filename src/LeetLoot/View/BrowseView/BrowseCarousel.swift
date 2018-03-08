@@ -57,11 +57,19 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
         //register item cell to the collection view
         itemsCollectionView.register(browseItemCell.self, forCellWithReuseIdentifier: cellId)
         
-        //expand from left to right edge
+        /*//expand from left to right edge
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-15-[v0]-15-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))
         
         //expand from top to bottom
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))*/
+        
+        NSLayoutConstraint.activate([
+            itemsCollectionView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            itemsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+            itemsCollectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            itemsCollectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
+            
+            ])
         
         
     }
