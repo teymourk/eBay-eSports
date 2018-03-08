@@ -21,7 +21,7 @@ class SignUp: SignIn {
         lb.translatesAutoresizingMaskIntoConstraints = false;
         return lb;
     }()
-    private let errorLabel: UILabel = {
+    private let ErrorLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Passwords do not match"
         lb.textColor = .red
@@ -35,6 +35,7 @@ class SignUp: SignIn {
         emailContainerView.translatesAutoresizingMaskIntoConstraints=false
         emailContainerView.layer.cornerRadius = 4
         emailContainerView.layer.masksToBounds = true
+        
         return emailContainerView
     }()
     private let emailTextField: UITextField = {
@@ -60,6 +61,7 @@ class SignUp: SignIn {
         textfield.keyboardType = .emailAddress
         textfield.isSecureTextEntry = true
        // textfield.font = UIFont(name:"Helvectica",size:14)
+        //textfield.addTarget(self, action: #selector(textFieldDidChange(_:)),for: UIControlEvents.editingChanged)
         return textfield;
     }()
     private lazy var confirmPasswordContainerView : UIView = {
@@ -68,6 +70,8 @@ class SignUp: SignIn {
         passwordContainerView.translatesAutoresizingMaskIntoConstraints=false
         passwordContainerView.layer.cornerRadius = 4
         passwordContainerView.layer.masksToBounds = true
+       // passwordContainerView.layer.borderWidth = 1
+        
         return passwordContainerView
     }()
     private let confirmPasswordTextField: UITextField = {
@@ -76,7 +80,7 @@ class SignUp: SignIn {
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.keyboardType = .emailAddress
         textfield.isSecureTextEntry = true
-        textfield.font = UIFont(name:"Helvectica",size:14)
+       // textfield.font = UIFont(name:"Helvectica",size:14)
         return textfield;
     }()
     private lazy var register: UIButton = {
@@ -99,6 +103,16 @@ class SignUp: SignIn {
             signInLabel.topAnchor.constraint(equalTo: topAnchor, constant: 63),
             signInLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 23)
         ])
+    }
+    func errorLabel() {
+        addSubview(ErrorLabel)
+        NSLayoutConstraint.activate([
+            //setup constraints
+            ErrorLabel.topAnchor.constraint(equalTo: topAnchor, constant: 285),
+           // ErrorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
+            ErrorLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 99)
+            ])
+        ErrorLabel.isHidden = true;
     }
     
     override func setupEmail(){
@@ -175,7 +189,7 @@ class SignUp: SignIn {
 
     override func setupLayoutAttributes() {
         back.isHidden = false
-
+        errorLabel();
         setupEmail();
         setupPassword();
         setupConfirmPassword();
@@ -192,15 +206,28 @@ func setregisterbuttonenabled(enabled:Bool){
         }
     
     }
+  
     @objc func registerAction(){
         guard let em = emailTextField.text else {return }
         guard let pass = passwordTextField.text else {return }
-        //guard let confirmPassword = confirmPasswordTextField.text else {return}
-        
-        /*if(password != confirmPassword)
+        guard let confirm = confirmPasswordTextField.text else {return}
+        if pass != confirm
         {
-            setupErrorLabel();
-        }*/
+            ErrorLabel.isHidden = false;
+            passwordContainerView.layer.borderWidth = 1
+            passwordContainerView.layer.borderColor = UIColor.red.cgColor
+            confirmPasswordContainerView.layer.borderWidth = 1
+            confirmPasswordContainerView.layer.borderColor = UIColor.red.cgColor
+            
+        }
+        else{
+            ErrorLabel.isHidden = true;
+            passwordContainerView.layer.borderWidth = 0
+           // passwordContainerView.layer.borderColor = paleGray.cgcolor
+            confirmPasswordContainerView.layer.borderWidth = 0
+            //confirmPasswordContainerView.layer.borderColor = .paleGray.cgcolor
+            
+            
         setregisterbuttonenabled(enabled:false);
     
         Auth.auth().createUser(withEmail: em, password: pass) { user,error in
@@ -216,8 +243,8 @@ func setregisterbuttonenabled(enabled:Bool){
                 }
             }
         }
-            
     }
+}
     }
     func saveUID(UID:String,completion:@escaping((_ success:Bool)->()))
     {
@@ -233,7 +260,9 @@ func setregisterbuttonenabled(enabled:Bool){
 
     }
 }
-    
+
+
+
 
 
    
