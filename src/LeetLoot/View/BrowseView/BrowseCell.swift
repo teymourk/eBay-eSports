@@ -39,6 +39,8 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
     let imageView: customeImage = {
         let iv = customeImage(frame: .zero)
         iv.image = UIImage(named: "")
+        iv.translatesAutoresizingMaskIntoConstraints = false
+
         return iv
     }()
 
@@ -55,7 +57,17 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
         label.text = "Events"
         label.textColor = .white
         label.font = UIFont(name: "Helvetica-Bold", size: 60)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    let blurEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.alpha = 0.5
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        return blurEffectView
     }()
   
     let browseCarousel: UICollectionView = {
@@ -76,19 +88,10 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
         
         //image (browse, games)
         addSubview(imageView)
-        imageView.frame = CGRectMake(0, 0, 375, 107)
-        
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.alpha = 0.5
-        blurEffectView.frame = CGRectMake(0, 0, 375, 107)
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+ 
         addSubview(blurEffectView)
-        
-       
+
         addSubview(textLabel)
-        textLabel.frame = CGRectMake(0, 0, 375, 107)
-        
         
         addSubview(browseCarousel)
         
@@ -99,12 +102,28 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
         //register item cell to the collection view
         browseCarousel.register(BrowseCarousel.self, forCellWithReuseIdentifier: cellId)
         
-        //expand from left to right edge
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": browseCarousel]))
-        
-        //expand from top to bottom
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-107-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": browseCarousel]))
-
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -160),
+            imageView.leftAnchor.constraint(equalTo: leftAnchor),
+            imageView.rightAnchor.constraint(equalTo: rightAnchor),
+            
+            blurEffectView.topAnchor.constraint(equalTo: imageView.topAnchor),
+            blurEffectView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            blurEffectView.leftAnchor.constraint(equalTo: imageView.leftAnchor),
+            blurEffectView.rightAnchor.constraint(equalTo: imageView.rightAnchor),
+            
+            textLabel.topAnchor.constraint(equalTo: imageView.topAnchor),
+            textLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            textLabel.leftAnchor.constraint(equalTo: imageView.leftAnchor),
+            textLabel.rightAnchor.constraint(equalTo: imageView.rightAnchor),
+            
+            browseCarousel.topAnchor.constraint(equalTo: topAnchor, constant: 107),
+            browseCarousel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            browseCarousel.leftAnchor.constraint(equalTo: leftAnchor),
+            browseCarousel.rightAnchor.constraint(equalTo: rightAnchor),
+            
+            ])
 
     }
     
