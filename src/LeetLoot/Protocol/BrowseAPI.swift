@@ -46,7 +46,7 @@ extension BrowseAPI {
                 completion(nil)
             case let .success(successDesctiption):
                 guard   let merchObj = _merchendise else { return }
-                    
+                
                 merchendise?.append(merchObj)
                 DispatchQueue.main.async {
                     completion(merchendise)

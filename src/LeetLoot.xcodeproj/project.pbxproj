@@ -23,6 +23,7 @@
 		AB4FA73D203D42A100F754CB /* ParentModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4FA73C203D42A100F754CB /* ParentModal.swift */; };
 		AB6B875D2020F5AE00C5B791 /* Parent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B875C2020F5AE00C5B791 /* Parent.swift */; };
 		AB6DA787200FF75500135CF5 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6DA786200FF75500135CF5 /* ScrollView.swift */; };
+		AB74F05F2050F43400D94F86 /* Token .swift in Sources */ = {isa = PBXBuildFile; fileRef = AB74F05E2050F43400D94F86 /* Token .swift */; };
 		AB7847C61FDDFB24008EBD70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */; };
 		AB7847C81FDDFB24008EBD70 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7847C71FDDFB24008EBD70 /* Home.swift */; };
 		AB7847CD1FDDFB24008EBD70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB7847CC1FDDFB24008EBD70 /* Assets.xcassets */; };
@@ -86,6 +87,7 @@
 		AB4FA73C203D42A100F754CB /* ParentModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentModal.swift; sourceTree = "<group>"; };
 		AB6B875C2020F5AE00C5B791 /* Parent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parent.swift; sourceTree = "<group>"; };
 		AB6DA786200FF75500135CF5 /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
+		AB74F05E2050F43400D94F86 /* Token .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Token .swift"; sourceTree = "<group>"; };
 		AB7847C21FDDFB24008EBD70 /* LeetLoot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeetLoot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB7847C51FDDFB24008EBD70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB7847C71FDDFB24008EBD70 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				BE4625282011C367005789E6 /* TwitterAPI.swift */,
 				AB94227E2031674C002E7311 /* Merchendise.swift */,
 				AB4820532049E70000698478 /* ItemHref.swift */,
+				AB74F05E2050F43400D94F86 /* Token .swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				A1A64DD2202E849000F89E19 /* BrowseCell.swift in Sources */,
 				AB2CE5542029B9BF0025DA69 /* ReusableView.swift in Sources */,
 				AB90EBD5204C711C00D77217 /* AdditionalImagesCV.swift in Sources */,
+				AB74F05F2050F43400D94F86 /* Token .swift in Sources */,
 				AB3CE83720068D0A00EF3A5D /* Merch_Cell.swift in Sources */,
 				AB7CE6411FF8901C0050125C /* General+Ext.swift in Sources */,
 				BE24D73A1FF585EC00E745E6 /* PageView.swift in Sources */,

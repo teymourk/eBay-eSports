@@ -73,6 +73,11 @@ class Browse_Game: UICollectionViewController {
         collectionView?.backgroundColor = .white
         title = "Game Title"
         setupLoader()
+        
+        let m = Token()
+        m.getToken {
+            print($0)
+        }
     }
     
     private func setupPaginationLoader() {

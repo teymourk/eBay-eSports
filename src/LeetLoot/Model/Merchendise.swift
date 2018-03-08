@@ -19,7 +19,8 @@ struct Root:Codable, BrowseAPI {
         filterBy: Filters.option?,
         sortBy: Sort.option?,
         fetchLimit: Int?,
-        range: String?
+        range: String?,
+        errors: [errors]?
     
     init(queryKey: String, filterBy: Filters.option, sortBy: Sort.option, range: String? = nil, limit: Int? = nil) {
         self.keyWord = queryKey
@@ -94,4 +95,8 @@ struct price:Codable {
 //Thumbnail Image
 struct thumbnailImages:Codable {
     let imageUrl: String?
+}
+
+struct errors: Codable {
+    let message: String?
 }
