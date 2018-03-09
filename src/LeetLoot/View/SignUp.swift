@@ -15,7 +15,13 @@ protocol HomePagesDelegate {
 }
 class SignUp: SignIn {
     
-   
+    private let EmLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "Please enter a valid email"
+        lb.textColor = .red
+        lb.translatesAutoresizingMaskIntoConstraints = false;
+        return lb;
+    }()
     private let signUpLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Register"
@@ -112,7 +118,7 @@ class SignUp: SignIn {
     }()
 
 
-    override func registerLabel() {
+    override func SignInLabel() {
         addSubview(signUpLabel)
         NSLayoutConstraint.activate([
             //setup constraints
@@ -218,6 +224,16 @@ class SignUp: SignIn {
         
         
     }
+    override func EmailLabel() {
+        addSubview(EmLabel)
+        NSLayoutConstraint.activate([
+            //setup constraints
+            EmLabel.topAnchor.constraint(equalTo: topAnchor, constant: 285),
+            // ErrorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
+            EmLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            ])
+        EmLabel.isHidden = true;
+    }
 
     override func setupLayoutAttributes() {
         back.isHidden = false
@@ -228,6 +244,7 @@ class SignUp: SignIn {
         setupPassword();
         setupConfirmPassword();
         setupRegister();
+        EmailLabel();
         }
     
 func setregisterbuttonenabled(enabled:Bool){
@@ -278,14 +295,25 @@ func setregisterbuttonenabled(enabled:Bool){
             
         
         setregisterbuttonenabled(enabled:false);
+          //  bool isDuplicate = false;
         
     
         Auth.auth().createUser(withEmail: em, password: pass) { user,error in
             if let error = error {
                 print(error.localizedDescription)
+                if em == ""
+                {
+                    self.EmLabel.isHidden = false;
+                    self.emailContainerView.layer.borderWidth = 1;
+                    self.emailContainerView.layer.borderColor = UIColor.red.cgColor
+                    
+                }
+                
+                /*{
                 self.duplicateAccount.isHidden = false;
                 self.emailContainerView.layer.borderWidth = 1
                 self.emailContainerView.layer.borderColor = UIColor.red.cgColor
+                }*/
                 
             }
             else if let user = user {

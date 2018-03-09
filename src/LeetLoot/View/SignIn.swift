@@ -26,6 +26,20 @@ class SignIn: ParentView {
         lb.translatesAutoresizingMaskIntoConstraints = false;
         return lb;
     }()
+    private let EmLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "Please enter a valid email and password"
+        lb.textColor = .red
+        lb.translatesAutoresizingMaskIntoConstraints = false;
+        return lb;
+    }()
+    /*private let PassLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "Please enter a password"
+        lb.textColor = .red
+        lb.translatesAutoresizingMaskIntoConstraints = false;
+        return lb;
+    }()*/
     private let eliteLootLogo = { () -> UIImageView in
         let image = UIImageView(image: #imageLiteral(resourceName: "EliteLootLogo"))
             image.contentMode = .scaleAspectFit
@@ -162,7 +176,7 @@ class SignIn: ParentView {
         setupStackView()
         setupStack()
         setupLayoutAttributes()
-        registerLabel()
+        SignInLabel()
     }
     
     func setupStackView() {
@@ -184,7 +198,7 @@ class SignIn: ParentView {
         setupForgot()
     }
     
-    func registerLabel() {
+    func SignInLabel() {
         addSubview(signInLabel)
         NSLayoutConstraint.activate([
             //setup constraints
@@ -267,6 +281,26 @@ class SignIn: ParentView {
         ForgotLabel.isHidden = true;
         
     }
+ /*   func PasswordLabel() {
+        addSubview(PassLabel)
+        NSLayoutConstraint.activate([
+            //setup constraints
+            PassLabel.topAnchor.constraint(equalTo: topAnchor, constant: 285),
+            // ErrorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
+            PassLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            ])
+        PassLabel.isHidden = true;
+    }*/
+    func EmailLabel() {
+        addSubview(EmLabel)
+        NSLayoutConstraint.activate([
+            //setup constraints
+            EmLabel.topAnchor.constraint(equalTo: topAnchor, constant: 285),
+            // ErrorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
+            EmLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            ])
+        EmLabel.isHidden = true;
+    }
         
     //Put layout here
     func setupLayoutAttributes() {
@@ -276,6 +310,8 @@ class SignIn: ParentView {
         //setupForgot()
         setupEmail()
         forgotLabel()
+        EmailLabel()
+       // PasswordLabel()
 
     }
     //sigin helper
@@ -303,8 +339,10 @@ class SignIn: ParentView {
     //signin
     @objc
     func signinAction(){
-        guard let em = emailTextField.text else {return }
-        guard let pass = passwordTextField.text else {return }
+        guard let em = emailTextField.text else {
+            return }
+        guard let pass = passwordTextField.text else {
+            return }
         //guard let confirmPassword = confirmPasswordTextField.text else {return}
         
         /*if(password != confirmPassword)
@@ -316,6 +354,7 @@ class SignIn: ParentView {
         
         Auth.auth().signIn(withEmail: em, password: pass) { user,error in
             if let error = error {
+                self.EmLabel.isHidden = false
                 print(error.localizedDescription)
             }
             else if let user = user {
@@ -330,7 +369,7 @@ class SignIn: ParentView {
     func forgotAction(){
        // self.emailTextField.text = "Enter password reset email here!"
         //self.emailTextField.textColor = .coolGrey
-         guard let em = emailTextField.text else {return }
+         guard let em = emailTextField.text else { return }
         Auth.auth().sendPasswordReset(withEmail: em) {(error) in
             if(error == nil)
             {
