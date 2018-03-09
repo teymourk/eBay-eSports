@@ -26,12 +26,7 @@ class SignIn: ParentView {
         return lb
     }()
     
-    let signInLabel: UILabel = {
-        let lb = UILabel()
-            lb.text = "Sign in"
-            lb.translatesAutoresizingMaskIntoConstraints = false
-        return lb
-    }()
+    
     
     private let eliteLootLogo = { () -> UIImageView in
         let image = UIImageView(image: #imageLiteral(resourceName: "EliteLootLogo"))
@@ -70,9 +65,15 @@ class SignIn: ParentView {
             button.tag = 2
         return button
     }()
+    private let signInLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "Sign in"
+        lb.translatesAutoresizingMaskIntoConstraints = false;
+        return lb;
+    }()
     
-    let emailTextField: UITextField = {
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
+    
+    private let emailTextField: UITextField = {
         let textfield = UITextField()
             textfield.text = nil
             textfield.placeholder = "Email"
@@ -222,17 +223,21 @@ class SignIn: ParentView {
     
     //signin
     @objc
-    func onSignIn(){
-        guard   let email = emailTextField.text,
-                let pass = passwordTextField.text else { return }
+    func signinAction(){
+        guard let em = emailTextField.text else {return }
+        guard let pass = passwordTextField.text else {return }
+        //guard let confirmPassword = confirmPasswordTextField.text else {return}
+        
+        /*if(password != confirmPassword)
+         {
+         setupErrorLabel();
+         }*/
+        setsigninbuttonenabled(enabled:false);
        
-        Auth.auth().signIn(withEmail: email, password: pass) { FBUser,error in
-            guard error == nil,
-                let user = FBUser else {
-                self.errorLabel.text = self.handleErrorFor(error)
-                self.errorLabel.shake()
-                self.errorLabel.flash()
-                return
+        
+        Auth.auth().signIn(withEmail: em, password: pass) { user,error in
+            if let error = error {
+                print(error.localizedDescription)
             }
             print("user id:" + user.uid)
             UserDefaults.standard.setValue(user.uid, forKey: "SignedUser")
@@ -245,7 +250,9 @@ class SignIn: ParentView {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
         }
     }
-    
+        
+    }
+    //forgot
     @objc
     func onForgot(){
         guard let email = emailTextField.text else { return }
