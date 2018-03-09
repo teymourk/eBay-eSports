@@ -19,7 +19,13 @@ protocol RegisterPagesDelegate {
 class SignIn: ParentView {
     
     
-    
+    private let ForgotLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "Password Reset email sent"
+        lb.textColor = .black
+        lb.translatesAutoresizingMaskIntoConstraints = false;
+        return lb;
+    }()
     private let eliteLootLogo = { () -> UIImageView in
         let image = UIImageView(image: #imageLiteral(resourceName: "EliteLootLogo"))
             image.contentMode = .scaleAspectFit
@@ -75,7 +81,7 @@ class SignIn: ParentView {
     
     private let emailTextField: UITextField = {
         let textfield = UITextField()
-        textfield.placeholder = "Email"
+        textfield.placeholder = "Email/Password Reset Email"
         textfield.translatesAutoresizingMaskIntoConstraints = false
         //textfield.font = UIFont(name:"Helvectica",size:14)
         textfield.keyboardType = .emailAddress
@@ -250,6 +256,17 @@ class SignIn: ParentView {
                 forgot.widthAnchor.constraint(equalTo:signin.widthAnchor)
                 ])
         }
+    func forgotLabel(){
+        addSubview(ForgotLabel)
+        NSLayoutConstraint.activate([
+            //setup constraints
+            ForgotLabel.topAnchor.constraint(equalTo: topAnchor, constant: 285),
+            // ErrorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
+            ForgotLabel.centerXAnchor.constraint(equalTo:centerXAnchor)
+            ])
+        ForgotLabel.isHidden = true;
+        
+    }
         
     //Put layout here
     func setupLayoutAttributes() {
@@ -258,6 +275,7 @@ class SignIn: ParentView {
         //setupSignin()
         //setupForgot()
         setupEmail()
+        forgotLabel()
 
     }
     //sigin helper
@@ -310,10 +328,13 @@ class SignIn: ParentView {
     //forgot
     @objc
     func forgotAction(){
+       // self.emailTextField.text = "Enter password reset email here!"
+        //self.emailTextField.textColor = .coolGrey
          guard let em = emailTextField.text else {return }
         Auth.auth().sendPasswordReset(withEmail: em) {(error) in
             if(error == nil)
             {
+                self.ForgotLabel.isHidden = false;
                 print("password reset successfully")
             }
             else{
