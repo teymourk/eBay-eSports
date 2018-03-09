@@ -14,16 +14,31 @@ protocol HomePagesDelegate {
     func onScreenButtons(_ sender: UIButton)
 }
 class SignUp: SignIn {
-
-    private let signInLabel: UILabel = {
+    
+   
+    private let signUpLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Register"
         lb.translatesAutoresizingMaskIntoConstraints = false;
         return lb;
     }()
-    private let ErrorLabel: UILabel = {
+   private let ErrorLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Passwords do not match"
+        lb.textColor = .red
+        lb.translatesAutoresizingMaskIntoConstraints = false;
+        return lb;
+    }()
+   private let PasswordLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "Password must be at least 6 characters"
+        lb.textColor = .red
+        lb.translatesAutoresizingMaskIntoConstraints = false;
+        return lb;
+    }()
+    private let duplicateAccount: UILabel = {
+        let lb = UILabel()
+        lb.text = "Account already in use"
         lb.textColor = .red
         lb.translatesAutoresizingMaskIntoConstraints = false;
         return lb;
@@ -56,7 +71,7 @@ class SignUp: SignIn {
         }()
     private let passwordTextField: UITextField = {
         let textfield = UITextField()
-        textfield.placeholder = "Password"
+        textfield.placeholder = "Passwords must be at least 6 characters"
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.keyboardType = .emailAddress
         textfield.isSecureTextEntry = true
@@ -96,24 +111,16 @@ class SignUp: SignIn {
         
     }()
 
+
     override func registerLabel() {
-        addSubview(signInLabel)
+        addSubview(signUpLabel)
         NSLayoutConstraint.activate([
             //setup constraints
-            signInLabel.topAnchor.constraint(equalTo: topAnchor, constant: 63),
-            signInLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 23)
+            signUpLabel.topAnchor.constraint(equalTo: topAnchor, constant: 63),
+            signUpLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 23)
         ])
     }
-    func errorLabel() {
-        addSubview(ErrorLabel)
-        NSLayoutConstraint.activate([
-            //setup constraints
-            ErrorLabel.topAnchor.constraint(equalTo: topAnchor, constant: 285),
-           // ErrorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
-            ErrorLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 99)
-            ])
-        ErrorLabel.isHidden = true;
-    }
+    
     
     override func setupEmail(){
         addSubview(emailContainerView)
@@ -179,17 +186,44 @@ class SignUp: SignIn {
             
             ])
     }
-
-    /*func setupErrorLabel(){
-        addSubview(errorLabel)
+    func passwordLabel() {
+        addSubview(PasswordLabel)
         NSLayoutConstraint.activate([
-            errorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 65)
+            //setup constraints
+            PasswordLabel.topAnchor.constraint(equalTo: topAnchor, constant: 285),
+            // ErrorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
+            PasswordLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
             ])
-    }*/
+        PasswordLabel.isHidden = true;
+    }
+    func errorLabel() {
+        addSubview(ErrorLabel)
+        NSLayoutConstraint.activate([
+            //setup constraints
+            ErrorLabel.topAnchor.constraint(equalTo: topAnchor, constant: 285),
+            // ErrorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
+            ErrorLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 99)
+            ])
+        ErrorLabel.isHidden = true;
+    }
+    func DuplicateAccount(){
+        addSubview(duplicateAccount)
+        NSLayoutConstraint.activate([
+            //setup constraints
+            duplicateAccount.topAnchor.constraint(equalTo: topAnchor, constant: 285),
+            // ErrorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
+            duplicateAccount.centerXAnchor.constraint(equalTo:centerXAnchor)
+            ])
+        duplicateAccount.isHidden = true;
+        
+        
+    }
 
     override func setupLayoutAttributes() {
         back.isHidden = false
         errorLabel();
+        passwordLabel();
+        DuplicateAccount();
         setupEmail();
         setupPassword();
         setupConfirmPassword();
@@ -218,23 +252,45 @@ func setregisterbuttonenabled(enabled:Bool){
             passwordContainerView.layer.borderColor = UIColor.red.cgColor
             confirmPasswordContainerView.layer.borderWidth = 1
             confirmPasswordContainerView.layer.borderColor = UIColor.red.cgColor
-            
+            PasswordLabel.isHidden = true;
+        }
+        else if pass.count < 6{
+            ErrorLabel.isHidden = true;
+            PasswordLabel.isHidden = false;
+            passwordContainerView.layer.borderWidth = 1
+            passwordContainerView.layer.borderColor = UIColor.red.cgColor
+            confirmPasswordContainerView.layer.borderWidth = 1
+            confirmPasswordContainerView.layer.borderColor = UIColor.red.cgColor
         }
         else{
+            PasswordLabel.isHidden = true;
+            passwordContainerView.layer.borderWidth = 0
+            // passwordContainerView.layer.borderColor = paleGray.cgcolor
+            confirmPasswordContainerView.layer.borderWidth = 0
+            //confirmPasswordContainerView.layer.borderColor = .paleGray.cgcolor
+        
+        
             ErrorLabel.isHidden = true;
             passwordContainerView.layer.borderWidth = 0
-           // passwordContainerView.layer.borderColor = paleGray.cgcolor
+            // passwordContainerView.layer.borderColor = paleGray.cgcolor
             confirmPasswordContainerView.layer.borderWidth = 0
             //confirmPasswordContainerView.layer.borderColor = .paleGray.cgcolor
             
-            
+        
         setregisterbuttonenabled(enabled:false);
+        
     
         Auth.auth().createUser(withEmail: em, password: pass) { user,error in
             if let error = error {
                 print(error.localizedDescription)
+                self.duplicateAccount.isHidden = false;
+                self.emailContainerView.layer.borderWidth = 1
+                self.emailContainerView.layer.borderColor = UIColor.red.cgColor
+                
             }
             else if let user = user {
+                self.emailContainerView.layer.borderWidth = 0
+                self.duplicateAccount.isHidden = true;
                 print("Sign Up Successfully. \(user.uid)")
                 guard let uid = Auth.auth().currentUser?.uid else {return}
                 self.saveUID(UID:uid){ success in
@@ -244,8 +300,9 @@ func setregisterbuttonenabled(enabled:Bool){
             }
         }
     }
+  }
 }
-    }
+    
     func saveUID(UID:String,completion:@escaping((_ success:Bool)->()))
     {
         

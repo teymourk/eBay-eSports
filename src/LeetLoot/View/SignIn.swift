@@ -18,6 +18,8 @@ protocol RegisterPagesDelegate {
 
 class SignIn: ParentView {
     
+    
+    
     private let eliteLootLogo = { () -> UIImageView in
         let image = UIImageView(image: #imageLiteral(resourceName: "EliteLootLogo"))
             image.contentMode = .scaleAspectFit
@@ -69,6 +71,8 @@ class SignIn: ParentView {
         lb.translatesAutoresizingMaskIntoConstraints = false;
         return lb;
     }()
+    
+    
     private let emailTextField: UITextField = {
         let textfield = UITextField()
         textfield.placeholder = "Email"
@@ -115,6 +119,7 @@ class SignIn: ParentView {
         return button
         
     }()
+    
     private lazy var forgot: UIButton = {
         let button = UIButton(type:.system)
         button.backgroundColor = UIColor.lightBlue
@@ -289,6 +294,8 @@ class SignIn: ParentView {
          setupErrorLabel();
          }*/
         setsigninbuttonenabled(enabled:false);
+       
+        
         Auth.auth().signIn(withEmail: em, password: pass) { user,error in
             if let error = error {
                 print(error.localizedDescription)
@@ -298,6 +305,7 @@ class SignIn: ParentView {
             }
         
     }
+        
     }
     //forgot
     @objc
