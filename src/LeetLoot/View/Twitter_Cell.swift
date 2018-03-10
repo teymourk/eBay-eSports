@@ -54,7 +54,6 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
         
         backgroundColor = .white
         NSLayoutConstraint.activate([
-    
             tweetView.topAnchor.constraint(equalTo: topAnchor, constant: 7),
             tweetView.rightAnchor.constraint(equalTo: rightAnchor, constant: -6),
             tweetView.leftAnchor.constraint(equalTo: leftAnchor),
