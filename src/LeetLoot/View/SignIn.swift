@@ -12,34 +12,25 @@ import FirebaseAuth
 protocol RegisterPagesDelegate: class {
     func onScreenButtons(_ sender: UIButton)
 }
-/*protocol signinPagesDelegate {
-    func onScreenButton(_ sender: UIButton)
-}*/
 
-class SignIn: ParentView {
-    
-    
+class SignIn: ParentView, UITextFieldDelegate {
     private let ForgotLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Password Reset email sent"
         lb.textColor = .black
-        lb.translatesAutoresizingMaskIntoConstraints = false;
-        return lb;
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        return lb
     }()
+    
     private let EmLabel: UILabel = {
         let lb = UILabel()
-        lb.text = "Please enter a valid email and password"
+        lb.text = "Please enter a valid email and password."
         lb.textColor = .red
-        lb.translatesAutoresizingMaskIntoConstraints = false;
-        return lb;
+        lb.font = UIFont.systemFont(ofSize: 14)
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        return lb
     }()
-    /*private let PassLabel: UILabel = {
-        let lb = UILabel()
-        lb.text = "Please enter a password"
-        lb.textColor = .red
-        lb.translatesAutoresizingMaskIntoConstraints = false;
-        return lb;
-    }()*/
+
     private let eliteLootLogo = { () -> UIImageView in
         let image = UIImageView(image: #imageLiteral(resourceName: "EliteLootLogo"))
             image.contentMode = .scaleAspectFit
@@ -67,6 +58,7 @@ class SignIn: ParentView {
             stack.translatesAutoresizingMaskIntoConstraints = false
        return stack
     }()
+    
     lazy var stack = { () -> UIStackView in
         let stack = UIStackView(arrangedSubviews: [forgot,signin])
         stack.distribution = .fillProportionally
@@ -76,66 +68,70 @@ class SignIn: ParentView {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    
     private let register = { () -> UIButton in
-        let button = UIButton(title: "Register")
-            button.setTitleColor(.lightBlue, for: .normal)
-            button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
-            button.addTarget(self, action: #selector(onScreenButtons(_ :)), for: .touchUpInside)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.tag = 2
+        let button = UIButton(title: "REGISTER")
+        button.setTitleColor(.lightBlue, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
+        button.addTarget(self, action: #selector(onScreenButtons(_ :)), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tag = 2
         return button
     }()
+    
     private let signInLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Sign in"
-        lb.translatesAutoresizingMaskIntoConstraints = false;
-        return lb;
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        return lb
     }()
-    
     
     private let emailTextField: UITextField = {
         let textfield = UITextField()
-        textfield.placeholder = "Email/Password Reset Email"
+        textfield.placeholder = "Email"
         textfield.translatesAutoresizingMaskIntoConstraints = false
-        //textfield.font = UIFont(name:"Helvectica",size:14)
+        textfield.font = UIFont(name: "Helvectica",size:14)
         textfield.keyboardType = .emailAddress
-        return textfield;
+        textfield.backgroundColor = .customGray
+        textfield.layer.cornerRadius = 4
+        textfield.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textfield.frame.height))
+        textfield.leftView = paddingView
+        textfield.leftViewMode = .always
+        
+        textfield.becomeFirstResponder()
+        
+        return textfield
     }()
-    private lazy var passwordContainerView : UIView = {
-        let passwordContainerView = UIView()
-        passwordContainerView.backgroundColor = UIColor(red:238, green: 239, blue: 241)
-        passwordContainerView.translatesAutoresizingMaskIntoConstraints=false
-        passwordContainerView.layer.cornerRadius = 4
-        passwordContainerView.layer.masksToBounds = true
-        return passwordContainerView
-    }()
+    
     private let passwordTextField: UITextField = {
         let textfield = UITextField()
         textfield.placeholder = "Password"
         textfield.translatesAutoresizingMaskIntoConstraints = false
-        //textfield.font = UIFont(name:"Helvectica",size:14)
+        textfield.font = UIFont(name: "Helvectica",size:14)
         textfield.keyboardType = .emailAddress
-        textfield.isSecureTextEntry = true
+        textfield.backgroundColor = .customGray
+        textfield.layer.cornerRadius = 4
+        textfield.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textfield.frame.height))
+        textfield.leftView = paddingView
+        textfield.leftViewMode = .always
+        
         return textfield
     }()
-    private lazy var emailContainerView: UIView = {
-        let emailContainerView = UIView()
-        emailContainerView.backgroundColor = UIColor(red:238, green: 239, blue: 241)
-        emailContainerView.translatesAutoresizingMaskIntoConstraints=false
-        emailContainerView.layer.cornerRadius = 4
-        emailContainerView.layer.masksToBounds = true
-        return emailContainerView
-        
-    }()
+    
     private lazy var signin: UIButton = {
         let button = UIButton(type:.system)
         button.backgroundColor = UIColor.lightBlue
-        button.setTitle("Sign in", for: .normal)
+        button.setTitle("SIGN IN", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 4
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont .boldSystemFont(ofSize: 16)
-        button.addTarget(self, action: #selector(signinAction), for: .touchUpInside);
+        button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.addTarget(self, action: #selector(signinAction), for: .touchUpInside)
         return button
         
     }()
@@ -143,12 +139,13 @@ class SignIn: ParentView {
     private lazy var forgot: UIButton = {
         let button = UIButton(type:.system)
         button.backgroundColor = UIColor.lightBlue
-        button.setTitle("Forgot?", for: .normal)
+        button.setTitle("FORGOT?", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 4
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont .boldSystemFont(ofSize: 16)
-        button.addTarget(self, action: #selector(forgotAction), for: .touchUpInside);
+        button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.addTarget(self, action: #selector(forgotAction), for: .touchUpInside)
         return button
     }()
     
@@ -159,15 +156,6 @@ class SignIn: ParentView {
         guard delegate != nil else { return }
         delegate?.onScreenButtons(sender)
     }
-    
-   /* var delegate:signinPagesDelegate?
-    @objc
-    func onScreenButton(_ sender: UIButton) {
-        guard delegate != nil else { return }
-        delegate?.onScreenButtons(sender)
-    }*/
-    
-    
     
     //Dont Touch
     override func setupView() {
@@ -187,13 +175,14 @@ class SignIn: ParentView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
     }
+    
     func setupStack() {
         addSubview(stack)
         NSLayoutConstraint.activate([
             stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -77),
             stack.leadingAnchor.constraint(equalTo: leadingAnchor),
             stack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            ])
+        ])
         setupSignin()
         setupForgot()
     }
@@ -203,7 +192,7 @@ class SignIn: ParentView {
         NSLayoutConstraint.activate([
             //setup constraints
             signInLabel.topAnchor.constraint(equalTo: topAnchor, constant: 63),
-            signInLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 23)
+            signInLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 15)
             
         ])
     }
@@ -212,108 +201,85 @@ class SignIn: ParentView {
     func setupRegister() {
         addSubview(register)
         NSLayoutConstraint.activate([
-            register.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
+            register.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -18),
             register.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
     }
-    //email container
+
+    //Email container
     func setupEmail(){
-        addSubview(emailContainerView)
-        NSLayoutConstraint.activate([
-            //setup constraints
-            emailContainerView.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 51),
-            emailContainerView.leftAnchor.constraint(equalTo: leftAnchor, constant:15),
-            emailContainerView.widthAnchor.constraint(equalTo:widthAnchor,constant: -30),
-            emailContainerView.heightAnchor.constraint(equalToConstant: 50)
-            ])
-        
         addSubview(emailTextField)
         NSLayoutConstraint.activate([
-            emailTextField.leftAnchor.constraint(equalTo: emailContainerView.leftAnchor, constant: 20),
-            emailTextField.topAnchor.constraint(equalTo: emailContainerView.topAnchor,constant:15),
-            emailTextField.widthAnchor.constraint(equalTo: widthAnchor,constant:15),
-            emailTextField.heightAnchor.constraint(equalToConstant: 17)
-            ])
+            //setup constraints
+            emailTextField.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 51),
+            emailTextField.leftAnchor.constraint(equalTo: leftAnchor, constant:15),
+            emailTextField.widthAnchor.constraint(equalTo:widthAnchor,constant: -30),
+            emailTextField.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
+    
     func setupPassword(){
-        addSubview(passwordContainerView)
-        NSLayoutConstraint.activate([
-            passwordContainerView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 116),
-            passwordContainerView.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
-            passwordContainerView.widthAnchor.constraint(equalTo:widthAnchor,constant:-30),   passwordContainerView.heightAnchor.constraint(equalToConstant: 50)
-            ])
         addSubview(passwordTextField)
-        NSLayoutConstraint.activate([ passwordTextField.leftAnchor.constraint(equalTo: passwordContainerView.leftAnchor, constant: 20), passwordTextField.topAnchor.constraint(equalTo: passwordContainerView.topAnchor,constant:15), passwordTextField.widthAnchor.constraint(equalTo:passwordContainerView.widthAnchor),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 17)
-            ])
+        NSLayoutConstraint.activate([
+            passwordTextField.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 116),
+            passwordTextField.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            passwordTextField.widthAnchor.constraint(equalTo:widthAnchor,constant:-30),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
 
     func setupSignin() {
         addSubview(signin)
         NSLayoutConstraint.activate([
             signin.topAnchor.constraint(equalTo: topAnchor, constant: 228),
-           // signin.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-                                                //height
-           // signin.leftAnchor.constraint(equalTo: leftAnchor, constant: 187),
             signin.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
             signin.leadingAnchor.constraint(equalTo:forgot.trailingAnchor,constant:15),
             signin.widthAnchor.constraint(equalToConstant:157)
             
             ])
     }
-        //Forgot
-        func setupForgot() {
-            addSubview(forgot)
-            NSLayoutConstraint.activate([
-                forgot.topAnchor.constraint(equalTo: topAnchor, constant: 228),
-                forgot.leftAnchor.constraint(equalTo:leftAnchor, constant: 15),
-                forgot.widthAnchor.constraint(equalTo:signin.widthAnchor)
-                ])
-        }
+    
+    //Forgot
+    func setupForgot() {
+        addSubview(forgot)
+        NSLayoutConstraint.activate([
+            forgot.topAnchor.constraint(equalTo: topAnchor, constant: 228),
+            forgot.leftAnchor.constraint(equalTo:leftAnchor, constant: 15),
+            forgot.widthAnchor.constraint(equalTo:signin.widthAnchor)
+            ])
+    }
+    
     func forgotLabel(){
         addSubview(ForgotLabel)
         NSLayoutConstraint.activate([
             //setup constraints
             ForgotLabel.topAnchor.constraint(equalTo: topAnchor, constant: 285),
-            // ErrorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
             ForgotLabel.centerXAnchor.constraint(equalTo:centerXAnchor)
             ])
         ForgotLabel.isHidden = true;
         
     }
- /*   func PasswordLabel() {
-        addSubview(PassLabel)
-        NSLayoutConstraint.activate([
-            //setup constraints
-            PassLabel.topAnchor.constraint(equalTo: topAnchor, constant: 285),
-            // ErrorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
-            PassLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
-            ])
-        PassLabel.isHidden = true;
-    }*/
+    
     func EmailLabel() {
         addSubview(EmLabel)
         NSLayoutConstraint.activate([
             //setup constraints
             EmLabel.topAnchor.constraint(equalTo: topAnchor, constant: 285),
-            // ErrorLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -65),
             EmLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
             ])
-        EmLabel.isHidden = true;
+        EmLabel.isHidden = true
     }
         
     //Put layout here
     func setupLayoutAttributes() {
         setupRegister()
         setupPassword()
-        //setupSignin()
-        //setupForgot()
         setupEmail()
         forgotLabel()
         EmailLabel()
-       // PasswordLabel()
 
     }
+    
     //sigin helper
     func setsigninbuttonenabled(enabled:Bool){
         if(enabled)
@@ -325,17 +291,17 @@ class SignIn: ParentView {
         }
         
     }
+    
     //forgot helper
     func setforgotbuttonenabled(enabled:Bool){
-        if(enabled)
-        {
+        if (enabled) {
             forgot.isEnabled = true
-        }
-        else{
+        } else{
             forgot.isEnabled = false
         }
         
     }
+    
     //signin
     @objc
     func signinAction(){
@@ -343,22 +309,17 @@ class SignIn: ParentView {
             return }
         guard let pass = passwordTextField.text else {
             return }
-        //guard let confirmPassword = confirmPasswordTextField.text else {return}
-        
-        /*if(password != confirmPassword)
-         {
-         setupErrorLabel();
-         }*/
-        setsigninbuttonenabled(enabled:false);
        
-        
         Auth.auth().signIn(withEmail: em, password: pass) { user,error in
             if let error = error {
                 self.EmLabel.isHidden = false
+                self.setsigninbuttonenabled(enabled:true)
                 print(error.localizedDescription)
             }
             else if let user = user {
                 print("user id:" + user.uid)
+                self.EmLabel.isHidden = true
+                self.setsigninbuttonenabled(enabled:false)
             }
         
     }
@@ -367,14 +328,12 @@ class SignIn: ParentView {
     //forgot
     @objc
     func forgotAction(){
-       // self.emailTextField.text = "Enter password reset email here!"
-        //self.emailTextField.textColor = .coolGrey
-         guard let em = emailTextField.text else { return }
+        guard let em = emailTextField.text else { return }
         Auth.auth().sendPasswordReset(withEmail: em) {(error) in
             if(error == nil)
             {
-                self.ForgotLabel.isHidden = false;
-                print("password reset successfully")
+                self.ForgotLabel.isHidden = false
+                print("Password reset successfully.")
             }
             else{
                 print(error!.localizedDescription)
@@ -382,7 +341,7 @@ class SignIn: ParentView {
         }
     
             
-}
+    }
 }
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
@@ -391,7 +350,7 @@ extension UIColor {
         assert(blue >= 0 && blue <= 255, "Invalid blue component")
         
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-}
+    }
 }
     
 
