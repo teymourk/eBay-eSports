@@ -22,12 +22,14 @@ class SignUp: SignIn {
         lb.translatesAutoresizingMaskIntoConstraints = false;
         return lb;
     }()
+    
     private let signUpLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Register"
         lb.translatesAutoresizingMaskIntoConstraints = false;
         return lb;
     }()
+    
    private let ErrorLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Passwords do not match"
@@ -35,93 +37,93 @@ class SignUp: SignIn {
         lb.translatesAutoresizingMaskIntoConstraints = false;
         return lb;
     }()
+    
    private let PasswordLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Password must be at least 6 characters"
         lb.textColor = .red
+        lb.font = UIFont(name:"Helvectica",size:14)
         lb.translatesAutoresizingMaskIntoConstraints = false;
         return lb;
     }()
+    
     private let duplicateAccount: UILabel = {
         let lb = UILabel()
         lb.text = "Account already in use"
         lb.textColor = .red
         lb.translatesAutoresizingMaskIntoConstraints = false;
+        lb.font = UIFont(name:"Helvectica",size:14)
         return lb;
     }()
+    
     private lazy var emailContainerView : UIView = {
-        
         let emailContainerView = UIView()
         emailContainerView.backgroundColor = UIColor(red:238, green: 239, blue: 241)
         emailContainerView.translatesAutoresizingMaskIntoConstraints=false
         emailContainerView.layer.cornerRadius = 4
         emailContainerView.layer.masksToBounds = true
-        
         return emailContainerView
     }()
+    
     private let emailTextField: UITextField = {
         let textfield = UITextField()
         textfield.placeholder = "Email"
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.keyboardType = .emailAddress
-        //textfield.font = UIFont(name:"Helvectica",size:14)
-        return textfield;}()
+        textfield.font = UIFont(name:"Helvectica",size:14)
+        return textfield
+    }()
 
-        private lazy var passwordContainerView : UIView = {
-            let passwordContainerView = UIView()
-            passwordContainerView.backgroundColor = UIColor(red:238, green: 239, blue: 241)
-            passwordContainerView.translatesAutoresizingMaskIntoConstraints=false
-            passwordContainerView.layer.cornerRadius = 4
-            passwordContainerView.layer.masksToBounds = true
-            return passwordContainerView
-        }()
+    private lazy var passwordContainerView : UIView = {
+        let passwordContainerView = UIView()
+        passwordContainerView.backgroundColor = UIColor(red:238, green: 239, blue: 241)
+        passwordContainerView.translatesAutoresizingMaskIntoConstraints=false
+        passwordContainerView.layer.cornerRadius = 4
+        passwordContainerView.layer.masksToBounds = true
+        return passwordContainerView
+    }()
+    
     private let passwordTextField: UITextField = {
         let textfield = UITextField()
-        textfield.placeholder = "Passwords must be at least 6 characters"
+        textfield.placeholder = "Password"
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.keyboardType = .emailAddress
         textfield.isSecureTextEntry = true
-       // textfield.font = UIFont(name:"Helvectica",size:14)
-        //textfield.addTarget(self, action: #selector(textFieldDidChange(_:)),for: UIControlEvents.editingChanged)
+        textfield.font = UIFont(name:"Helvectica",size:14)
         return textfield;
     }()
+    
     private lazy var confirmPasswordContainerView : UIView = {
         let passwordContainerView = UIView()
         passwordContainerView.backgroundColor = UIColor(red:238, green: 239, blue: 241)
         passwordContainerView.translatesAutoresizingMaskIntoConstraints=false
         passwordContainerView.layer.cornerRadius = 4
         passwordContainerView.layer.masksToBounds = true
-       // passwordContainerView.layer.borderWidth = 1
         
         return passwordContainerView
     }()
+    
     private let confirmPasswordTextField: UITextField = {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         let textfield = UITextField()
-            textfield.text = nil
-            textfield.isSecureTextEntry = true
-            textfield.placeholder = "Confirm Password"
-            textfield.font = UIFont(name: "Helvectica",size:14)
-            textfield.keyboardType = .emailAddress
-            textfield.backgroundColor = .customGray
-            textfield.layer.cornerRadius = 4
-            textfield.leftView = paddingView
-            textfield.leftViewMode = .always
-            textfield.heightAnchor.constraint(equalToConstant: 50).isActive = true
-            textfield.translatesAutoresizingMaskIntoConstraints = false
-        return textfield
+        textfield.placeholder = "Confirm Password"
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.keyboardType = .emailAddress
+        textfield.isSecureTextEntry = true
+        textfield.font = UIFont(name:"Helvectica",size:14)
+        return textfield;
     }()
     
     private lazy var register: UIButton = {
         let button = UIButton(type:.system)
-            button.backgroundColor = .lightBlue
-            button.setTitle("REGISTER", for: .normal)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.layer.cornerRadius = 4
-            button.setTitleColor(UIColor.white, for: .normal)
-            button.titleLabel?.font = UIFont .boldSystemFont(ofSize: 14)
-            button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-            button.addTarget(self, action: #selector(onRegister(_:)), for: .touchUpInside);
+        button.backgroundColor = .lightBlue
+        button.setTitle("REGISTER", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 4
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont .boldSystemFont(ofSize: 14)
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.addTarget(self, action: #selector(registerAction), for: .touchUpInside);
         return button
     }()
 
@@ -131,7 +133,7 @@ class SignUp: SignIn {
         NSLayoutConstraint.activate([
             //setup constraints
             signUpLabel.topAnchor.constraint(equalTo: topAnchor, constant: 63),
-            signUpLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 23)
+            signUpLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 15)
         ])
     }
     
@@ -171,6 +173,7 @@ class SignUp: SignIn {
             passwordTextField.heightAnchor.constraint(equalToConstant: 17)
             ])
     }
+    
     func setupConfirmPassword(){
         addSubview(confirmPasswordContainerView)
         NSLayoutConstraint.activate([
@@ -187,17 +190,18 @@ class SignUp: SignIn {
             confirmPasswordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
         ])
     }
+    
     override func setupRegister(){
         addSubview(register)
         //setup constraints
         NSLayoutConstraint.activate([
-            register.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 283),
-            
-            register.widthAnchor.constraint(equalTo: widthAnchor,constant:-10),
+            register.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            register.leftAnchor.constraint(equalTo: leftAnchor, constant: 5),
+            register.rightAnchor.constraint(equalTo: rightAnchor, constant: -5),
             register.centerXAnchor.constraint(equalTo:centerXAnchor)
-            
-            ])
+        ])
     }
+    
     func passwordLabel() {
         addSubview(PasswordLabel)
         NSLayoutConstraint.activate([
@@ -208,6 +212,7 @@ class SignUp: SignIn {
             ])
         PasswordLabel.isHidden = true;
     }
+    
     func errorLabel() {
         addSubview(ErrorLabel)
         NSLayoutConstraint.activate([
@@ -218,6 +223,7 @@ class SignUp: SignIn {
             ])
         ErrorLabel.isHidden = true;
     }
+    
     func DuplicateAccount(){
         addSubview(duplicateAccount)
         NSLayoutConstraint.activate([
@@ -230,6 +236,7 @@ class SignUp: SignIn {
         
         
     }
+    
     override func EmailLabel() {
         addSubview(EmLabel)
         NSLayoutConstraint.activate([
@@ -333,12 +340,12 @@ func setregisterbuttonenabled(enabled:Bool){
                 print("Sign Up Successfully. \(user.uid)")
                 guard let uid = Auth.auth().currentUser?.uid else {return}
                 self.saveUID(UID:uid){ success in
-                    if success{
-                    print("Sucessfully saved in databse!")
+                    if success {
+                        print("Sucessfully saved in databse!")
+                    }
                 }
             }
         }
-    }
   }
 }
     
