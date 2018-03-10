@@ -11,6 +11,7 @@ import UIKit
 
 protocol FeaturedEventDelegate: class {
     func onEventBanner(_ sender: UITapGestureRecognizer)
+    func showFeaturedMerch()
 }
 
 class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
@@ -75,6 +76,12 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
                 delegate?.onEventBanner(sender)
     }
     
+    @objc func showFeaturedMerch() {
+        if let del = self.delegate {
+            del.showFeaturedMerch()
+        }
+    }
+    
     override func setupView() {
         addSubview(eventBanner)
         addSubview(carouselCollectionView)
@@ -100,11 +107,13 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
 
             merchButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             merchButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            ])
+        ])
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onEventBanner(_:)))
             tapGesture.numberOfTapsRequired = 1
         self.eventBanner.addGestureRecognizer(tapGesture)
+        
+        merchButton.addTarget(self, action: #selector(showFeaturedMerch), for: .touchUpInside)
         
         backgroundColor = .white
     }

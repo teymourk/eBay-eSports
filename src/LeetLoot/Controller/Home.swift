@@ -210,6 +210,12 @@ extension Home: FeaturedEventDelegate {
         let browseEvent = Browse_Event(collectionViewLayout: layout)
         navigationController?.pushViewController(browseEvent, animated: true)
     }
+    
+    func showFeaturedMerch() {
+        let layout = UICollectionViewFlowLayout()
+        let browseEvent = Browse_Event(collectionViewLayout: layout)
+        navigationController?.pushViewController(browseEvent, animated: true)
+    }
 }
 
 //Mark: - CollectionHeader
