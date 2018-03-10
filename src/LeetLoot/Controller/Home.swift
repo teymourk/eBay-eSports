@@ -92,7 +92,8 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
             return indexPath.row == 0 ? eventRow : tweet
         }
         
-        return CGSize(width: view.frame.width, height: 200)
+        //changes size of favorites here
+        return CGSize(width: view.frame.width, height: 244)
     }
 }
 

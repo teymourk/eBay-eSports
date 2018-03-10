@@ -75,7 +75,7 @@ class Categories: NSObject {
         var categories = [Categories]()
         
         let overwatch = Categories()
-        overwatch.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/owBrowse.png?alt=media&token=5fff142d-b71f-4d4a-b3b0-aeca81931b11"
+        overwatch.imageName = "https://static-cdn.jtvnw.net/ttv-boxart/Overwatch-285x380.jpg"
         overwatch.type = "game"
         categories.append(overwatch)
         

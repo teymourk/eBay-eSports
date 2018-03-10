@@ -8,9 +8,12 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class browseItemCell: UICollectionViewCell{
     
+
     var category: Categories? {
         didSet{
             if let imageName = category?.imageName {
@@ -25,6 +28,13 @@ class browseItemCell: UICollectionViewCell{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        Auth.auth().addStateDidChangeListener { auth, user in
+            if let user = user {
+                print ("User is: ", user.uid)
+            } else {
+                print ("no user is logged in")
+            }
+        }
         setupViews()
     }
     
@@ -53,6 +63,24 @@ class browseItemCell: UICollectionViewCell{
     
     @objc func checkAction(sender : UITapGestureRecognizer) {
         print("Add this game to favorites")
+        
+        /*Auth.auth().addStateDidChangeListener { auth, user in
+            if let user = user {
+                print ("User is: ", user.uid)
+            } else {
+                print ("no user is logged in")
+            }
+        }*/
+        
+        /*//firebase testing
+        if Auth.auth().currentUser != nil {
+            print("User is signed in, id is)
+            // ...
+        } else {
+            
+            print("No user is signed in.")
+            // ...
+        }*/
     }
     
     func setupViews(){
@@ -82,6 +110,10 @@ class browseItemCell: UICollectionViewCell{
         backgroundColor = .clear
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.softGrey.cgColor
+        
+        
+        
+        
     }
     
     //function to allow for CGRectMake in Swift 4
