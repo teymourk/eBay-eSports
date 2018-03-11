@@ -132,7 +132,7 @@ class ItemCell: UICollectionViewCell{
     func setupViews(){
         backgroundColor = .clear
         layer.borderWidth = 0.5
-        layer.borderColor = UIColor.softGrey.cgColor
+        layer.borderColor = UIColor.softGray.cgColor
         addSubview(merchImage)
         
         NSLayoutConstraint.activate([

@@ -12,7 +12,7 @@ final class customeImage: UIImageView {
     
     var loadingIndicator = { () -> UIActivityIndicatorView in
         let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-            view.color = .coolGrey
+            view.color = .coolGray
             view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

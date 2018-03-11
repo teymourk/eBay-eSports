@@ -28,7 +28,7 @@ class AdditionalImagesCell: ParentCell {
     override func setupView() {
         backgroundColor = .clear
         layer.borderWidth = 0.5
-        layer.borderColor = UIColor.softGrey.cgColor
+        layer.borderColor = UIColor.softGray.cgColor
         addSubview(merchImage)
         
         NSLayoutConstraint.activate([

@@ -40,9 +40,9 @@ extension Browse_Event {
         let height = menuBar.frame.height + eventHeader.frame.height + 20
         collectionView.scrollIndicatorInsets.top = height
         return UIEdgeInsets(top: height,
-                            left: 19,
+                            left: 25,
                             bottom: 0,
-                            right: 19)
+                            right: 25)
     }
 }
 
@@ -52,22 +52,38 @@ class Event_Header: ParentView {
         let image = UIImageView(image: #imageLiteral(resourceName: "Bitmap"))
             image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false
-            image.backgroundColor = .red
+            image.backgroundColor = .clear
        return image
     }()
     
-    private let eventTitle = { () -> UILabel in
+    private let dateIcon = { () -> UIImageView in
+        let image = UIImageView(image: #imageLiteral(resourceName: "date"))
+            image.contentMode = .scaleAspectFit
+            image.translatesAutoresizingMaskIntoConstraints = false
+            image.backgroundColor = .white
+        return image
+    }()
+    
+    private let eventDate = { () -> UILabel in
         let label = UILabel()
-            label.text = "June 12 - June 14 . Los Angeles Convention Center"
-            label.font = UIFont.systemFont(ofSize: 12)
+            label.text = "June 12 - June 14"
+            label.font = UIFont.systemFont(ofSize: 14)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
+    private let locationIcon = { () -> UIImageView in
+        let image = UIImageView(image: #imageLiteral(resourceName: "location"))
+        image.contentMode = .scaleAspectFit
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.backgroundColor = .white
+        return image
+    }()
+    
     private let location = { () -> UILabel in
         let label = UILabel()
             label.text = "Los Angeles, California"
-            label.font = UIFont.systemFont(ofSize: 12)
+            label.font = UIFont.systemFont(ofSize: 14)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -75,7 +91,9 @@ class Event_Header: ParentView {
     override func setupView() {
         backgroundColor = .white
         addSubview(eventImage)
-        addSubview(eventTitle)
+        addSubview(dateIcon)
+        addSubview(eventDate)
+        addSubview(locationIcon)
         addSubview(location)
         
         NSLayoutConstraint.activate([
@@ -84,13 +102,23 @@ class Event_Header: ParentView {
             eventImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             eventImage.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-            eventTitle.topAnchor.constraint(equalTo: eventImage.topAnchor, constant: 2),
-            eventTitle.leadingAnchor.constraint(equalTo: eventImage.trailingAnchor, constant: 4),
-            eventTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            dateIcon.widthAnchor.constraint(equalToConstant: 15),
+            dateIcon.heightAnchor.constraint(equalToConstant: 15),
+            dateIcon.leadingAnchor.constraint(equalTo: eventImage.trailingAnchor, constant: 10),
+            dateIcon.topAnchor.constraint(equalTo: eventImage.topAnchor, constant: 2),
             
-            location.topAnchor.constraint(equalTo: eventTitle.bottomAnchor, constant: 3.5),
-            location.leadingAnchor.constraint(equalTo: eventTitle.leadingAnchor),
-            location.trailingAnchor.constraint(equalTo: eventTitle.trailingAnchor)
+            eventDate.topAnchor.constraint(equalTo: eventImage.topAnchor, constant: 1.5),
+            eventDate.leadingAnchor.constraint(equalTo: eventImage.trailingAnchor, constant: 32),
+            eventDate.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            
+            locationIcon.widthAnchor.constraint(equalToConstant: 13.5),
+            locationIcon.heightAnchor.constraint(equalToConstant: 19),
+            locationIcon.leadingAnchor.constraint(equalTo: eventImage.trailingAnchor, constant: 10.5),
+            locationIcon.topAnchor.constraint(equalTo: eventDate.bottomAnchor, constant: 2),
+            
+            location.topAnchor.constraint(equalTo: eventDate.bottomAnchor, constant: 2),
+            location.leadingAnchor.constraint(equalTo: eventDate.leadingAnchor),
+            location.trailingAnchor.constraint(equalTo: eventDate.trailingAnchor)
         ])
     }
 }
