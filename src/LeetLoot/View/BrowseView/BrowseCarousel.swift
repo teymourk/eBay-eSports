@@ -10,7 +10,12 @@ import Foundation
 import UIKit
 
 
-class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, BrowseDelegate{
+    
+    func refreshItems() {
+        itemsCollectionView.reloadData()
+    }
+    
     
     private let cellId = "cellId"
     
@@ -81,6 +86,8 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! browseItemCell
         cell.category = categories?[indexPath.item]
+        cell.curGame = categories?[indexPath.item].id
+        cell.delegate = self
         return cell
     }
     

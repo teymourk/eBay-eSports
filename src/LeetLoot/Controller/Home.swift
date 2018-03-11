@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 import UIKit
 import Firebase
 import TwitterKit
@@ -16,6 +17,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        
     }
 
     private func setupCollectionView() {

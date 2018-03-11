@@ -250,8 +250,12 @@ func setregisterbuttonenabled(enabled:Bool){
     {
         
         let databaseRef = Database.database().reference().child("users/\(UID)")
+        let favorites = [
+            "overwatch":false, "lol":false, "dota":false, "sbm":false, "sf":false,
+            "rl":false, "csgo":false, "hots":false, "sc2":false, "hs":false
+        ] as [String:Bool]
         let userObject = [
-            "favorites":""
+            "favorites":favorites
         ]
             as [String:Any]
         databaseRef.setValue(userObject){error, ref in completion(error == nil)

@@ -11,32 +11,64 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class browseItemCell: UICollectionViewCell{
-    
+protocol BrowseDelegate: class {
+    func refreshItems()
+}
 
+class browseItemCell: UICollectionViewCell{
+ 
     var category: Categories? {
         didSet{
             if let imageName = category?.imageName {
                 imageView.downloadImages(url: imageName)
                 
                 if category?.type == "game"{
-                    heartView.isHidden = false}
+                    heartView.isHidden = false
+                    //curGame = category?.id
+                    //curUser = Auth.auth().currentUser?.uid
+                }
                 else {heartView.isHidden = true}
             }
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        Auth.auth().addStateDidChangeListener { auth, user in
-            if let user = user {
-                print ("User is: ", user.uid)
-            } else {
-                print ("no user is logged in")
+    var curGame: String? {
+        didSet{
+            if let game = curGame{
+                //print ("cur game is: ", game)
+                //check if user is null, if not then populate images
+                let user = Auth.auth().currentUser?.uid
+                //if user is signed in
+                if user != nil{
+                    //print("we have a user")
+                    Database.database().reference().child("users").child(user!).child("favorites").observeSingleEvent(of: .value, with: {(snapshot) in
+                     
+                        if let items = snapshot.value as? [String:Bool]{
+                            //print(items)
+                            if let check = items[self.curGame!]
+                            {
+                                if check == true {
+                                    self.heartView.tintColor = UIColor.lightBlue
+                                }
+                                else if check == false{
+                                    self.heartView.tintColor = UIColor.coolGrey
+                                }
+                                
+                            }
+                        }
+                    }, withCancel: nil)
+                    
+                }
             }
         }
+    }
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupViews()
     }
+
     
     let imageView: customeImage = {
         let iv = customeImage(frame: .zero)
@@ -63,24 +95,27 @@ class browseItemCell: UICollectionViewCell{
     
     @objc func checkAction(sender : UITapGestureRecognizer) {
         print("Add this game to favorites")
-        
-        /*Auth.auth().addStateDidChangeListener { auth, user in
-            if let user = user {
-                print ("User is: ", user.uid)
-            } else {
-                print ("no user is logged in")
-            }
-        }*/
-        
-        /*//firebase testing
-        if Auth.auth().currentUser != nil {
-            print("User is signed in, id is)
-            // ...
-        } else {
+        let ref = Database.database().reference()
+        let user = Auth.auth().currentUser?.uid
+        if user != nil{
             
-            print("No user is signed in.")
-            // ...
-        }*/
+            Database.database().reference().child("users").child(user!).child("favorites").observeSingleEvent(of: .value, with: {(snapshot) in
+                
+                if let items = snapshot.value as? [String:Bool]{
+                    if let check = items[self.curGame!]
+                    {
+                        let userRef = ref.child("users").child(user!).child("favorites")
+                        print("check is: ", check, " opposite is: ", !check)
+                        userRef.updateChildValues([self.curGame! : !check])
+                        //refresh page
+                    
+                        self.delegate?.refreshItems()
+                        
+                    }
+                }
+            }, withCancel: nil)
+       
+        }
     }
     
     func setupViews(){
@@ -121,4 +156,14 @@ class browseItemCell: UICollectionViewCell{
         return CGRect(x: x, y: y, width: width, height: height)
     }
     
+    weak var delegate:BrowseDelegate?
+    
+    @objc func displayItems() {
+        if let del = self.delegate {
+            del.refreshItems()
+        }
+    }
+
+    
 }
+
