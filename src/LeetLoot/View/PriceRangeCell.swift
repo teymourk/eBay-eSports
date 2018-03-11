@@ -36,7 +36,7 @@ class PriceRange: UITableViewCell {
         NSLayoutConstraint.activate([
             priceSlider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             priceSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            priceSlider.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            priceSlider.topAnchor.constraint(equalTo: topAnchor, constant: 10),
         ])
     }
     

@@ -135,7 +135,7 @@ extension Browse_Game {
 // Mark: - UICollectionViewDelegateFlowLayout
 extension Browse_Game: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = Constants.kWidth * (1/2) - 28.5
+        let width = Constants.kWidth * (1/2) - 37.5
         return CGSize(width: width,
                       height: width * 1.6) //Height Based on Text
     }
@@ -145,9 +145,9 @@ extension Browse_Game: UICollectionViewDelegateFlowLayout {
         let height = menuBar.frame.height + 25
         collectionView.scrollIndicatorInsets.top = height
         return UIEdgeInsets(top: height,
-                            left: 19,
+                            left: 25,
                             bottom: 0,
-                            right: 19)
+                            right: 25)
     }
 }
 
