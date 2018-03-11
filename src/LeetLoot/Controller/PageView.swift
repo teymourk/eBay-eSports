@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class PageView: UIViewController {
     lazy var signIn = { () -> ParentModal in
@@ -38,6 +39,10 @@ class PageView: UIViewController {
             scrollView.delegate = self
         return scrollView
     }()
+    
+    var isUserLoggedIn: Bool {
+        return UserDefaults.standard.value(forKey: "SignedUser") != nil ? true : false
+    }
 
     //Custom Title view for the nav bar
     private let titleView = { () -> CustomNavbar in
@@ -50,19 +55,46 @@ class PageView: UIViewController {
         setupMenuBar()
         setupNavBar()
     }
+
+    private lazy var signInBtn = { () -> UIButton in
+        let profilePic: UIImage = isUserLoggedIn ?  #imageLiteral(resourceName: "Profile") : #imageLiteral(resourceName: "ProfileIcon"),
+            button = UIButton(imageName: profilePic.withRenderingMode(.alwaysOriginal))
+            button.addTarget(self, action: #selector(onSignIn(sender:)), for: .touchUpInside)
+        return button
+    }()
     
     //Setup navigation bar
     private func setupNavBar() {
-        navigationController?.navigationBar.isTranslucent = false;
-        let profilePic: UIImage = #imageLiteral(resourceName: "ProfileIcon").withRenderingMode(.alwaysOriginal)
-        let signIn = UIBarButtonItem(image: profilePic, style: .plain, target: self, action: #selector(onSignIn(sender:)))
-        navigationItem.leftBarButtonItem = signIn
+        navigationController?.navigationBar.isTranslucent = false
+        let signInBarButton = UIBarButtonItem(customView: signInBtn)
+        navigationItem.leftBarButtonItem = signInBarButton
         navigationItem.titleView = titleView
     }
     
     @objc
     private func onSignIn(sender: UIBarButtonItem) {
+        if isUserLoggedIn {
+            logOutAlert()
+            return
+        }
         signIn.action = .open
+    }
+    
+    private func logOutAlert() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Log out?", style: .destructive, handler: { (alert) in
+            do {
+                try Auth.auth().signOut()
+                UserDefaults.standard.setValue(nil, forKey: "SignedUser")
+                self.signInBtn.setImage(#imageLiteral(resourceName: "ProfileIcon").withRenderingMode(.alwaysOriginal), for: .normal)
+            } catch let error {
+                print(error.localizedDescription)
+            }
+            return
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     private func setupMenuBar() {
@@ -124,5 +156,10 @@ extension PageView: RegisterPagesDelegate {
             signIn.action = .signUp
         default: break
         }
+    }
+    
+    func signedInSuccessfully() {
+        signIn.action = .close
+        signInBtn.setImage(#imageLiteral(resourceName: "Profile").withRenderingMode(.alwaysOriginal), for: .normal)
     }
 }

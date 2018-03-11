@@ -49,6 +49,9 @@ final class Buy_Filter: NSObject {
     
     private lazy var buy_reset = { () -> UIButton in
         let button = UIButton()
+            button.backgroundColor = .lightBlue
+            button.layer.cornerRadius = 4
+            button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
             button.addTarget(self, action: #selector(onBuy_Reset(_ :)), for: .touchUpInside)
             button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -86,8 +89,9 @@ final class Buy_Filter: NSObject {
     }
     
     private lazy var setupOptions: (Option) -> () = {
-        let image = $0 == .Filter ? "Reset" : "BuyNow"
-        self.buy_reset.setImage(UIImage(named: image), for: .normal)
+        
+        let title = $0 == .Filter ? "RESET" : "BUY NOW"
+        self.buy_reset.setTitle(title, for: .normal)
         self.currentView = $0 == .Buy ? self.setupViewFor(self.buyView) : self.setupViewFor(self.filterView)
     }
     
@@ -118,6 +122,7 @@ final class Buy_Filter: NSObject {
             close_done.topAnchor.constraint(equalTo: parentView.topAnchor, constant: 10),
             close_done.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
             
+            buy_reset.heightAnchor.constraint(equalToConstant: 40),
             buy_reset.bottomAnchor.constraint(equalTo: parentView.bottomAnchor, constant: -5),
             buy_reset.leadingAnchor.constraint(equalTo: parentView.leadingAnchor, constant: 5),
             buy_reset.trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: -5),
