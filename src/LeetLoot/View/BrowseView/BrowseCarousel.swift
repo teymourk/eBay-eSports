@@ -125,14 +125,12 @@ class browseItemCell: UICollectionViewCell{
     }
     
     func setupViews(){
-        
         addSubview(imageView)
         imageView.frame = CGRectMake(0, 0, frame.width, frame.height)
 
-        
         backgroundColor = .clear
         layer.borderWidth = 0.5
-        layer.borderColor = UIColor.softGrey.cgColor
+        layer.borderColor = UIColor.softGray.cgColor
     }
     
     //function to allow for CGRectMake in Swift 4

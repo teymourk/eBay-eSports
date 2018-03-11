@@ -47,11 +47,9 @@ class AdditionalImagesCV: ParentView {
             text.font = UIFont.systemFont(ofSize: 13)
             text.textAlignment = .center
             text.textColor = .white
-            text.backgroundColor = .darkGray
+            text.backgroundColor = .clearGray
             text.layer.masksToBounds = true
             text.layer.cornerRadius = 5
-            text.layer.borderWidth = 0.5
-            text.layer.borderColor = UIColor.white.cgColor
             text.translatesAutoresizingMaskIntoConstraints = false
         return text
     }()
