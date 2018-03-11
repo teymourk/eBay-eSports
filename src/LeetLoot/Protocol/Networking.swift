@@ -35,8 +35,8 @@ extension Networking where Self == Model {
     func requestData(forUrl url: URL, completion: @escaping (RequestRespnse, Model?) -> ()) {
         
         //QUICK FIX FOR NOW
-        Token().getToken { (token) in
-            let authString = "Bearer \(token)"
+        Token().getToken {
+            let authString = "Bearer \($0)"
             let config = URLSessionConfiguration.default
                 config.httpAdditionalHeaders = ["Authorization" : authString]
             let urlsession = URLSession(configuration: config)
