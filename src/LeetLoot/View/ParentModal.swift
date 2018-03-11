@@ -17,12 +17,14 @@ class ParentModal: NSObject {
     lazy var signIn = { () -> SignIn in
         let view = SignIn(frame: signInFrames(self.edgeOffset, -(self.width)))
             view.backgroundColor = .white
+            view.layer.cornerRadius = 4
         return view
     }()
     
     lazy var signUp = { () -> SignUp in
         let view = SignUp(frame: signUpInitialFrame(self.width, self.edgeOffset))
             view.backgroundColor = .white
+            view.layer.cornerRadius = 4
         return view
     }()
     
@@ -37,14 +39,14 @@ class ParentModal: NSObject {
         return CGRect(x: $0,
                       y: $1 + self.topAnchor,
                       width: self.width - (self.edgeOffset * 2),
-                      height: self.width - 20)
+                      height: 367)
     }
     
     private lazy var signUpInitialFrame: (CGFloat,CGFloat) -> CGRect = {
         return CGRect(x: $0,
                       y: $1 + self.topAnchor,
                       width: self.width - (self.edgeOffset * 2),
-                      height: self.width)
+                      height: 367)
     }
     
 

@@ -38,7 +38,6 @@ class Buy: Merch_Cell {
         case .None: return }
 
         additionalImages.heightAnchor.constraint(equalTo: widthAnchor, multiplier: imageHeight).isActive = true
-        merchTitle.textContainerInset = UIEdgeInsets(top: 5, left: 10, bottom: 0, right: 0)
-
+        merchTitle.textContainerInset = UIEdgeInsets(top: 15, left: 10, bottom: 0, right: 0)
     }
 }
