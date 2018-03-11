@@ -339,8 +339,6 @@ class SignIn: ParentView, UITextFieldDelegate {
                 print(error!.localizedDescription)
             }
         }
-    
-            
     }
 }
 extension UIColor {
