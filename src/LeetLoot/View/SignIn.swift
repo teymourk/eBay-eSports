@@ -14,24 +14,24 @@ protocol RegisterPagesDelegate: class {
     func signedInSuccessfully()
 }
 
-class SignIn: ParentView, UITextFieldDelegate {
-    private let ForgotLabel: UILabel = {
+class SignIn: ParentView {
+    let errorLabel: UILabel = {
         let lb = UILabel()
-        lb.text = "Password Reset email sent"
-        lb.textColor = .black
-        lb.translatesAutoresizingMaskIntoConstraints = false
+            lb.textColor = .black
+            lb.font = UIFont(name: "Helvetica", size: 14)
+            lb.textColor = .red
+            lb.textAlignment = .center
+            lb.translatesAutoresizingMaskIntoConstraints = false
         return lb
     }()
     
-    private let EmLabel: UILabel = {
+    let signInLabel: UILabel = {
         let lb = UILabel()
-        lb.text = "Please enter a valid email and password."
-        lb.textColor = .red
-        lb.font = UIFont.systemFont(ofSize: 14)
-        lb.translatesAutoresizingMaskIntoConstraints = false
+            lb.text = "Sign in"
+            lb.translatesAutoresizingMaskIntoConstraints = false
         return lb
     }()
-
+    
     private let eliteLootLogo = { () -> UIImageView in
         let image = UIImageView(image: #imageLiteral(resourceName: "EliteLootLogo"))
             image.contentMode = .scaleAspectFit
@@ -60,93 +60,71 @@ class SignIn: ParentView, UITextFieldDelegate {
        return stack
     }()
     
-    lazy var stack = { () -> UIStackView in
-        let stack = UIStackView(arrangedSubviews: [forgot,signin])
-        stack.distribution = .fillProportionally
-        stack.axis = .horizontal
-        stackView.setCustomSpacing(15.0, after: forgot)
-        stackView.setCustomSpacing(15.0, after: signin)
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
     private let register = { () -> UIButton in
         let button = UIButton(title: "REGISTER")
-        button.setTitleColor(.lightBlue, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
-        button.addTarget(self, action: #selector(onScreenButtons(_ :)), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.tag = 2
+            button.setTitleColor(.lightBlue, for: .normal)
+            button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
+            button.addTarget(self, action: #selector(onScreenButtons(_ :)), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.tag = 2
         return button
     }()
     
-    private let signInLabel: UILabel = {
-        let lb = UILabel()
-        lb.text = "Sign in"
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        return lb
-    }()
-    
-    private let emailTextField: UITextField = {
+    let emailTextField: UITextField = {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         let textfield = UITextField()
-        textfield.placeholder = "Email"
-        textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.font = UIFont(name: "Helvectica",size:14)
-        textfield.keyboardType = .emailAddress
-        textfield.backgroundColor = .customGray
-        textfield.layer.cornerRadius = 4
-        textfield.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textfield.frame.height))
-        textfield.leftView = paddingView
-        textfield.leftViewMode = .always
-        
-        textfield.becomeFirstResponder()
-        
+            textfield.text = nil
+            textfield.placeholder = "Email"
+            textfield.font = UIFont(name: "Helvectica",size:14)
+            textfield.keyboardType = .emailAddress
+            textfield.backgroundColor = .customGray
+            textfield.layer.cornerRadius = 4
+            textfield.leftView = paddingView
+            textfield.leftViewMode = .always
+            textfield.translatesAutoresizingMaskIntoConstraints = false
         return textfield
     }()
     
-    private let passwordTextField: UITextField = {
+    let passwordTextField: UITextField = {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         let textfield = UITextField()
-        textfield.placeholder = "Password"
-        textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.font = UIFont(name: "Helvectica",size:14)
-        textfield.keyboardType = .emailAddress
-        textfield.backgroundColor = .customGray
-        textfield.layer.cornerRadius = 4
-        textfield.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textfield.frame.height))
-        textfield.leftView = paddingView
-        textfield.leftViewMode = .always
-        
+            textfield.text = nil
+            textfield.isSecureTextEntry = true
+            textfield.placeholder = "Password"
+            textfield.font = UIFont(name: "Helvectica",size:14)
+            textfield.keyboardType = .emailAddress
+            textfield.backgroundColor = .customGray
+            textfield.layer.cornerRadius = 4
+            textfield.leftView = paddingView
+            textfield.leftViewMode = .always
+            textfield.translatesAutoresizingMaskIntoConstraints = false
         return textfield
     }()
     
     private lazy var signin: UIButton = {
         let button = UIButton(type:.system)
-        button.backgroundColor = UIColor.lightBlue
-        button.setTitle("SIGN IN", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 4
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.addTarget(self, action: #selector(signinAction), for: .touchUpInside)
+            button.backgroundColor = UIColor.lightBlue
+            button.setTitle("SIGN IN", for: .normal)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.layer.cornerRadius = 4
+            button.setTitleColor(UIColor.white, for: .normal)
+            button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
+            button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            button.addTarget(self, action: #selector(onSignIn), for: .touchUpInside)
         return button
         
     }()
     
     private lazy var forgot: UIButton = {
         let button = UIButton(type:.system)
-        button.backgroundColor = UIColor.lightBlue
-        button.setTitle("FORGOT?", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 4
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        button.addTarget(self, action: #selector(forgotAction), for: .touchUpInside)
+            button.backgroundColor = UIColor.lightBlue
+            button.setTitle("FORGOT?", for: .normal)
+            button.layer.cornerRadius = 4
+            button.setTitleColor(UIColor.white, for: .normal)
+            button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
+            button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.addTarget(self, action: #selector(onForgot), for: .touchUpInside)
         return button
     }()
 
@@ -163,7 +141,6 @@ class SignIn: ParentView, UITextFieldDelegate {
         backgroundColor = .white
         setupStackView()
         setupLayoutAttributes()
-        SignInLabel()
     }
         
     func setupStackView() {
@@ -180,23 +157,30 @@ class SignIn: ParentView, UITextFieldDelegate {
         ])
     }
     
-    func setupStack() {
-        addSubview(stack)
+    func setupTextFields() {
+        addSubview(emailTextField)
+        addSubview(passwordTextField)
+        
         NSLayoutConstraint.activate([
-            stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -77),
-            stack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            emailTextField.topAnchor.constraint(equalTo: signInLabel.bottomAnchor,constant: 15),
+            emailTextField.leftAnchor.constraint(equalTo: leftAnchor, constant:15),
+            emailTextField.widthAnchor.constraint(equalTo:widthAnchor,constant: -30),
+            emailTextField.heightAnchor.constraint(equalToConstant: 50),
+
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 15),
+            passwordTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            passwordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 50)
         ])
-        setupSignin()
-        setupForgot()
     }
-    
-    func SignInLabel() {
-        addSubview(signInLabel)
+
+    func setupSignin() {
+        addSubview(signin)
+        addSubview(forgot)
         NSLayoutConstraint.activate([
-            //setup constraints
-            signInLabel.topAnchor.constraint(equalTo: topAnchor, constant: 63),
-            signInLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 15)
+            forgot.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 15),
+            forgot.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor),
+            forgot.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -7.5),
             
             signin.topAnchor.constraint(equalTo: forgot.topAnchor),
             signin.leadingAnchor.constraint(equalTo: forgot.trailingAnchor,constant:15),
@@ -222,152 +206,74 @@ class SignIn: ParentView, UITextFieldDelegate {
         ])
     }
 
-    //Email container
-    func setupEmail(){
-        addSubview(emailTextField)
-        NSLayoutConstraint.activate([
-            //setup constraints
-            emailTextField.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 51),
-            emailTextField.leftAnchor.constraint(equalTo: leftAnchor, constant:15),
-            emailTextField.widthAnchor.constraint(equalTo:widthAnchor,constant: -30),
-            emailTextField.heightAnchor.constraint(equalToConstant: 50)
-        ])
-    }
-    
-    func setupPassword(){
-        addSubview(passwordTextField)
-        NSLayoutConstraint.activate([
-            passwordTextField.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 116),
-            passwordTextField.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
-            passwordTextField.widthAnchor.constraint(equalTo:widthAnchor,constant:-30),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50)
-        ])
-    }
-
-    func setupSignin() {
-        addSubview(signin)
-        NSLayoutConstraint.activate([
-            signin.topAnchor.constraint(equalTo: topAnchor, constant: 228),
-            signin.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
-            signin.leadingAnchor.constraint(equalTo:forgot.trailingAnchor,constant:15),
-            signin.widthAnchor.constraint(equalToConstant:157)
-            
-            ])
-    }
-    
-    //Forgot
-    func setupForgot() {
-        addSubview(forgot)
-        NSLayoutConstraint.activate([
-            forgot.topAnchor.constraint(equalTo: topAnchor, constant: 228),
-            forgot.leftAnchor.constraint(equalTo:leftAnchor, constant: 15),
-            forgot.widthAnchor.constraint(equalTo:signin.widthAnchor)
-            ])
-    }
-    
-    func forgotLabel(){
-        addSubview(ForgotLabel)
-        NSLayoutConstraint.activate([
-            //setup constraints
-            ForgotLabel.topAnchor.constraint(equalTo: topAnchor, constant: 285),
-            ForgotLabel.centerXAnchor.constraint(equalTo:centerXAnchor)
-            ])
-        ForgotLabel.isHidden = true;
-        
-    }
-    
-    func EmailLabel() {
-        addSubview(EmLabel)
-        NSLayoutConstraint.activate([
-            //setup constraints
-            EmLabel.topAnchor.constraint(equalTo: topAnchor, constant: 285),
-            EmLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
-            ])
-        EmLabel.isHidden = true
-    }
-        
     //Put layout here
     func setupLayoutAttributes() {
         setupTextFields()
         setupSignin()
         forgotLabel()
         setupRegister()
-        setupPassword()
-        setupEmail()
-        forgotLabel()
-        EmailLabel()
-
     }
     
-    //sigin helper
-    func setsigninbuttonenabled(enabled:Bool){
-        if(enabled)
-        {
-            signin.isEnabled = true
-        }
-        else{
-            signin.isEnabled = false
-        }
-        
-    }
-    
-    //forgot helper
-    func setforgotbuttonenabled(enabled:Bool){
-        if (enabled) {
-            forgot.isEnabled = true
-        } else{
-            forgot.isEnabled = false
-        }
-        
+    private func handleErrorUIFor(_ textfield: UITextField) {
+        textfield.layer.borderWidth = 0.5
+        textfield.layer.borderColor = UIColor.red.cgColor
     }
     
     //signin
     @objc
-    func signinAction(){
-        guard let em = emailTextField.text else {
-            return }
-        guard let pass = passwordTextField.text else {
-            return }
+    func onSignIn(){
+        guard   let email = emailTextField.text,
+                let pass = passwordTextField.text else { return }
        
-        Auth.auth().signIn(withEmail: em, password: pass) { user,error in
-            if let error = error {
-                self.EmLabel.isHidden = false
-                self.setsigninbuttonenabled(enabled:true)
-                print(error.localizedDescription)
+        Auth.auth().signIn(withEmail: email, password: pass) { FBUser,error in
+            guard error == nil,
+                let user = FBUser else {
+                self.errorLabel.text = self.handleErrorFor(error)
+                self.errorLabel.shake()
+                self.errorLabel.flash()
+                return
             }
-            else if let user = user {
-                print("user id:" + user.uid)
-                self.EmLabel.isHidden = true
-                self.setsigninbuttonenabled(enabled:false)
-            }
-        
+            print("user id:" + user.uid)
+            UserDefaults.standard.setValue(user.uid, forKey: "SignedUser")
+            self.emailTextField.text = nil
+            self.passwordTextField.text = nil
+            self.delegate?.signedInSuccessfully()
+        }
     }
-        
-    }
-    //forgot
+    
     @objc
-    func forgotAction(){
-        guard let em = emailTextField.text else { return }
-        Auth.auth().sendPasswordReset(withEmail: em) {(error) in
-            if(error == nil)
-            {
-                self.ForgotLabel.isHidden = false
-                print("Password reset successfully.")
+    func onForgot(){
+        guard let email = emailTextField.text else { return }
+        Auth.auth().sendPasswordReset(withEmail: email) {(error) in
+            guard error == nil else {
+                self.errorLabel.text = self.handleErrorFor(error)
+                return
             }
             print("Password reset successfully.")
         }
     }
-}
-extension UIColor {
-    convenience init(red: Int, green: Int, blue: Int) {
-        assert(red >= 0 && red <= 255, "Invalid red component")
-        assert(green >= 0 && green <= 255, "Invalid green component")
-        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+    
+    func handleErrorFor(_ FBError: Error?) -> String {
+        guard   let error = FBError as NSError?,
+                let authErrorCode = AuthErrorCode(rawValue: error.code) else { return "" }
         
-        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+            switch authErrorCode {
+            case .weakPassword:
+                return "Invalid password"
+            case .wrongPassword:
+                return "Invalid password"
+            case .userNotFound:
+                return "Incorrect email or password"
+            case .emailAlreadyInUse:
+                return "Email already exists"
+            case .invalidEmail:
+                return "Invalid email"
+            case .missingEmail:
+                return "Missing email"
+            default: return ""
+        }
     }
 }
-    
 
 
 

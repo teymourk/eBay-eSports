@@ -93,9 +93,8 @@ extension String {
     }
 }
 
-//Mark: - UIIMageView {
+//Mark: - UIIMageView
 extension UIImageView {
-    
     func playsAnimation(For image:String,  numberOfImages:Int, withAnimation durantion:Double) {
         self.image = UIImage(named: image)
         self.animationImages = nil
@@ -113,4 +112,31 @@ extension UIImageView {
         self.startAnimating()
     }
 }
+
+//Mark: - UIView
+extension UIView {
+    func shake() {
+        let from: CGPoint = CGPoint(x: self.center.x - 5, y: self.center.y),
+            to: CGPoint =  CGPoint(x: self.center.x + 5, y: self.center.y)
+        let animation = CABasicAnimation(keyPath: "position")
+            animation.duration = 0.05
+            animation.repeatCount = 5
+            animation.autoreverses = true
+            animation.fromValue = from
+            animation.toValue = to
+        layer.add(animation, forKey: "position")
+    }
+    
+    func flash() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.alpha = 1
+        }) { (true) in
+            UIView.animate(withDuration: 0.3, delay: 2.0, options: .curveEaseOut, animations: {
+                self.alpha = 0
+            }, completion: nil)
+        }
+    }
+}
+
+
 
