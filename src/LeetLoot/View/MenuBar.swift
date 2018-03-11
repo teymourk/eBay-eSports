@@ -63,7 +63,7 @@ final class Menu: ParentView {
         return view
     }()
     
-    private let result = { () -> UILabel in
+    private lazy var result = { () -> UILabel in
         let label = UILabel()
             label.textColor = .black
             label.textAlignment = .right
@@ -132,6 +132,7 @@ final class Menu: ParentView {
             horizontalBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.kWidth/optionsCount).isActive = true
             return
         }
+        result.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
         horizontalBar.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         horizontalBar.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }

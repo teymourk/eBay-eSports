@@ -357,9 +357,6 @@ class SignIn: ParentView, UITextFieldDelegate {
             print("Password reset successfully.")
         }
     }
-    
-            
-    }
 }
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {

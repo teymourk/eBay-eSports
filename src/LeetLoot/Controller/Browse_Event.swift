@@ -37,7 +37,7 @@ class Browse_Event: Browse_Game {
 extension Browse_Event {
     //Space Between Header and Collection itself
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let height = menuBar.frame.height + eventHeader.frame.height + 20
+        let height = menuBar.frame.height + eventHeader.frame.height + 25
         collectionView.scrollIndicatorInsets.top = height
         return UIEdgeInsets(top: height,
                             left: 25,
