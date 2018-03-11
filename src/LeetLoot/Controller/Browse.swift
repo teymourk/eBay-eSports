@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 
 class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, AlertDelegate {
+    
     func sendAlert() {
-        let alert = UIAlertController(title: "My Alert", message: "This is an alert.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Not Signed In", message: "Sign in to start favoriting games.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
             NSLog("The \"OK\" alert occured.")
         }))

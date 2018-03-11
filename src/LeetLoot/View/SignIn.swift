@@ -288,7 +288,7 @@ class SignIn: ParentView {
          {
          setupErrorLabel();
          }*/
-        setsigninbuttonenabled(enabled:false);
+        //setsigninbuttonenabled(enabled:false);
         Auth.auth().signIn(withEmail: em, password: pass) { user,error in
             if let error = error {
                 print(error.localizedDescription)
@@ -302,7 +302,12 @@ class SignIn: ParentView {
     //forgot
     @objc
     func forgotAction(){
-         guard let em = emailTextField.text else {return }
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+         /*guard let em = emailTextField.text else {return }
         Auth.auth().sendPasswordReset(withEmail: em) {(error) in
             if(error == nil)
             {
@@ -312,7 +317,7 @@ class SignIn: ParentView {
                 print(error!.localizedDescription)
             }
         }
-    
+    */
             
 }
 }

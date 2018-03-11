@@ -71,6 +71,12 @@ class browseItemCell: UICollectionViewCell{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        Auth.auth().addStateDidChangeListener { auth, user in
+
+            self.delegate?.refreshItems()
+            
+            
+        }
         setupViews()
     }
 
@@ -172,6 +178,7 @@ class browseItemCell: UICollectionViewCell{
             del.refreshItems()
         }
     }
+
     
     weak var alert:AlertDelegate?
     

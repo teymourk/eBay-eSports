@@ -14,6 +14,7 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
     
     func refreshItems() {
         itemsCollectionView.reloadData()
+        //itemsCollectionView.collectionViewLayout.invalidateLayout()
     }
     
     

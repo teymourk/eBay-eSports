@@ -14,17 +14,52 @@ import TwitterKit
 
 class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, TwitterDelegate {
     
+    var size:CGFloat = 46
+    //var favs = grabFavInfo()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let user = Auth.auth().currentUser
-        if user != nil{
-        _ = userInfo().createFavorites { (val) in
-            print("val is: ",val)
-            }
-            
+        grabFavInfo()
+        
+        Auth.auth().addStateDidChangeListener { auth, user in
+            self.grabFavInfo()
+            self.collectionView?.reloadData()
+            self.collectionView?.collectionViewLayout.invalidateLayout()
+
+
         }
+        
+       
         setupCollectionView()
         
+    }
+    
+    var arr: [String]?{
+        didSet{
+            print(oldValue)
+            self.collectionView?.reloadData()
+            self.collectionView?.collectionViewLayout.invalidateLayout()
+
+        }
+    }
+    
+    private func grabFavInfo(){
+        let user = Auth.auth().currentUser
+        //var favs = [String]()
+        if user != nil{
+            _ = userInfo().createFavorites { (val) in
+                //self.favs = nil
+                self.arr = val
+                print("grabbed favs from view: ", self.arr)
+
+                
+                //self.collectionView?.reloadData()
+                //self.collectionView?.collectionViewLayout.invalidateLayout()
+            }
+            //print("grabbed favs from view load: ",favs)
+        }
+        
+        //return favs
     }
 
     private func setupCollectionView() {
@@ -52,6 +87,10 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         let twitterCell: Twitter_Cell = collectionView.reusableCell(indexPath: indexPath)
             twitterCell.delegate = self
         let favoritesCell: Favorites_Cell = collectionView.reusableCell(indexPath: indexPath)
+            favoritesCell.userFavorites = arr
+        //self.collectionView?.reloadData()
+        //self.collectionView?.collectionViewLayout.invalidateLayout()
+            //print("favs getting passed is: ",grabFavInfo())
         
         if indexPath.section == 0 {
             return indexPath.row == 0 ? featuredEventsCell : setupTwitterFor(twitterCell)
@@ -102,7 +141,34 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         }
         
         //changes size of favorites here
-        return CGSize(width: view.frame.width, height: 244)
+
+        if Auth.auth().currentUser != nil {
+            if let f  = arr{
+            if f.count > 0 {
+                    //collectionView.reloadData()
+                    print("user signed in with favorites")
+                    self.size = CGFloat(244)
+                }
+                else{
+                    print("user signed in with no favorites")
+
+                    self.size = CGFloat(46)
+                }
+                
+            }}else {
+                print("no user signed in")
+                self.size = CGFloat(46)
+            }
+    
+        /*let user = Auth.auth().currentUser
+        if user != nil{
+            _ = userInfo().createFavorites { (val) in
+                print("val is: ",val)
+            }
+            
+        }*/
+        print("size is: ", size)
+        return CGSize(width: view.frame.width, height: size)
     }
 }
 

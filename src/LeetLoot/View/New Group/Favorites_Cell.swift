@@ -8,10 +8,48 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
+import Firebase
 
 class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     private let cellId = "cellId"
+    var userFavorites: [String]?{
+        didSet{
+            print("fav in fav cell is: ", userFavorites)
+            //userFavorites = nil
+            if Auth.auth().currentUser != nil {
+                if let f = userFavorites{
+                if f.count > 0 {
+                    print("user signed in with favorites")
+                    //print("fav counts is ", f.count)
+                    self.errorText.isHidden = true
+                    
+                }
+                else{
+                    print("user signed in with no favorites")
+                    self.gameImage.isHidden = true
+                    self.textLabel.isHidden = true
+                    self.heartView.isHidden = true
+                    self.carouselCollectionView.isHidden = true
+                    self.merchButton.isHidden = true
+                    self.errorText.text = "Go to browse to start favoriting games."
+                    
+                }
+                
+                }} else {
+                print("no user signed in")
+                self.gameImage.isHidden = true
+                self.textLabel.isHidden = true
+                self.heartView.isHidden = true
+                self.carouselCollectionView.isHidden = true
+                self.merchButton.isHidden = true
+                self.errorText.text = "Sign in to view your favorites."
+            }
+            
+            
+        }
+    }
     
     private lazy var merchButton: UIButton = {
         let button = UIButton(title: "See more", imageName: #imageLiteral(resourceName: "Arrow"))
@@ -64,6 +102,17 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         return label
     }()
     
+    let errorText: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.text = ""
+        label.textColor = .black
+        label.font = UIFont(name: "Helvetica-Regular", size:13)
+        label.contentMode = .scaleAspectFit
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     let heartView: customeImage = {
         let hv = customeImage(frame: .zero)
         hv.contentMode = .scaleAspectFit
@@ -89,12 +138,13 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
     
     
     override func setupView() {
-       
+        
         addSubview(gameImage)
         addSubview(textLabel)
         addSubview(heartView)
         addSubview(carouselCollectionView)
         addSubview(merchButton)
+        addSubview(errorText)
         
         //to generate multiple cells in nested collection view
         carouselCollectionView.dataSource = self
@@ -126,6 +176,11 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
             
             merchButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             merchButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            
+            errorText.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            //errorText.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
+            errorText.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            errorText.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
             
             ])
         backgroundColor = .white
