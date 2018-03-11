@@ -14,7 +14,7 @@ class BrowseCategory: NSObject {
     var name: String?
     var imageName: String?
     var categories: [Categories]?
-    var user: userInfo?
+    //var user: userInfo?
 
     
     static func sampleBrowseCategories() -> [BrowseCategory] {
@@ -23,14 +23,14 @@ class BrowseCategory: NSObject {
         eventsCategory.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/events.png?alt=media&token=69453696-0b77-4994-a397-37ab38f78f3b"
         
         eventsCategory.categories = Categories.eventCategories()
-        eventsCategory.user = userInfo()
+        //eventsCategory.user = userInfo()
         
         let gamesCategory = BrowseCategory()
         gamesCategory.name = "Games"
         gamesCategory.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/games.jpg?alt=media&token=bec14f2c-f66e-42fd-b697-c8d2b45cd4cf"
         
         gamesCategory.categories = Categories.gameCategories()
-        gamesCategory.user = userInfo()
+        //gamesCategory.user = userInfo()
         
         return [eventsCategory, gamesCategory]
     }

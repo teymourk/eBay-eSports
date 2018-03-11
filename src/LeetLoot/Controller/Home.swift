@@ -16,6 +16,13 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let user = Auth.auth().currentUser
+        if user != nil{
+        _ = userInfo().createFavorites { (val) in
+            print("val is: ",val)
+            }
+            
+        }
         setupCollectionView()
         
     }

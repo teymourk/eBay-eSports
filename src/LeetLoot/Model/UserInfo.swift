@@ -11,29 +11,105 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
-
 struct userInfo {
-    let userID: String
-    let favorites: [String]?
+    let userID: String?
+    var favorites: [String]?
     
-    init() {
+    init(userID: String? = nil, favorites: [String]? = nil) {
         let user = Auth.auth().currentUser
-        if user != nil{
-            userID = (user?.uid)!
-        }
-        else {
-            userID = ""
-        }
-        favorites = nil
-        /*let ref = Database.database().reference()
-        let favorite = ref.child("users").queryOrdered(byChild: "users")*/
+        self.userID = user?.uid
+        //self.favorites = nil
+        //createFavorites()
+        
+    }
     
-        //print ("favorites are: ", favorite)
-
+    func createFavorites(completionHandler: @escaping ([String]) -> Void) {
+        var fav = [String]()
+        Database.database().reference().child("users").child(self.userID!).child("favorites").observeSingleEvent(of: .value, with: {(snapshot) in
+            
+            if let items = snapshot.value as? [String:Bool]{
+                let val = items.filter({ $0.value == true })
+                for value in val{
+                    //print(value.key)
+                    fav.append(value.key)
+                }
+                DispatchQueue.main.async {
+                    completionHandler(fav)
+                }
+                //print(val)
+                
+            }
+        }, withCancel: nil)
+        
+        //return fav
     }
     
     
 }
+
+/*
+class userInfo {
+    var userID: String?
+    var favorites = [String]()
+    
+    static func createInfo() -> userInfo{
+        let user = userInfo()
+        user.userID = Auth.auth().currentUser?.uid
+        //user.favorites = nil
+        Database.database().reference().child("users").child(user.userID!).child("favorites").observeSingleEvent(of: .value, with: {(snapshot) in
+            
+            if let items = snapshot.value as? [String:Bool]{
+                let val = items.filter({ $0.value == true })
+                for value in val{
+                    //print(value.key)
+                    user.favorites.append(value.key)
+                }
+                
+                //print(val)
+                
+            }
+        }, withCancel: nil)
+        
+        //print("users favorites are: ", user.favorites)
+        return user
+    }
+}
+*/
+
+/*
+struct userInfo {
+    let userID: String?
+    var favorites: [String]?
+    
+    init(userID: String? = nil, favorites: [String]? = nil) {
+        let user = Auth.auth().currentUser
+        self.userID = user?.uid
+        //self.favorites = nil
+        self.favorites = createFavorites()
+      
+    }
+    
+    func createFavorites() -> [String]? {
+        var fav:[String]?
+        Database.database().reference().child("users").child(self.userID!).child("favorites").observeSingleEvent(of: .value, with: {(snapshot) in
+            
+            if let items = snapshot.value as? [String:Bool]{
+                let val = items.filter({ $0.value == true })
+                for value in val{
+                    //print(value.key)
+                    fav?.append(value.key)
+                }
+                
+                print(val)
+                
+            }
+        }, withCancel: nil)
+        
+        return fav
+    }
+    
+    
+}*/
 
 /*class UserInfo: NSObject {
     

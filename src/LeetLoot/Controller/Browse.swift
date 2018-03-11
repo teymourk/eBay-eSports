@@ -9,14 +9,22 @@
 import Foundation
 import UIKit
 
-class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, AlertDelegate {
+    func sendAlert() {
+        let alert = UIAlertController(title: "My Alert", message: "This is an alert.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     
     private let cellId = "cellId"
    var browseCategories: [BrowseCategory]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //sendAlert()
         browseCategories = BrowseCategory.sampleBrowseCategories()
         
         //collectionView?.contentInsetAdjustmentBehavior = .never
@@ -29,7 +37,7 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BrowseCell
         
         cell.browseCategory = browseCategories?[indexPath.item]
-        
+
         return cell
     }
     

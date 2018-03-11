@@ -15,6 +15,10 @@ protocol BrowseDelegate: class {
     func refreshItems()
 }
 
+protocol AlertDelegate: class {
+    func sendAlert()
+}
+
 class browseItemCell: UICollectionViewCell{
  
     var category: Categories? {
@@ -59,6 +63,7 @@ class browseItemCell: UICollectionViewCell{
                     }, withCancel: nil)
                     
                 }
+                
             }
         }
     }
@@ -116,6 +121,10 @@ class browseItemCell: UICollectionViewCell{
             }, withCancel: nil)
        
         }
+        else{
+            self.alert?.sendAlert()
+            
+        }
     }
     
     func setupViews(){
@@ -161,6 +170,14 @@ class browseItemCell: UICollectionViewCell{
     @objc func displayItems() {
         if let del = self.delegate {
             del.refreshItems()
+        }
+    }
+    
+    weak var alert:AlertDelegate?
+    
+    @objc func displayAlert() {
+        if let del = self.alert {
+            del.sendAlert()
         }
     }
 
