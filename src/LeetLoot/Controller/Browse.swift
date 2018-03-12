@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, AlertDelegate {
+class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    func sendAlert() {
+    @objc func sendAlert() {
         let alert = UIAlertController(title: "Not Signed In", message: "Sign in to start favoriting games.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
             NSLog("The \"OK\" alert occured.")
@@ -25,13 +25,18 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, Al
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //sendAlert()
+        NotificationCenter.default.addObserver(self, selector: #selector(sendAlert), name: NSNotification.Name(rawValue: "sendAlertBrowse"), object: nil)
         browseCategories = BrowseCategory.sampleBrowseCategories()
         
         //collectionView?.contentInsetAdjustmentBehavior = .never
         collectionView?.backgroundColor = .customGray
         collectionView?.register(BrowseCell.self, forCellWithReuseIdentifier: cellId)
         
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

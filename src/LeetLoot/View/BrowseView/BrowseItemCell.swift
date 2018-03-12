@@ -15,10 +15,6 @@ protocol BrowseDelegate: class {
     func refreshItems()
 }
 
-protocol AlertDelegate: class {
-    func sendAlert()
-}
-
 class browseItemCell: UICollectionViewCell{
  
     var category: Categories? {
@@ -77,6 +73,14 @@ class browseItemCell: UICollectionViewCell{
             
             
         }
+        /*let user = Auth.auth().currentUser?.uid
+        if user != nil
+        {Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
+            print ("Changes: ", snapshot)
+            //self.delegate?.refreshItems()
+
+            //Determine if coordinate has changed
+        })}*/
         setupViews()
     }
 
@@ -128,7 +132,9 @@ class browseItemCell: UICollectionViewCell{
        
         }
         else{
-            self.alert?.sendAlert()
+            //send alert
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "sendAlertBrowse"), object: nil)
+            //self.alert?.sendAlert()
             
         }
     }
@@ -176,15 +182,6 @@ class browseItemCell: UICollectionViewCell{
     @objc func displayItems() {
         if let del = self.delegate {
             del.refreshItems()
-        }
-    }
-
-    
-    weak var alert:AlertDelegate?
-    
-    @objc func displayAlert() {
-        if let del = self.alert {
-            del.sendAlert()
         }
     }
 

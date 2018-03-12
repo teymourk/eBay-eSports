@@ -14,6 +14,24 @@ import Firebase
 class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     private let cellId = "cellId"
+    var favorites: FavoritesCategory?{
+        didSet{
+            if let imageName = favorites!.imageName{
+                gameImage.downloadImages(url: imageName)
+            }
+            if let label = favorites!.name{
+                textLabel.text = label
+            }
+            //print("name is: ", favorites!.name)
+        }
+    }
+    
+    var curGame:String? {
+        didSet{
+            
+        }
+    }
+
     var userFavorites: [String]?{
         didSet{
             print("fav in fav cell is: ", userFavorites)
@@ -136,6 +154,28 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         return CGSize(width: collectionView.frame.size.width, height: 130)
     }
     
+    @objc func checkAction(sender : UITapGestureRecognizer) {
+         print("Add this game to favorites")
+         let ref = Database.database().reference()
+         let user = Auth.auth().currentUser?.uid
+         if user != nil{
+         
+         Database.database().reference().child("users").child(user!).child("favorites").observeSingleEvent(of: .value, with: {(snapshot) in
+         
+            if let items = snapshot.value as? [String:Bool]{
+                if let check = items[self.curGame!]
+                {
+                    let userRef = ref.child("users").child(user!).child("favorites")
+                    print("check is: ", check, " opposite is: ", !check)
+                    userRef.updateChildValues([self.curGame! : !check])
+         
+                }
+            }
+             }, withCancel: nil)
+         
+         }
+     
+     }
     
     override func setupView() {
         
@@ -152,6 +192,11 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         
         //register item cell to the collection view
         carouselCollectionView.register(CarouselCollectionView.self, forCellWithReuseIdentifier: cellId)
+        
+        let gesture = UITapGestureRecognizer(target: self, action:  #selector(browseItemCell.checkAction))
+        gesture.cancelsTouchesInView = false
+        heartView.addGestureRecognizer(gesture)
+        
         
         NSLayoutConstraint.activate([
             gameImage.topAnchor.constraint(equalTo: topAnchor, constant: 12),

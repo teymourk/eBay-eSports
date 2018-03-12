@@ -15,18 +15,20 @@ import TwitterKit
 class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, TwitterDelegate {
     
     var size:CGFloat = 46
-    //var favs = grabFavInfo()
+    var favorites: [FavoritesCategory]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        favorites = FavoritesCategory.favoriteCategories()
         grabFavInfo()
         
         Auth.auth().addStateDidChangeListener { auth, user in
+            //self.arr = nil
+            self.count = 1
             self.grabFavInfo()
             self.collectionView?.reloadData()
             self.collectionView?.collectionViewLayout.invalidateLayout()
-
-
         }
         
        
@@ -34,9 +36,12 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         
     }
     
+    var count:Int = 1
+    
     var arr: [String]?{
         didSet{
             print(oldValue)
+            count = arr!.count
             self.collectionView?.reloadData()
             self.collectionView?.collectionViewLayout.invalidateLayout()
 
@@ -50,7 +55,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
             _ = userInfo().createFavorites { (val) in
                 //self.favs = nil
                 self.arr = val
-                print("grabbed favs from view: ", self.arr)
+                //print("grabbed favs from view: ", self.arr)
 
                 
                 //self.collectionView?.reloadData()
@@ -77,7 +82,8 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? 2 : 1
+       
+        return section == 0 ? 2 : count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,6 +94,28 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
             twitterCell.delegate = self
         let favoritesCell: Favorites_Cell = collectionView.reusableCell(indexPath: indexPath)
             favoritesCell.userFavorites = arr
+        
+            if (arr?.count != nil) {
+                if (arr!.count > 0){
+                    var game:String
+                    if arr!.count == 1 {
+                        game = arr![0]
+                    }
+                    else{
+                         let index = (indexPath.item) - 1
+                         game = arr![index]}
+                    if (favorites != nil){
+                        let i = favorites?.index(where: {$0.id == game})
+                        favoritesCell.favorites = favorites![i!]
+                        favoritesCell.curGame = favorites![i!].id
+                        //print ("index of fav: ", favorites![i!].name)
+                    }
+                    //let i = favorites?.index(where: {$0.name == game})
+                    //print ("favs is: ", favorites?[(i)!].name)
+                    //favoritesCell.favorites = favorites(arr[indexPath])*/
+                }
+
+            }
         //self.collectionView?.reloadData()
         //self.collectionView?.collectionViewLayout.invalidateLayout()
             //print("favs getting passed is: ",grabFavInfo())
