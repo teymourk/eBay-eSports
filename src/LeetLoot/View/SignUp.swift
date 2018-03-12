@@ -103,8 +103,10 @@ class SignUp: SignIn {
         let databaseRef = Database.database().reference().child("users/\(UID)"),
             userObject = ["favorites": ["csgo":false, "dota":true]] as Dictionary<String, Any>
         databaseRef.setValue(userObject)
-
         UserDefaults.standard.setValue(UID, forKey: "SignedUser")
         delegate?.signedInSuccessfully()
+        emailTextField.text = nil
+        passwordTextField.text = nil
+        confirmPasswordTextField.text = nil
     }
 }
