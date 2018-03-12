@@ -93,26 +93,6 @@ extension String {
     }
 }
 
-//Mark: - UIIMageView
-extension UIImageView {
-    func playsAnimation(For image:String,  numberOfImages:Int, withAnimation durantion:Double) {
-        self.image = UIImage(named: image)
-        self.animationImages = nil
-        
-        var imageArray = [UIImage]()
-        
-        for index in stride(from: 0, to: numberOfImages, by: 1) {
-            guard let img = UIImage(named: "\(image)\(Int(index))") else { return }
-            imageArray.append(img)
-        }
-        
-        self.animationImages = imageArray
-        self.animationDuration = durantion
-        self.animationRepeatCount = 0
-        self.startAnimating()
-    }
-}
-
 //Mark: - UIView
 extension UIView {
     func shake() {
