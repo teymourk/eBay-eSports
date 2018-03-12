@@ -184,8 +184,10 @@ final class Buy_Filter: NSObject {
     @objc
     private func onTap(_ sender: UITapGestureRecognizer) {
         if parentView.isDescendant(of: window) {
+            if filterView.isDescendant(of: parentView) {
+                delegate?.updateNewData(for: filterView.rootQuery)
+            }
             close()
-            delegate?.updateNewData(for: filterView.rootQuery)
         }
     }
     
