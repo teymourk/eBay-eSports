@@ -15,6 +15,13 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     
     var isDownloading: Bool = false
     
+    private var loadingIndicator = { () -> UIActivityIndicatorView in
+        let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            view.color = .lightBlue
+            view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -40,6 +47,7 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
         backgroundColor = .white
         loadData()
         addSubview(itemsCollectionView)
+        addSubview(loadingIndicator)
 
         //to generate multiple cells in nested collection view
         itemsCollectionView.dataSource = self
@@ -54,7 +62,10 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
         //expand from top to bottom
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": itemsCollectionView]))
         
-        
+        NSLayoutConstraint.activate([
+            loadingIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
     }
     
    //number of cells return in section, this will change based on if it's events or games
@@ -107,7 +118,7 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     
     func loadData() {
         let query = Root(queryKey: "nintendo", filterBy: .All_Items, sortBy: .Best_Match, limit: 8)
-        query.retrieveDataByName(offset: 0, loadingIndicator: UIActivityIndicatorView()) { (eventMerch) in
+        query.retrieveDataByName(offset: 0, loadingIndicator: loadingIndicator) { (eventMerch) in
             self.root = eventMerch
         }
     }
