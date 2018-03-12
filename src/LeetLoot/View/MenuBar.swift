@@ -66,7 +66,8 @@ final class Menu: ParentView {
     private lazy var result = { () -> UILabel in
         let label = UILabel()
             label.textColor = .black
-            label.textAlignment = .right
+            label.textAlignment = .left
+            label.minimumScaleFactor = 13
             label.font = .systemFont(ofSize: 15)
         return label
     }()
@@ -133,7 +134,7 @@ final class Menu: ParentView {
             return
         }
         NSLayoutConstraint.activate([
-            result.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            result.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
             horizontalBar.leadingAnchor.constraint(equalTo: leadingAnchor),
             horizontalBar.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])

@@ -48,7 +48,7 @@ class Browse_Game: UICollectionViewController {
         requestDataFromAPI()
     }
     
-    private var merchRoot = Root(queryKey: "League+of+legends",
+    private var merchRoot = Root(queryKey: "overwatch",
                                  filterBy: .All_Items,
                                  sortBy: .Best_Match)
 
@@ -178,8 +178,7 @@ extension Browse_Game: BuyFilterDelegate {
         query.retrieveDataByName(offset: 0, loadingIndicator: loadingIndicator, { [weak self] in
             self?.root = $0
             
-            let indexPath = IndexPath(item: 0, section: 0)
-            self?.collectionView?.scrollToItem(at: indexPath, at: .top, animated: true)
+            self?.collectionView?.contentOffset.y = 0
         })
     }
 }

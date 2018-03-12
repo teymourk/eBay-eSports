@@ -22,15 +22,16 @@ class PriceRange: UITableViewCell {
             priceSlider.colorBetweenHandles = .lightBlue
             priceSlider.handleBorderColor = .lightBlue
             priceSlider.handleColor = .white
-        
             priceSlider.delegate = self
             priceSlider.translatesAutoresizingMaskIntoConstraints = false
         return priceSlider
     }()
     
     weak var delegate: priceRangeDelegate?
-    
+
     private func setupView() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onResetFilter), name: NSNotification.Name(rawValue: "onResetFilter"), object: nil) //Need To deinit this 
+        
         addSubview(priceSlider)
         
         NSLayoutConstraint.activate([
@@ -38,6 +39,18 @@ class PriceRange: UITableViewCell {
             priceSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             priceSlider.topAnchor.constraint(equalTo: topAnchor, constant: 10),
         ])
+    }
+    
+    @objc
+    private func onResetFilter() {
+        let minValue = priceSlider.selectedMinValue,
+            maxValue = priceSlider.selectedMaxValue
+        
+        if minValue != 0 || maxValue != 100 {
+            priceSlider.selectedMinValue = 0
+            priceSlider.selectedMaxValue = 100
+            priceSlider.layoutSubviews()
+        }
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
