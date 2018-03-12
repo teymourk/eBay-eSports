@@ -10,6 +10,10 @@ import UIKit
 
 class Filter: UITableView {
     
+    deinit {
+        print("yo")
+    }
+    
     var sorting: Sort.option = .Best_Match,
         filtering: Filters.option = .All_Items,
         rangeQuery: String = "0.."

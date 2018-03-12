@@ -17,10 +17,11 @@ protocol RegisterPagesDelegate: class {
 class SignIn: ParentView {
     let errorLabel: UILabel = {
         let lb = UILabel()
-            lb.textColor = .black
+            lb.text = "Error"
             lb.font = UIFont(name: "Helvetica", size: 14)
             lb.textColor = .red
             lb.textAlignment = .center
+            lb.isHidden = true
             lb.translatesAutoresizingMaskIntoConstraints = false
         return lb
     }()
@@ -39,9 +40,9 @@ class SignIn: ParentView {
     }()
     
     lazy var back = { () -> UIButton in
-        let button = UIButton(imageName: #imageLiteral(resourceName: "Back"))
+        let button = UIButton(imageName: #imageLiteral(resourceName: "wBack"))
             button.addTarget(self, action: #selector(onScreenButtons(_ :)), for: .touchUpInside)
-            button.isHidden = true
+            button.isEnabled = false
             button.tag = 0
         return button
     }()
@@ -127,7 +128,7 @@ class SignIn: ParentView {
             button.addTarget(self, action: #selector(onForgot), for: .touchUpInside)
         return button
     }()
-    
+
     weak var delegate:RegisterPagesDelegate?
     
     @objc
