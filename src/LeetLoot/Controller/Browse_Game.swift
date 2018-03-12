@@ -38,6 +38,8 @@ class Browse_Game: UICollectionViewController {
         return view
     }()
     
+    var isDownloading: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
@@ -126,7 +128,18 @@ extension Browse_Game {
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if !isDownloading {
+            isDownloading = true
+            print("isDownloading")
+            guard   let itemSummaries = root?.first?.itemSummaries?[indexPath.item],
                 let url = itemSummaries.hrefURL else { return }
+            
+            _ = ItemHerf(herfUrl: url) { [weak self] in
+                self?.buyItem.items = (itemSummaries, $0)
+                self?.isDownloading = false
+                print("Done Downloading")
+            }
+        }
     }
 }
 

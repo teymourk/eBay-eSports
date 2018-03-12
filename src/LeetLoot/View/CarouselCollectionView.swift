@@ -13,7 +13,7 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     
     private let cellId = "cellId"
     
-    
+    var isDownloading: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -73,10 +73,18 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard   let itemSummaries = root?.first?.itemSummaries?[indexPath.item],
+        if !isDownloading {
+            isDownloading = true
+            print("isDownloading")
+            guard   let itemSummaries = root?.first?.itemSummaries?[indexPath.item],
                 let url = itemSummaries.hrefURL else { return }
-        
-        _ = ItemHerf(herfUrl: url) { [weak self] in self?.buyItem.items = (itemSummaries, $0) }
+            
+            _ = ItemHerf(herfUrl: url) { [weak self] in
+                self?.buyItem.items = (itemSummaries, $0)
+                self?.isDownloading = false
+                print("Done Downloading")
+            }
+        }
     }
     
     //sizing of cells
@@ -99,7 +107,7 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     
     func loadData() {
         let query = Root(queryKey: "nintendo", filterBy: .All_Items, sortBy: .Best_Match, limit: 8)
-        query.retrieveDataByName(offset: 0, loadingImage: UIImageView()) { (eventMerch) in
+        query.retrieveDataByName(offset: 0, loadingIndicator: UIActivityIndicatorView()) { (eventMerch) in
             self.root = eventMerch
         }
     }
