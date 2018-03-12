@@ -10,9 +10,9 @@ import UIKit
 
 class Browse_Game: UICollectionViewController {
 
-    private let loading = { () -> UIImageView in
-        let view = UIImageView()
-            view.contentMode = .scaleAspectFit
+    private var loadingIndicator = { () -> UIActivityIndicatorView in
+        let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            view.color = .lightBlue
             view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -21,7 +21,7 @@ class Browse_Game: UICollectionViewController {
         didSet {
             collectionView?.reloadData()
             menuBar.results = self.root?.first?.total
-            loading.stopAnimating()
+            loadingIndicator.stopAnimating()
             print("Reloaded")
         }
     }
@@ -51,7 +51,7 @@ class Browse_Game: UICollectionViewController {
                                  sortBy: .Best_Match)
 
     private func requestDataFromAPI() {
-        merchRoot.retrieveDataByName(offset: 0, loadingImage: loading, { [weak self] in
+        merchRoot.retrieveDataByName(offset: 0, loadingIndicator: loadingIndicator, { [weak self] in
             self?.root = $0
         })
     }
@@ -60,7 +60,7 @@ class Browse_Game: UICollectionViewController {
         guard   let root = root?.first,
                 let summariesCount = root.itemSummaries?.count else { return }
         if indexPath.item == summariesCount - 10 {
-            merchRoot.retrieveDataByName(offset: summariesCount, loadingImage: loading, { [weak self] in
+            merchRoot.retrieveDataByName(offset: summariesCount, loadingIndicator: loadingIndicator, { [weak self] in
                 if let items = $0?.first?.itemSummaries {
                     self?.root?[0].itemSummaries?.append(contentsOf: items)
                 }
@@ -76,18 +76,18 @@ class Browse_Game: UICollectionViewController {
     }
     
     private func setupPaginationLoader() {
-        view.addSubview(loading)
+        view.addSubview(loadingIndicator)
         NSLayoutConstraint.activate([
-            loading.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15),
-            loading.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            loadingIndicator.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15),
+            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     
     private func setupLoader() {
-        view.addSubview(loading)
+        view.addSubview(loadingIndicator)
         NSLayoutConstraint.activate([
-        loading.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-        loading.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
@@ -126,9 +126,7 @@ extension Browse_Game {
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard   let itemSummaries = root?.first?.itemSummaries?[indexPath.item],
                 let url = itemSummaries.hrefURL else { return }
-        _ = ItemHerf(herfUrl: url) { [weak self] in self?.buyItem.items = (itemSummaries, $0) }
     }
 }
 
@@ -164,7 +162,7 @@ extension Browse_Game: BuyFilterDelegate {
         self.setupLoader()
         self.root?[0].itemSummaries?.removeAll(keepingCapacity: false)
         self.merchRoot = query
-        query.retrieveDataByName(offset: 0, loadingImage: loading, { [weak self] in
+        query.retrieveDataByName(offset: 0, loadingIndicator: loadingIndicator, { [weak self] in
             self?.root = $0
             
             let indexPath = IndexPath(item: 0, section: 0)

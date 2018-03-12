@@ -132,9 +132,11 @@ final class Menu: ParentView {
             horizontalBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.kWidth/optionsCount).isActive = true
             return
         }
-        result.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
-        horizontalBar.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        horizontalBar.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            result.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
+            horizontalBar.leadingAnchor.constraint(equalTo: leadingAnchor),
+            horizontalBar.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
     }
     
     convenience init(isMenu: Bool) {
