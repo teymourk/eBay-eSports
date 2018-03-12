@@ -120,7 +120,8 @@ final class Buy_Filter: NSObject {
         parentView.addSubview(currentView)
         NSLayoutConstraint.activate([
             close_done.topAnchor.constraint(equalTo: parentView.topAnchor, constant: 10),
-            close_done.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
+            close_done.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
+            close_done.trailingAnchor.constraint(equalTo: parentView.trailingAnchor),
             
             buy_reset.heightAnchor.constraint(equalToConstant: 40),
             buy_reset.bottomAnchor.constraint(equalTo: parentView.bottomAnchor, constant: -5),
@@ -182,7 +183,10 @@ final class Buy_Filter: NSObject {
     
     @objc
     private func onTap(_ sender: UITapGestureRecognizer) {
-        parentView.isDescendant(of: window) ? close() : nil
+        if parentView.isDescendant(of: window) {
+            close()
+            delegate?.updateNewData(for: filterView.rootQuery)
+        }
     }
     
     override init() {
