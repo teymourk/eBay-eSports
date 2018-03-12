@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
+import Firebase
 
 class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
@@ -19,13 +21,34 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         self.present(alert, animated: true, completion: nil)
     }
     
+    @objc func refreshBrowse() {
+        self.collectionView?.reloadData()
+        self.collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
     
     private let cellId = "cellId"
    var browseCategories: [BrowseCategory]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(sendAlert), name: NSNotification.Name(rawValue: "sendAlertBrowse"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshBrowse), name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+        
+        let user = Auth.auth().currentUser?.uid
+         if user != nil
+         {Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
+         print ("Changes: ", snapshot)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+        //self.collectionView?.reloadData()
+        //self.collectionView?.collectionViewLayout.invalidateLayout()
+         //Determine if coordinate has changed
+         })}
+        
+        
+       
         browseCategories = BrowseCategory.sampleBrowseCategories()
         
         //collectionView?.contentInsetAdjustmentBehavior = .never

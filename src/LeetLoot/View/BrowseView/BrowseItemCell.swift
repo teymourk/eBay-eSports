@@ -73,14 +73,20 @@ class browseItemCell: UICollectionViewCell{
             
             
         }
-        /*let user = Auth.auth().currentUser?.uid
+        
+        let user = Auth.auth().currentUser?.uid
         if user != nil
         {Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
             print ("Changes: ", snapshot)
-            //self.delegate?.refreshItems()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+                self.delegate?.refreshItems()
 
+            //self.collectionView?.reloadData()
+            //self.collectionView?.collectionViewLayout.invalidateLayout()
             //Determine if coordinate has changed
-        })}*/
+        })}
+        
         setupViews()
     }
 
@@ -137,6 +143,9 @@ class browseItemCell: UICollectionViewCell{
             //self.alert?.sendAlert()
             
         }
+        
+        self.delegate?.refreshItems()
+
     }
     
     func setupViews(){

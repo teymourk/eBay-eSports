@@ -17,8 +17,17 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     var size:CGFloat = 46
     var favorites: [FavoritesCategory]?
     
+    @objc func refreshHome() {
+        self.count = 1
+        self.grabFavInfo()
+        self.collectionView?.reloadData()
+        self.collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshHome), name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
 
         favorites = FavoritesCategory.favoriteCategories()
         grabFavInfo()
@@ -31,9 +40,27 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
             self.collectionView?.collectionViewLayout.invalidateLayout()
         }
         
+        let user = Auth.auth().currentUser?.uid
+        if user != nil
+        {Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
+            print ("Changes: ", snapshot)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+            //self.count = 1
+            //self.grabFavInfo()
+            //self.collectionView?.reloadData()
+            //self.collectionView?.collectionViewLayout.invalidateLayout()
+            //Determine if coordinate has changed
+        })}
+        
        
         setupCollectionView()
         
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     var count:Int = 1
@@ -100,15 +127,18 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
                     var game:String
                     if arr!.count == 1 {
                         game = arr![0]
+                        let index = (indexPath.item)
+                        print ("index is: ", index)
                     }
                     else{
-                         let index = (indexPath.item) - 1
+                         let index = (indexPath.item)
+                        print ("index is: ", index)
                          game = arr![index]}
-                    if (favorites != nil){
+                   if (favorites != nil){
                         let i = favorites?.index(where: {$0.id == game})
                         favoritesCell.favorites = favorites![i!]
                         favoritesCell.curGame = favorites![i!].id
-                        //print ("index of fav: ", favorites![i!].name)
+                        //print ("index of fav: ", favorites![i!].name)*/
                     }
                     //let i = favorites?.index(where: {$0.name == game})
                     //print ("favs is: ", favorites?[(i)!].name)
