@@ -17,10 +17,11 @@ protocol RegisterPagesDelegate: class {
 class SignIn: ParentView {
     let errorLabel: UILabel = {
         let lb = UILabel()
-            lb.textColor = .black
+            lb.text = "Error"
             lb.font = UIFont(name: "Helvetica", size: 14)
             lb.textColor = .red
             lb.textAlignment = .center
+            lb.isHidden = true
             lb.translatesAutoresizingMaskIntoConstraints = false
         return lb
     }()

@@ -96,6 +96,7 @@ extension String {
 //Mark: - UIView
 extension UIView {
     func shake() {
+        self.isHidden = false
         let from: CGPoint = CGPoint(x: self.center.x - 5, y: self.center.y),
             to: CGPoint =  CGPoint(x: self.center.x + 5, y: self.center.y)
         let animation = CABasicAnimation(keyPath: "position")

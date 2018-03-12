@@ -53,6 +53,10 @@ class PriceRange: UITableViewCell {
         }
     }
     
+    deinit {
+        print("Im leaving")
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .white
