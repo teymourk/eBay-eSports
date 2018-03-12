@@ -153,6 +153,15 @@ final class Buy_Filter: NSObject {
         })
     }
     
+    private func eBayURLNavigation() {
+        guard let itemUrl = URL(string: items.summary?.webURL ?? "") else { return }
+        
+        if UIApplication.shared.canOpenURL(itemUrl) {
+            UIApplication.shared.open(itemUrl, options: [:], completionHandler: nil)
+            return
+        }
+    }
+    
     @objc
     private func onClose_Done(_ sender: UIButton) {
         switch menuOption {
@@ -167,11 +176,12 @@ final class Buy_Filter: NSObject {
     
     @objc
     private func onBuy_Reset(_ sender: UIButton) {
-        guard let itemUrl = URL(string: items.summary?.webURL ?? "") else { return }
-        
-        if UIApplication.shared.canOpenURL(itemUrl) {
-            UIApplication.shared.open(itemUrl, options: [:], completionHandler: nil)
-            return
+        switch menuOption {
+        case .Buy:
+            eBayURLNavigation()
+        case .Filter:
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "onResetFilter"), object: nil)
+        default: break
         }
     }
     

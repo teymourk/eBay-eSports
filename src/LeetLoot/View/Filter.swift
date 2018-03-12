@@ -15,7 +15,7 @@ class Filter: UITableView {
         rangeQuery: String = "0.."
 
     var rootQuery: Root {
-        return Root(  queryKey: "League+of+legends",
+        return Root(  queryKey: "overwatch",
                       filterBy: filtering,
                       sortBy: sorting,
                       range: rangeQuery)
@@ -39,11 +39,26 @@ class Filter: UITableView {
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: .plain)
         setupTableView()
+        NotificationCenter.default.addObserver(self, selector: #selector(onResetFilter), name: NSNotification.Name(rawValue: "onResetFilter"), object: nil) //Need To deinit this 
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    @objc
+    private func onResetFilter() {
+        sortCheckedIndexPath = IndexPath(item: 0, section: 0)
+        filterCheckedIndexPth = IndexPath(item: 0, section: 1)
+        sorting = .Best_Match
+        filtering = .All_Items
+        rangeQuery = "0.."
+        reloadData()
+    }
+    
+    //Will Make Dynamic later
+    var sortCheckedIndexPath: IndexPath? = IndexPath(item: 0, section: 0)
+    var filterCheckedIndexPth: IndexPath? = IndexPath(item: 0, section: 1)
 }
 
 //Mark: -TableView DataSource/Delegate
@@ -68,29 +83,62 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 2 {
             let priceCell = tableView.dequeueReusableCell(withIdentifier: "T", for: indexPath) as? PriceRange
+                priceCell?.selectionStyle = .none
                 priceCell?.delegate = self
             return priceCell ?? UITableViewCell()
         }
         
         let filtersCell = tableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as? Filter_Cell
         let options = filterMenu[indexPath.section].options[indexPath.row]
-        
         filtersCell?.textLabel?.text = options.name
         filtersCell?.textLabel?.font = UIFont.systemFont(ofSize: 14)
+        filtersCell?.selectionStyle = .none
+        filtersCell?.checkImage.isHidden =  indexPath == sortCheckedIndexPath ||
+                                            indexPath == filterCheckedIndexPth ? false : true
+    
         return filtersCell ?? UITableViewCell()
     }
     
     fileprivate func menuOptions<T>(indexPath: IndexPath) -> T {
         let item =  filterMenu[indexPath.section]
                     .options[indexPath.item] as? T
+        
         return item!
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //Will Refactor This...ITS for testing purposes only
+    func handleFilterChanging(indexPath: IndexPath, tableView: UITableView) {
+    
+        if indexPath.section == 0 {
+            if sortCheckedIndexPath != nil {
+                let cell = tableView.cellForRow(at: sortCheckedIndexPath!) as? Filter_Cell
+                cell?.checkImage.isHidden = true
+            }
+            sortCheckedIndexPath = indexPath
+            let cell = tableView.cellForRow(at: indexPath) as? Filter_Cell
+            cell?.checkImage.isHidden = false
+            return
+        }
+        
+        if indexPath.section == 1 {
+            if filterCheckedIndexPth != nil {
+                let cell = tableView.cellForRow(at: filterCheckedIndexPth!) as? Filter_Cell
+                cell?.checkImage.isHidden = true
+            }
+            filterCheckedIndexPth = indexPath
+            let cell = tableView.cellForRow(at: indexPath) as? Filter_Cell
+            cell?.checkImage.isHidden = false
+            return
+        }
+    }
+    
+    internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
             case 0: sorting = menuOptions(indexPath: indexPath)
             case 1: filtering = menuOptions(indexPath: indexPath)
         default: return }
+        
+        handleFilterChanging(indexPath: indexPath, tableView: tableView)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
