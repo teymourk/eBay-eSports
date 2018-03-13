@@ -35,7 +35,6 @@ class browseItemCell: UICollectionViewCell{
     var curGame: String? {
         didSet{
             if let game = curGame{
-                //print ("cur game is: ", game)
                 //check if user is null, if not then populate images
                 let user = Auth.auth().currentUser?.uid
                 //if user is signed in
@@ -59,7 +58,6 @@ class browseItemCell: UICollectionViewCell{
                     }, withCancel: nil)
                     
                 }
-                
             }
         }
     }
@@ -67,26 +65,6 @@ class browseItemCell: UICollectionViewCell{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        /*Auth.auth().addStateDidChangeListener { auth, user in
-
-            self.delegate?.refreshItems()
-            
-            
-        }
-        
-        let user = Auth.auth().currentUser?.uid
-        if user != nil
-        {Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
-            print ("Changes: ", snapshot)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
-                self.delegate?.refreshItems()
-
-            //self.collectionView?.reloadData()
-            //self.collectionView?.collectionViewLayout.invalidateLayout()
-            //Determine if coordinate has changed
-        })}*/
-        
         setupViews()
     }
 
@@ -128,9 +106,6 @@ class browseItemCell: UICollectionViewCell{
                         let userRef = ref.child("users").child(user!).child("favorites")
                         print("check is: ", check, " opposite is: ", !check)
                         userRef.updateChildValues([self.curGame! : !check])
-                        //refresh page
-                    
-                       // self.delegate?.refreshItems()
                         
                     }
                 }
@@ -140,18 +115,14 @@ class browseItemCell: UICollectionViewCell{
         else{
             //send alert
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "sendAlertBrowse"), object: nil)
-            //self.alert?.sendAlert()
             
         }
-        
-        //self.delegate?.refreshItems()
 
     }
     
     func setupViews(){
         
         addSubview(imageView)
-        
         addSubview(heartView)
         
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(browseItemCell.checkAction))
@@ -171,7 +142,6 @@ class browseItemCell: UICollectionViewCell{
             
             ])
         
-        
         backgroundColor = .clear
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.softGrey.cgColor
@@ -185,15 +155,6 @@ class browseItemCell: UICollectionViewCell{
     func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
         return CGRect(x: x, y: y, width: width, height: height)
     }
-    
-    /*weak var delegate:BrowseDelegate?
-    
-    @objc func displayItems() {
-        if let del = self.delegate {
-            del.refreshItems()
-        }
-    }
-*/
     
 }
 

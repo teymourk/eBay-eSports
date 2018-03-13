@@ -17,7 +17,6 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
         didSet{
             if let imageName = curGame?.imageName {
                 gameImage.downloadImages(url: imageName)
-
             }
             
             if let type = curGame?.name {
@@ -27,11 +26,8 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
             let user = Auth.auth().currentUser?.uid
             //if user is signed in
             if user != nil{
-                //print("we have a user")
                 Database.database().reference().child("users").child(user!).child("favorites").observeSingleEvent(of: .value, with: {(snapshot) in
-                    
                     if let items = snapshot.value as? [String:Bool]{
-                        //print(items)
                         if let check = items[self.curGame!.id!]
                         {
                             if check == true {
@@ -67,19 +63,6 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
             }
         
         }
-        
-        /*let user = Auth.auth().currentUser?.uid
-        if user != nil
-        {Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
-            print ("Changes: ", snapshot)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
-            //self.delegate?.refreshItems()
-            
-            //self.collectionView?.reloadData()
-            //self.collectionView?.collectionViewLayout.invalidateLayout()
-            //Determine if coordinate has changed
-        })}*/
         
         setupView()
     }
@@ -141,10 +124,8 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
             
         }
         else{
-            //send alert
-            //print("user not signed in!!!")
+
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "sendAlertBrowse"), object: nil)
-            //self.alert?.sendAlert()
             
         }
         

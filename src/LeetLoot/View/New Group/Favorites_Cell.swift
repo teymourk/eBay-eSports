@@ -22,7 +22,6 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
             if let label = favorites!.name{
                 textLabel.text = label
             }
-            //print("name is: ", favorites!.name)
         }
     }
     
@@ -34,8 +33,6 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
 
     var userFavorites: [String]?{
         didSet{
-            print("fav in fav cell is: ", userFavorites)
-            
             self.gameImage.isHidden = true
             self.textLabel.isHidden = true
             self.heartView.isHidden = true
@@ -84,7 +81,6 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
     private lazy var merchButton: UIButton = {
         let button = UIButton(title: "See more", imageName: #imageLiteral(resourceName: "Arrow"))
         
-        //button.contentHorizontalAlignment = .left
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -211,10 +207,6 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         gesture.cancelsTouchesInView = false
         heartView.addGestureRecognizer(gesture)
         
-        //print("no user signed in")
-        
-       
-        
         
         NSLayoutConstraint.activate([
             gameImage.topAnchor.constraint(equalTo: topAnchor, constant: 12),
@@ -241,7 +233,6 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
             merchButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             
             errorText.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            //errorText.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
             errorText.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             errorText.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
             

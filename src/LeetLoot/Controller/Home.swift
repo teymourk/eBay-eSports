@@ -15,14 +15,24 @@ import TwitterKit
 class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, TwitterDelegate {
     
     var size:CGFloat = 46
+    
     var favorites: [FavoritesCategory]?
     
-    @objc func refreshHome() {
-        self.count = 1
-        self.grabFavInfo()
-        self.collectionView?.reloadData()
-        self.collectionView?.collectionViewLayout.invalidateLayout()
+    var count:Int = 1
+    
+    var arr: [String]?{
+        didSet{
+            if (arr!.count > 0) {
+                count = arr!.count
+            }
+            else {
+                count = 1
+            }
+            self.collectionView?.reloadData()
+            self.collectionView?.collectionViewLayout.invalidateLayout()
+        }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +44,6 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         grabFavInfo()
         
         Auth.auth().addStateDidChangeListener { auth, user in
-            //self.arr = nil
             self.count = 1
             self.grabFavInfo()
             self.collectionView?.reloadData()
@@ -42,15 +51,14 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         }
         
         let user = Auth.auth().currentUser?.uid
-        if user != nil
-        {Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
+        if user != nil {
+            Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
             print ("Changes: ", snapshot)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
 
         })}
         
-       
         setupCollectionView()
         
     }
@@ -60,26 +68,8 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         NotificationCenter.default.removeObserver(self)
     }
     
-    var count:Int = 1
-    
-    var arr: [String]?{
-        didSet{
-            print(oldValue)
-            if (arr!.count > 0 ){
-                count = arr!.count
-            }
-            else {
-                count = 1
-            }
-            self.collectionView?.reloadData()
-            self.collectionView?.collectionViewLayout.invalidateLayout()
-
-        }
-    }
-    
     private func grabFavInfo(){
         let user = Auth.auth().currentUser
-        //var favs = [String]()
         if user != nil{
             _ = userInfo().createFavorites { (val) in
                 self.arr = val
@@ -126,16 +116,14 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
                     else{
                          let index = (indexPath.item)
                         print ("index is: ", index)
-                         game = arr![index]}
+                         game = arr![index]
+                    }
                    if (favorites != nil){
                         let i = favorites?.index(where: {$0.id == game})
                         favoritesCell.favorites = favorites![i!]
                         favoritesCell.curGame = favorites![i!].id
-
                     }
- 
                 }
-
             }
 
         if indexPath.section == 0 {
@@ -186,28 +174,32 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
             return indexPath.row == 0 ? eventRow : tweet
         }
         
-        //changes size of favorites here
-
         if Auth.auth().currentUser != nil {
             if let f  = arr{
             if f.count > 0 {
-                    //collectionView.reloadData()
                     print("user signed in with favorites")
                     self.size = CGFloat(244)
                 }
                 else{
                     print("user signed in with no favorites")
-
                     self.size = CGFloat(46)
                 }
-                
-            }}else {
-                print("no user signed in")
-                self.size = CGFloat(46)
             }
+        }
+        else {
+            print("no user signed in")
+            self.size = CGFloat(46)
+        }
     
         print("size is: ", size)
         return CGSize(width: view.frame.width, height: size)
+    }
+    
+    @objc func refreshHome() {
+        self.count = 1
+        self.grabFavInfo()
+        self.collectionView?.reloadData()
+        self.collectionView?.collectionViewLayout.invalidateLayout()
     }
 }
 
