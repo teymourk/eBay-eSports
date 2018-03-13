@@ -8,7 +8,8 @@
 
 import Foundation
 import UIKit
-
+import FirebaseAuth
+import Firebase
 
 class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, BrowseDelegate{
     
@@ -31,6 +32,19 @@ class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollec
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        let user = Auth.auth().currentUser?.uid
+        if user != nil
+        {Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
+            print ("Changes: ", snapshot)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+            self.refreshItems()
+            //self.count = 1
+            //self.grabFavInfo()
+            //self.collectionView?.reloadData()
+            //self.collectionView?.collectionViewLayout.invalidateLayout()
+            //Determine if coordinate has changed
+        })}
         setupViews()
         
     }

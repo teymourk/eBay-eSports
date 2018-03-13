@@ -26,6 +26,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.count = 1
         
         NotificationCenter.default.addObserver(self, selector: #selector(refreshHome), name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
 
@@ -68,7 +69,12 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     var arr: [String]?{
         didSet{
             print(oldValue)
-            count = arr!.count
+            if (arr!.count > 0 ){
+                count = arr!.count
+            }
+            else {
+                count = 1
+            }
             self.collectionView?.reloadData()
             self.collectionView?.collectionViewLayout.invalidateLayout()
 

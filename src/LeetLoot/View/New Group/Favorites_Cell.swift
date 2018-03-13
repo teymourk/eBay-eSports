@@ -35,13 +35,26 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
     var userFavorites: [String]?{
         didSet{
             print("fav in fav cell is: ", userFavorites)
-            //userFavorites = nil
+            
+            self.gameImage.isHidden = true
+            self.textLabel.isHidden = true
+            self.heartView.isHidden = true
+            self.carouselCollectionView.isHidden = true
+            self.merchButton.isHidden = true
+            self.errorText.isHidden = false
+            self.errorText.text = "Sign in to view your favorites."
+            
             if Auth.auth().currentUser != nil {
                 if let f = userFavorites{
                 if f.count > 0 {
                     print("user signed in with favorites")
                     //print("fav counts is ", f.count)
                     self.errorText.isHidden = true
+                    self.gameImage.isHidden = false
+                    self.textLabel.isHidden = false
+                    self.heartView.isHidden = false
+                    self.carouselCollectionView.isHidden = false
+                    self.merchButton.isHidden = false
                     
                 }
                 else{
@@ -51,6 +64,7 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
                     self.heartView.isHidden = true
                     self.carouselCollectionView.isHidden = true
                     self.merchButton.isHidden = true
+                    self.errorText.isHidden = false
                     self.errorText.text = "Go to browse to start favoriting games."
                     
                 }
@@ -64,8 +78,6 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
                 self.merchButton.isHidden = true
                 self.errorText.text = "Sign in to view your favorites."
             }
-            
-            
         }
     }
     
@@ -196,6 +208,10 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(browseItemCell.checkAction))
         gesture.cancelsTouchesInView = false
         heartView.addGestureRecognizer(gesture)
+        
+        //print("no user signed in")
+        
+       
         
         
         NSLayoutConstraint.activate([

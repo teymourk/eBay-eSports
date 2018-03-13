@@ -54,6 +54,8 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         //collectionView?.contentInsetAdjustmentBehavior = .never
         collectionView?.backgroundColor = .customGray
         collectionView?.register(BrowseCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.registerCell(Header_Cell.self, isHeader: true)
+
         
     }
     
@@ -91,3 +93,4 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     }
 
 }
+

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
@@ -29,6 +30,20 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        let user = Auth.auth().currentUser?.uid
+        if user != nil
+        {Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
+            print ("Changes: ", snapshot)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+            self.browseCarousel.reloadData()
+            self.browseCarousel.collectionViewLayout.invalidateLayout()
+            //self.count = 1
+            //self.grabFavInfo()
+            //self.collectionView?.reloadData()
+            //self.collectionView?.collectionViewLayout.invalidateLayout()
+            //Determine if coordinate has changed
+        })}
         setupViews()
     }
     
