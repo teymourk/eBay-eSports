@@ -295,6 +295,9 @@ class SignIn: ParentView {
             }
             else if let user = user {
                 print("user id:" + user.uid)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+
             }
         
     }
@@ -304,6 +307,9 @@ class SignIn: ParentView {
     func forgotAction(){
         do {
             try Auth.auth().signOut()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }

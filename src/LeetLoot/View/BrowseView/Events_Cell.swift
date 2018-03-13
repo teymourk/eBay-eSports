@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class Events_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, BrowseDelegate {
+class Events_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     private let cellId = "cellId"
     
@@ -34,14 +34,14 @@ class Events_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDeleg
         let browse = BrowseCategory.sampleBrowseCategories()
         categories = browse[0].categories
         
-        let user = Auth.auth().currentUser?.uid
+        /*let user = Auth.auth().currentUser?.uid
         if user != nil
         {Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
             print ("Changes: ", snapshot)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
             self.refreshItems()
-        })}
+        })}*/
         
         
         setupView()
@@ -51,10 +51,10 @@ class Events_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDeleg
         fatalError("init(coder:) has not been implemented")
     }
     
-    func refreshItems() {
+    /*func refreshItems() {
         itemsCollectionView.reloadData()
         itemsCollectionView.collectionViewLayout.invalidateLayout()
-    }
+    }*/
     
     override func setupView() {
         backgroundColor = .white
@@ -89,7 +89,7 @@ class Events_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDeleg
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! browseItemCell
         cell.category = categories?[indexPath.item]
         cell.curGame = categories?[indexPath.item].id
-        cell.delegate = self
+        //cell.delegate = self
         return cell
     }
     

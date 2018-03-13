@@ -180,7 +180,9 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
                     let userRef = ref.child("users").child(user!).child("favorites")
                     print("check is: ", check, " opposite is: ", !check)
                     userRef.updateChildValues([self.curGame! : !check])
-         
+                    //refresh
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
                 }
             }
              }, withCancel: nil)

@@ -28,8 +28,42 @@ extension Browse {
 
 class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    var category: [FavoritesCategory]?
+    
+    @objc func sendAlert() {
+        let alert = UIAlertController(title: "Not Signed In", message: "Sign in to start favoriting games.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func refreshBrowse() {
+        self.collectionView?.reloadData()
+        self.collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       NotificationCenter.default.addObserver(self, selector: #selector(sendAlert), name: NSNotification.Name(rawValue: "sendAlertBrowse"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshBrowse), name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+        
+       /* let user = Auth.auth().currentUser?.uid
+        if user != nil
+        {Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
+            print ("Changes: ", snapshot)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+            
+        })}*/
+        
+        Auth.auth().addStateDidChangeListener { auth, user in
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+        }
+        
+        category = FavoritesCategory.favoriteCategories()
        setupCollectionView()
         
     }
@@ -62,6 +96,9 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         let eventsCell: Events_Cell = collectionView.reusableCell(indexPath: indexPath)
         let gamesCell: Games_Cell = collectionView.reusableCell(indexPath: indexPath)
+        let index = (indexPath.item)
+        gamesCell.curGame = category![index]
+        gamesCell.game = category![index].id
      
      return indexPath.section == 0 ? eventsCell : gamesCell
     }

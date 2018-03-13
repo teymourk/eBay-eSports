@@ -67,7 +67,7 @@ class browseItemCell: UICollectionViewCell{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        Auth.auth().addStateDidChangeListener { auth, user in
+        /*Auth.auth().addStateDidChangeListener { auth, user in
 
             self.delegate?.refreshItems()
             
@@ -85,7 +85,7 @@ class browseItemCell: UICollectionViewCell{
             //self.collectionView?.reloadData()
             //self.collectionView?.collectionViewLayout.invalidateLayout()
             //Determine if coordinate has changed
-        })}
+        })}*/
         
         setupViews()
     }
@@ -130,7 +130,7 @@ class browseItemCell: UICollectionViewCell{
                         userRef.updateChildValues([self.curGame! : !check])
                         //refresh page
                     
-                        self.delegate?.refreshItems()
+                       // self.delegate?.refreshItems()
                         
                     }
                 }
@@ -144,7 +144,7 @@ class browseItemCell: UICollectionViewCell{
             
         }
         
-        self.delegate?.refreshItems()
+        //self.delegate?.refreshItems()
 
     }
     
@@ -186,14 +186,14 @@ class browseItemCell: UICollectionViewCell{
         return CGRect(x: x, y: y, width: width, height: height)
     }
     
-    weak var delegate:BrowseDelegate?
+    /*weak var delegate:BrowseDelegate?
     
     @objc func displayItems() {
         if let del = self.delegate {
             del.refreshItems()
         }
     }
-
+*/
     
 }
 
