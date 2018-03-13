@@ -50,7 +50,7 @@ class browseItemCell: UICollectionViewCell{
                                     self.heartView.tintColor = UIColor.lightBlue
                                 }
                                 else if check == false{
-                                    self.heartView.tintColor = UIColor.coolGrey
+                                    self.heartView.tintColor = UIColor.coolGray
                                 }
                                 
                             }
@@ -81,7 +81,7 @@ class browseItemCell: UICollectionViewCell{
         let hv = customeImage(frame: .zero)
         hv.contentMode = .scaleAspectFit
         hv.translatesAutoresizingMaskIntoConstraints = false
-        hv.tintColor = UIColor.softGrey
+        hv.tintColor = UIColor.softGray
         hv.image = #imageLiteral(resourceName: "Path").withRenderingMode(.alwaysTemplate)
         hv.isUserInteractionEnabled = true
         return hv
@@ -144,7 +144,7 @@ class browseItemCell: UICollectionViewCell{
         
         backgroundColor = .clear
         layer.borderWidth = 0.5
-        layer.borderColor = UIColor.softGrey.cgColor
+        layer.borderColor = UIColor.softGray.cgColor
         
         
         

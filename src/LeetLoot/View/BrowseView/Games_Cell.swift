@@ -34,7 +34,7 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
                                 self.heartView.tintColor = UIColor.lightBlue
                             }
                             else if check == false{
-                                self.heartView.tintColor = UIColor.coolGrey
+                                self.heartView.tintColor = UIColor.coolGray
                             }
                             
                         }
@@ -59,7 +59,7 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
             
             let user = Auth.auth().currentUser?.uid
             if user == nil{
-                self.heartView.tintColor = UIColor.softGrey
+                self.heartView.tintColor = UIColor.softGray
             }
         
         }
@@ -95,7 +95,7 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
         let hv = customeImage(frame: .zero)
         hv.contentMode = .scaleAspectFit
         hv.translatesAutoresizingMaskIntoConstraints = false
-        hv.tintColor = UIColor.softGrey
+        hv.tintColor = UIColor.softGray
         hv.image = #imageLiteral(resourceName: "Path").withRenderingMode(.alwaysTemplate)
         hv.isUserInteractionEnabled = true
         return hv
