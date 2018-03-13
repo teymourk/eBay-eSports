@@ -47,11 +47,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
             print ("Changes: ", snapshot)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
-            //self.count = 1
-            //self.grabFavInfo()
-            //self.collectionView?.reloadData()
-            //self.collectionView?.collectionViewLayout.invalidateLayout()
-            //Determine if coordinate has changed
+
         })}
         
        
@@ -86,18 +82,9 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         //var favs = [String]()
         if user != nil{
             _ = userInfo().createFavorites { (val) in
-                //self.favs = nil
                 self.arr = val
-                //print("grabbed favs from view: ", self.arr)
-
-                
-                //self.collectionView?.reloadData()
-                //self.collectionView?.collectionViewLayout.invalidateLayout()
             }
-            //print("grabbed favs from view load: ",favs)
         }
-        
-        //return favs
     }
 
     private func setupCollectionView() {
@@ -144,18 +131,13 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
                         let i = favorites?.index(where: {$0.id == game})
                         favoritesCell.favorites = favorites![i!]
                         favoritesCell.curGame = favorites![i!].id
-                        //print ("index of fav: ", favorites![i!].name)*/
+
                     }
-                    //let i = favorites?.index(where: {$0.name == game})
-                    //print ("favs is: ", favorites?[(i)!].name)
-                    //favoritesCell.favorites = favorites(arr[indexPath])*/
+ 
                 }
 
             }
-        //self.collectionView?.reloadData()
-        //self.collectionView?.collectionViewLayout.invalidateLayout()
-            //print("favs getting passed is: ",grabFavInfo())
-        
+
         if indexPath.section == 0 {
             return indexPath.row == 0 ? featuredEventsCell : setupTwitterFor(twitterCell)
         }
@@ -224,13 +206,6 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
                 self.size = CGFloat(46)
             }
     
-        /*let user = Auth.auth().currentUser
-        if user != nil{
-            _ = userInfo().createFavorites { (val) in
-                print("val is: ",val)
-            }
-            
-        }*/
         print("size is: ", size)
         return CGSize(width: view.frame.width, height: size)
     }

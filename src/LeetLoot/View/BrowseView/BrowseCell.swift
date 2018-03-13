@@ -5,7 +5,7 @@
 //  Created by Katherine Bajno on 2/9/18.
 //  Copyright © 2018 Kiarash Teymoury. All rights reserved.
 //
-
+/*
 import UIKit
 import Firebase
 import FirebaseAuth
@@ -38,11 +38,7 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
             self.browseCarousel.reloadData()
             self.browseCarousel.collectionViewLayout.invalidateLayout()
-            //self.count = 1
-            //self.grabFavInfo()
-            //self.collectionView?.reloadData()
-            //self.collectionView?.collectionViewLayout.invalidateLayout()
-            //Determine if coordinate has changed
+
         })}
         setupViews()
     }
@@ -115,7 +111,7 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
         browseCarousel.delegate = self
         
         //register item cell to the collection view
-        browseCarousel.register(BrowseCarousel.self, forCellWithReuseIdentifier: cellId)
+        browseCarousel.register(Events_Cell.self, forCellWithReuseIdentifier: cellId)
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor),
@@ -161,4 +157,4 @@ class BrowseCell: UICollectionViewCell, UICollectionViewDataSource, UICollection
     func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
         return CGRect(x: x, y: y, width: width, height: height)
     }
-}
+}*/

@@ -1,57 +1,21 @@
 //
-//  BrowseCarousel.swift
+//  Events_Cell.swift
 //  LeetLoot
 //
-//  Created by Katherine Bajno on 2/23/18.
+//  Created by Katherine Bajno on 3/12/18.
 //  Copyright © 2018 Kiarash Teymoury. All rights reserved.
 //
 
 import Foundation
 import UIKit
-import FirebaseAuth
 import Firebase
+import FirebaseAuth
 
-/*class BrowseCarousel: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, BrowseDelegate{
-    
-    func refreshItems() {
-        itemsCollectionView.reloadData()
-        itemsCollectionView.collectionViewLayout.invalidateLayout()
-    }
-    
+class Events_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, BrowseDelegate {
     
     private let cellId = "cellId"
     
     var categories: [Categories]?
-    
-    var itemCategory: BrowseCategory? {
-        didSet{
-            let browseCategories = itemCategory?.categories
-                categories = browseCategories
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        let user = Auth.auth().currentUser?.uid
-        if user != nil
-        {Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
-            print ("Changes: ", snapshot)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
-            self.refreshItems()
-            //self.count = 1
-            //self.grabFavInfo()
-            //self.collectionView?.reloadData()
-            //self.collectionView?.collectionViewLayout.invalidateLayout()
-            //Determine if coordinate has changed
-        })}
-        setupViews()
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     let itemsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -65,7 +29,34 @@ import Firebase
         return collectionView
     }()
     
-    func setupViews(){
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        let browse = BrowseCategory.sampleBrowseCategories()
+        categories = browse[0].categories
+        
+        let user = Auth.auth().currentUser?.uid
+        if user != nil
+        {Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
+            print ("Changes: ", snapshot)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+            self.refreshItems()
+        })}
+        
+        
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func refreshItems() {
+        itemsCollectionView.reloadData()
+        itemsCollectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    override func setupView() {
         backgroundColor = .white
         
         addSubview(itemsCollectionView)
@@ -76,7 +67,7 @@ import Firebase
         
         //register item cell to the collection view
         itemsCollectionView.register(browseItemCell.self, forCellWithReuseIdentifier: cellId)
-
+        
         NSLayoutConstraint.activate([
             itemsCollectionView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             itemsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
@@ -84,11 +75,7 @@ import Firebase
             itemsCollectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
             
             ])
-        
-        
     }
-    
-    //number of cells return in section, this will change based on if it's events or games
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         
@@ -106,7 +93,7 @@ import Firebase
         return cell
     }
     
-
+    
     //sizing of cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 130, height: 130)
@@ -116,4 +103,6 @@ import Firebase
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(15)
     }
-}*/
+
+    
+}
