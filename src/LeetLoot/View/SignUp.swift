@@ -102,7 +102,8 @@ class SignUp: SignIn {
     
     private func createUserWithDatsa(UID:String) {
         let databaseRef = Database.database().reference().child("users/\(UID)"),
-            userObject = ["favorites": ["csgo":false, "dota":true]] as Dictionary<String, Any>
+        userObject = ["favorites": ["overwatch":false, "lol":false, "dota":false, "sbm":false, "sf":false,
+                                    "rl":false, "csgo":false, "hots":false, "sc2":false, "hs":false]] as Dictionary<String, Any>
         databaseRef.setValue(userObject)
         UserDefaults.standard.setValue(UID, forKey: "SignedUser")
         delegate?.signedInSuccessfully()

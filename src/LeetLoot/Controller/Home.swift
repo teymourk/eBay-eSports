@@ -7,15 +7,74 @@
 //
 
 import Foundation
+import FirebaseAuth
 import UIKit
 import Firebase
 import TwitterKit
 
 class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, TwitterDelegate {
     
+    var size:CGFloat = 46
+    
+    var favorites: [FavoritesCategory]?
+    
+    var count:Int = 1
+    
+    var arr: [String]?{
+        didSet{
+            if (arr!.count > 0) {
+                count = arr!.count
+            }
+            else {
+                count = 1
+            }
+            self.collectionView?.reloadData()
+            self.collectionView?.collectionViewLayout.invalidateLayout()
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.count = 1
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshHome), name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+
+        favorites = FavoritesCategory.favoriteCategories()
+        grabFavInfo()
+        
+        Auth.auth().addStateDidChangeListener { auth, user in
+            self.count = 1
+            self.grabFavInfo()
+            self.collectionView?.reloadData()
+            self.collectionView?.collectionViewLayout.invalidateLayout()
+        }
+        
+        let user = Auth.auth().currentUser?.uid
+        if user != nil {
+            Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
+            print ("Changes: ", snapshot)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+
+        })}
+        
         setupCollectionView()
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func grabFavInfo(){
+        let user = Auth.auth().currentUser
+        if user != nil{
+            _ = userInfo().createFavorites { (val) in
+                self.arr = val
+            }
+        }
     }
 
     private func setupCollectionView() {
@@ -33,7 +92,8 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? 2 : 1
+       
+        return section == 0 ? 2 : count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -43,7 +103,29 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         let twitterCell: Twitter_Cell = collectionView.reusableCell(indexPath: indexPath)
             twitterCell.delegate = self
         let favoritesCell: Favorites_Cell = collectionView.reusableCell(indexPath: indexPath)
+            favoritesCell.userFavorites = arr
         
+            if (arr?.count != nil) {
+                if (arr!.count > 0){
+                    var game:String
+                    if arr!.count == 1 {
+                        game = arr![0]
+                        let index = (indexPath.item)
+                        print ("index is: ", index)
+                    }
+                    else{
+                         let index = (indexPath.item)
+                        print ("index is: ", index)
+                         game = arr![index]
+                    }
+                   if (favorites != nil){
+                        let i = favorites?.index(where: {$0.id == game})
+                        favoritesCell.favorites = favorites![i!]
+                        favoritesCell.curGame = favorites![i!].id
+                    }
+                }
+            }
+
         if indexPath.section == 0 {
             return indexPath.row == 0 ? featuredEventsCell : setupTwitterFor(twitterCell)
         }
@@ -92,7 +174,32 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
             return indexPath.row == 0 ? eventRow : tweet
         }
         
-        return CGSize(width: view.frame.width, height: 200)
+        if Auth.auth().currentUser != nil {
+            if let f  = arr{
+            if f.count > 0 {
+                    print("user signed in with favorites")
+                    self.size = CGFloat(244)
+                }
+                else{
+                    print("user signed in with no favorites")
+                    self.size = CGFloat(46)
+                }
+            }
+        }
+        else {
+            print("no user signed in")
+            self.size = CGFloat(46)
+        }
+    
+        print("size is: ", size)
+        return CGSize(width: view.frame.width, height: size)
+    }
+    
+    @objc func refreshHome() {
+        self.count = 1
+        self.grabFavInfo()
+        self.collectionView?.reloadData()
+        self.collectionView?.collectionViewLayout.invalidateLayout()
     }
 }
 

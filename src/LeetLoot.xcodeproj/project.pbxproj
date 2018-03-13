@@ -9,9 +9,12 @@
 /* Begin PBXBuildFile section */
 		141690F0C6C00E83139AC50A /* Pods_LeetLootTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7756037293945067944C34A /* Pods_LeetLootTests.framework */; };
 		A13F4BB72040D07A008E042E /* BrowseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13F4BB62040D07A008E042E /* BrowseCategory.swift */; };
-		A13F4BB92040D83D008E042E /* BrowseCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13F4BB82040D83D008E042E /* BrowseCarousel.swift */; };
-		A1A64DD2202E849000F89E19 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A64DD1202E849000F89E19 /* BrowseCell.swift */; };
+		A176880F2051E79B001C2B6F /* BrowseItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A176880E2051E79B001C2B6F /* BrowseItemCell.swift */; };
+		A1A7774D20575EDE008B2E95 /* Events_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A7774C20575EDE008B2E95 /* Events_Cell.swift */; };
+		A1A7774F20575EEF008B2E95 /* Games_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A7774E20575EEF008B2E95 /* Games_Cell.swift */; };
+		A1BD0A1E20571D8100D9DA18 /* FavoritesCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BD0A1D20571D8100D9DA18 /* FavoritesCategory.swift */; };
 		A1F1F116202EA7F40048AD45 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F1F115202EA7F40048AD45 /* CarouselCollectionView.swift */; };
+		A1F6343520520BCA00661FAD /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F6343420520BCA00661FAD /* UserInfo.swift */; };
 		AB29EAA3202312D000F27A3B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB29EAA2202312D000F27A3B /* Filter.swift */; };
 		AB2CE5542029B9BF0025DA69 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2CE5532029B9BF0025DA69 /* ReusableView.swift */; };
 		AB310E69201DA3070085EBA8 /* Buy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB310E68201DA3070085EBA8 /* Buy.swift */; };
@@ -73,9 +76,12 @@
 		26B939428E35986B807F8E56 /* Pods-LeetLootTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7A1F30C730B697589D58797A /* Pods-LeetLootTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLootTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLootTests/Pods-LeetLootTests.release.xcconfig"; sourceTree = "<group>"; };
 		A13F4BB62040D07A008E042E /* BrowseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseCategory.swift; sourceTree = "<group>"; };
-		A13F4BB82040D83D008E042E /* BrowseCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseCarousel.swift; sourceTree = "<group>"; };
-		A1A64DD1202E849000F89E19 /* BrowseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseCell.swift; sourceTree = "<group>"; };
+		A176880E2051E79B001C2B6F /* BrowseItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseItemCell.swift; sourceTree = "<group>"; };
+		A1A7774C20575EDE008B2E95 /* Events_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events_Cell.swift; sourceTree = "<group>"; };
+		A1A7774E20575EEF008B2E95 /* Games_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Games_Cell.swift; sourceTree = "<group>"; };
+		A1BD0A1D20571D8100D9DA18 /* FavoritesCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCategory.swift; sourceTree = "<group>"; };
 		A1F1F115202EA7F40048AD45 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
+		A1F6343420520BCA00661FAD /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		AB29EAA2202312D000F27A3B /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		AB2CE5532029B9BF0025DA69 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		AB310E68201DA3070085EBA8 /* Buy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buy.swift; sourceTree = "<group>"; };
@@ -158,10 +164,20 @@
 		A13F4BBA2040D905008E042E /* BrowseView */ = {
 			isa = PBXGroup;
 			children = (
-				A1A64DD1202E849000F89E19 /* BrowseCell.swift */,
-				A13F4BB82040D83D008E042E /* BrowseCarousel.swift */,
+				A176880E2051E79B001C2B6F /* BrowseItemCell.swift */,
+				A1A7774C20575EDE008B2E95 /* Events_Cell.swift */,
+				A1A7774E20575EEF008B2E95 /* Games_Cell.swift */,
 			);
 			path = BrowseView;
+			sourceTree = "<group>";
+		};
+		A1F634362054776B00661FAD /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				BE4625332011DA4F005789E6 /* Favorites_Cell.swift */,
+			);
+			name = Favorites;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		AB310E67201D98720085EBA8 /* Recovered References */ = {
@@ -248,6 +264,8 @@
 				AB94227E2031674C002E7311 /* Merchendise.swift */,
 				AB4820532049E70000698478 /* ItemHref.swift */,
 				AB74F05E2050F43400D94F86 /* Token .swift */,
+				A1F6343420520BCA00661FAD /* UserInfo.swift */,
+				A1BD0A1D20571D8100D9DA18 /* FavoritesCategory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -255,6 +273,7 @@
 		AB7847E81FDDFC2A008EBD70 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A1F634362054776B00661FAD /* Favorites */,
 				A13F4BBA2040D905008E042E /* BrowseView */,
 				AB7847CE1FDDFB24008EBD70 /* LaunchScreen.storyboard */,
 				A1F1F115202EA7F40048AD45 /* CarouselCollectionView.swift */,
@@ -271,7 +290,6 @@
 				AB90EBD4204C711C00D77217 /* AdditionalImagesCV.swift */,
 				AB90EBD6204C72A000D77217 /* AdditionalImagesCell.swift */,
 				BE46252D2011D305005789E6 /* Featured_Events_Cell.swift */,
-				BE4625332011DA4F005789E6 /* Favorites_Cell.swift */,
 				BE4625312011DA1A005789E6 /* Header_Cell.swift */,
 				ABD41D962015C45500A61C95 /* CustomNavbar.swift */,
 				AB6DA786200FF75500135CF5 /* ScrollView.swift */,
@@ -464,7 +482,8 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterShareExtensionUIResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -545,25 +564,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB4820542049E70000698478 /* ItemHref.swift in Sources */,
+				A1F6343520520BCA00661FAD /* UserInfo.swift in Sources */,
 				AB90BC0D203D14540052C685 /* Browse_Event.swift in Sources */,
 				A1F1F116202EA7F40048AD45 /* CarouselCollectionView.swift in Sources */,
 				AB38512A2026F58C008D6B71 /* FilterOptions.swift in Sources */,
+				A176880F2051E79B001C2B6F /* BrowseItemCell.swift in Sources */,
 				ABF26A3D2023CB4300FE1473 /* Filter_Cell.swift in Sources */,
 				AB90EBD7204C72A000D77217 /* AdditionalImagesCell.swift in Sources */,
 				BE4625342011DA4F005789E6 /* Favorites_Cell.swift in Sources */,
 				BE4625292011C367005789E6 /* TwitterAPI.swift in Sources */,
 				AB310E69201DA3070085EBA8 /* Buy.swift in Sources */,
+				A1BD0A1E20571D8100D9DA18 /* FavoritesCategory.swift in Sources */,
 				A13F4BB72040D07A008E042E /* BrowseCategory.swift in Sources */,
+				A1A7774F20575EEF008B2E95 /* Games_Cell.swift in Sources */,
 				ABD41D972015C45500A61C95 /* CustomNavbar.swift in Sources */,
 				AB6DA787200FF75500135CF5 /* ScrollView.swift in Sources */,
 				AB7847C81FDDFB24008EBD70 /* Home.swift in Sources */,
 				BEBE73482032247400032325 /* Twitter_Timeline.swift in Sources */,
 				AB29EAA3202312D000F27A3B /* Filter.swift in Sources */,
 				BE46252E2011D305005789E6 /* Featured_Events_Cell.swift in Sources */,
-				A13F4BB92040D83D008E042E /* BrowseCarousel.swift in Sources */,
 				BE24D7381FF585C600E745E6 /* Browse.swift in Sources */,
 				AB7847C61FDDFB24008EBD70 /* AppDelegate.swift in Sources */,
-				A1A64DD2202E849000F89E19 /* BrowseCell.swift in Sources */,
+				A1A7774D20575EDE008B2E95 /* Events_Cell.swift in Sources */,
 				AB2CE5542029B9BF0025DA69 /* ReusableView.swift in Sources */,
 				AB90EBD5204C711C00D77217 /* AdditionalImagesCV.swift in Sources */,
 				AB74F05F2050F43400D94F86 /* Token .swift in Sources */,

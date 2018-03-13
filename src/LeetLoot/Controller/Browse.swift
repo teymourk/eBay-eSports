@@ -8,49 +8,104 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
+import Firebase
+
+
+//Mark: - CollectionHeader
+extension Browse {
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header: Header_Cell = collectionView.reusableCell(indexPath: indexPath, kind: kind)
+        header.title = indexPath.section == 0 ? "Events" : "Games"
+        
+        return header
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width,
+                      height: 40)
+    }
+}
 
 class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    private let cellId = "cellId"
-   var browseCategories: [BrowseCategory]?
+    var category: [FavoritesCategory]?
+    
+    @objc func sendAlert() {
+        let alert = UIAlertController(title: "Not Signed In", message: "Sign in to start favoriting games.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func refreshBrowse() {
+        self.collectionView?.reloadData()
+        self.collectionView?.collectionViewLayout.invalidateLayout()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        browseCategories = BrowseCategory.sampleBrowseCategories()
+       NotificationCenter.default.addObserver(self, selector: #selector(sendAlert), name: NSNotification.Name(rawValue: "sendAlertBrowse"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshBrowse), name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
         
-        //collectionView?.contentInsetAdjustmentBehavior = .never
+        Auth.auth().addStateDidChangeListener { auth, user in
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+        }
+        
+        category = FavoritesCategory.favoriteCategories()
+        setupCollectionView()
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func setupCollectionView() {
         collectionView?.backgroundColor = .customGray
-        collectionView?.register(BrowseCell.self, forCellWithReuseIdentifier: cellId)
-        
+        collectionView?.registerCell(Events_Cell.self)
+        collectionView?.registerCell(Games_Cell.self)
+        collectionView?.registerCell(Header_Cell.self, isHeader: true)
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+    }
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return section == 0 ? 1 : 10
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BrowseCell
         
-        cell.browseCategory = browseCategories?[indexPath.item]
-        
-        return cell
+        let eventsCell: Events_Cell = collectionView.reusableCell(indexPath: indexPath)
+        let gamesCell: Games_Cell = collectionView.reusableCell(indexPath: indexPath)
+        let index = (indexPath.item)
+        gamesCell.curGame = category![index]
+        gamesCell.game = category![index].id
+     
+     return indexPath.section == 0 ? eventsCell : gamesCell
     }
     
-    
-    
-    //num cells
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let count = browseCategories?.count {
-            return count
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
+        UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        if indexPath.section == 0 {
+            return CGSize(width: view.frame.width, height: 160)
+                
         }
-        return 0
-    }
-    
-    //sizing of cells
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: 265)
+        
+        return CGSize(width: view.frame.width, height: 64)
     }
     
     //adjust line spacing between cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return CGFloat(15)
+        return CGFloat(2)
     }
-
+ 
 }
