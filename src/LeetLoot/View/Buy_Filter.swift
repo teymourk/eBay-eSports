@@ -169,7 +169,10 @@ final class Buy_Filter: NSObject {
             close()
         case .Filter:
             close()
-            delegate?.updateNewData(for: filterView.rootQuery)
+            if let m = filterView.rootQuery {
+                delegate?.updateNewData(for: m)
+            }
+            
         case .None: break
         }
     }
@@ -195,7 +198,9 @@ final class Buy_Filter: NSObject {
     private func onTap(_ sender: UITapGestureRecognizer) {
         if parentView.isDescendant(of: window) {
             if filterView.isDescendant(of: parentView) {
-                delegate?.updateNewData(for: filterView.rootQuery)
+                if let m = filterView.rootQuery {
+                    delegate?.updateNewData(for: m)
+                }
             }
             close()
         }

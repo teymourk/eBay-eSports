@@ -10,19 +10,15 @@ import UIKit
 
 class Filter: UITableView {
     
-    var gameName: String? = " "
-    
     var sorting: Sort.option = .Best_Match,
         filtering: Filters.option = .All_Items,
         rangeQuery: String = "0.."
 
-    var rootQuery: Root {
-        get {
-            let name = gameName?.replacingOccurrences(of: " ", with: "+")
-            return Root(queryKey: name!,
-                        filterBy: filtering,
-                        sortBy: sorting,
-                        range: rangeQuery)
+    var rootQuery: Root? {
+        didSet {
+            let name = self.rootQuery?.keyWord ?? ""
+            print(name)
+            rootQuery = Root(queryKey: name, filterBy: filtering, sortBy: sorting, range: rangeQuery)
         }
     }
 

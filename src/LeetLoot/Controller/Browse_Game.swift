@@ -12,8 +12,9 @@ class Browse_Game: UICollectionViewController {
     
     var selectedGame: String? {
         didSet {
-            if  let game = selectedGame?.replacingOccurrences(of: " ", with: "+") {
+            if  let game = selectedGame {
                 merchRoot = Root(queryKey: game, filterBy: .All_Items, sortBy: .Best_Match)
+                buyItem.filterView.rootQuery = merchRoot!
                 merchRoot?.retrieveDataByName(offset: 0, loadingIndicator, { [weak self] in
                     self?.root = $0
                 })
@@ -168,7 +169,6 @@ extension Browse_Game: UICollectionViewDelegateFlowLayout {
 extension Browse_Game: MenuBarDelegate {
     func onMenuButtons(_ sender: UIButton) {
         buyItem.open(.Filter)
-        buyItem.filterView.gameName = selectedGame!
     }
 }
 

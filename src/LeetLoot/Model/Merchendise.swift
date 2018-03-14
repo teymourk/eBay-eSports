@@ -23,7 +23,7 @@ struct Root:Codable, BrowseAPI {
         errors: [errors]?
 
     init(queryKey: String, filterBy: Filters.option, sortBy: Sort.option, range: String? = nil, limit: Int? = nil) {
-        self.keyWord = queryKey
+        self.keyWord = queryKey.replacingOccurrences(of: " ", with: "+")
         self.filterBy = filterBy
         self.sortBy = sortBy
         self.fetchLimit = limit
