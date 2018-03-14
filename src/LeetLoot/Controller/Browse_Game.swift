@@ -21,14 +21,14 @@ class Browse_Game: UICollectionViewController {
         }
     }
 
-    private var loadingIndicator = { () -> UIActivityIndicatorView in
+    var loadingIndicator = { () -> UIActivityIndicatorView in
         let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
             view.color = .lightBlue
             view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    fileprivate var root: [Root]? {
+    var root: [Root]? {
         didSet {
             collectionView?.reloadData()
             menuBar.results = self.root?.first?.total
@@ -75,7 +75,7 @@ class Browse_Game: UICollectionViewController {
     private func setupCollectionView() {
         collectionView?.registerCell(Merch_Cell.self)
         collectionView?.backgroundColor = .white
-        title = "Game Title"
+        title = selectedGame
         setupLoader()
     }
     

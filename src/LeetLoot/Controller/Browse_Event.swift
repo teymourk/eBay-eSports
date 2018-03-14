@@ -32,6 +32,14 @@ class Browse_Event: Browse_Game {
             menuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let merchRoot = Root(queryKey: "Nintendo", filterBy: .All_Items, sortBy: .Best_Match)
+        merchRoot.retrieveDataByName(offset: 0, loadingIndicator, { [weak self] in
+            self?.root = $0
+        })
+    }
 }
 
 extension Browse_Event {
