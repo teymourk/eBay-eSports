@@ -123,7 +123,8 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         label.textAlignment = .left
         label.text = "Overwatch"
         label.textColor = .black
-        label.font = UIFont(name: "Helvetica-Regular", size:15)
+        label.font = UIFont.systemFont(ofSize: 15.0)
+        //label.font = UIFont(name: "Helvetica-Regular", size:15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -133,7 +134,8 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         label.textAlignment = .left
         label.text = ""
         label.textColor = .black
-        label.font = UIFont(name: "Helvetica-Regular", size:13)
+        label.font = UIFont.systemFont(ofSize: 13.0)
+        //label.font = UIFont(name: "Helvetica-Regular", size:13)
         label.contentMode = .scaleAspectFit
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -214,15 +216,16 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
             gameImage.heightAnchor.constraint(equalToConstant: 40),
             gameImage.widthAnchor.constraint(equalToConstant: 30),
             
-            textLabel.topAnchor.constraint(equalTo: topAnchor, constant: 21),
-            textLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -197),
-            textLabel.leftAnchor.constraint(equalTo: gameImage.rightAnchor, constant: 12),
-            textLabel.rightAnchor.constraint(equalTo: centerXAnchor),
-            
             heartView.topAnchor.constraint(equalTo: topAnchor, constant: 19),
             heartView.rightAnchor.constraint(equalTo: rightAnchor, constant: -19),
             heartView.heightAnchor.constraint(equalToConstant: 24),
             heartView.widthAnchor.constraint(equalToConstant: 22.2),
+            
+            textLabel.topAnchor.constraint(equalTo: topAnchor, constant: 21),
+            textLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -197),
+            textLabel.leftAnchor.constraint(equalTo: gameImage.rightAnchor, constant: 12),
+            textLabel.rightAnchor.constraint(equalTo: heartView.rightAnchor),
+            //textLabel.rightAnchor.constraint(equalTo: centerXAnchor),
             
             carouselCollectionView.topAnchor.constraint(equalTo: gameImage.bottomAnchor, constant: 12),
             carouselCollectionView.leftAnchor.constraint(equalTo: leftAnchor),
