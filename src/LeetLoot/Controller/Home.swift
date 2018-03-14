@@ -148,14 +148,6 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         self.navigationController?.pushViewController(twitterTimeline, animated: true)
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 0, indexPath.item == 0 {
-            let layout = UICollectionViewFlowLayout()
-            let myPge = Browse_Game(collectionViewLayout: layout)
-            navigationController?.pushViewController(myPge, animated: true)
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
         UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 

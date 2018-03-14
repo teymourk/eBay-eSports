@@ -67,6 +67,7 @@ final class customeImage: UIImageView {
                             self?.loadWithAnimation()
                             self?.image = cachedImage
                         }
+                        self?.handleCellAnimation()
                     }
                 }
             }.resume()

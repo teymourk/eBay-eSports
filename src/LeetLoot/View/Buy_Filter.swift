@@ -62,7 +62,7 @@ final class Buy_Filter: NSObject {
         return view
     }()
     
-    private lazy var filterView = { () -> Filter in
+    lazy var filterView = { () -> Filter in
         let view = Filter()
         return view
     }()

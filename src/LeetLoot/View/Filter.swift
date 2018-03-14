@@ -10,21 +10,22 @@ import UIKit
 
 class Filter: UITableView {
     
-    deinit {
-        print("yo")
-    }
+    var gameName: String? = " "
     
     var sorting: Sort.option = .Best_Match,
         filtering: Filters.option = .All_Items,
         rangeQuery: String = "0.."
 
     var rootQuery: Root {
-        return Root(  queryKey: "overwatch",
-                      filterBy: filtering,
-                      sortBy: sorting,
-                      range: rangeQuery)
+        get {
+            let name = gameName?.replacingOccurrences(of: " ", with: "+")
+            return Root(queryKey: name!,
+                        filterBy: filtering,
+                        sortBy: sorting,
+                        range: rangeQuery)
+        }
     }
-    
+
     fileprivate var filterMenu: [FilterOptions] {
         return [Sort(), Filters(), Price()]
     }

@@ -21,7 +21,7 @@ struct Root:Codable, BrowseAPI {
         fetchLimit: Int?,
         range: String?,
         errors: [errors]?
-    
+
     init(queryKey: String, filterBy: Filters.option, sortBy: Sort.option, range: String? = nil, limit: Int? = nil) {
         self.keyWord = queryKey
         self.filterBy = filterBy

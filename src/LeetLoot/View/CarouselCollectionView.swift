@@ -118,8 +118,8 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     
     func loadData() {
         let query = Root(queryKey: "nintendo", filterBy: .All_Items, sortBy: .Best_Match, limit: 8)
-        query.retrieveDataByName(offset: 0, loadingIndicator: loadingIndicator) { (eventMerch) in
-            self.root = eventMerch
+        query.retrieveDataByName(offset: 0, loadingIndicator) { [weak self] in
+            self?.root = $0
         }
     }
     
