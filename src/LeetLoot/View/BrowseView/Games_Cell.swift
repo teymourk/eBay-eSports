@@ -34,7 +34,7 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
                                 self.heartView.tintColor = UIColor.lightBlue
                             }
                             else if check == false{
-                                self.heartView.tintColor = UIColor.coolGray
+                                self.heartView.tintColor = UIColor.softGray
                             }
                             
                         }
@@ -77,14 +77,14 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
         iv.image = UIImage(named: "")
         iv.contentMode = .scaleAspectFit
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.downloadImages(url: "https://static-cdn.jtvnw.net/ttv-boxart/Overwatch-285x380.jpg")
+        iv.downloadImages(url: "")
         return iv
     }()
     
     let textLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.text = "Overwatch"
+        label.text = ""
         label.textColor = .black
         label.font = UIFont(name: "Helvetica-Regular", size:15)
         label.translatesAutoresizingMaskIntoConstraints = false
