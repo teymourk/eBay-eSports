@@ -127,8 +127,9 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
                         let userRef = ref.child("users").child(user!).child("favorites")
                         print("check is: ", check, " opposite is: ", !check)
                         userRef.updateChildValues([self.game! : !check])
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
                         self.delegate?.updateItems(index: self.indexPath!)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+
                         
                     }
                 }

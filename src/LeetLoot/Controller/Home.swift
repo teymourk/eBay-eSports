@@ -186,7 +186,9 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     @objc func refreshHome() {
         self.count = 1
         self.grabFavInfo()
-        self.collectionView?.reloadSections(NSIndexSet(index:1) as IndexSet)
+        self.collectionView?.reloadData()
+        self.collectionView?.collectionViewLayout.invalidateLayout()
+        //self.collectionView?.reloadSections(NSIndexSet(index:1) as IndexSet)
     }
 }
 
