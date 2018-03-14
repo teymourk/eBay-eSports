@@ -26,7 +26,7 @@ extension Browse {
     }
 }
 
-class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, GamesDelegate {
     
     var category: [FavoritesCategory]?
     
@@ -41,6 +41,11 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     @objc func refreshBrowse() {
         self.collectionView?.reloadData()
         self.collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
+    func updateItems(index: IndexPath) {
+        print("index is: ", index)
+        self.collectionView?.reloadItems(at: [index])
     }
     
     override func viewDidLoad() {
@@ -89,6 +94,8 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         let index = (indexPath.item)
         gamesCell.curGame = category![index]
         gamesCell.game = category![index].id
+        gamesCell.indexPath = indexPath
+        gamesCell.delegate = self
      
      return indexPath.section == 0 ? eventsCell : gamesCell
     }

@@ -162,7 +162,7 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         return CGSize(width: collectionView.frame.size.width, height: 130)
     }
     
-    @objc func checkAction(sender : UITapGestureRecognizer) {
+    @objc func checkAction() {
          print("Add this game to favorites")
          let ref = Database.database().reference()
          let user = Auth.auth().currentUser?.uid
@@ -202,11 +202,6 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         
         //register item cell to the collection view
         carouselCollectionView.register(CarouselCollectionView.self, forCellWithReuseIdentifier: cellId)
-        
-        let gesture = UITapGestureRecognizer(target: self, action:  #selector(browseItemCell.checkAction))
-        gesture.cancelsTouchesInView = false
-        heartView.addGestureRecognizer(gesture)
-        
         
         NSLayoutConstraint.activate([
             gameImage.topAnchor.constraint(equalTo: topAnchor, constant: 12),

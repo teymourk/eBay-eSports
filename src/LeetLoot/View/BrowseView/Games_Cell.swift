@@ -11,8 +11,14 @@ import UIKit
 import FirebaseAuth
 import Firebase
 
+protocol GamesDelegate {
+    func updateItems(index: IndexPath)
+}
+
 class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    var delegate: GamesDelegate?
+
     var curGame:FavoritesCategory? {
         didSet{
             if let imageName = curGame?.imageName {
@@ -46,6 +52,12 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
     }
     
     var game:String?{
+        didSet{
+            
+        }
+    }
+    
+    var indexPath: IndexPath? {
         didSet{
             
         }
@@ -115,8 +127,8 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
                         let userRef = ref.child("users").child(user!).child("favorites")
                         print("check is: ", check, " opposite is: ", !check)
                         userRef.updateChildValues([self.game! : !check])
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+                        self.delegate?.updateItems(index: self.indexPath!)
                         
                     }
                 }
@@ -135,10 +147,6 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
         addSubview(gameImage)
         addSubview(textLabel)
         addSubview(heartView)
-        
-        /*let gesture = UITapGestureRecognizer(target: self, action:  #selector(browseItemCell.checkAction))
-        gesture.cancelsTouchesInView = false
-        heartView.addGestureRecognizer(gesture)*/
 
         NSLayoutConstraint.activate([
             gameImage.topAnchor.constraint(equalTo: topAnchor, constant: 12),
@@ -154,9 +162,7 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
             textLabel.topAnchor.constraint(equalTo: topAnchor, constant: 21),
             textLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25),
             textLabel.leftAnchor.constraint(equalTo: gameImage.rightAnchor, constant: 12),
-            textLabel.rightAnchor.constraint(equalTo: heartView.leftAnchor),
-            //textLabel.rightAnchor.constraint(equalTo: centerXAnchor),
-            
+            textLabel.rightAnchor.constraint(equalTo: heartView.leftAnchor),            
             
             ])
         
