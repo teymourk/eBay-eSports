@@ -86,7 +86,8 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
         label.textAlignment = .left
         label.text = ""
         label.textColor = .black
-        label.font = UIFont(name: "Helvetica-Regular", size:15)
+        label.font = UIFont.systemFont(ofSize: 15.0)
+        //label.font = UIFont(name: "Helvetica-Regular", size:15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -146,15 +147,16 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
             gameImage.heightAnchor.constraint(equalToConstant: 40),
             gameImage.widthAnchor.constraint(equalToConstant: 30),
             
-            textLabel.topAnchor.constraint(equalTo: topAnchor, constant: 21),
-            textLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25),
-            textLabel.leftAnchor.constraint(equalTo: gameImage.rightAnchor, constant: 12),
-            textLabel.rightAnchor.constraint(equalTo: centerXAnchor),
-            
             heartView.topAnchor.constraint(equalTo: topAnchor, constant: 19),
             heartView.rightAnchor.constraint(equalTo: rightAnchor, constant: -19),
             heartView.heightAnchor.constraint(equalToConstant: 24),
             heartView.widthAnchor.constraint(equalToConstant: 22.2),
+            
+            textLabel.topAnchor.constraint(equalTo: topAnchor, constant: 21),
+            textLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25),
+            textLabel.leftAnchor.constraint(equalTo: gameImage.rightAnchor, constant: 12),
+            textLabel.rightAnchor.constraint(equalTo: heartView.leftAnchor),
+            //textLabel.rightAnchor.constraint(equalTo: centerXAnchor),
             
             
             ])
