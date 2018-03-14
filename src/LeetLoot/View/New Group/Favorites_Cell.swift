@@ -114,7 +114,7 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         iv.image = UIImage(named: "")
         iv.contentMode = .scaleAspectFit
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.downloadImages(url: "https://static-cdn.jtvnw.net/ttv-boxart/Overwatch-285x380.jpg")
+        iv.downloadImages(url: "")
         return iv
     }()
     
@@ -124,7 +124,6 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         label.text = "Overwatch"
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 15.0)
-        //label.font = UIFont(name: "Helvetica-Regular", size:15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -135,7 +134,6 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         label.text = ""
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 13.0)
-        //label.font = UIFont(name: "Helvetica-Regular", size:13)
         label.contentMode = .scaleAspectFit
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -225,7 +223,6 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
             textLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -197),
             textLabel.leftAnchor.constraint(equalTo: gameImage.rightAnchor, constant: 12),
             textLabel.rightAnchor.constraint(equalTo: heartView.rightAnchor),
-            //textLabel.rightAnchor.constraint(equalTo: centerXAnchor),
             
             carouselCollectionView.topAnchor.constraint(equalTo: gameImage.bottomAnchor, constant: 12),
             carouselCollectionView.leftAnchor.constraint(equalTo: leftAnchor),

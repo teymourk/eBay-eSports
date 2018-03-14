@@ -28,8 +28,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
             else {
                 count = 1
             }
-            self.collectionView?.reloadData()
-            self.collectionView?.collectionViewLayout.invalidateLayout()
+            self.collectionView?.reloadSections(NSIndexSet(index:1) as IndexSet)
         }
     }
     
@@ -44,10 +43,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         grabFavInfo()
         
         Auth.auth().addStateDidChangeListener { auth, user in
-            self.count = 1
-            self.grabFavInfo()
-            self.collectionView?.reloadData()
-            self.collectionView?.collectionViewLayout.invalidateLayout()
+            self.refreshHome()
         }
         
         let user = Auth.auth().currentUser?.uid
@@ -198,8 +194,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     @objc func refreshHome() {
         self.count = 1
         self.grabFavInfo()
-        self.collectionView?.reloadData()
-        self.collectionView?.collectionViewLayout.invalidateLayout()
+        self.collectionView?.reloadSections(NSIndexSet(index:1) as IndexSet)
     }
 }
 

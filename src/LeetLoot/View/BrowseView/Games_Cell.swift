@@ -87,7 +87,6 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
         label.text = ""
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 15.0)
-        //label.font = UIFont(name: "Helvetica-Regular", size:15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
