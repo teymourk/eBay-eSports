@@ -90,18 +90,18 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    let heartView: customeImage = {
-        let hv = customeImage(frame: .zero)
-        hv.contentMode = .scaleAspectFit
-        hv.translatesAutoresizingMaskIntoConstraints = false
-        hv.tintColor = UIColor.softGray
-        hv.image = #imageLiteral(resourceName: "Path").withRenderingMode(.alwaysTemplate)
-        hv.isUserInteractionEnabled = true
-        return hv
+
+    lazy var heartView: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "Path").withRenderingMode(.alwaysTemplate), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .scaleAspectFit
+        button.tintColor = UIColor.softGray
+        button.addTarget(self, action: #selector(checkAction), for: .touchUpInside)
+        return button
     }()
     
-    @objc func checkAction(sender : UITapGestureRecognizer) {
+    @objc func checkAction() {
         print("Add this game to favorites")
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser?.uid
@@ -136,9 +136,9 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
         addSubview(textLabel)
         addSubview(heartView)
         
-        let gesture = UITapGestureRecognizer(target: self, action:  #selector(browseItemCell.checkAction))
+        /*let gesture = UITapGestureRecognizer(target: self, action:  #selector(browseItemCell.checkAction))
         gesture.cancelsTouchesInView = false
-        heartView.addGestureRecognizer(gesture)
+        heartView.addGestureRecognizer(gesture)*/
 
         NSLayoutConstraint.activate([
             gameImage.topAnchor.constraint(equalTo: topAnchor, constant: 12),

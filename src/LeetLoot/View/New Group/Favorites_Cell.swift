@@ -139,14 +139,14 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         return label
     }()
     
-    let heartView: customeImage = {
-        let hv = customeImage(frame: .zero)
-        hv.contentMode = .scaleAspectFit
-        hv.translatesAutoresizingMaskIntoConstraints = false
-        hv.tintColor = UIColor.lightBlue
-        hv.image = #imageLiteral(resourceName: "Path").withRenderingMode(.alwaysTemplate)
-        hv.isUserInteractionEnabled = true
-        return hv
+    lazy var heartView: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "Path").withRenderingMode(.alwaysTemplate), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .scaleAspectFit
+        button.tintColor = UIColor.lightBlue
+        button.addTarget(self, action: #selector(checkAction), for: .touchUpInside)
+        return button
     }()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
