@@ -9,6 +9,17 @@
 import UIKit
 
 class Browse_Game: UICollectionViewController {
+    
+    var selectedGame: String? {
+        didSet {
+            if  let game = selectedGame?.replacingOccurrences(of: " ", with: "+") {
+                merchRoot = Root(queryKey: game, filterBy: .All_Items, sortBy: .Best_Match)
+                merchRoot?.retrieveDataByName(offset: 0, loadingIndicator, { [weak self] in
+                    self?.root = $0
+                })
+            }
+        }
+    }
 
     private var loadingIndicator = { () -> UIActivityIndicatorView in
         let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -45,28 +56,19 @@ class Browse_Game: UICollectionViewController {
         setupCollectionView()
         setupMenuBar()
         setupNavBar()
-        requestDataFromAPI()
     }
     
-    private var merchRoot = Root(queryKey: "overwatch",
-                                 filterBy: .All_Items,
-                                 sortBy: .Best_Match)
-
-    private func requestDataFromAPI() {
-        merchRoot.retrieveDataByName(offset: 0, loadingIndicator: loadingIndicator, { [weak self] in
-            self?.root = $0
-        })
-    }
+    private var merchRoot: Root?
     
     private func loadMoreData(_ indexPath: IndexPath) {
         guard   let root = root?.first,
                 let summariesCount = root.itemSummaries?.count else { return }
         if indexPath.item == summariesCount - 10 {
-            merchRoot.retrieveDataByName(offset: summariesCount, loadingIndicator: loadingIndicator, { [weak self] in
+            merchRoot?.retrieveDataByName(offset: summariesCount, loadingIndicator) { [weak self] in
                 if let items = $0?.first?.itemSummaries {
                     self?.root?[0].itemSummaries?.append(contentsOf: items)
                 }
-            })
+            }
         }
     }
     
@@ -166,6 +168,7 @@ extension Browse_Game: UICollectionViewDelegateFlowLayout {
 extension Browse_Game: MenuBarDelegate {
     func onMenuButtons(_ sender: UIButton) {
         buyItem.open(.Filter)
+        buyItem.filterView.gameName = selectedGame!
     }
 }
 
@@ -175,11 +178,10 @@ extension Browse_Game: BuyFilterDelegate {
         self.setupLoader()
         self.root?[0].itemSummaries?.removeAll(keepingCapacity: false)
         self.merchRoot = query
-        query.retrieveDataByName(offset: 0, loadingIndicator: loadingIndicator, { [weak self] in
+        query.retrieveDataByName(offset: 0, loadingIndicator) { [weak self] in
             self?.root = $0
-            
             self?.collectionView?.contentOffset.y = 0
-        })
+        }
     }
 }
 

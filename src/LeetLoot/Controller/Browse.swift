@@ -81,6 +81,7 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         return section == 0 ? 1 : 10
     }
     
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let eventsCell: Events_Cell = collectionView.reusableCell(indexPath: indexPath)
@@ -90,6 +91,15 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         gamesCell.game = category![index].id
      
      return indexPath.section == 0 ? eventsCell : gamesCell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            guard   let gameName = category?[indexPath.item].name else { return }
+                    let myPge = Browse_Game(collectionViewLayout: UICollectionViewFlowLayout())
+                        myPge.selectedGame = gameName
+            navigationController?.pushViewController(myPge, animated: true)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:

@@ -14,7 +14,7 @@ protocol BrowseAPI: Networking where Model == Root {
     var sortBy: Sort.option? { get set }
     var fetchLimit: Int? { get set }
     var range: String? { get set }
-    func retrieveDataByName(offset: Int, loadingIndicator: UIActivityIndicatorView, _ completion: @escaping ([Root]?) ->())
+    func retrieveDataByName(offset: Int,_ loadingIndicator: UIActivityIndicatorView, _ completion: @escaping ([Root]?) ->())
 }
 
 extension BrowseAPI {
@@ -33,7 +33,7 @@ extension BrowseAPI {
         return baseUrl + query + groupBy + limit + filter + sort
     }
     
-    func retrieveDataByName(offset: Int, loadingIndicator: UIActivityIndicatorView, _ completion: @escaping ([Root]?) ->()) {
+    func retrieveDataByName(offset: Int,_ loadingIndicator: UIActivityIndicatorView, _ completion: @escaping ([Root]?) ->()) {
         guard let url = URL(string: endPoint+"&offset=\(offset)") else { return }
         loadingIndicator.startAnimating()
         print("URL: \(url)")
