@@ -83,7 +83,11 @@ class Events_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let event = categories?[indexPath.item].id?.appending(" Expo") else { return }
+        var event = categories?[indexPath.item].id ?? ""
+        switch indexPath.item {
+        case 0: event.append(" Expo")
+        case 2: event.append(" West")
+        default: event.append("") }
         delegate?.onEvent(name: event)
     }
     
