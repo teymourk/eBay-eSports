@@ -11,11 +11,17 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
+protocol EventCategoryDelegate: class {
+    func onEvent(name: String)
+}
+
 class Events_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     private let cellId = "cellId"
     
     var categories: [Categories]?
+    
+    weak var delegate: EventCategoryDelegate?
     
     let itemsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -76,6 +82,10 @@ class Events_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDeleg
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let event = categories?[indexPath.item].id?.appending(" Expo") else { return }
+        delegate?.onEvent(name: event)
+    }
     
     //sizing of cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
