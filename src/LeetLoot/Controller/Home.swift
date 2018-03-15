@@ -198,6 +198,7 @@ extension Home: FeaturedEventDelegate {
     func onEventBanner(_ sender: UITapGestureRecognizer) {
         let layout = UICollectionViewFlowLayout()
         let browseEvent = Browse_Event(collectionViewLayout: layout)
+            browseEvent.selectedGame = "E3 Expo"
         navigationController?.pushViewController(browseEvent, animated: true)
     }
     

@@ -33,9 +33,9 @@ struct Sort: FilterOptions {
     var options: [EnumTitles] { return [option.Best_Match, option.Lowest_Price, option.Highest_Price] }
     
     enum option: String, Codable, EnumTitles {
-        case Best_Match = "fieldgroups=MATCHING_ITEMS"
-        case Lowest_Price = "sort=price"
-        case Highest_Price = "sort=-price"
+        case Best_Match = "fieldgroups=MATCHING_ITEMS&"
+        case Lowest_Price = "sort=price&"
+        case Highest_Price = "sort=-price&"
     }
 }
 

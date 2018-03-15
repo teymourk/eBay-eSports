@@ -258,13 +258,13 @@
 		AB7847E71FDDFC1F008EBD70 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A13F4BB62040D07A008E042E /* BrowseCategory.swift */,
 				ABBC3F88201011320004C2C5 /* Constants.swift */,
 				BE4625282011C367005789E6 /* TwitterAPI.swift */,
 				AB94227E2031674C002E7311 /* Merchendise.swift */,
 				AB4820532049E70000698478 /* ItemHref.swift */,
 				AB74F05E2050F43400D94F86 /* Token .swift */,
 				A1F6343420520BCA00661FAD /* UserInfo.swift */,
+				A13F4BB62040D07A008E042E /* BrowseCategory.swift */,
 				A1BD0A1D20571D8100D9DA18 /* FavoritesCategory.swift */,
 			);
 			path = Model;

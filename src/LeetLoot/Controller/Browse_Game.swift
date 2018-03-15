@@ -13,8 +13,7 @@ class Browse_Game: UICollectionViewController {
     var selectedGame: String? {
         didSet {
             if  let game = selectedGame {
-                merchRoot = Root(queryKey: game, filterBy: .All_Items, sortBy: .Best_Match)
-                buyItem.filterView.rootQuery = merchRoot!
+                merchRoot = Root(queryKey: game, filterBy: .All_Items, sortBy: .Best_Match, range: "0..")
                 merchRoot?.retrieveDataByName(offset: 0, loadingIndicator, { [weak self] in
                     self?.root = $0
                 })
@@ -63,8 +62,9 @@ class Browse_Game: UICollectionViewController {
     
     private func loadMoreData(_ indexPath: IndexPath) {
         guard   let root = root?.first,
-                let summariesCount = root.itemSummaries?.count else { return }
-        if indexPath.item == summariesCount - 10 {
+                let summariesCount = root.itemSummaries?.count,
+                let total = root.total else { return }
+        if indexPath.item == summariesCount - 10, summariesCount < total  {
             merchRoot?.retrieveDataByName(offset: summariesCount, loadingIndicator) { [weak self] in
                 if let items = $0?.first?.itemSummaries {
                     self?.root?[0].itemSummaries?.append(contentsOf: items)
@@ -168,17 +168,21 @@ extension Browse_Game: UICollectionViewDelegateFlowLayout {
 //Mark: MenuBarDelegate
 extension Browse_Game: MenuBarDelegate {
     func onMenuButtons(_ sender: UIButton) {
+        guard let query = merchRoot else { return }
         buyItem.open(.Filter)
+        buyItem.rootQury = query
     }
 }
 
 //Mark: BuyFilterDelegate
 extension Browse_Game: BuyFilterDelegate {
-    func updateNewData(for query: Root) {
+    func updateNewData(for filteredQuery: Root) {
+        guard let merchQuery = merchRoot else { return }
+        if merchQuery == filteredQuery { return }
         self.setupLoader()
         self.root?[0].itemSummaries?.removeAll(keepingCapacity: false)
-        self.merchRoot = query
-        query.retrieveDataByName(offset: 0, loadingIndicator) { [weak self] in
+        self.merchRoot = filteredQuery
+        filteredQuery.retrieveDataByName(offset: 0, loadingIndicator) { [weak self] in
             self?.root = $0
             self?.collectionView?.contentOffset.y = 0
         }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BuyFilterDelegate: class {
-    func updateNewData(for query: Root)
+    func updateNewData(for filteredQuery: Root)
 }
 
 final class Buy_Filter: NSObject {
@@ -18,6 +18,12 @@ final class Buy_Filter: NSObject {
         didSet {
             buyView.items = items
             open(.Buy)
+        }
+    }
+    
+    var rootQury: Root? {
+        willSet {
+            filterView.filterQuery = newValue
         }
     }
 
@@ -57,12 +63,12 @@ final class Buy_Filter: NSObject {
         return button
     }()
     
-    private lazy var buyView = { () -> Buy in
+    private let buyView = { () -> Buy in
         let view = Buy()
         return view
     }()
     
-    lazy var filterView = { () -> Filter in
+    private let filterView = { () -> Filter in
         let view = Filter()
         return view
     }()
@@ -169,10 +175,7 @@ final class Buy_Filter: NSObject {
             close()
         case .Filter:
             close()
-            if let m = filterView.rootQuery {
-                delegate?.updateNewData(for: m)
-            }
-            
+            delegate?.updateNewData(for: filterView.filterQuery!)
         case .None: break
         }
     }
@@ -198,9 +201,7 @@ final class Buy_Filter: NSObject {
     private func onTap(_ sender: UITapGestureRecognizer) {
         if parentView.isDescendant(of: window) {
             if filterView.isDescendant(of: parentView) {
-                if let m = filterView.rootQuery {
-                    delegate?.updateNewData(for: m)
-                }
+                delegate?.updateNewData(for: filterView.filterQuery!)
             }
             close()
         }

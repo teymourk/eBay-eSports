@@ -9,7 +9,13 @@
 import UIKit
 
 //Root of the API Call
-struct Root:Codable, BrowseAPI {
+struct Root:Codable, BrowseAPI, Equatable {
+    static func ==(lhs: Root, rhs: Root) -> Bool {
+        return  lhs.filterBy == rhs.filterBy &&
+                lhs.sortBy == rhs.sortBy &&
+                lhs.range == rhs.range
+    }
+    
     typealias Model = Root
     
     var total: Int?,

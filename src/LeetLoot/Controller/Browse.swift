@@ -95,6 +95,7 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, Ga
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let eventsCell: Events_Cell = collectionView.reusableCell(indexPath: indexPath)
+            eventsCell.delegate = self
         let gamesCell: Games_Cell = collectionView.reusableCell(indexPath: indexPath)
         let index = (indexPath.item)
         gamesCell.curGame = category![index]
@@ -105,12 +106,13 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, Ga
      return indexPath.section == 0 ? eventsCell : gamesCell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {        
         if indexPath.section == 1 {
             guard   let gameName = category?[indexPath.item].name else { return }
                     let myPge = Browse_Game(collectionViewLayout: UICollectionViewFlowLayout())
                         myPge.selectedGame = gameName
             navigationController?.pushViewController(myPge, animated: true)
+            return
         }
     }
     
@@ -130,4 +132,13 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, Ga
         return CGFloat(2)
     }
  
+}
+
+//Mark: - EventCell Delegate
+extension Browse: EventCategoryDelegate {
+    func onEvent(name: String) {
+        let evenPage = Browse_Event(collectionViewLayout: UICollectionViewFlowLayout())
+            evenPage.selectedGame = name
+        navigationController?.pushViewController(evenPage, animated: true)
+    }
 }
