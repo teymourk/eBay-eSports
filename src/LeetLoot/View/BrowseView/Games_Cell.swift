@@ -114,7 +114,7 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
     }()
     
     @objc func checkAction() {
-        print("Add this game to favorites")
+        print("Button pressed on browse")
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser?.uid
         if user != nil{

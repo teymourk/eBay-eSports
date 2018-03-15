@@ -32,13 +32,14 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshHome), name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.count = 1
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshHome), name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
-
         favorites = FavoritesCategory.favoriteCategories()
         grabFavInfo()
         

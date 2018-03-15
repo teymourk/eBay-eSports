@@ -13,6 +13,15 @@ import Firebase
 
 class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let cellId = "cellId"
     var favorites: FavoritesCategory?{
         didSet{
@@ -163,7 +172,7 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
     }
     
     @objc func checkAction() {
-         print("Add this game to favorites")
+        print("Button pressed on home")
          let ref = Database.database().reference()
          let user = Auth.auth().currentUser?.uid
          if user != nil{
