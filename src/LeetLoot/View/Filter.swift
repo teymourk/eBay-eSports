@@ -9,16 +9,21 @@
 import UIKit
 
 class Filter: UITableView {
-    
+        
     var sorting: Sort.option = .Best_Match,
         filtering: Filters.option = .All_Items,
         rangeQuery: String = "0.."
 
-    var rootQuery: Root? {
-        didSet {
+    private var rootQuery: Root?
+    
+    var filterQuery: Root? {
+        get {
             let name = self.rootQuery?.keyWord ?? ""
-            print(name)
             rootQuery = Root(queryKey: name, filterBy: filtering, sortBy: sorting, range: rangeQuery)
+            return rootQuery
+            
+        }set {
+            self.rootQuery = newValue
         }
     }
 
@@ -30,11 +35,11 @@ class Filter: UITableView {
         backgroundColor = .white
         register(Filter_Cell.self, forCellReuseIdentifier: "FilterCell")
         register(PriceRange.self, forCellReuseIdentifier: "T")
-        self.isScrollEnabled = false
-        self.showsVerticalScrollIndicator = false
-        self.delegate = self
-        self.dataSource = self
-        self.bounces = false
+        isScrollEnabled = false
+        showsVerticalScrollIndicator = false
+        delegate = self
+        dataSource = self
+        bounces = false
     }
     
     override init(frame: CGRect, style: UITableViewStyle) {

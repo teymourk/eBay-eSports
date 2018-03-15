@@ -30,7 +30,7 @@ extension BrowseAPI {
             priceRange = "price%3A%5B\(range ?? "0..")%5D",
             filter = "filter=\(priceCurrency)\(priceRange),\(buyOption),\(condition)",
             sort = sortBy?.rawValue ?? ""
-        return baseUrl + query + groupBy + limit + filter + sort
+        return baseUrl + query + groupBy + filter + sort + limit
     }
     
     func retrieveDataByName(offset: Int,_ loadingIndicator: UIActivityIndicatorView, _ completion: @escaping ([Root]?) ->()) {
