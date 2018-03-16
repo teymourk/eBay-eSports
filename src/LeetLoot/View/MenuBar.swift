@@ -134,7 +134,7 @@ final class Menu: ParentView {
             return
         }
         NSLayoutConstraint.activate([
-            result.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
+            result.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             horizontalBar.leadingAnchor.constraint(equalTo: leadingAnchor),
             horizontalBar.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])

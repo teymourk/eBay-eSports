@@ -117,7 +117,7 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     }
     
     func loadData() {
-        let query = Root(queryKey: "nintendo", filterBy: .All_Items, sortBy: .Best_Match, limit: 8)
+        let query = Root(queryKey: "e3 expo", filterBy: .All_Items, sortBy: .Best_Match, limit: 8)
         query.retrieveDataByName(offset: 0, loadingIndicator) { [weak self] in
             self?.root = $0
         }
