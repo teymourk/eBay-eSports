@@ -101,6 +101,8 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
         filtersCell?.selectionStyle = .none
         filtersCell?.checkImage.isHidden =  indexPath == sortCheckedIndexPath ||
                                             indexPath == filterCheckedIndexPth ? false : true
+        filtersCell?.textLabel?.textColor = indexPath == sortCheckedIndexPath ||
+                                            indexPath == filterCheckedIndexPth ? .lightBlue : .black
     
         return filtersCell ?? UITableViewCell()
     }
@@ -118,22 +120,26 @@ extension Filter: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {
             if sortCheckedIndexPath != nil {
                 let cell = tableView.cellForRow(at: sortCheckedIndexPath!) as? Filter_Cell
-                cell?.checkImage.isHidden = true
+                    cell?.checkImage.isHidden = true
+                    cell?.textLabel?.textColor = .black
             }
             sortCheckedIndexPath = indexPath
             let cell = tableView.cellForRow(at: indexPath) as? Filter_Cell
-            cell?.checkImage.isHidden = false
+                cell?.checkImage.isHidden = false
+                cell?.textLabel?.textColor = .lightBlue
             return
         }
         
         if indexPath.section == 1 {
             if filterCheckedIndexPth != nil {
                 let cell = tableView.cellForRow(at: filterCheckedIndexPth!) as? Filter_Cell
-                cell?.checkImage.isHidden = true
+                    cell?.checkImage.isHidden = true
+                    cell?.textLabel?.textColor = .black
             }
             filterCheckedIndexPth = indexPath
             let cell = tableView.cellForRow(at: indexPath) as? Filter_Cell
-            cell?.checkImage.isHidden = false
+                cell?.checkImage.isHidden = false
+                cell?.textLabel?.textColor = .lightBlue
             return
         }
     }
