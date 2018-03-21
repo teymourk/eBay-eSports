@@ -40,6 +40,11 @@ class PageView: UIViewController {
         return scrollView
     }()
     
+    private let toast = { () -> Toast in
+        let notification = Toast()
+        return notification
+    }()
+    
     var isUserLoggedIn: Bool {
         return UserDefaults.standard.value(forKey: "SignedUser") != nil ? true : false
     }
@@ -87,6 +92,7 @@ class PageView: UIViewController {
                 try Auth.auth().signOut()
                 UserDefaults.standard.setValue(nil, forKey: "SignedUser")
                 self.signInBtn.setImage(#imageLiteral(resourceName: "ProfileIcon").withRenderingMode(.alwaysOriginal), for: .normal)
+                self.toast.text = "User Signed Out"
             } catch let error {
                 print(error.localizedDescription)
             }
@@ -161,5 +167,6 @@ extension PageView: RegisterPagesDelegate {
     func signedInSuccessfully() {
         signIn.action = .close
         signInBtn.setImage(#imageLiteral(resourceName: "Profile").withRenderingMode(.alwaysOriginal), for: .normal)
+        toast.text = "User Signed In"
     }
 }

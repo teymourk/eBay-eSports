@@ -55,7 +55,7 @@ class Merch_Cell: ParentCell {
     func configureCellFor(_ item: itemSummaries, itemHref: ItemHerf? = nil) {
         //let detailsSize = item.itemTitle.size(withAttributes: [.font: UIFont.systemFont(ofSize: 14.0)])
     
-        let p =  80 / frame.width
+        //let p =  80 / frame.width
         //print(item.itemTitle.count, p)
         
         let reducedText = item.itemTitle.reduceTextWith(53)

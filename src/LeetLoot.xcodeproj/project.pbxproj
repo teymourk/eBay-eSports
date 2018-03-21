@@ -46,6 +46,7 @@
 		ABCD6638203E1EB700F01DB2 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCD6637203E1EB700F01DB2 /* SignIn.swift */; };
 		ABD41D972015C45500A61C95 /* CustomNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD41D962015C45500A61C95 /* CustomNavbar.swift */; };
 		ABDF266D203E25F8005E603B /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDF266C203E25F8005E603B /* SignUp.swift */; };
+		ABE7589220617409003FE289 /* ToastNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE7589120617409003FE289 /* ToastNotification.swift */; };
 		ABF26A3D2023CB4300FE1473 /* Filter_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF26A3C2023CB4300FE1473 /* Filter_Cell.swift */; };
 		BA25D71E3395478B222BCCA7 /* Pods_LeetLoot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2332B1B8B9901E9E01AC1AE7 /* Pods_LeetLoot.framework */; };
 		BE24D7381FF585C600E745E6 /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24D7371FF585C600E745E6 /* Browse.swift */; };
@@ -117,6 +118,7 @@
 		ABCD6637203E1EB700F01DB2 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		ABD41D962015C45500A61C95 /* CustomNavbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavbar.swift; sourceTree = "<group>"; };
 		ABDF266C203E25F8005E603B /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		ABE7589120617409003FE289 /* ToastNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastNotification.swift; sourceTree = "<group>"; };
 		ABF26A3C2023CB4300FE1473 /* Filter_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter_Cell.swift; sourceTree = "<group>"; };
 		B32F9ADFD97BBE109C6F27A6 /* Pods-LeetLoot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetLoot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeetLoot/Pods-LeetLoot.debug.xcconfig"; sourceTree = "<group>"; };
 		B7756037293945067944C34A /* Pods_LeetLootTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeetLootTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -296,6 +298,7 @@
 				AB6B875C2020F5AE00C5B791 /* Parent.swift */,
 				BED4A5F62024F1AA00D06AE1 /* Twitter_Cell.swift */,
 				ABA344BF204F54C60077FAA3 /* CustomImage.swift */,
+				ABE7589120617409003FE289 /* ToastNotification.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				A13F4BB72040D07A008E042E /* BrowseCategory.swift in Sources */,
 				A1A7774F20575EEF008B2E95 /* Games_Cell.swift in Sources */,
 				ABD41D972015C45500A61C95 /* CustomNavbar.swift in Sources */,
+				ABE7589220617409003FE289 /* ToastNotification.swift in Sources */,
 				AB6DA787200FF75500135CF5 /* ScrollView.swift in Sources */,
 				AB7847C81FDDFB24008EBD70 /* Home.swift in Sources */,
 				BEBE73482032247400032325 /* Twitter_Timeline.swift in Sources */,
