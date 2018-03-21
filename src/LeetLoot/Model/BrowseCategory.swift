@@ -51,11 +51,11 @@ class Categories: NSObject {
         e3.id = "e3"
         categories.append(e3)
         
-        let gamescon = Categories()
-        gamescon.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/gamesconBrowse.jpg?alt=media&token=e31ff162-7bb1-43d8-b9b5-f84347f5d430"
-        gamescon.type = "event"
-        gamescon.id = "gamescon"
-        categories.append(gamescon)
+        let gamescom = Categories()
+        gamescom.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/gamesconBrowse.jpg?alt=media&token=e31ff162-7bb1-43d8-b9b5-f84347f5d430"
+        gamescom.type = "event"
+        gamescom.id = "gamescom"
+        categories.append(gamescom)
         
         let pax = Categories()
         pax.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/paxBrowse.png?alt=media&token=8ac86422-b0cd-4c0d-90e0-1c2d0de1fd08"
