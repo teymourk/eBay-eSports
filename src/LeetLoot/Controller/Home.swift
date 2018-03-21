@@ -205,6 +205,7 @@ extension Home: FeaturedEventDelegate {
     func showFeaturedMerch() {
         let layout = UICollectionViewFlowLayout()
         let browseEvent = Browse_Event(collectionViewLayout: layout)
+            browseEvent.selectedGame = "E3 Expo"
         navigationController?.pushViewController(browseEvent, animated: true)
     }
 }
