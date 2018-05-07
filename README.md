@@ -23,6 +23,8 @@ eBay would like to make use of recently released public buying APIs in order to 
 
 ```Winter Midterm: docs/progress_reports/winter```
 
+```Spring Midterm: docs/progress_reports/spring```
+
 ## [UI Design](https://sketch.cloud/s/AZnYR/)
 
 ## Installing 
