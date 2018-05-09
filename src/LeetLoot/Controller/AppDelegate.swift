@@ -23,14 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.rootViewController = UINavigationController(rootViewController: PageView())
         FirebaseApp.configure()
-        
+        //Connect to the Twitter API
+        TWTRTwitter.sharedInstance().start(withConsumerKey:"9BnvFFtOYulbdyXkUCGhgBbgY", consumerSecret:"b8AjQP6QWCP1gnRb5jfL7LP8wWFurpSLxfSgbEM67XrwztyfrS")
+  
         //NavigationBar Appearance
         UINavigationBar.appearance().barTintColor = .white
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        
-        //Connect to the Twitter API
-        TWTRTwitter.sharedInstance().start(withConsumerKey:"9BnvFFtOYulbdyXkUCGhgBbgY", consumerSecret:"b8AjQP6QWCP1gnRb5jfL7LP8wWFurpSLxfSgbEM67XrwztyfrS")
         
         return true
     }

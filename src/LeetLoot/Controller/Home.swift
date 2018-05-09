@@ -39,14 +39,15 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.count = 1
         favorites = FavoritesCategory.favoriteCategories()
         grabFavInfo()
-        
+    
         Auth.auth().addStateDidChangeListener { auth, user in
             self.refreshHome()
         }
-        
+    
         let user = Auth.auth().currentUser?.uid
         if user != nil {
             Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
@@ -55,9 +56,16 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
 
         })}
+    
+        if Reachability.isConnectedToNetwork() {
+            print("Internet Connection Available!")
+        } else {
+            print("Internet Connection not Available!")
+            var alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+        }
         
         setupCollectionView()
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
