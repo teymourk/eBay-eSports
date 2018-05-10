@@ -18,6 +18,8 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     
     var favorites: [FavoritesCategory]?
     
+    let events = Categories.eventCategories()
+    
     var count:Int = 1
     
     var arr: [String]?{
@@ -197,8 +199,10 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
 extension Home: FeaturedEventDelegate {
     func onEventBanner(_ sender: UITapGestureRecognizer) {
         let layout = UICollectionViewFlowLayout()
+        guard let e3 = events.first else { return }
         let browseEvent = Browse_Event(collectionViewLayout: layout)
-            browseEvent.selectedGame = "E3 Expo"
+            browseEvent.selectedGame = e3.id
+            browseEvent.eventHeader.eventDetails = e3
         navigationController?.pushViewController(browseEvent, animated: true)
     }
     

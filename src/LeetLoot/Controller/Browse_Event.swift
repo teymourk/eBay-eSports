@@ -32,6 +32,8 @@ class Browse_Event: Browse_Game {
             menuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
+    
+    override func setupNavBar() {}
 }
 
 extension Browse_Event {
@@ -48,8 +50,22 @@ extension Browse_Event {
 
 
 class Event_Header: ParentView {
-    private let eventImage = { () -> UIImageView in
-        let image = UIImageView(image: #imageLiteral(resourceName: "Bitmap"))
+    
+    var eventDetails: Categories? {
+        didSet {
+            let date = eventDetails?.date ?? "",
+                locations = eventDetails?.location ?? "",
+                imageURL = eventDetails?.imageName ?? ""
+            
+            eventDate.text = date
+            location.text = locations
+            
+            eventImage.downloadImages(url: imageURL)
+        }
+    }
+    
+    private let eventImage = { () -> customeImage in
+        let image = customeImage(frame: .zero)
             image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false
             image.backgroundColor = .clear
@@ -66,7 +82,6 @@ class Event_Header: ParentView {
     
     private let eventDate = { () -> UILabel in
         let label = UILabel()
-            label.text = "June 12 - June 14"
             label.font = UIFont.systemFont(ofSize: 14)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -82,7 +97,6 @@ class Event_Header: ParentView {
     
     private let location = { () -> UILabel in
         let label = UILabel()
-            label.text = "Los Angeles, California"
             label.font = UIFont.systemFont(ofSize: 14)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label

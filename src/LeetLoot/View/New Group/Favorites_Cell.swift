@@ -30,6 +30,7 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
             }
             if let label = favorites!.name{
                 textLabel.text = label
+                print(label)
             }
         }
     }
@@ -163,13 +164,16 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CarouselCollectionView
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CarouselCollectionView
+        let name = favorites?.name ?? ""
+        cell.loadData(name: name)
+        return cell
     }
     
     //sizing of cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: 130)
-    }
+    } 
     
     @objc func checkAction() {
         print("Button pressed on home")

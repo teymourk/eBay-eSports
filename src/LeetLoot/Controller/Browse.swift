@@ -94,16 +94,18 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, Ga
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        let index = (indexPath.item)
+        
         let eventsCell: Events_Cell = collectionView.reusableCell(indexPath: indexPath)
             eventsCell.delegate = self
+        
         let gamesCell: Games_Cell = collectionView.reusableCell(indexPath: indexPath)
-        let index = (indexPath.item)
-        gamesCell.curGame = category![index]
-        gamesCell.game = category![index].id
-        gamesCell.indexPath = indexPath
-        gamesCell.delegate = self
-     
-     return indexPath.section == 0 ? eventsCell : gamesCell
+            gamesCell.curGame = category?[index]
+            gamesCell.game = category?[index].id
+            gamesCell.indexPath = indexPath
+            gamesCell.delegate = self
+        
+        return indexPath.section == 0 ? eventsCell : gamesCell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {        
@@ -136,9 +138,10 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, Ga
 
 //Mark: - EventCell Delegate
 extension Browse: EventCategoryDelegate {
-    func onEvent(name: String) {
+    func onEvent(_ events: Categories) {
         let evenPage = Browse_Event(collectionViewLayout: UICollectionViewFlowLayout())
-            evenPage.selectedGame = name
+            evenPage.selectedGame = events.id
+            evenPage.eventHeader.eventDetails = events
         navigationController?.pushViewController(evenPage, animated: true)
     }
 }

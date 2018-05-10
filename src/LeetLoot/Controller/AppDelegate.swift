@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //NavigationBar Appearance
         UINavigationBar.appearance().barTintColor = .white
+        UINavigationBar.appearance().tintColor = .lightBlue
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         

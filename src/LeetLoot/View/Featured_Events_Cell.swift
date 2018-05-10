@@ -20,9 +20,9 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
     
     private lazy var eventBanner: UIImageView = {
         let banner = UIImageView()
-        banner.image = UIImage(named: "E3Banner.png")
-        banner.isUserInteractionEnabled = true
-        banner.translatesAutoresizingMaskIntoConstraints = false
+            banner.image = UIImage(named: "E3Banner.png")
+            banner.isUserInteractionEnabled = true
+            banner.translatesAutoresizingMaskIntoConstraints = false
         return banner
     }()
     
@@ -62,7 +62,10 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CarouselCollectionView
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CarouselCollectionView
+            cell.loadData(name: "e3 expo")
+        return cell
     }
     
     //sizing of cells

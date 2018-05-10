@@ -12,7 +12,7 @@ import Firebase
 import FirebaseAuth
 
 protocol EventCategoryDelegate: class {
-    func onEvent(name: String)
+    func onEvent(_ events: Categories)
 }
 
 class Events_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -83,12 +83,8 @@ class Events_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var event = categories?[indexPath.item].id ?? ""
-        switch indexPath.item {
-        case 0: event.append(" Expo")
-        case 2: event.append(" West")
-        default: event.append("") }
-        delegate?.onEvent(name: event)
+        guard let event = categories?[indexPath.item] else { return }
+        delegate?.onEvent(event)
     }
     
     //sizing of cells

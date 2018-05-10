@@ -40,39 +40,50 @@ class Categories: NSObject {
     var id : String?
     var imageName: String?
     var type: String?
-    
+    var date: String?
+    var location: String?
     
     static func eventCategories() -> [Categories] {
         var categories = [Categories]()
         
         let e3 = Categories()
-        e3.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/e3browse.png?alt=media&token=dc7eca57-6c2b-4cb1-8d9a-8f98167fa6ee"
+        e3.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/e3Browse.png?alt=media&token=8a59b679-d03d-4b78-9341-e1e36aff883c"
         e3.type = "event"
-        e3.id = "e3"
+        e3.id = "E3 Expo"
+        e3.date = "June 12 - June 14"
+        e3.location = "Los Angeles, California"
         categories.append(e3)
         
         let gamescon = Categories()
         gamescon.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/gamesconBrowse.jpg?alt=media&token=e31ff162-7bb1-43d8-b9b5-f84347f5d430"
         gamescon.type = "event"
-        gamescon.id = "gamescon"
+        gamescon.id = "Gamescom"
+        gamescon.date = "Aug 21 - Aug 25"
+        gamescon.location = "Cologne, Germany"
         categories.append(gamescon)
         
         let pax = Categories()
         pax.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/paxBrowse.png?alt=media&token=8ac86422-b0cd-4c0d-90e0-1c2d0de1fd08"
         pax.type = "event"
-        pax.id = "pax"
+        pax.id = "Pax West"
+        pax.date = "Aug 31 - Sep 3"
+        pax.location = "Seattle, Washington"
         categories.append(pax)
         
         let twitchcon = Categories()
-        twitchcon.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/twitchconBrowse.png?alt=media&token=7a9756cc-0b83-4437-aeed-d4420749b3c8"
+        twitchcon.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/twitchconBrowse2.png?alt=media&token=b5c487a3-a2a5-4d37-8aaf-67068844dc06"
         twitchcon.type = "event"
-        twitchcon.id = "twitchcon"
+        twitchcon.id = "Twitchcon"
+        twitchcon.date = "Oct 26 – Oct 28"
+        twitchcon.location = "San Jose, California"
         categories.append(twitchcon)
         
         let blizzcon = Categories()
         blizzcon.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/blizzconBrowse.jpg?alt=media&token=47479430-be8b-4aad-8377-773a3d3a9cd9"
         blizzcon.type = "event"
-        blizzcon.id = "blizzcon"
+        blizzcon.id = "Blizzcon"
+        blizzcon.date = "Nov 2 - Nov 3"
+        blizzcon.location = "Anaheim, California"
         categories.append(blizzcon)
         
         return categories
@@ -144,6 +155,5 @@ class Categories: NSObject {
         
         return categories
     }
-    
 }
 

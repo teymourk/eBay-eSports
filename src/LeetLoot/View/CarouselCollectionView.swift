@@ -45,7 +45,6 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
     
     func setupViews(){
         backgroundColor = .white
-        loadData()
         addSubview(itemsCollectionView)
         addSubview(loadingIndicator)
 
@@ -116,8 +115,8 @@ class CarouselCollectionView: UICollectionViewCell, UICollectionViewDataSource, 
         }
     }
     
-    func loadData() {
-        let query = Root(queryKey: "e3 expo", filterBy: .All_Items, sortBy: .Best_Match, limit: 8)
+    func loadData(name: String) {
+        let query = Root(queryKey: name, filterBy: .All_Items, sortBy: .Best_Match, limit: 8)
         query.retrieveDataByName(offset: 0, loadingIndicator) { [weak self] in
             self?.root = $0
         }

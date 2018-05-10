@@ -108,8 +108,10 @@ class Browse_Game: UICollectionViewController {
     }
     
     //Setup navigation bar
-    private func setupNavBar() {
-        let likes = UIBarButtonItem(image: UIImage(named: "Path"), style: .plain, target: self, action: nil)
+    func setupNavBar() {
+        let image = UIImage(named: "Path")
+        let likes = UIBarButtonItem(image: image, style: .plain, target: self, action: nil)
+            likes.tintColor = .softGray
         navigationItem.rightBarButtonItem = likes
     }
 }

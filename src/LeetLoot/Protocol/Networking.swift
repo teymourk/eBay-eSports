@@ -20,19 +20,7 @@ protocol Networking {
 }
 
 extension Networking where Self == Model {
-    
-//    private var token: String {
-//        return ""
-//    }
-//
-//    private var urlSession: URLSession {
-//        let authString = "Bearer \(token)"
-//        let config = URLSessionConfiguration.default
-//            config.httpAdditionalHeaders = ["Authorization" : authString]
-//        return URLSession(configuration: config)
-//    }
-
-    func requestData(forUrl url: URL, completion: @escaping (RequestRespnse, Model?) -> ()) {
+        func requestData(forUrl url: URL, completion: @escaping (RequestRespnse, Model?) -> ()) {
         
         //QUICK FIX FOR NOW
         Token().getToken {

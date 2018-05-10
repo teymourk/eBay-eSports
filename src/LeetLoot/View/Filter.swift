@@ -33,6 +33,7 @@ class Filter: UITableView {
     
     private func setupTableView() {
         backgroundColor = .white
+        separatorInset = UIEdgeInsetsMake(0, 15, 0, 15)
         register(Filter_Cell.self, forCellReuseIdentifier: "FilterCell")
         register(PriceRange.self, forCellReuseIdentifier: "T")
         isScrollEnabled = false
