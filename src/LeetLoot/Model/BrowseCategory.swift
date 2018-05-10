@@ -61,7 +61,7 @@ class Categories: NSObject {
         gamescon.date = "Aug 21 - Aug 25"
         gamescon.location = "Cologne, Germany"
         categories.append(gamescon)
-        
+
         let pax = Categories()
         pax.imageName = "https://firebasestorage.googleapis.com/v0/b/ebay-esports-app.appspot.com/o/paxBrowse.png?alt=media&token=8ac86422-b0cd-4c0d-90e0-1c2d0de1fd08"
         pax.type = "event"
