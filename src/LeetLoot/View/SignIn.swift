@@ -229,6 +229,7 @@ class SignIn: ParentView {
         Auth.auth().signIn(withEmail: email, password: pass) { FBUser,error in
             guard error == nil,
                 let user = FBUser else {
+                self.errorLabel.textColor = .red
                 self.errorLabel.text = self.handleErrorFor(error)
                 self.errorLabel.shake()
                 self.errorLabel.flash()
@@ -247,9 +248,15 @@ class SignIn: ParentView {
         guard let email = emailTextField.text else { return }
         Auth.auth().sendPasswordReset(withEmail: email) {(error) in
             guard error == nil else {
+                self.errorLabel.textColor = .red
                 self.errorLabel.text = self.handleErrorFor(error)
+                self.errorLabel.shake()
+                self.errorLabel.flash()
                 return
             }
+            self.errorLabel.textColor = .successGreen
+            self.errorLabel.text = "Password reset email sent."
+            self.errorLabel.flash()
             print("Password reset successfully.")
         }
     }

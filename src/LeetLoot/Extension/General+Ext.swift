@@ -20,8 +20,9 @@ extension UIColor {
     static var lightBlue: UIColor { return UIColor(red: 18, green: 149, blue: 232) }
     static var customGray: UIColor { return UIColor(red: 238, green: 239, blue: 241) }
     static var softGray: UIColor { return UIColor(red: 210, green: 211, blue: 213) }
-    static var coolGray: UIColor { return UIColor(red: 160, green: 164, blue: 165) }
+    static var coolGray: UIColor { return UIColor(red: 160, green: 164, blue: 165) } //0, 177, 106
     static var clearGray: UIColor { return UIColor(red: 160, green: 164, blue: 165).withAlphaComponent(0.95) }
+    static var successGreen: UIColor { return UIColor(red: 0, green: 177, blue: 106) }
 }
 
 //Mark: - Int
