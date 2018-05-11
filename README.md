@@ -33,9 +33,9 @@ Open terminal and run ```sudo gem install cocoapods``` to install cocoapods
 
 Clone or Download the project
 
-```git clone https://github.com/teymourk/eBay-eSports.git ```
+```git clone https://github.com/teymourk/Elite-Loot.git ```
 
-```$ cd``` into  ```/eBay-eSports/src```
+```$ cd``` into  ```/Elite-Loot/src```
 
 run  ```pod install```  to download all the dependencies
 

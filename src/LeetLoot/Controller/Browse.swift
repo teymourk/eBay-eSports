@@ -52,7 +52,6 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, Ga
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(sendAlert), name: NSNotification.Name(rawValue: "sendAlertBrowse"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshBrowse), name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
-        
     }
     
     override func viewDidLoad() {

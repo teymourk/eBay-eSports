@@ -76,7 +76,7 @@ class SignUp: SignIn {
     override func setupLayoutAttributes() {
         back.setImage(#imageLiteral(resourceName: "Back"), for: .normal)
         back.isEnabled = true
-        signInLabel.text = "Sign Up"
+        signInLabel.text = "Register"
         setupRegister()
         setupTextFields()
         setupConfirmPassword()
