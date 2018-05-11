@@ -86,7 +86,17 @@ class SignUp: SignIn {
     @objc
     func onRegister(_ sender: UIButton) {
         guard   let email = emailTextField.text,
-                let password = passwordTextField.text else { return }
+                let password = passwordTextField.text,
+                let confirmPassword = confirmPasswordTextField.text else { return }
+        
+        //Check for if the passwords match
+        if ((password.elementsEqual(confirmPassword)) != true)
+        {
+            self.errorLabel.text = "Passwords do not match, please try again."
+            self.errorLabel.shake()
+            self.errorLabel.flash()
+            return
+        }
         
         Auth.auth().createUser(withEmail: email, password: password) { FBUser,error in
             guard error == nil,
