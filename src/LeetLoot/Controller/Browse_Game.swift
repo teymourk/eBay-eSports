@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class Browse_Game: UICollectionViewController {
     
@@ -20,6 +21,8 @@ class Browse_Game: UICollectionViewController {
             }
         }
     }
+    
+    var gameId: String?
 
     var loadingIndicator = { () -> UIActivityIndicatorView in
         let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -50,7 +53,7 @@ class Browse_Game: UICollectionViewController {
     }()
     
     var isDownloading: Bool = false
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
@@ -107,12 +110,39 @@ class Browse_Game: UICollectionViewController {
         ])
     }
     
+    var buttonIsSelected: UIColor? {
+        didSet {
+            setupNavBar()
+        }
+    }
+    
     //Setup navigation bar
     func setupNavBar() {
         let image = UIImage(named: "Path")
-        let likes = UIBarButtonItem(image: image, style: .plain, target: self, action: nil)
-            likes.tintColor = .softGray
+        let likes = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(checkAction))
+            likes.tintColor = buttonIsSelected
         navigationItem.rightBarButtonItem = likes
+    }
+    
+    @objc
+    func checkAction() {
+        let isFavorited = buttonIsSelected == .lightBlue ? false : true
+        print("Button pressed on home")
+        let ref = Database.database().reference()
+        let user = Auth.auth().currentUser?.uid
+        
+        guard   let id = self.gameId else { return }
+    
+        if user != nil{
+        Database.database().reference().child("users").child(user!).child("favorites").observeSingleEvent(of: .value, with: {(snapshot) in
+
+            let userRef = ref.child("users").child(user!).child("favorites")
+                userRef.updateChildValues([id: isFavorited])
+                
+            }, withCancel: nil)
+        }
+        
+        buttonIsSelected = buttonIsSelected == .lightBlue ? .softGray : .lightBlue
     }
 }
 

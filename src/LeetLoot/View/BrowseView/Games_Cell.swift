@@ -51,18 +51,8 @@ class Games_Cell: ParentCell, UICollectionViewDelegate, UICollectionViewDelegate
         }
     }
     
-    var game:String?{
-        didSet{
-            
-        }
-    }
-    
-    var indexPath: IndexPath? {
-        didSet{
-            
-        }
-    }
-    
+    var game:String?
+    var indexPath: IndexPath?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

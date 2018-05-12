@@ -38,9 +38,9 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, Ga
         self.present(alert, animated: true, completion: nil)
     }
     
-    @objc func refreshBrowse() {
+    @objc
+    func refreshBrowse() {
         self.collectionView?.reloadData()
-        self.collectionView?.collectionViewLayout.invalidateLayout()
     }
     
     func updateItems(index: IndexPath) {
@@ -57,20 +57,13 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, Ga
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
-        Auth.auth().addStateDidChangeListener { auth, user in
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
-        }
-        
         category = FavoritesCategory.favoriteCategories()
         setupCollectionView()
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
+        viewDidAppear(animated)
+        refreshBrowse()
     }
     
     private func setupCollectionView() {
@@ -109,10 +102,14 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, Ga
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {        
         if indexPath.section == 1 {
-            guard   let gameName = category?[indexPath.item].name else { return }
-                    let myPge = Browse_Game(collectionViewLayout: UICollectionViewFlowLayout())
-                        myPge.selectedGame = gameName
-            navigationController?.pushViewController(myPge, animated: true)
+            guard   let game = category?[indexPath.item] else { return }
+                    let browse = Browse_Game(collectionViewLayout: UICollectionViewFlowLayout())
+                        browse.selectedGame = game.name
+                        browse.gameId = game.id
+            
+            let cell = collectionView.cellForItem(at: indexPath) as? Games_Cell
+                browse.buttonIsSelected = cell?.heartView.tintColor
+            navigationController?.pushViewController(browse, animated: true)
             return
         }
     }
@@ -132,7 +129,6 @@ class Browse: UICollectionViewController, UICollectionViewDelegateFlowLayout, Ga
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(2)
     }
- 
 }
 
 //Mark: - EventCell Delegate

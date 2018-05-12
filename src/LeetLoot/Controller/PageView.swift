@@ -93,6 +93,7 @@ class PageView: UIViewController {
                 UserDefaults.standard.setValue(nil, forKey: "SignedUser")
                 self.signInBtn.setImage(#imageLiteral(resourceName: "ProfileIcon").withRenderingMode(.alwaysOriginal), for: .normal)
                 self.toast.text = "User Signed Out"
+                
             } catch let error {
                 print(error.localizedDescription)
             }

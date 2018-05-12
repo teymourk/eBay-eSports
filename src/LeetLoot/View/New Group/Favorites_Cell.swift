@@ -35,11 +35,7 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
         }
     }
     
-    var curGame:String? {
-        didSet{
-            
-        }
-    }
+    var curGame:String? 
 
     var userFavorites: [String]?{
         didSet{
@@ -195,9 +191,7 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
                 }
             }
              }, withCancel: nil)
-         
          }
-     
      }
     
     override func setupView() {

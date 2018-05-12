@@ -50,16 +50,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         Auth.auth().addStateDidChangeListener { auth, user in
             self.refreshHome()
         }
-    
-        let user = Auth.auth().currentUser?.uid
-        if user != nil {
-            Database.database().reference().child("users").child(user!).child("favorites").observe(.childChanged, with: { (snapshot) in
-            print ("Changes: ", snapshot)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
 
-        })}
-    
         // Check if there is internet connection to display a notification before loading the collection view
         if Reachability.isConnectedToNetwork() {
             print("Internet Connection Available!")
@@ -73,11 +64,6 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         }
         
         setupCollectionView()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
     }
     
     private func grabFavInfo(){
@@ -116,6 +102,10 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
             
             let browseGame = Browse_Game(collectionViewLayout: UICollectionViewFlowLayout())
                 browseGame.selectedGame = favorites.name
+            
+            let cell = collectionView.cellForItem(at: indexPath) as? Favorites_Cell
+                browseGame.buttonIsSelected = cell?.heartView.tintColor
+                browseGame.gameId = favorites.id
             navigationController?.pushViewController(browseGame, animated: true)
         }
     }
@@ -212,12 +202,10 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         return CGSize(width: view.frame.width, height: size)
     }
     
-    @objc func refreshHome() {
+    @objc
+    func refreshHome() {
         self.count = 1
         self.grabFavInfo()
-        self.collectionView?.reloadData()
-        self.collectionView?.collectionViewLayout.invalidateLayout()
-        //self.collectionView?.reloadSections(NSIndexSet(index:1) as IndexSet)
     }
 }
 
