@@ -235,8 +235,8 @@ class SignIn: ParentView {
                 self.errorLabel.flash()
                 return
             }
-            print("user id:" + user.uid)
-            UserDefaults.standard.setValue(user.uid, forKey: "SignedUser")
+            print("user id:" + user.user.uid)
+            UserDefaults.standard.setValue(user.user.uid, forKey: "SignedUser")
             self.emailTextField.text = nil
             self.passwordTextField.text = nil
             self.delegate?.signedInSuccessfully()

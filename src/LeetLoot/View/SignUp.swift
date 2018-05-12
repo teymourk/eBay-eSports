@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import Firebase
 
 protocol HomePagesDelegate {
     func onScreenButtons(_ sender: UIButton)
@@ -106,7 +107,7 @@ class SignUp: SignIn {
                     self.errorLabel.flash()
                     return
             }
-            self.createUserWithDatsa(UID: user.uid)
+            self.createUserWithDatsa(UID: user.user.uid)
         }
     }
     
