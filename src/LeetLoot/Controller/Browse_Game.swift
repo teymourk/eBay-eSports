@@ -124,24 +124,34 @@ class Browse_Game: UICollectionViewController {
         navigationItem.rightBarButtonItem = likes
     }
     
+    var isUserLoggedIn: Bool {
+        return UserDefaults.standard.value(forKey: "SignedUser") != nil ? true : false
+    }
+    
     @objc
     func checkAction() {
-        let isFavorited = buttonIsSelected == .lightBlue ? false : true
-        print("Button pressed on home")
-        let ref = Database.database().reference()
-        let user = Auth.auth().currentUser?.uid
-        
-        guard   let id = self.gameId else { return }
-    
-        if user != nil{
-        Database.database().reference().child("users").child(user!).child("favorites").observeSingleEvent(of: .value, with: {(snapshot) in
-
-            let userRef = ref.child("users").child(user!).child("favorites")
-                userRef.updateChildValues([id: isFavorited])
-                
-            }, withCancel: nil)
+        if isUserLoggedIn {
+            let isFavorited = buttonIsSelected == .lightBlue ? false : true
+            print("Button pressed on home")
+            let ref = Database.database().reference()
+            let user = Auth.auth().currentUser?.uid
+            
+            guard   let id = self.gameId else { return }
+            
+            if user != nil{
+                Database.database().reference().child("users").child(user!).child("favorites").observeSingleEvent(of: .value, with: {(snapshot) in
+                    
+                    let userRef = ref.child("users").child(user!).child("favorites")
+                    userRef.updateChildValues([id: isFavorited])
+                    
+                }, withCancel: nil)
+            }
+            buttonIsSelected = buttonIsSelected == .lightBlue ? .softGray : .lightBlue
+            return
         }
-        buttonIsSelected = buttonIsSelected == .lightBlue ? .softGray : .lightBlue
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "sendAlertBrowse"), object: nil)
+        return
     }
 }
 

@@ -172,5 +172,6 @@ extension PageView: RegisterPagesDelegate {
         signInBtn.setImage(#imageLiteral(resourceName: "Profile").withRenderingMode(.alwaysOriginal), for: .normal)
         toast.text = "User Signed In"
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
     }
 }
