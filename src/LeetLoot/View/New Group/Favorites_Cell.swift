@@ -90,7 +90,7 @@ class Favorites_Cell: ParentCell, UICollectionViewDataSource, UICollectionViewDe
     
     private lazy var merchButton: UIButton = {
         let button = UIButton(title: "See more", imageName: #imageLiteral(resourceName: "Arrow"))
-        
+        button.isUserInteractionEnabled = false
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         button.translatesAutoresizingMaskIntoConstraints = false

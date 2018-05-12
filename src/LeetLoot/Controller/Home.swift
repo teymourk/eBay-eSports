@@ -19,7 +19,6 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     var size:CGFloat = 46
     
     var favorites: [FavoritesCategory]?
-    
     let events = Categories.eventCategories()
     
     var count:Int = 1
@@ -107,6 +106,18 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        
         return section == 0 ? 2 : count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let game = arr?[indexPath.item]
+            guard   let i = favorites?.index(where: {$0.id == game}),
+                    let favorites = favorites?[i] else { return }
+            
+            let browseGame = Browse_Game(collectionViewLayout: UICollectionViewFlowLayout())
+                browseGame.selectedGame = favorites.name
+            navigationController?.pushViewController(browseGame, animated: true)
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
