@@ -115,9 +115,7 @@ class browseItemCell: UICollectionViewCell{
         else{
             //send alert
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "sendAlertBrowse"), object: nil)
-            
         }
-
     }
     
     func setupViews(){

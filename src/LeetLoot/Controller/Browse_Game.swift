@@ -39,7 +39,7 @@ class Browse_Game: UICollectionViewController {
             print("Reloaded")
         }
     }
-    
+        
     lazy var menuBar = { () -> Menu in
         let view = Menu(isMenu: false)
             view.delegate = self
@@ -141,7 +141,6 @@ class Browse_Game: UICollectionViewController {
                 
             }, withCancel: nil)
         }
-        
         buttonIsSelected = buttonIsSelected == .lightBlue ? .softGray : .lightBlue
     }
 }

@@ -94,6 +94,8 @@ class PageView: UIViewController {
                 self.signInBtn.setImage(#imageLiteral(resourceName: "ProfileIcon").withRenderingMode(.alwaysOriginal), for: .normal)
                 self.toast.text = "User Signed Out"
                 
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+                
             } catch let error {
                 print(error.localizedDescription)
             }
@@ -169,5 +171,6 @@ extension PageView: RegisterPagesDelegate {
         signIn.action = .close
         signInBtn.setImage(#imageLiteral(resourceName: "Profile").withRenderingMode(.alwaysOriginal), for: .normal)
         toast.text = "User Signed In"
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshBrowseNotification"), object: nil)
     }
 }

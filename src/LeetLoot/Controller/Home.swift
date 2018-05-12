@@ -35,9 +35,14 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         }
     }
     
+    var isUserLoggedIn: Bool {
+        return UserDefaults.standard.value(forKey: "SignedUser") != nil ? true : false
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshHome), name: NSNotification.Name(rawValue: "refreshHomeNotification"), object: nil)
+        refreshHome()
     }
     
     override func viewDidLoad() {
@@ -47,10 +52,6 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         favorites = FavoritesCategory.favoriteCategories()
         grabFavInfo()
     
-        Auth.auth().addStateDidChangeListener { auth, user in
-            self.refreshHome()
-        }
-
         // Check if there is internet connection to display a notification before loading the collection view
         if Reachability.isConnectedToNetwork() {
             print("Internet Connection Available!")
@@ -96,17 +97,20 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            let game = arr?[indexPath.item]
-            guard   let i = favorites?.index(where: {$0.id == game}),
+            if isUserLoggedIn {
+                let game = arr?[indexPath.item]
+                guard   let i = favorites?.index(where: {$0.id == game}),
                     let favorites = favorites?[i] else { return }
-            
-            let browseGame = Browse_Game(collectionViewLayout: UICollectionViewFlowLayout())
+                
+                let browseGame = Browse_Game(collectionViewLayout: UICollectionViewFlowLayout())
                 browseGame.selectedGame = favorites.name
-            
-            let cell = collectionView.cellForItem(at: indexPath) as? Favorites_Cell
+                
+                let cell = collectionView.cellForItem(at: indexPath) as? Favorites_Cell
                 browseGame.buttonIsSelected = cell?.heartView.tintColor
                 browseGame.gameId = favorites.id
-            navigationController?.pushViewController(browseGame, animated: true)
+                navigationController?.pushViewController(browseGame, animated: true)
+            }
+            
         }
     }
     
@@ -202,10 +206,11 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         return CGSize(width: view.frame.width, height: size)
     }
     
-    @objc
-    func refreshHome() {
+    @objc func refreshHome() {
         self.count = 1
         self.grabFavInfo()
+        self.collectionView?.reloadData()
+        self.collectionView?.collectionViewLayout.invalidateLayout()
     }
 }
 
