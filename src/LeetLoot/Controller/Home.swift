@@ -222,8 +222,10 @@ extension Home: FeaturedEventDelegate {
     
     func showFeaturedMerch() {
         let layout = UICollectionViewFlowLayout()
+        guard let e3 = events.first else { return }
         let browseEvent = Browse_Event(collectionViewLayout: layout)
-            browseEvent.selectedGame = "E3 Expo"
+            browseEvent.selectedGame = e3.id
+            browseEvent.eventHeader.eventDetails = e3
         navigationController?.pushViewController(browseEvent, animated: true)
     }
 }
