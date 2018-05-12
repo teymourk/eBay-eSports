@@ -1,5 +1,5 @@
 //
-//  d.swift
+//  Merch_Cell.swift
 //  LeetLoot
 //
 //  Created by Kiarash Teymoury on 1/10/18.

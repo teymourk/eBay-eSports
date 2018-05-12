@@ -1,9 +1,11 @@
 //
-//  ViewController.swift
+//  Home.swift
 //  LeetLoot
 //
 //  Created by Kiarash Teymoury on 12/10/17.
 //  Copyright © 2017 Kiarash Teymoury. All rights reserved.
+//
+//  Contains code for the home screen view controller
 //
 
 import Foundation
@@ -59,6 +61,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
 
         })}
     
+        // Check if there is internet connection to display a notification before loading the collection view
         if Reachability.isConnectedToNetwork() {
             print("Internet Connection Available!")
         } else {
@@ -86,7 +89,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
             }
         }
     }
-
+    // Register cells in the collection view
     private func setupCollectionView() {
         collectionView?.backgroundColor = .customGray
         collectionView?.registerCell(Featured_Events_Cell.self)
@@ -107,7 +110,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        // Set the cells for the home screen
         let featuredEventsCell: Featured_Events_Cell = collectionView.reusableCell(indexPath: indexPath)
             featuredEventsCell.delegate = self
         let twitterCell: Twitter_Cell = collectionView.reusableCell(indexPath: indexPath)
@@ -152,7 +155,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         })
         return cell
     }
-    
+    // Push the timeline view controller to the home screen
     func showTwitterTimeline() {
         let twitterTimeline = Twitter_Timeline()
         self.navigationController?.pushViewController(twitterTimeline, animated: true)
@@ -160,13 +163,13 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
         UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
         
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
-        var eventHeight = CGFloat(325)
+        var eventHeight = CGFloat(325) // Use base event banner height for all phones other than + models
+        // Dynamically size the twitter cell
         let tweet = CGSize(width: Constants.kWidth, height: tweetSize.height + CGFloat(40))
-       
+        // Set height of the event banner based on screen width
         if (screenWidth > 375) {
             eventHeight = CGFloat(338)
         }

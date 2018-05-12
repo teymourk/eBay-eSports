@@ -5,6 +5,8 @@
 //  Created by Will on 2/2/18.
 //  Copyright © 2018 Kiarash Teymoury. All rights reserved.
 //
+//  Contains code for displaying tweets on the home screen
+//
 
 import Foundation
 import TwitterKit
@@ -14,7 +16,7 @@ protocol TwitterDelegate: class {
 }
 
 class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
-    
+    // Create button to view the twitter timeline
     private lazy var timelineButton: UIButton = {
         let button = UIButton(title: "See more tweets", imageName: #imageLiteral(resourceName: "Arrow"))
         button.contentHorizontalAlignment = .left
@@ -30,7 +32,7 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
         
         return button;
     }()
-    
+    // Create the view for the tweet
     lazy var tweetView:TWTRTweetView = {
         let tweetView = TWTRTweetView()
         tweetView.translatesAutoresizingMaskIntoConstraints = false;
@@ -66,7 +68,7 @@ class Twitter_Cell: ParentCell, TWTRTweetViewDelegate{
     }
     
     weak var delegate:TwitterDelegate?
-    
+    // Delegate to push the twitter timeline view controller from home
     @objc func displayTimeline() {
         if let del = self.delegate {
             del.showTwitterTimeline()

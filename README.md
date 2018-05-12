@@ -40,3 +40,5 @@ Clone or Download the project
 run  ```pod install```  to download all the dependencies
 
 Open ```LeetLoot.xcworkspace``` to run the current build.
+
+Select iPhone X as your simulator in the top left corner of Xcode and press ⌘ + R to run the project.
