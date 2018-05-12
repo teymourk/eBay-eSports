@@ -146,6 +146,7 @@ class Home: UICollectionViewController, UICollectionViewDelegateFlowLayout, Twit
         return favoritesCell
     }
     
+    // Grab the size of the tweetView to dynamically size the twitter cell
     private func setupTwitterFor(_ cell: Twitter_Cell) -> Twitter_Cell {
         getTweet(completion: { [weak self] (tweet) in
             cell.tweetView.configure(with: tweet)

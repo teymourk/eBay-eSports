@@ -5,6 +5,8 @@
 //  Created by Will on 1/18/18.
 //  Copyright © 2018 Kiarash Teymoury. All rights reserved.
 //
+//  Contains code for the featured event UIView
+//
 
 import Foundation
 import UIKit
@@ -18,6 +20,7 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
     
     private let cellId = "cellId"
     
+    // Create the banner for the featured event
     private lazy var eventBanner: UIImageView = {
         let banner = UIImageView()
             banner.image = UIImage(named: "E3Banner.png")
@@ -25,11 +28,10 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
             banner.translatesAutoresizingMaskIntoConstraints = false
         return banner
     }()
-    
+    // Button for navigating the user to the browse event page associated with the featured event
     private lazy var merchButton: UIButton = {
         let button = UIButton(title: "See more", imageName: #imageLiteral(resourceName: "Arrow"))
 
-        //button.contentHorizontalAlignment = .left
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +44,7 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
         
         return button;
     }()
-    
+    // Create the carousel of merchandise for the featured event
     let carouselCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -61,14 +63,14 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
         return 1
     }
     
+    // Create the carousel collection view and load merchandise returned from "e3 expo" as the query (featured event)
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CarouselCollectionView
             cell.loadData(name: "e3 expo")
         return cell
     }
     
-    //sizing of cells
+    //  Sizing of cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: 130)
     }
@@ -116,6 +118,7 @@ class Featured_Events_Cell: ParentCell, UICollectionViewDataSource, UICollection
             tapGesture.numberOfTapsRequired = 1
         self.eventBanner.addGestureRecognizer(tapGesture)
         
+        // Set the merch button to call the showFeaturedMerch function when pressed
         merchButton.addTarget(self, action: #selector(showFeaturedMerch), for: .touchUpInside)
         
         backgroundColor = .white

@@ -89,7 +89,7 @@ class SignUp: SignIn {
                 let password = passwordTextField.text,
                 let confirmPassword = confirmPasswordTextField.text else { return }
         
-        //Check for if the passwords match
+        // Check for if the passwords match
         if ((password.elementsEqual(confirmPassword)) != true)
         {
             self.errorLabel.text = "Passwords do not match, please try again."
@@ -97,7 +97,7 @@ class SignUp: SignIn {
             self.errorLabel.flash()
             return
         }
-        
+        // Handle errors returned by firebase
         Auth.auth().createUser(withEmail: email, password: password) { FBUser,error in
             guard error == nil,
                 let user = FBUser else {
