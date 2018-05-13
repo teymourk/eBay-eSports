@@ -193,7 +193,7 @@ class SignIn: ParentView {
     func forgotLabel(){
         addSubview(errorLabel)
         NSLayoutConstraint.activate([
-            errorLabel.topAnchor.constraint(equalTo: forgot.bottomAnchor, constant: 20),
+            errorLabel.topAnchor.constraint(equalTo: forgot.bottomAnchor, constant: 5),
             errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
@@ -268,7 +268,7 @@ class SignIn: ParentView {
         
             switch authErrorCode {
             case .weakPassword:
-                return "Invalid password"
+                return "Please choose a stronger password"
             case .wrongPassword:
                 return "Invalid password"
             case .userNotFound:
@@ -278,7 +278,7 @@ class SignIn: ParentView {
             case .invalidEmail:
                 return "Invalid email"
             case .missingEmail:
-                return "Missing email"
+                return "Please enter an email"
             default: return ""
         }
     }

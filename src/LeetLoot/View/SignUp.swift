@@ -32,6 +32,14 @@ class SignUp: SignIn {
             textfield.translatesAutoresizingMaskIntoConstraints = false
         return textfield
     }()
+    /*password label*/
+    let passwordLabel: UILabel = {
+        let lb = UILabel()
+        lb.font = UIFont(name: "Helvetica", size: 14)
+        lb.text = "Passwords must be 6 characters in length"
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        return lb
+    }()
     /*register button*/
     private lazy var register: UIButton = {
         let button = UIButton(type:.system)
@@ -48,6 +56,14 @@ class SignUp: SignIn {
 /*constraints for register button*/
     override func setupRegister(){
         addSubview(register)
+        addSubview(passwordLabel);
+        
+        NSLayoutConstraint.activate([
+            passwordLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
+            passwordLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 67),
+            passwordLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -5),
+            passwordLabel.centerXAnchor.constraint(equalTo:centerXAnchor)
+            ])
     
         NSLayoutConstraint.activate([
             register.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
@@ -69,7 +85,7 @@ class SignUp: SignIn {
     override func forgotLabel(){
         addSubview(errorLabel)
         NSLayoutConstraint.activate([
-            errorLabel.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 15),
+            errorLabel.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 5),
             errorLabel.centerXAnchor.constraint(equalTo:centerXAnchor)
         ])
     }
