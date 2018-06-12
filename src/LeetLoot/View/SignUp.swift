@@ -15,7 +15,7 @@ protocol HomePagesDelegate {
     func onScreenButtons(_ sender: UIButton)
 }
 class SignUp: SignIn {
-
+    /*confirm password text field*/
     private let confirmPasswordTextField: UITextField = {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         let textfield = UITextField()
@@ -32,7 +32,15 @@ class SignUp: SignIn {
             textfield.translatesAutoresizingMaskIntoConstraints = false
         return textfield
     }()
-    
+    /*password label*/
+    let passwordLabel: UILabel = {
+        let lb = UILabel()
+        lb.font = UIFont(name: "Helvetica", size: 14)
+        lb.text = "Passwords must be 6 characters in length"
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        return lb
+    }()
+    /*register button*/
     private lazy var register: UIButton = {
         let button = UIButton(type:.system)
             button.backgroundColor = .lightBlue
@@ -45,9 +53,17 @@ class SignUp: SignIn {
             button.addTarget(self, action: #selector(onRegister(_:)), for: .touchUpInside);
         return button
     }()
-
+/*constraints for register button*/
     override func setupRegister(){
         addSubview(register)
+        addSubview(passwordLabel);
+        
+        NSLayoutConstraint.activate([
+            passwordLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
+            passwordLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 67),
+            passwordLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -5),
+            passwordLabel.centerXAnchor.constraint(equalTo:centerXAnchor)
+            ])
     
         NSLayoutConstraint.activate([
             register.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
@@ -56,7 +72,7 @@ class SignUp: SignIn {
             register.centerXAnchor.constraint(equalTo:centerXAnchor)
         ])
     }
-    
+    /*confirm password text field constraints*/
     private func setupConfirmPassword() {
         addSubview(confirmPasswordTextField)
         NSLayoutConstraint.activate([
@@ -65,15 +81,15 @@ class SignUp: SignIn {
             confirmPasswordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
         ])
     }
-    
+    /*forgot label constraints*/
     override func forgotLabel(){
         addSubview(errorLabel)
         NSLayoutConstraint.activate([
-            errorLabel.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 15),
+            errorLabel.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 5),
             errorLabel.centerXAnchor.constraint(equalTo:centerXAnchor)
         ])
     }
-    
+    /*setup entire layout*/
     override func setupLayoutAttributes() {
         back.setImage(#imageLiteral(resourceName: "Back"), for: .normal)
         back.isEnabled = true
@@ -83,7 +99,7 @@ class SignUp: SignIn {
         setupConfirmPassword()
         forgotLabel()
     }
-    
+    /*activate register button on click*/
     @objc
     func onRegister(_ sender: UIButton) {
         guard   let email = emailTextField.text,
@@ -110,7 +126,7 @@ class SignUp: SignIn {
             self.createUserWithDatsa(UID: user.user.uid)
         }
     }
-    
+    /*creates user in firebase*/
     private func createUserWithDatsa(UID:String) {
         let databaseRef = Database.database().reference().child("users/\(UID)"),
         userObject = ["favorites": ["overwatch":false, "lol":false, "dota":false, "sbm":false, "sf":false,

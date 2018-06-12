@@ -15,6 +15,7 @@ protocol RegisterPagesDelegate: class {
 }
 
 class SignIn: ParentView {
+    /*error label*/
     let errorLabel: UILabel = {
         let lb = UILabel()
             lb.text = "Error"
@@ -25,20 +26,20 @@ class SignIn: ParentView {
             lb.translatesAutoresizingMaskIntoConstraints = false
         return lb
     }()
-    
+    /*sign in label*/
     let signInLabel: UILabel = {
         let lb = UILabel()
             lb.text = "Sign in"
             lb.translatesAutoresizingMaskIntoConstraints = false
         return lb
     }()
-    
+    /*eliteloot logo*/
     private let eliteLootLogo = { () -> UIImageView in
         let image = UIImageView(image: #imageLiteral(resourceName: "EliteLootLogo"))
             image.contentMode = .scaleAspectFit
         return image
     }()
-    
+    /*back button*/
     lazy var back = { () -> UIButton in
         let button = UIButton(imageName: #imageLiteral(resourceName: "wBack"))
             button.addTarget(self, action: #selector(onScreenButtons(_ :)), for: .touchUpInside)
@@ -46,7 +47,7 @@ class SignIn: ParentView {
             button.tag = 0
         return button
     }()
-    
+    /*close button*/
     private lazy var close = { () -> UIButton in
         let button = UIButton(imageName: #imageLiteral(resourceName: "Close"))
             button.addTarget(self, action: #selector(onScreenButtons(_ :)), for: .touchUpInside)
@@ -60,7 +61,7 @@ class SignIn: ParentView {
             stack.translatesAutoresizingMaskIntoConstraints = false
        return stack
     }()
-    
+    /*register button*/
     private let register = { () -> UIButton in
         let button = UIButton(title: "REGISTER")
             button.setTitleColor(.lightBlue, for: .normal)
@@ -70,7 +71,7 @@ class SignIn: ParentView {
             button.tag = 2
         return button
     }()
-    
+    /*email text field*/
     let emailTextField: UITextField = {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         let textfield = UITextField()
@@ -85,7 +86,7 @@ class SignIn: ParentView {
             textfield.translatesAutoresizingMaskIntoConstraints = false
         return textfield
     }()
-    
+    /*password text field*/
     let passwordTextField: UITextField = {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
         let textfield = UITextField()
@@ -101,7 +102,7 @@ class SignIn: ParentView {
             textfield.translatesAutoresizingMaskIntoConstraints = false
         return textfield
     }()
-    
+    /*sign in button*/
     private lazy var signin: UIButton = {
         let button = UIButton(type:.system)
             button.backgroundColor = UIColor.lightBlue
@@ -115,7 +116,7 @@ class SignIn: ParentView {
         return button
         
     }()
-    
+    /*forgot button*/
     private lazy var forgot: UIButton = {
         let button = UIButton(type:.system)
             button.backgroundColor = UIColor.lightBlue
@@ -157,7 +158,7 @@ class SignIn: ParentView {
             signInLabel.leftAnchor.constraint(equalTo:leftAnchor, constant: 15),
         ])
     }
-    
+    /*text fields*/
     func setupTextFields() {
         addSubview(emailTextField)
         addSubview(passwordTextField)
@@ -174,7 +175,7 @@ class SignIn: ParentView {
             passwordTextField.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
-
+/*signin*/
     func setupSignin() {
         addSubview(signin)
         addSubview(forgot)
@@ -188,11 +189,11 @@ class SignIn: ParentView {
             signin.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
         ])
     }
-    
+    /*forgot password*/
     func forgotLabel(){
         addSubview(errorLabel)
         NSLayoutConstraint.activate([
-            errorLabel.topAnchor.constraint(equalTo: forgot.bottomAnchor, constant: 20),
+            errorLabel.topAnchor.constraint(equalTo: forgot.bottomAnchor, constant: 5),
             errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
@@ -242,7 +243,7 @@ class SignIn: ParentView {
             self.delegate?.signedInSuccessfully()
         }
     }
-    
+    /*forgot password*/
     @objc
     func onForgot(){
         guard let email = emailTextField.text else { return }
@@ -260,14 +261,14 @@ class SignIn: ParentView {
             print("Password reset successfully.")
         }
     }
-    
+    /*Error handling for incorrect password*/
     func handleErrorFor(_ FBError: Error?) -> String {
         guard   let error = FBError as NSError?,
                 let authErrorCode = AuthErrorCode(rawValue: error.code) else { return "" }
         
             switch authErrorCode {
             case .weakPassword:
-                return "Invalid password"
+                return "Please choose a stronger password"
             case .wrongPassword:
                 return "Invalid password"
             case .userNotFound:
@@ -277,7 +278,7 @@ class SignIn: ParentView {
             case .invalidEmail:
                 return "Invalid email"
             case .missingEmail:
-                return "Missing email"
+                return "Please enter an email"
             default: return ""
         }
     }
